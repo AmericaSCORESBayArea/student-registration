@@ -1,2 +1,2 @@
 # registration
-America SCORES Registration 
+America SCORES Registration Form
