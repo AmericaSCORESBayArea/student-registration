@@ -373,27 +373,6 @@
                     return data;
                 }
 
-                // /* print the HTTP response */
-                // function printJSON(json){
-                //     let listEl = document.getElementById('keys');
-                //     listEl.innerHTML = "";
-                //     for(let entry of Object.entries(json)){
-                //         let item = document.createElement('li');
-                //         item.innerText = entry[0] + ': ';
-                //         if(entry[1] == '' || Object.entries(entry[1]).length === 0){
-                //              item.innerText += '\"\"';
-                //         }else if(typeof(entry[1]) === 'object'){
-                //             printJSONinJSON(item, entry[1]);
-                //          }else{
-                //             item.innerText += entry[1];
-                //         }
-                //         console.log(listEl);
-                //         listEl.appendChild(item);
-                        
-                //     }
-
-                // }
-
                 /* POST using XHR */
                 function postXHR(){
                     let order = formData();
