@@ -4,16 +4,20 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Registration Form</title>
-        <style>
+        <title>Registration Form</title>   
+       <style>
+            html{
+                background-color: rgb(77, 76, 76)
+            }
             header{
                 display: grid;
-                grid-template-columns: 1fr 2fr 1fr;
-                grid-template-rows: .5fr 1fr;
-                
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: .5fr .75fr;
+                background-color: rgb(122, 167, 236);
             }
-           
+                   
             #logo{
+                grid-row: 1;
                 max-width: 200px;
                 max-height: 100px;
             }
@@ -30,30 +34,44 @@
 
             }
             form{
-                display: grid;                
+                display: grid;
+                grid-template-rows: 2fr repeat(11, 1fr) 2fr  1fr 1fr 2fr repeat(3, 1fr) 2fr repeat(16, 1fr) 2fr repeat(6, 1fr) 2fr repeat(6, 1fr);
+                grid-template-columns: 1fr 1fr          
             }
             
             h2, form{
                 grid-column: 2;
             }
-            h2{grid-column:1;}
+            div{
+                grid-column: 1/3;
+                /*background-color: rgb(122, 178, 231);    */
+            }
+            h2{
+                grid-column-start: 1;
+                grid-column-end: 3;
+                margin: 0px;
+                padding-top: 20px;
+                
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+                color: honeydew;
+            }
 
             h3{
-                font-size: medium;
+                font-size: large;
                 grid-column:1;
+                color:rgb(122, 178, 231);
+                
             }
             label{
                 grid-column: 1;
             }
+
             form>*{
                 max-width: 300px;
             }
             input, select, textarea{
                  margin-bottom: 10px; 
-                 grid-column:2;  
-            }
-            input, select{
-                
+                 grid-column: 2;  
             }
 
             #btns{
@@ -61,36 +79,42 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
             }
-            #submit-btn{
+            button.form{
                 grid-column: 2;
                 max-width: 100px;
                 margin-top: 50px;
                 background-color: rgb(73, 124, 201);
             }
 
-            #submit-btn:hover{
+            button.form:hover{
                 background-color:rgb(122, 167, 236);
             }
             label{
                 max-width: 200px;
                 padding-bottom: 5px;
+                color:honeydew
+            }
+            dialog>label{
+                color:black;
             }
 
         </style>
+
+        <script src='form.js'></script>
 
     </head>
 
     <body>
         <header>
             <nav>
-                <img id='logo' src='America-SCORES-Logo.jpg'/>
+                <img id='logo' src='AmericaScoresUpdated copy.png'/>
             </nav>
             <h1>America SCORES Student Registration Form</h1>
         </header>
         <main>
            
             <form id="student-registration">
-                <h2 id='outside-form'>Student Details</h2>
+                <h2 id='outside-form'><u>Student Details</u></h2>
                 <label for='first-name' id="fName-label">First Name:</label>
                 <input type="text" name="first-name" id='first-name' title="First Name">
 
@@ -122,6 +146,10 @@
                 <label for='personal-email' id="pEmail-label">Personal Email:</label>
                 <input type="email" name="personal-email" id='personal-email' title="Personal Email">
 
+                <label for='home-phone' id="hPhone-label">Home Phone:</label>
+                <input type="number" maxlength="10" name="home-phone" id='home-phone' title="Home Phone">
+
+                
                 <label for='birthdate' id="bday-label">Birthdate:</label>
                 <input type="date" name="birthdate" id='birthdate' title="Birthdate">
 
@@ -194,8 +222,11 @@
                 <label for="DCYF-id" id='DCYF-id-label'>DCYF Student ID:</label>
                 <input type='text' maxlength="8" name="DCYF-student-id" id="DCYF-student-id">
 
-                <h2 class='inForm'>Waivers</h2>
+                <h2 class='inForm'><u>Waivers</u></h2>
                 <label for='liability'>Liability</label>
+                <!--<details>
+                    <summary>Waiver & Indemnity Agreement</summary>
+                </details>-->
                 <input type='checkbox' name='liability' id='liability'>
 
                 <label for="data-release">Data Release</label>
@@ -204,7 +235,7 @@
                 <label for="media-release">Media Release</label>
                 <input type='checkbox' name="media-release" id="media-release">
 
-                <h2 class='inForm'>Parent/Guardian Information</h2>
+               <h2 class='inForm'><u>Parent/Guardian Information</u></h2>
 
                 <label for='parent-first-name' id="parent-fName-label">Parent First Name:</label>
                 <input type="text" name="parent-first-name" id='parent-first-name' title="Paretn First Name">
@@ -227,7 +258,7 @@
                 <label for='parent-phone3' id="parent-phone3-label">Parent Phone 3:</label>
                 <input type="text" name="parent-phone3" id='parent-phone3' title="Parent Phone 03">
 
-                <h3>Mailing Address:</h3>
+                <!--<h3>Mailing Address:</h3>-->
                 <label for='street' id="street-label">Mailing Street:</label>
                 <input type="text" name="street" id='street' title="Mailing Street">
 
@@ -298,7 +329,7 @@
                     </optgroup>
                 </select>
 
-                <h2>Emergency Contact (Other than Parent/Guardian)</h2>
+                <h2><u>Emergency Contact (Other than Parent/Guardian)</u></h2>
 
                 <label for='ec-name' id="ec-name-label">Emergency Contact Name:</label>
                 <input type="text" name="ec-name" id='ec-name' title="Emergency Contact Name">
@@ -325,9 +356,9 @@
                 </select>
 
 
-                <h2>Second Emergency Contact</h2>
+                <h2><u>Second Emergency Contact</u></h2>
                
-                <label for='ec2-name' id="ec2-name-label">Emergency Contact Name:</label>
+                <label for='ec2-name' id="ec2-name-label">Second Emergency Contact Name:</label>
                 <input type="text" name="ec2-name" id='ec2-name' title="Emergency Contact Name">
 
                 <label for='ec2-relationship' id="ec2-relationship-label">Sec. Emergency Contact Relationship to Child:</label>
@@ -355,9 +386,53 @@
             </form>
 
             <section id='btns'>
-                <button id='submit-btn'>Submit</button>
+                <button class='form' id='sign-waivers-btn'>Sign Waivers</button>
+                <button class='form' id='submit-btn' disabled>Submit</button>
             </section>
             
+
+            <dialog id='waiver-dialog'>
+                <h3>Waiver & Indemnity Agreement</h3>
+                <p>I, the undersigned legal parent/guardian of above named participant, understand that participation in the America SCORES and U.S. Soccer Foundation’s Soccer for Success program involves certain inherent risks of injury, despite all safety precautions taken by America SCORES. Therefore, as parent and/or guardian, I will assume all risks, injury or illness, for my child(ren) that may occur during the participation in any activities or use of facilities associated with the America SCORES or Soccer for Success program. I hereby give permission for America SCORES Bay Area staff and operators to use their best judgment in arranging for my child(ren)’s emergency medical treatment in addition to contacting me to the best of their ability. I certify that my child(ren) is/are fully covered by medical insurance and that I am fully responsible for all costs incurred due to medical or dental treatment as deemed necessary by America SCORES Bay Area the U.S. Soccer Foundation staff and operators.
+                    By signing this form, I acknowledge that I am aware of the potential risks of participation in any activities or use of facilities associated with the program, and in no way hold America SCORES Bay Area or the U.S. Soccer Foundation, its respective parent, its subsidiaries or affiliates, or their respective management, agents, employees, directors, officers, sponsoring agencies, volunteers or the facility or its operators, coaches, officials, or advertisers, (Individually and Collectively, the “Released Parties”), liable for any injury that my child(ren) may sustain. <b>I, FOR MYSELF, MY SPOUSE AND MY CHILD(REN), DO FURTHER RELEASE, ABSOLVE, INDEMNIFY, AND HOLD THE RELEASED PARTIES HARMLESS AGAINST ANY CLAIMS OF INJURY OR DEATH TO MY CHILD(REN) IN CONNECTION WITH ANY AND ALL OF THE ACTIVITIES MENTIONED.
+                    </b>
+                </p>
+                <label for='ESig-agreement1'>I agree to sign this document electronically:</label>
+                <input type='checkbox' name='ESig-agreement1' id='ESig-agreement1' required>
+                <label for='name'>Name:</label>
+                <input type='text' name='name' id='esig-name1'>
+                <label for='signature'>Electronic Signature:</label>
+                <input type='text' name='signature' id='signature1' required>
+                
+           
+                <br>
+                <h3>Evaluation</h3>
+                <p>America SCORES and its partners collect data to evaluate the effectiveness and impact of program. Students will be asked to complete a survey and provide ongoing feedback. I, the legal parent/guardian(s) of above named participant, agree to the following: I give America SCORES Bay Area and Public Profit, a partner of America SCORES, permission to collect my child's identifiable student level data from his/her school or schooldistrict. This data includes grades, attendance, ELA and Math test information, student perception survey, enrollment, biographic, course and credit, fitness and graduation outcomes for the years of 2009-2010 through 2024-2025 with the understanding that all information obtained will remain private, and that any responses publicly reported will be grouped together with other participants of this program and that my child will not be individually linked to his/her response. America SCORES will not share your child’s name in evaluation reports. America SCORES Bay Area will comply with regulations protecting your student's personal information. Parents have the right to request review of the data collected from
+                    their student, revoke permission to continue collection, and request removal of their student's identifying information from data collected.
+                </p>
+                <label for='ESig-agreement2'>I agree to sign this document electronically:</label>
+                <input type='checkbox' name='ESig-agreement2' id='ESig-agreement2' required>
+                <label for='name'>Name:</label>
+                <input type='text' name='name' id='esig-name2' disabled>
+                <label for='signature'>Electronic Signature:</label>
+                <input type='text' name='signature' id='signature2' required>
+
+           <br>
+                <h3>Model Release and Authorization to Video/Photograph</h3>
+                <p><b>For all Students:</b> As the child’s parent/guardian, I hereby grant a license to America SCORES Bay Area and their agents to use and to license others to use the child’s name, recorded voice, image, picture or likeness in any live or recorded audio, video or photographic display or other transmission for purposes of promotion and publicity in connection with America SCORES and the Soccer for Success program and any future U.S. Soccer Foundation events or programs and hereby waive any rights of compensation or ownership thereto.
+                    <br>
+                    <b>For students in San Fransisco:</b> Your child participates in a youth program funded by the San Francisco Department of Children, Youth, and Their Families (DCYF). DCYF staff or contractors may on occasion visit this program to take photographs for public information projects. The public information projects aim to educate civic leaders and the general public about programs and services available for San Francisco children, youth and families. Example projects include DCYF publications and exhibits, as well as the DCYF website <a href='http://www.dcyf.org'>(http://www.dcyf.org)</a>. By signing this form, you authorize DCYF staff and contractors to take photographs of program activities that may include images of you or your child and to use these photographs for the public information projects described above.
+                </p>
+                <label for='ESig-agreement3'>I agree to sign this document electronically:</label>
+                <input type='checkbox' name='ESig-agreement3' id='ESig-agreement3' required>
+                <label for='name'>Name:</label>
+                <input type='text' name='name' id='esig-name3'>
+                <label for='signature'>Electronic Signature:</label>
+                <input type='text' name='signature' id='signature3' required>
+                <button id='submit-waivers'>Submit</button>
+                <button id='cancel-waivers'>Cancel</button>
+            </dialog>
+
             <script>
 
                 /* retireve the form data */
@@ -365,7 +440,6 @@
                     let data = {};
                     let form = document.getElementById('student-registration');
                     for(let el of form.elements){
-                        
                         console.log(el.value);
                         
                         data[el.id] = el.value;
@@ -407,14 +481,25 @@
                     
                     
                 }
-                document.getElementById('submit-btn').addEventListener('click', function(){
-                    postXHR();
-                    document.querySelector('main').innerHTML = "";
-                    let h1 = document.querySelector('h1');
-                    h1.innerText = "Registration Submitted!";
-                    h1.style.top = '50%';
-                    h1.style.fontSize = '5em'
-                });
+                // document.getElementById('submit-btn').addEventListener('click', function(){
+                    
+                //     document.getElementById('liability-form').showModal();
+                //     document.getElementById('esig-name').value = document.getElementById('parent-first-name').value + ' '  + document.getElementById('parent-last-name').value
+                //     document.getElementById('esig-name').disabled = true;
+                //    postXHR();
+                //     document.querySelector('main').innerHTML = "";
+                //     let h1 = document.querySelector('h1');
+                //     h1.innerText = "Registration Submitted!";
+                //     h1.style.top = '50%';
+                //     h1.style.fontSize = '5em'
+                    
+                // });
+
+                // document.querySelector('#submit-liability').addEventListener('click', function(){
+                //     document.querySelector('#liability').checked = true;
+                //     document.querySelector('#liability').disabled = true;
+
+                // });
 
             </script>
 
