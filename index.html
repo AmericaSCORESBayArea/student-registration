@@ -93,8 +93,8 @@
             }
             
             label{
-                font-size: small;
-                width: 125px;
+                /* font-size: small; */
+                width: 250px;
             }
 
 
@@ -141,7 +141,7 @@
             form>input, form>select, form>textarea{
                  margin-bottom: 10px; 
                  grid-column: 2;  
-                 text-align: center;
+                 
             }
 
             #btns{
@@ -321,7 +321,7 @@
                 <input type="email" name="personal-email" id='personal-email' title="PersonalEmail">
 
                 <label for='home-phone' id="hPhone-label">Home Phone:</label>
-                <input type="number" maxlength="10" name="home-phone" id='home-phone' title="HomePhone">
+                <input type="tel" name="home-phone" id='home-phone' title="HomePhone">
 
                 
                 <label for='birthdate' id="bday-label">Birthdate:</label>
@@ -424,13 +424,13 @@
                 <input type="text" name="relationship" id='relationship' title="Relationship">
                
                 <label for='parent-phone1' id="parent-phone1-label">Parent Phone 1:</label>
-                <input type="text" name="parent-phone1" id='parent-phone1' title="ParentPhone1">
+                <input type="tel" name="parent-phone1" id='parent-phone1' title="ParentPhone1">
 
                 <label for='parent-phone2' id="parent-phone2-label">Parent Phone 2:</label>
-                <input type="text" name="parent-phone2" id='parent-phone2' title="ParentPhone2">
+                <input type="tel" name="parent-phone2" id='parent-phone2' title="ParentPhone2">
 
                 <label for='parent-phone3' id="parent-phone3-label">Parent Phone 3:</label>
-                <input type="text" name="parent-phone3" id='parent-phone3' title="ParentPhone3">
+                <input type="tel" name="parent-phone3" id='parent-phone3' title="ParentPhone3">
 
                 <!--<h3>Mailing Address:</h3>-->
                 <label for='street' id="street-label">Mailing Street:</label>
@@ -512,15 +512,15 @@
                 <input type="text" name="ec-relationship" id='ec-relationship' title="Emergency_Contact_Relationship to Child">
                
                 <label for='ec-phone1' id="ec-phone1-label">Emergency Contact Phone 1:</label>
-                <input type="text" name="ec-phone1" id='ec-phone1' title="Emergency_Contact_Phone1">
+                <input type="tel" name="ec-phone1" id='ec-phone1' title="Emergency_Contact_Phone1">
 
                 <label for='ec-phone2' id="ec-phone2-label">Emergency Contact Phone 2:</label>
-                <input type="text" name="ec-phone2" id='ec-phone2' title="Emergency_Contact_Phone2">
+                <input type="tel" name="ec-phone2" id='ec-phone2' title="Emergency_Contact_Phone2">
 
                 <label for='ec-phone3' id="ec-phone3-label">Emergency Contact Phone 3:</label>
-                <input type="text" name="ec-phone3" id='ec-phone3' title="Emergency_Contact_Phone3">
+                <input type="tel" name="ec-phone3" id='ec-phone3' title="Emergency_Contact_Phone3">
 
-                <label for='ec-permission' id='ec-permission-label'>Emerg. Cont. Permission to Pick up Child</label>
+                <label for='ec-permission' id='ec-permission-label'>Permission to Pick up Child</label>
                 <select id="ec-permission" title='Emergency_Contact_Permission_to_Pickup_child'>
                     <option>--None--</option>
                     <optgroup label="Does this person have permission to pick up your child?">
@@ -539,15 +539,15 @@
                 <input type="text" name="ec2-relationship" id='ec2-relationship' title="Second_Emergency_Contact_Relationship">
                
                 <label for='ec2-phone1' id="ec2-phone1-label">Second Emergency Contact Phone 1:</label>
-                <input type="text" name="ec2-phone1" id='ec2-phone1' title="Second_Emergency_Contact_Phone1">
+                <input type="tel" name="ec2-phone1" id='ec2-phone1' title="Second_Emergency_Contact_Phone1">
 
                 <label for='ec2-phone2' id="ec2-phone2-label">Second Emergency Contact Phone 2:</label>
-                <input type="text" name="ec2-phone2" id='ec2-phone2' title="Second_Emergency_Contact_Phone2">
+                <input type="tel" name="ec2-phone2" id='ec2-phone2' title="Second_Emergency_Contact_Phone2">
 
                 <label for='ec2-phone3' id="ec2-phone3-label">Sencond Emergency Contact Phone 3:</label>
-                <input type="text" name="ec2-phone3" id='ec2-phone3' title="Second_Emergency_Contact_Phone3">
+                <input type="tel" name="ec2-phone3" id='ec2-phone3' title="Second_Emergency_Contact_Phone3">
 
-                <label for='ec2-permission' id='ec2-permission-label'>Sec. Emerg. Cont. Permission to Pick up Child</label>
+                <label for='ec2-permission' id='ec2-permission-label'>Permission to Pick up Child</label>
                 <select id="ec2-permission" title='Second_Emergency_Contact_Permission_to_Pickup_child'>
                     <option>--None--</option>
                     <optgroup label="Does this person have permission to pick up your child?">
