@@ -6,52 +6,119 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Registration Form</title>   
        <style>
+           @media screen and (max-width: 700px) {
+                header{
+                    display: grid;
+                    grid-template-rows: 50px 125px;
+                    grid-template-columns: 100px 5fr 1fr;
+                                        
+                }
+                #logo{
+                    grid-row: 1;
+                    grid-column: 1;
+                    width: 100px;
+                }
+                h1{
+                    grid-row: 2;
+                    grid-column: 2;
+                    font-size: 25px;
+                    width: 150px;
+                    margin: auto;
+                }
+                h2{
+                    font-size: medium;
+                }
+                form{
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    align-content: center;
+                }
+
+                
+                form>input, form>select, form>textarea{
+                    width: 150px !important;
+                    font-size: small;
+                    max-height: 60px;
+                }
+                
+                label{
+                    width: 125px;
+                    font-size: small;
+                    padding-right: 5px;
+                }
+
+           }
+
+
             html{
                 background-color: rgb(245, 245, 245)
             }
+
             header{
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                grid-template-rows: .5fr .75fr;
+                grid-template-rows: 50px 125px;
+                grid-template-columns: 100px 5fr 1fr;
                 background-color: rgb(228, 228, 228);
+                                    
             }
-                   
             #logo{
                 grid-row: 1;
-                max-width: 200px;
-                max-height: 100px;
+                grid-column: 1;
+                width: 200px;
             }
-           
             h1{
                 grid-row: 2;
                 grid-column: 2;
-                max-width: 500px;
-                text-align: center;    
+                font-size: 25px;
+                width: 150px;
+                margin: auto;
+                text-align: center; 
             }
-            main{
-                display: grid;
-                grid-template-columns: 1fr 2fr 1fr;
 
+            h2{
+                font-size: medium;
             }
             form{
-                display: grid;
-                grid-template-rows: 2fr repeat(11, 1fr) 2fr  1fr 1fr 2fr repeat(3, 1fr) 2fr repeat(16, 1fr) 2fr repeat(6, 1fr) 2fr repeat(6, 1fr);
-                grid-template-columns: 1fr 1fr          
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                align-content: center;
+            }
+
+            
+            form>input, form>select, form>textarea{
+                width: 250px;
+                max-height: 75px;
             }
             
+            label{
+                font-size: small;
+                width: 125px;
+            }
+
+
+            main{
+                display: grid;
+                grid-template-columns: 1fr 3fr 1fr;
+
+            } 
+            form{
+                display: grid;
+                /*grid-template-rows: 1fr repeat(11, 40px) 80px  40px 40px 40px repeat(3, 40px) 80px repeat(16, 40px) 80px repeat(6, 40px) 80px repeat(6, 40px);*/
+                grid-template-rows: 1fr repeat(11, 40px) 80px  40px 40px 80px repeat(16, 40px) 80px repeat(6, 40px) 80px repeat(6, 40px);
+                grid-template-columns: 1fr 1fr          
+            }
             h2, form{
                 grid-column: 2;
             }
-            div{
-                grid-column: 1/3;
-                /*background-color: rgb(122, 178, 231);    */
-            }
+            
             h2{
                 grid-column-start: 1;
                 grid-column-end: 3;
                 margin: 0px;
-                padding-top: 20px;
-                
+                padding-bottom: 20px;
+                padding-top: 10px;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
                 color: black;
             }
@@ -62,6 +129,7 @@
                 color:rgb(0, 0, 0);
                 
             }
+
             label{
                 grid-column: 1;
             }
@@ -69,9 +137,11 @@
             form>*{
                 max-width: 300px;
             }
-            input, select, textarea{
+
+            form>input, form>select, form>textarea{
                  margin-bottom: 10px; 
                  grid-column: 2;  
+                 text-align: center;
             }
 
             #btns{
@@ -79,6 +149,7 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
             }
+
             button.form{
                 grid-column: 2;
                 max-width: 100px;
@@ -89,14 +160,14 @@
             button.form:hover{
                 background-color:rgb(122, 167, 236);
             }
+
             label{
                 max-width: 200px;
                 padding-bottom: 5px;
                 color:black;
             }
-            dialog>label{
-                color:black;
-            }
+
+          
 
         </style>
 
@@ -116,13 +187,13 @@
             <form id="student-registration">
                 <h2 id='outside-form'><u>Student Details</u></h2>
                 <label for='first-name' id="fName-label">First Name:</label>
-                <input type="text" name="first-name" id='first-name' title="First Name">
+                <input type="text" name="first-name" id='first-name' title="FirstName">
 
                 <label for='middle-name' id="mName-label">Middle Name:</label>
-                <input type="text" name="middle-name" id='middle-name' title="Middle Name">
+                <input type="text" name="middle-name" id='middle-name' title="MiddleName">
 
                 <label for='last-name' id="lName-label">Last Name:</label>
-                <input type="text" name="last-name" id='last-name' title="Last Name">
+                <input type="text" name="last-name" id='last-name' title="LastName">
 
                 <label for='school' id="school-label">School Name:</label>
                <!-- <input list="schools-list">
@@ -133,28 +204,131 @@
                         <option value="School 4">School 4</option>
                     </datalist>
                -->
-                <select id='school'>
+                <select id='school' title='SchoolName'>
                     <option>--Choose School--</option>
                     <optgroup label="List of Schools">
-                        <option value="School 1">School 1</option>
-                        <option value="School 2">School 2</option>
-                        <option value="School 3">School 3</option>
-                        <option value="School 4">School 4</option>
+                        <option value="Adelante Selby Lane Elementary School">Adelante Selby Lane Elementary School</option>
+                        <option value="Alvarado Elementary School">Alvarado Elementary School</option>
+                        <option value="ASCEND Elementary School">ASCEND Elementary School</option>
+                        
+                        <option value="Bowman Elementary School">Bowman Elementary School</option>
+                        <option value="Bret Harte Elementary School">Bret Harte Elementary School</option>
+                        <option value="Bret Harte Middle School">Bret Harte Middle School</option>
+                        <option value="Bridges Academy Elementary School">Bridges Academy Elementary School</option>
+                        <option value="Bryant Elementary School">Bryant Elementary School</option>
+                        <option value="Burbank Elementary School">Burbank Elementary School</option>
+                        <option value="Cesar Chavez Middle School">Cesar Chavez Middle School</option>
+                        <option value="Chad's School Site">Chad's School Site</option>
+                        <option value="Cherryland Elementary School">Cherryland Elementary School</option>
+                        <option value="Cleveland Elementary School">Cleveland Elementary School</option>
+                        <option value="Coleman Elementary School">Coleman Elementary School</option>
+                        <option value="Davidson Middle School">Davidson Middle School</option>
+                        <option value="East Avenue Elementary School">East Avenue Elementary School</option>
+                        <option value="Eden Gardens Elementary School">Eden Gardens Elementary School</option>
+                        <option value="El Dorado Elementary School">El Dorado Elementary School</option>
+                        <option value="Eldridge Elementary School">Eldridge Elementary School</option>
+                        <option value="Elmhurst Elementary School">Elmhurst Elementary School</option>
+                        <option value="EnCompass Elementary School">EnCompass Elementary School</option>
+                        <option value="ER Taylor Elementary School">ER Taylor Elementary School</option>
+                        <option value="Esperanza Elementary School">Esperanza Elementary School</option>
+                        <option value="Everett Middle School">Everett Middle School</option>
+                        <option value="Fairview Elementary School">Fairview Elementary School</option>
+                        <option value="Faith Ringgold Elementary School">Faith Ringgold Elementary School</option>
+                        <option value="Flynn Elementary School">Flynn Elementary School</option>
+                        <option value="Francisco Middle School">Francisco Middle School</option>
+                        <option value="Futures & Community United Elementary School">Futures & Community United Elementary School</option>
+                        <option value="Futures Elementary School">Futures Elementary School</option>
+                        <option value="Garfield Elementary School">Garfield Elementary School</option>
+                        <option value="Glassbrook Elementary School">Glassbrook Elementary School</option>
+                        <option value="Glenview Elementary School">Glenview Elementary School</option>
+                        <option value="Global Family Elementary School">Global Family Elementary School</option>
+                        <option value="Greenleaf Elementary School">Greenleaf Elementary School</option>
+                        <option value="Guadalupe Elementary School">Guadalupe Elementary School</option>
+                        <option value="Harder Elementary School">Harder Elementary School</option>
+                        <option value="Hawes Elementary School">Hawes Elementary School</option>
+                        <option value="Henry Ford Elementary School">Henry Ford Elementary School</option>
+                        <option value="Herbert Hoover Middle School">Herbert Hoover Middle School</option>
+                        <option value="Hillcrest Elementary School">Hillcrest Elementary School</option>
+                        <option value="Howard Elementary School">Howard Elementary School</option>
+                        <option value="IFC San Francisco">IFC San Francisco</option>
+                        <option value="Indochinese Housing Development Corporation - Program Site">Indochinese Housing Development Corporation - Program Site</option>
+                        <option value="International Community School & Think College Now">International Community School & Think College Now</option>
+                        <option value="John Gill Elementary School">John Gill Elementary School</option>
+                        <option value="John Muir Elementary School">John Muir Elementary School</option>
+                        <option value="Joseph Lee Rec Center Bayview">Joseph Lee Rec Center Bayview</option>
+                        <option value="Junipero Serra Elementary">Junipero Serra Elementary</option>
+                        <option value="Kipp Middle School">Kipp Middle School</option>
+                        <option value="KIPP SF Bay Academy Lead Agency">KIPP SF Bay Academy Lead Agency</option>
+                        <option value="KIPP SF Bay Academy Program Site">KIPP SF Bay Academy Program Site</option>
+                        <option value="Korematsu Discovery Academy">Korematsu Discovery Academy</option>
+                        <option value="Lakeshore Alternative Elementary School">Lakeshore Alternative Elementary School</option>
+                        <option value="Laurel Dell Elementary School">Laurel Dell Elementary School</option>
+                        <option value="Learning Without Limits Elementary School">Learning Without Limits Elementary School</option>
+                        <option value="Longwood Elementary School">Longwood Elementary School</option>
+                        <option value="Lorin Eden Elementary School">Lorin Eden Elementary School</option>
+                        <option value="Madison Park Primary">Madison Park Primary</option>
+
+                        <option value=" Manzanita Community School & Manzanita SEED"> Manzanita Community School & Manzanita SEED</option>
+                        <option value="Marshall Elementary School">Marshall Elementary School</option>
+                        <option value="Mathson Middle School">Mathson Middle School</option>
+                        <option value="McCoppin Elementary School">McCoppin Elementary School</option>
+                        <option value="Mission Education Center">Mission Education Center</option>
+                        <option value="MLK Academic Middle School">MLK Academic Middle School</option>
+                        <option value="MLK Lafayette Elementary School">MLK Lafayette Elementary School</option>
+                        <option value="MLK Middle School">MLK Middle School</option>
+                        <option value="Monroe Elementary School">Monroe Elementary School</option>
+                        <option value="Montera Middle School">Montera Middle School</option>
+                        <option value="Moscone Elementary School">Moscone Elementary School</option>
+                        <option value="Ocala Middle School">Ocala Middle School</option>
+                        <option value="Ochoa Middle School">Ochoa Middle School</option>
+                        <option value="Palma Ceia Elementary School">Palma Ceia Elementary School</option>
+                        <option value="Panorama Elementary School">Panorama Elementary School</option>
+                        <option value="Park Elementary School">Park Elementary School</option>
+                        <option value="Paul Revere Elementary School">Paul Revere Elementary School</option>
+                        <option value="Paul Revere Middle School">Paul Revere Middle School</option>
+                        <option value="Prescott Elementary School">Prescott Elementary School</option>
+                        <option value="Redding Elementary School">Redding Elementary School</option>
+                        <option value="Ruus Elementary School">Ruus Elementary School</option>
+                        <option value="Salvation Army Kroc Center - Program Site">Salvation Army Kroc Center - Program Site</option>
+                        <option value="San Francisco Community School">San Francisco Community School</option>
+                        <option value="San Pedro Elementary School">San Pedro Elementary School</option>
+                        <option value="Sanchez Elementary School">Sanchez Elementary School</option>
+                        <option value="Sankofa Academy">Sankofa Academy</option>
+                        <option value="Schafer Elementary School">Schafer Elementary School</option>
+                        <option value="Sherman Elementary School">Sherman Elementary School</option>
+                        <option value="Short Elementary School">Short Elementary School</option>
+                        <option value="Southgate Elementary School">Southgate Elementary School</option>
+                        <option value="Stonebrae Elementary School">Stonebrae Elementary School</option>
+                        <option value="Strobridge Elementary School">Strobridge Elementary School</option>
+                        <option value="Sunnyside Elementary School">Sunnyside Elementary School</option>
+                        <option value="TECA Elementary School - Program Site">TECA Elementary School - Program Site</option>
+                        <option value="TECA Middle School - Program Site">TECA Middle School - Program Site</option>
+                        <option value="Tenderloin Community School">Tenderloin Community School</option>
+                        <option value="Treeview Elementary School">Treeview Elementary School</option>
+                        <option value="Tyrrell Elementary School">Tyrrell Elementary School</option>
+                        <option value="Up on Top - Program Site">Up on Top - Program Site</option>
+                        <option value="Venetia Valley K-8 School">Venetia Valley K-8 School</option>
+                        <option value="Visitation Valley Middle School">Visitation Valley Middle School</option>
+                        <option value="Westlake Middle School">Westlake Middle School</option>
+                        <option value="Willie Brown Middle School">Willie Brown Middle School</option>
+                        <option value="Winton Middle School">Winton Middle School</option>
+                        <option value="Woodrow Wilson Elementary School">Woodrow Wilson Elementary School</option>
                     </optgroup>
                 </select>
                 
+                
                 <label for='personal-email' id="pEmail-label">Personal Email:</label>
-                <input type="email" name="personal-email" id='personal-email' title="Personal Email">
+                <input type="email" name="personal-email" id='personal-email' title="PersonalEmail">
 
                 <label for='home-phone' id="hPhone-label">Home Phone:</label>
-                <input type="number" maxlength="10" name="home-phone" id='home-phone' title="Home Phone">
+                <input type="number" maxlength="10" name="home-phone" id='home-phone' title="HomePhone">
 
                 
                 <label for='birthdate' id="bday-label">Birthdate:</label>
                 <input type="date" name="birthdate" id='birthdate' title="Birthdate">
 
                 <label for='gender-list' id="gender-label">Gender:</label>
-                <select id="gender-list">
+                <select id="gender-list" title='Gender'>
                     <option>--Choose Gender--</option>
                     <optgroup>
                         <option value="Female">Female</option>
@@ -164,7 +338,7 @@
                 </select>
 
                 <label for='grade-list' id="grade-label">Grade:</label>
-                <select id="grade-list">
+                <select id="grade-list" title='Grade'>
                     <option>--Choose Grade--</option>
                     <optgroup label="Grades">
                         <option value="K">Kindergarten</option>
@@ -181,7 +355,7 @@
 
 
                 <label for='ethnicity' id="ethinicity-label">Ethnicity:</label>
-                <select id="ethnicity-list">
+                <select id="ethnicity-list" title='Ethnicity'>
                     <option>--Choose Ethnicity--</option>
                     <optgroup label="Ethnicity">
                         <option value="Hispanic/Latino">Hispanic/Latino</option>
@@ -199,7 +373,7 @@
 
 
                 <label for='reduced-lunch-list' id="reduced-lunch-label">Reduced Price Lunch:</label>
-                <select id="reduced-lunch-list">
+                <select id="reduced-lunch-list" title='ReducedPriceLunch'>
                     <option>--N/A--</option>
                     <optgroup label="Does your child receive free/reduced price lunch at school during the school year?">
                         <option value="Yes">Yes</option>
@@ -208,10 +382,10 @@
                 </select>
 
                 <label for='allergies' id='allergies-label'>Allergies/Medical Conditions:</label>
-                <textarea id='allergies'></textarea>
+                <textarea id='allergies' title='Allergies'></textarea>
                 
                 <label for='commute-permission' id="commute-permission-label">Permission to Commute Alone:</label>
-                <select id="commute-permission">
+                <select id="commute-permission" title='PermissiontoCommuteAlone'>
                     <option>--None--</option>
                     <optgroup label="Does your child have permission to walk, bicycle, or take public transportation home on their own?">
                         <option value="Yes">Yes</option>
@@ -220,63 +394,63 @@
                 </select>
 
                 <label for="DCYF-id" id='DCYF-id-label'>DCYF Student ID:</label>
-                <input type='text' maxlength="8" name="DCYF-student-id" id="DCYF-student-id">
+                <input type='text' maxlength="8" name="DCYF-student-id" id="DCYF-student-id" title='DCYFStuID'>
 
-                <h2 class='inForm'><u>Waivers</u></h2>
+                <!-- <h2 class='inForm'><u>Waivers</u></h2>
                 <label for='liability'>Liability</label>
-                <!--<details>
+                <details>
                     <summary>Waiver & Indemnity Agreement</summary>
-                </details>-->
-                <input type='checkbox' name='liability' id='liability'>
+                </details>
+                <input type='checkbox' name='liability' id='liability' title='LiabilityWaiver'>
 
                 <label for="data-release">Data Release</label>
-                <input type='checkbox' name="data-release" id="data-release">
+                <input type='checkbox' name="data-release" id="data-release" title='DataReleaseWaiver'>
 
                 <label for="media-release">Media Release</label>
-                <input type='checkbox' name="media-release" id="media-release">
+                <input type='checkbox' name="media-release" id="media-release" title='MediaReleaseWaiver'> --> 
 
                <h2 class='inForm'><u>Parent/Guardian Information</u></h2>
 
                 <label for='parent-first-name' id="parent-fName-label">Parent First Name:</label>
-                <input type="text" name="parent-first-name" id='parent-first-name' title="Paretn First Name">
+                <input type="text" name="parent-first-name" id='parent-first-name' title="ParentFName">
 
                 <label for='parent-last-name' id="parent-lName-label">Parent Last Name:</label>
-                <input type="text" name="parent-last-name" id='parent-last-name' title="Parent Last Name">
+                <input type="text" name="parent-last-name" id='parent-last-name' title="ParentLName">
 
                 <label for='parent-email' id="parentEmail-label">Parent Email Address:</label>
-                <input type="email" name="parent-email" id='parent-email' title="Parent Email">                
+                <input type="email" name="parent-email" id='parent-email' title="ParentEmail">                
 
                 <label for='relationship' id="relationship-label">Relationship to Child:</label>
-                <input type="text" name="relationship" id='relationship' title="Relationship to Child">
+                <input type="text" name="relationship" id='relationship' title="Relationship">
                
                 <label for='parent-phone1' id="parent-phone1-label">Parent Phone 1:</label>
-                <input type="text" name="parent-phone1" id='parent-phone1' title="Parent Phone 01">
+                <input type="text" name="parent-phone1" id='parent-phone1' title="ParentPhone1">
 
                 <label for='parent-phone2' id="parent-phone2-label">Parent Phone 2:</label>
-                <input type="text" name="parent-phone2" id='parent-phone2' title="Parent Phone 02">
+                <input type="text" name="parent-phone2" id='parent-phone2' title="ParentPhone2">
 
                 <label for='parent-phone3' id="parent-phone3-label">Parent Phone 3:</label>
-                <input type="text" name="parent-phone3" id='parent-phone3' title="Parent Phone 03">
+                <input type="text" name="parent-phone3" id='parent-phone3' title="ParentPhone3">
 
                 <!--<h3>Mailing Address:</h3>-->
                 <label for='street' id="street-label">Mailing Street:</label>
-                <input type="text" name="street" id='street' title="Mailing Street">
+                <input type="text" name="street" id='street' title="MailingStreet">
 
                 <label for='city' id="city-label">Mailing City:</label>
-                <input type="text" name="city" id='city' title="Mailing City">
+                <input type="text" name="city" id='city' title="MailingCity">
 
                 <label for='state' id="state-label">Mailing State/Province:</label>
-                <input type="text" name="state" id='state' title="Mailing State">             
+                <input type="text" name="state" id='state' title="MailingState">             
 
                 <label for='zip-code' id="zip-code-label">Mailing Zip/Postal Code:</label>
-                <input type="text" name="zip-code" id='zip-code' title="Mailing Zip/Postal Code">
+                <input type="text" name="zip-code" id='zip-code' title="MailingZip">
 
                 <label for='country' id="country-label">Mailing Country:</label>
-                <input type="text" name='country' id='country' title="Mailing Country">
+                <input type="text" name='country' id='country' title="MailingCountry">
 
 
                 <label for='fluency' id="fluency-label">Parent English Fluency:</label>
-                <select id='fluency'>
+                <select id='fluency' title='ParentEnglishFluency'>
                     <option>--None--</option>
                     <optgroup label="English Fluency">
                         <option value="Yes">Yes</option>
@@ -286,7 +460,7 @@
                 </select>
 
                 <label for='home-lang' id="home-lang-label">Parent Home Language:</label>
-                <select id="home-lang">
+                <select id="home-lang" title='ParentHomeLang'>
                     <option>--Choose Language--</option>
                     <optgroup label="Languages">
                         <option value="English">English</option>
@@ -318,10 +492,10 @@
                 </select>
 
                 <label for='other-lang' id='other-lang-label'>Specify Other Language:</label>
-                <input type="text" name='other-lang' id='other-lang' title="Parent Other Language">
+                <input type="text" name='other-lang' id='other-lang' title="OtherLang">
 
                 <label for='volunteer' id='volunteer-label'>Volunteer for this program? (Parent):</label>
-                <select id="volunteer">
+                <select id="volunteer" title='Volunteer'>
                     <option>--None--</option>
                     <optgroup label="Are you interested in being a volunteer for this program?">
                         <option value="Yes">Yes</option>
@@ -332,22 +506,22 @@
                 <h2><u>Emergency Contact (Other than Parent/Guardian)</u></h2>
 
                 <label for='ec-name' id="ec-name-label">Emergency Contact Name:</label>
-                <input type="text" name="ec-name" id='ec-name' title="Emergency Contact Name">
+                <input type="text" name="ec-name" id='ec-name' title="Emergency_Contact_Name">
 
                 <label for='ec-relationship' id="ec-relationship-label">Emergency Contact Relationship to Child:</label>
-                <input type="text" name="ec-relationship" id='ec-relationship' title="Emergency Contact Relationship to Child">
+                <input type="text" name="ec-relationship" id='ec-relationship' title="Emergency_Contact_Relationship to Child">
                
                 <label for='ec-phone1' id="ec-phone1-label">Emergency Contact Phone 1:</label>
-                <input type="text" name="ec-phone1" id='ec-phone1' title="ec Phone 01">
+                <input type="text" name="ec-phone1" id='ec-phone1' title="Emergency_Contact_Phone1">
 
                 <label for='ec-phone2' id="ec-phone2-label">Emergency Contact Phone 2:</label>
-                <input type="text" name="ec-phone2" id='ec-phone2' title="ec Phone 02">
+                <input type="text" name="ec-phone2" id='ec-phone2' title="Emergency_Contact_Phone2">
 
                 <label for='ec-phone3' id="ec-phone3-label">Emergency Contact Phone 3:</label>
-                <input type="text" name="ec-phone3" id='ec-phone3' title="ec Phone 03">
+                <input type="text" name="ec-phone3" id='ec-phone3' title="Emergency_Contact_Phone3">
 
                 <label for='ec-permission' id='ec-permission-label'>Emerg. Cont. Permission to Pick up Child</label>
-                <select id="ec-permission">
+                <select id="ec-permission" title='Emergency_Contact_Permission_to_Pickup_child'>
                     <option>--None--</option>
                     <optgroup label="Does this person have permission to pick up your child?">
                         <option value="Yes">Yes</option>
@@ -359,22 +533,22 @@
                 <h2><u>Second Emergency Contact</u></h2>
                
                 <label for='ec2-name' id="ec2-name-label">Second Emergency Contact Name:</label>
-                <input type="text" name="ec2-name" id='ec2-name' title="Emergency Contact Name">
+                <input type="text" name="ec2-name" id='ec2-name' title="Second_Emergency_Contact_Name">
 
                 <label for='ec2-relationship' id="ec2-relationship-label">Sec. Emergency Contact Relationship to Child:</label>
-                <input type="text" name="ec2-relationship" id='ec2-relationship' title="Second Emergency Contact Relationship to Child">
+                <input type="text" name="ec2-relationship" id='ec2-relationship' title="Second_Emergency_Contact_Relationship">
                
                 <label for='ec2-phone1' id="ec2-phone1-label">Second Emergency Contact Phone 1:</label>
-                <input type="text" name="ec2-phone1" id='ec2-phone1' title="ec2 Phone 01">
+                <input type="text" name="ec2-phone1" id='ec2-phone1' title="Second_Emergency_Contact_Phone1">
 
                 <label for='ec2-phone2' id="ec2-phone2-label">Second Emergency Contact Phone 2:</label>
-                <input type="text" name="ec2-phone2" id='ec2-phone2' title="ec2 Phone 02">
+                <input type="text" name="ec2-phone2" id='ec2-phone2' title="Second_Emergency_Contact_Phone2">
 
                 <label for='ec2-phone3' id="ec2-phone3-label">Sencond Emergency Contact Phone 3:</label>
-                <input type="text" name="ec2-phone3" id='ec2-phone3' title="ec2 Phone 03">
+                <input type="text" name="ec2-phone3" id='ec2-phone3' title="Second_Emergency_Contact_Phone3">
 
                 <label for='ec2-permission' id='ec2-permission-label'>Sec. Emerg. Cont. Permission to Pick up Child</label>
-                <select id="ec2-permission">
+                <select id="ec2-permission" title='Second_Emergency_Contact_Permission_to_Pickup_child'>
                     <option>--None--</option>
                     <optgroup label="Does this person have permission to pick up your child?">
                         <option value="Yes">Yes</option>
@@ -386,124 +560,9 @@
             </form>
 
             <section id='btns'>
-                <button class='form' id='sign-waivers-btn'>Sign Waivers</button>
-                <button class='form' id='submit-btn' disabled>Submit</button>
+                <button class='form' id='submit-btn'>Submit</button>
             </section>
             
-
-            <dialog id='waiver-dialog'>
-                <h3>Waiver & Indemnity Agreement</h3>
-                <p>I, the undersigned legal parent/guardian of above named participant, understand that participation in the America SCORES and U.S. Soccer Foundation’s Soccer for Success program involves certain inherent risks of injury, despite all safety precautions taken by America SCORES. Therefore, as parent and/or guardian, I will assume all risks, injury or illness, for my child(ren) that may occur during the participation in any activities or use of facilities associated with the America SCORES or Soccer for Success program. I hereby give permission for America SCORES Bay Area staff and operators to use their best judgment in arranging for my child(ren)’s emergency medical treatment in addition to contacting me to the best of their ability. I certify that my child(ren) is/are fully covered by medical insurance and that I am fully responsible for all costs incurred due to medical or dental treatment as deemed necessary by America SCORES Bay Area the U.S. Soccer Foundation staff and operators.
-                    By signing this form, I acknowledge that I am aware of the potential risks of participation in any activities or use of facilities associated with the program, and in no way hold America SCORES Bay Area or the U.S. Soccer Foundation, its respective parent, its subsidiaries or affiliates, or their respective management, agents, employees, directors, officers, sponsoring agencies, volunteers or the facility or its operators, coaches, officials, or advertisers, (Individually and Collectively, the “Released Parties”), liable for any injury that my child(ren) may sustain. <b>I, FOR MYSELF, MY SPOUSE AND MY CHILD(REN), DO FURTHER RELEASE, ABSOLVE, INDEMNIFY, AND HOLD THE RELEASED PARTIES HARMLESS AGAINST ANY CLAIMS OF INJURY OR DEATH TO MY CHILD(REN) IN CONNECTION WITH ANY AND ALL OF THE ACTIVITIES MENTIONED.
-                    </b>
-                </p>
-                <label for='ESig-agreement1'>I agree to sign this document electronically:</label>
-                <input type='checkbox' name='ESig-agreement1' id='ESig-agreement1' required>
-                <label for='name'>Name:</label>
-                <input type='text' name='name' id='esig-name1'>
-                <label for='signature'>Electronic Signature:</label>
-                <input type='text' name='signature' id='signature1' required>
-                
-           
-                <br>
-                <h3>Evaluation</h3>
-                <p>America SCORES and its partners collect data to evaluate the effectiveness and impact of program. Students will be asked to complete a survey and provide ongoing feedback. I, the legal parent/guardian(s) of above named participant, agree to the following: I give America SCORES Bay Area and Public Profit, a partner of America SCORES, permission to collect my child's identifiable student level data from his/her school or schooldistrict. This data includes grades, attendance, ELA and Math test information, student perception survey, enrollment, biographic, course and credit, fitness and graduation outcomes for the years of 2009-2010 through 2024-2025 with the understanding that all information obtained will remain private, and that any responses publicly reported will be grouped together with other participants of this program and that my child will not be individually linked to his/her response. America SCORES will not share your child’s name in evaluation reports. America SCORES Bay Area will comply with regulations protecting your student's personal information. Parents have the right to request review of the data collected from
-                    their student, revoke permission to continue collection, and request removal of their student's identifying information from data collected.
-                </p>
-                <label for='ESig-agreement2'>I agree to sign this document electronically:</label>
-                <input type='checkbox' name='ESig-agreement2' id='ESig-agreement2' required>
-                <label for='name'>Name:</label>
-                <input type='text' name='name' id='esig-name2' disabled>
-                <label for='signature'>Electronic Signature:</label>
-                <input type='text' name='signature' id='signature2' required>
-
-           <br>
-                <h3>Model Release and Authorization to Video/Photograph</h3>
-                <p><b>For all Students:</b> As the child’s parent/guardian, I hereby grant a license to America SCORES Bay Area and their agents to use and to license others to use the child’s name, recorded voice, image, picture or likeness in any live or recorded audio, video or photographic display or other transmission for purposes of promotion and publicity in connection with America SCORES and the Soccer for Success program and any future U.S. Soccer Foundation events or programs and hereby waive any rights of compensation or ownership thereto.
-                    <br>
-                    <b>For students in San Fransisco:</b> Your child participates in a youth program funded by the San Francisco Department of Children, Youth, and Their Families (DCYF). DCYF staff or contractors may on occasion visit this program to take photographs for public information projects. The public information projects aim to educate civic leaders and the general public about programs and services available for San Francisco children, youth and families. Example projects include DCYF publications and exhibits, as well as the DCYF website <a href='http://www.dcyf.org'>(http://www.dcyf.org)</a>. By signing this form, you authorize DCYF staff and contractors to take photographs of program activities that may include images of you or your child and to use these photographs for the public information projects described above.
-                </p>
-                <label for='ESig-agreement3'>I agree to sign this document electronically:</label>
-                <input type='checkbox' name='ESig-agreement3' id='ESig-agreement3' required>
-                <label for='name'>Name:</label>
-                <input type='text' name='name' id='esig-name3'>
-                <label for='signature'>Electronic Signature:</label>
-                <input type='text' name='signature' id='signature3' required>
-                <button id='submit-waivers'>Submit</button>
-                <button id='cancel-waivers'>Cancel</button>
-            </dialog>
-
-            <script>
-
-                /* retireve the form data */
-                function formData(){
-                    let data = {};
-                    let form = document.getElementById('student-registration');
-                    for(let el of form.elements){
-                        console.log(el.value);
-                        
-                        data[el.id] = el.value;
-                    }
-                    return data;
-                }
-
-                // /* print the HTTP response */
-                // function printJSON(json){
-                //     let listEl = document.getElementById('keys');
-                //     listEl.innerHTML = "";
-                //     for(let entry of Object.entries(json)){
-                //         let item = document.createElement('li');
-                //         item.innerText = entry[0] + ': ';
-                //         if(entry[1] == '' || Object.entries(entry[1]).length === 0){
-                //              item.innerText += '\"\"';
-                //         }else if(typeof(entry[1]) === 'object'){
-                //             printJSONinJSON(item, entry[1]);
-                //          }else{
-                //             item.innerText += entry[1];
-                //         }
-                //         console.log(listEl);
-                //         listEl.appendChild(item);
-                        
-                //     }
-
-                // }
-
-                /* POST using XHR */
-                function postXHR(){
-                    let order = formData();
-                    xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'https://httpbin.org/post', true);
-                    xhr.setRequestHeader('Content-Type', 'application/json');
-                    // xhr.onload = function(){
-                    //     printJSON(JSON.parse(xhr.responseText));
-                    // };
-                    xhr.send(JSON.stringify(order));
-                    
-                    
-                }
-                // document.getElementById('submit-btn').addEventListener('click', function(){
-                    
-                //     document.getElementById('liability-form').showModal();
-                //     document.getElementById('esig-name').value = document.getElementById('parent-first-name').value + ' '  + document.getElementById('parent-last-name').value
-                //     document.getElementById('esig-name').disabled = true;
-                //    postXHR();
-                //     document.querySelector('main').innerHTML = "";
-                //     let h1 = document.querySelector('h1');
-                //     h1.innerText = "Registration Submitted!";
-                //     h1.style.top = '50%';
-                //     h1.style.fontSize = '5em'
-                    
-                // });
-
-                // document.querySelector('#submit-liability').addEventListener('click', function(){
-                //     document.querySelector('#liability').checked = true;
-                //     document.querySelector('#liability').disabled = true;
-
-                // });
-
-            </script>
-
-
         </main>
 
 
