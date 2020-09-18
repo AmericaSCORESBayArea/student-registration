@@ -28,7 +28,7 @@
                 h2{
                     font-size: medium;
                 }
-                form{
+                #form-fields{
                     display: flex;
                     justify-content: space-evenly;
                     align-items: center;
@@ -36,7 +36,7 @@
                 }
 
                 
-                form>input, form>select, form>textarea{
+                #form-fields>input, #form-fields>select, #form-fields>textarea{
                     width: 150px !important;
                     font-size: small;
                     max-height: 60px;
@@ -79,7 +79,7 @@
             h2{
                 font-size: medium;
             }
-            form{
+            #form-fields{
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
@@ -87,7 +87,7 @@
             }
 
             
-            form>input, form>select, form>textarea{
+            #form-fields>input, #form-fields>select, #form-fields>textarea{
                 width: 250px;
                 max-height: 75px;
             }
@@ -103,11 +103,29 @@
                 grid-template-columns: 1fr 3fr 1fr;
 
             } 
+            #star{
+                grid-column: 2;
+                font-size: small;
+            }
             form{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+            }
+            #form-fields{
                 display: grid;
                 /*grid-template-rows: 1fr repeat(11, 40px) 80px  40px 40px 40px repeat(3, 40px) 80px repeat(16, 40px) 80px repeat(6, 40px) 80px repeat(6, 40px);*/
                 grid-template-rows: 1fr repeat(11, 40px) 80px  40px 40px 80px repeat(16, 40px) 80px repeat(6, 40px) 80px repeat(6, 40px);
                 grid-template-columns: 1fr 1fr          
+            }
+            #submit-btn{
+                /* grid-column-start: 1;
+                grid-column-end: 3; 
+                margin-left: 100px;  */
+                margin-top: 30px;
+                width: 100px;
             }
             h2, form{
                 grid-column: 2;
@@ -134,11 +152,11 @@
                 grid-column: 1;
             }
 
-            form>*{
+            #form-fields>*{
                 max-width: 300px;
             }
 
-            form>input, form>select, form>textarea{
+            form>input, #form-fields>select, #form-fields>textarea{
                  margin-bottom: 10px; 
                  grid-column: 2;  
                  
@@ -154,11 +172,6 @@
                 grid-column: 2;
                 max-width: 100px;
                 margin-top: 50px;
-                background-color: rgb(73, 124, 201);
-            }
-
-            button.form:hover{
-                background-color:rgb(122, 167, 236);
             }
 
             label{
@@ -172,6 +185,7 @@
         </style>
 
         <script src='form.js'></script>
+        <script src='a.js'></script>
 
     </head>
 
@@ -183,386 +197,393 @@
             <h1>Student Registration Form</h1>
         </header>
         <main>
-           
+            <h3 id='star'>required fields denoted by *</h3>
             <form id="student-registration">
-                <h2 id='outside-form'><u>Student Details</u></h2>
-                <label for='first-name' id="fName-label">First Name:</label>
-                <input type="text" name="first-name" id='first-name' title="FirstName">
+                <div id='form-fields'>
+                    <h2 id='outside-form'><u>Student Details</u></h2>
+                    <label for='first-name' id="fName-label">First Name*:</label>
+                    <input type="text" name="first-name" id='first-name' title="FirstName" required>
 
-                <label for='middle-name' id="mName-label">Middle Name:</label>
-                <input type="text" name="middle-name" id='middle-name' title="MiddleName">
+                    <label for='middle-name' id="mName-label">Middle Name:</label>
+                    <input type="text" name="middle-name" id='middle-name' title="MiddleName">
 
-                <label for='last-name' id="lName-label">Last Name:</label>
-                <input type="text" name="last-name" id='last-name' title="LastName">
+                    <label for='last-name' id="lName-label">Last Name*:</label>
+                    <input type="text" name="last-name" id='last-name' title="LastName" required>
 
-                <label for='school' id="school-label">School Name:</label>
-               <!-- <input list="schools-list">
-                    <datalist id="schools-list">
-                        <option value="School 1">School 1</option>
-                        <option value="School 2">School 2</option>
-                        <option value="School 3">School 3</option>
-                        <option value="School 4">School 4</option>
-                    </datalist>
-               -->
-                <select id='school' title='SchoolName'>
-                    <option>--Choose School--</option>
-                    <optgroup label="List of Schools">
-                        <option value="Adelante Selby Lane Elementary School">Adelante Selby Lane Elementary School</option>
-                        <option value="Alvarado Elementary School">Alvarado Elementary School</option>
-                        <option value="ASCEND Elementary School">ASCEND Elementary School</option>
-                        
-                        <option value="Bowman Elementary School">Bowman Elementary School</option>
-                        <option value="Bret Harte Elementary School">Bret Harte Elementary School</option>
-                        <option value="Bret Harte Middle School">Bret Harte Middle School</option>
-                        <option value="Bridges Academy Elementary School">Bridges Academy Elementary School</option>
-                        <option value="Bryant Elementary School">Bryant Elementary School</option>
-                        <option value="Burbank Elementary School">Burbank Elementary School</option>
-                        <option value="Cesar Chavez Middle School">Cesar Chavez Middle School</option>
-                        <option value="Chad's School Site">Chad's School Site</option>
-                        <option value="Cherryland Elementary School">Cherryland Elementary School</option>
-                        <option value="Cleveland Elementary School">Cleveland Elementary School</option>
-                        <option value="Coleman Elementary School">Coleman Elementary School</option>
-                        <option value="Davidson Middle School">Davidson Middle School</option>
-                        <option value="East Avenue Elementary School">East Avenue Elementary School</option>
-                        <option value="Eden Gardens Elementary School">Eden Gardens Elementary School</option>
-                        <option value="El Dorado Elementary School">El Dorado Elementary School</option>
-                        <option value="Eldridge Elementary School">Eldridge Elementary School</option>
-                        <option value="Elmhurst Elementary School">Elmhurst Elementary School</option>
-                        <option value="EnCompass Elementary School">EnCompass Elementary School</option>
-                        <option value="ER Taylor Elementary School">ER Taylor Elementary School</option>
-                        <option value="Esperanza Elementary School">Esperanza Elementary School</option>
-                        <option value="Everett Middle School">Everett Middle School</option>
-                        <option value="Fairview Elementary School">Fairview Elementary School</option>
-                        <option value="Faith Ringgold Elementary School">Faith Ringgold Elementary School</option>
-                        <option value="Flynn Elementary School">Flynn Elementary School</option>
-                        <option value="Francisco Middle School">Francisco Middle School</option>
-                        <option value="Futures & Community United Elementary School">Futures & Community United Elementary School</option>
-                        <option value="Futures Elementary School">Futures Elementary School</option>
-                        <option value="Garfield Elementary School">Garfield Elementary School</option>
-                        <option value="Glassbrook Elementary School">Glassbrook Elementary School</option>
-                        <option value="Glenview Elementary School">Glenview Elementary School</option>
-                        <option value="Global Family Elementary School">Global Family Elementary School</option>
-                        <option value="Greenleaf Elementary School">Greenleaf Elementary School</option>
-                        <option value="Guadalupe Elementary School">Guadalupe Elementary School</option>
-                        <option value="Harder Elementary School">Harder Elementary School</option>
-                        <option value="Hawes Elementary School">Hawes Elementary School</option>
-                        <option value="Henry Ford Elementary School">Henry Ford Elementary School</option>
-                        <option value="Herbert Hoover Middle School">Herbert Hoover Middle School</option>
-                        <option value="Hillcrest Elementary School">Hillcrest Elementary School</option>
-                        <option value="Howard Elementary School">Howard Elementary School</option>
-                        <option value="IFC San Francisco">IFC San Francisco</option>
-                        <option value="Indochinese Housing Development Corporation - Program Site">Indochinese Housing Development Corporation - Program Site</option>
-                        <option value="International Community School & Think College Now">International Community School & Think College Now</option>
-                        <option value="John Gill Elementary School">John Gill Elementary School</option>
-                        <option value="John Muir Elementary School">John Muir Elementary School</option>
-                        <option value="Joseph Lee Rec Center Bayview">Joseph Lee Rec Center Bayview</option>
-                        <option value="Junipero Serra Elementary">Junipero Serra Elementary</option>
-                        <option value="Kipp Middle School">Kipp Middle School</option>
-                        <option value="KIPP SF Bay Academy Lead Agency">KIPP SF Bay Academy Lead Agency</option>
-                        <option value="KIPP SF Bay Academy Program Site">KIPP SF Bay Academy Program Site</option>
-                        <option value="Korematsu Discovery Academy">Korematsu Discovery Academy</option>
-                        <option value="Lakeshore Alternative Elementary School">Lakeshore Alternative Elementary School</option>
-                        <option value="Laurel Dell Elementary School">Laurel Dell Elementary School</option>
-                        <option value="Learning Without Limits Elementary School">Learning Without Limits Elementary School</option>
-                        <option value="Longwood Elementary School">Longwood Elementary School</option>
-                        <option value="Lorin Eden Elementary School">Lorin Eden Elementary School</option>
-                        <option value="Madison Park Primary">Madison Park Primary</option>
+                    <label for='school' id="school-label">School Name*:</label>
+                    <select id='school' title='SchoolName' required>
+                        <option></option>
+                        <optgroup label="List of Schools">
+                            <option value="Adelante Selby Lane Elementary School">Adelante Selby Lane Elementary School</option>
+                            <option value="Alvarado Elementary School">Alvarado Elementary School</option>
+                            <option value="ASCEND Elementary School">ASCEND Elementary School</option>
+                            
+                            <option value="Bowman Elementary School">Bowman Elementary School</option>
+                            <option value="Bret Harte Elementary School">Bret Harte Elementary School</option>
+                            <option value="Bret Harte Middle School">Bret Harte Middle School</option>
+                            <option value="Bridges Academy Elementary School">Bridges Academy Elementary School</option>
+                            <option value="Bryant Elementary School">Bryant Elementary School</option>
+                            <option value="Burbank Elementary School">Burbank Elementary School</option>
+                            <option value="Cesar Chavez Middle School">Cesar Chavez Middle School</option>
+                            <option value="Chad's School Site">Chad's School Site</option>
+                            <option value="Cherryland Elementary School">Cherryland Elementary School</option>
+                            <option value="Cleveland Elementary School">Cleveland Elementary School</option>
+                            <option value="Coleman Elementary School">Coleman Elementary School</option>
+                            <option value="Davidson Middle School">Davidson Middle School</option>
+                            <option value="East Avenue Elementary School">East Avenue Elementary School</option>
+                            <option value="Eden Gardens Elementary School">Eden Gardens Elementary School</option>
+                            <option value="El Dorado Elementary School">El Dorado Elementary School</option>
+                            <option value="Eldridge Elementary School">Eldridge Elementary School</option>
+                            <option value="Elmhurst Elementary School">Elmhurst Elementary School</option>
+                            <option value="EnCompass Elementary School">EnCompass Elementary School</option>
+                            <option value="ER Taylor Elementary School">ER Taylor Elementary School</option>
+                            <option value="Esperanza Elementary School">Esperanza Elementary School</option>
+                            <option value="Everett Middle School">Everett Middle School</option>
+                            <option value="Fairview Elementary School">Fairview Elementary School</option>
+                            <option value="Faith Ringgold Elementary School">Faith Ringgold Elementary School</option>
+                            <option value="Flynn Elementary School">Flynn Elementary School</option>
+                            <option value="Francisco Middle School">Francisco Middle School</option>
+                            <option value="Futures & Community United Elementary School">Futures & Community United Elementary School</option>
+                            <option value="Futures Elementary School">Futures Elementary School</option>
+                            <option value="Garfield Elementary School">Garfield Elementary School</option>
+                            <option value="Glassbrook Elementary School">Glassbrook Elementary School</option>
+                            <option value="Glenview Elementary School">Glenview Elementary School</option>
+                            <option value="Global Family Elementary School">Global Family Elementary School</option>
+                            <option value="Greenleaf Elementary School">Greenleaf Elementary School</option>
+                            <option value="Guadalupe Elementary School">Guadalupe Elementary School</option>
+                            <option value="Harder Elementary School">Harder Elementary School</option>
+                            <option value="Hawes Elementary School">Hawes Elementary School</option>
+                            <option value="Henry Ford Elementary School">Henry Ford Elementary School</option>
+                            <option value="Herbert Hoover Middle School">Herbert Hoover Middle School</option>
+                            <option value="Hillcrest Elementary School">Hillcrest Elementary School</option>
+                            <option value="Howard Elementary School">Howard Elementary School</option>
+                            <option value="IFC San Francisco">IFC San Francisco</option>
+                            <option value="Indochinese Housing Development Corporation - Program Site">Indochinese Housing Development Corporation - Program Site</option>
+                            <option value="International Community School & Think College Now">International Community School & Think College Now</option>
+                            <option value="John Gill Elementary School">John Gill Elementary School</option>
+                            <option value="John Muir Elementary School">John Muir Elementary School</option>
+                            <option value="Joseph Lee Rec Center Bayview">Joseph Lee Rec Center Bayview</option>
+                            <option value="Junipero Serra Elementary">Junipero Serra Elementary</option>
+                            <option value="Kipp Middle School">Kipp Middle School</option>
+                            <option value="KIPP SF Bay Academy Lead Agency">KIPP SF Bay Academy Lead Agency</option>
+                            <option value="KIPP SF Bay Academy Program Site">KIPP SF Bay Academy Program Site</option>
+                            <option value="Korematsu Discovery Academy">Korematsu Discovery Academy</option>
+                            <option value="Lakeshore Alternative Elementary School">Lakeshore Alternative Elementary School</option>
+                            <option value="Laurel Dell Elementary School">Laurel Dell Elementary School</option>
+                            <option value="Learning Without Limits Elementary School">Learning Without Limits Elementary School</option>
+                            <option value="Longwood Elementary School">Longwood Elementary School</option>
+                            <option value="Lorin Eden Elementary School">Lorin Eden Elementary School</option>
+                            <option value="Madison Park Primary">Madison Park Primary</option>
+                            <option value=" Manzanita Community School & Manzanita SEED"> Manzanita Community School & Manzanita SEED</option>
+                            <option value="Marshall Elementary School">Marshall Elementary School</option>
+                            <option value="Mathson Middle School">Mathson Middle School</option>
+                            <option value="McCoppin Elementary School">McCoppin Elementary School</option>
+                            <option value="Mission Education Center">Mission Education Center</option>
+                            <option value="MLK Academic Middle School">MLK Academic Middle School</option>
+                            <option value="MLK Lafayette Elementary School">MLK Lafayette Elementary School</option>
+                            <option value="MLK Middle School">MLK Middle School</option>
+                            <option value="Monroe Elementary School">Monroe Elementary School</option>
+                            <option value="Montera Middle School">Montera Middle School</option>
+                            <option value="Moscone Elementary School">Moscone Elementary School</option>
+                            <option value="Ocala Middle School">Ocala Middle School</option>
+                            <option value="Ochoa Middle School">Ochoa Middle School</option>
+                            <option value="Palma Ceia Elementary School">Palma Ceia Elementary School</option>
+                            <option value="Panorama Elementary School">Panorama Elementary School</option>
+                            <option value="Park Elementary School">Park Elementary School</option>
+                            <option value="Paul Revere Elementary School">Paul Revere Elementary School</option>
+                            <option value="Paul Revere Middle School">Paul Revere Middle School</option>
+                            <option value="Prescott Elementary School">Prescott Elementary School</option>
+                            <option value="Redding Elementary School">Redding Elementary School</option>
+                            <option value="Ruus Elementary School">Ruus Elementary School</option>
+                            <option value="Salvation Army Kroc Center - Program Site">Salvation Army Kroc Center - Program Site</option>
+                            <option value="San Francisco Community School">San Francisco Community School</option>
+                            <option value="San Pedro Elementary School">San Pedro Elementary School</option>
+                            <option value="Sanchez Elementary School">Sanchez Elementary School</option>
+                            <option value="Sankofa Academy">Sankofa Academy</option>
+                            <option value="Schafer Elementary School">Schafer Elementary School</option>
+                            <option value="Sherman Elementary School">Sherman Elementary School</option>
+                            <option value="Short Elementary School">Short Elementary School</option>
+                            <option value="Southgate Elementary School">Southgate Elementary School</option>
+                            <option value="Stonebrae Elementary School">Stonebrae Elementary School</option>
+                            <option value="Strobridge Elementary School">Strobridge Elementary School</option>
+                            <option value="Sunnyside Elementary School">Sunnyside Elementary School</option>
+                            <option value="TECA Elementary School - Program Site">TECA Elementary School - Program Site</option>
+                            <option value="TECA Middle School - Program Site">TECA Middle School - Program Site</option>
+                            <option value="Tenderloin Community School">Tenderloin Community School</option>
+                            <option value="Treeview Elementary School">Treeview Elementary School</option>
+                            <option value="Tyrrell Elementary School">Tyrrell Elementary School</option>
+                            <option value="Up on Top - Program Site">Up on Top - Program Site</option>
+                            <option value="Venetia Valley K-8 School">Venetia Valley K-8 School</option>
+                            <option value="Visitation Valley Middle School">Visitation Valley Middle School</option>
+                            <option value="Westlake Middle School">Westlake Middle School</option>
+                            <option value="Willie Brown Middle School">Willie Brown Middle School</option>
+                            <option value="Winton Middle School">Winton Middle School</option>
+                            <option value="Woodrow Wilson Elementary School">Woodrow Wilson Elementary School</option>
+                        </optgroup>
+                    </select>
+                    
+                    
+                    <label for='personal-email' id="pEmail-label">Personal Email*:</label>
+                    <input type="email" name="personal-email" id='personal-email' title="PersonalEmail" required>
 
-                        <option value=" Manzanita Community School & Manzanita SEED"> Manzanita Community School & Manzanita SEED</option>
-                        <option value="Marshall Elementary School">Marshall Elementary School</option>
-                        <option value="Mathson Middle School">Mathson Middle School</option>
-                        <option value="McCoppin Elementary School">McCoppin Elementary School</option>
-                        <option value="Mission Education Center">Mission Education Center</option>
-                        <option value="MLK Academic Middle School">MLK Academic Middle School</option>
-                        <option value="MLK Lafayette Elementary School">MLK Lafayette Elementary School</option>
-                        <option value="MLK Middle School">MLK Middle School</option>
-                        <option value="Monroe Elementary School">Monroe Elementary School</option>
-                        <option value="Montera Middle School">Montera Middle School</option>
-                        <option value="Moscone Elementary School">Moscone Elementary School</option>
-                        <option value="Ocala Middle School">Ocala Middle School</option>
-                        <option value="Ochoa Middle School">Ochoa Middle School</option>
-                        <option value="Palma Ceia Elementary School">Palma Ceia Elementary School</option>
-                        <option value="Panorama Elementary School">Panorama Elementary School</option>
-                        <option value="Park Elementary School">Park Elementary School</option>
-                        <option value="Paul Revere Elementary School">Paul Revere Elementary School</option>
-                        <option value="Paul Revere Middle School">Paul Revere Middle School</option>
-                        <option value="Prescott Elementary School">Prescott Elementary School</option>
-                        <option value="Redding Elementary School">Redding Elementary School</option>
-                        <option value="Ruus Elementary School">Ruus Elementary School</option>
-                        <option value="Salvation Army Kroc Center - Program Site">Salvation Army Kroc Center - Program Site</option>
-                        <option value="San Francisco Community School">San Francisco Community School</option>
-                        <option value="San Pedro Elementary School">San Pedro Elementary School</option>
-                        <option value="Sanchez Elementary School">Sanchez Elementary School</option>
-                        <option value="Sankofa Academy">Sankofa Academy</option>
-                        <option value="Schafer Elementary School">Schafer Elementary School</option>
-                        <option value="Sherman Elementary School">Sherman Elementary School</option>
-                        <option value="Short Elementary School">Short Elementary School</option>
-                        <option value="Southgate Elementary School">Southgate Elementary School</option>
-                        <option value="Stonebrae Elementary School">Stonebrae Elementary School</option>
-                        <option value="Strobridge Elementary School">Strobridge Elementary School</option>
-                        <option value="Sunnyside Elementary School">Sunnyside Elementary School</option>
-                        <option value="TECA Elementary School - Program Site">TECA Elementary School - Program Site</option>
-                        <option value="TECA Middle School - Program Site">TECA Middle School - Program Site</option>
-                        <option value="Tenderloin Community School">Tenderloin Community School</option>
-                        <option value="Treeview Elementary School">Treeview Elementary School</option>
-                        <option value="Tyrrell Elementary School">Tyrrell Elementary School</option>
-                        <option value="Up on Top - Program Site">Up on Top - Program Site</option>
-                        <option value="Venetia Valley K-8 School">Venetia Valley K-8 School</option>
-                        <option value="Visitation Valley Middle School">Visitation Valley Middle School</option>
-                        <option value="Westlake Middle School">Westlake Middle School</option>
-                        <option value="Willie Brown Middle School">Willie Brown Middle School</option>
-                        <option value="Winton Middle School">Winton Middle School</option>
-                        <option value="Woodrow Wilson Elementary School">Woodrow Wilson Elementary School</option>
-                    </optgroup>
-                </select>
+                    <label for='home-phone' id="hPhone-label">Home Phone: (ex: 1234567890)</label>
+                    <input type="tel" name="home-phone" id='home-phone' title="HomePhone">
+
+                    
+                    <label for='birthdate' id="bday-label">Birthdate*:</label>
+                    <input type="date" name="birthdate" id='birthdate' title="Birthdate" required>
+
+                    <label for='gender-list' id="gender-label">Gender:</label>
+                    <select id="gender-list" title='Gender'>
+                        <option></option>
+                        <optgroup>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Transgender">Transgender</option>
+                            <option value="Other">Other</option>
+                        </optgroup>
+                    </select>
+
+                    <label for='grade-list' id="grade-label">Grade:</label>
+                    <select id="grade-list" title='Grade'>
+                        <option></option>
+                        <optgroup label="Grades">
+                            <option value="K">Kindergarten</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                        </optgroup>
+                    </select>
+
+
+                    <label for='ethnicity' id="ethinicity-label">Ethnicity:</label>
+                    <select id="ethnicity-list" title='Ethnicity'>
+                        <option></option>
+                        <optgroup label="Ethnicity">
+                            <option value="Hispanic/Latino">Hispanic/Latino</option>
+                            <option value="Native American">Native American</option>
+                            <option value="African American">African American</option>
+                            <option value="Pacific Islander">Pacific Islander</option>
+                            <option value="Asian">Asian</option>
+                            <option value="Caucasian">Caucasian</option>
+                            <option value="Middle Eastern/Arabic">Middle Eastern/Arabic</option>
+                            <option value="Multi-Racial/Multi-Ethnic">Multi-Racial/Multi-Ethnic</option>
+                            <option value="Filipino">Filipino</option>
+                            <option value="Other">Other</option>
+                        </optgroup>
+                    </select>
+
+
+                    <label for='reduced-lunch-list' id="reduced-lunch-label">Reduced Price Lunch:</label>
+                    <select id="reduced-lunch-list" title='ReducedPriceLunch'>
+                        <option>--N/A--</option>
+                        <optgroup label="Does your child receive free/reduced price lunch at school during the school year?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </optgroup>
+                    </select>
+
+                    <label for='allergies' id='allergies-label'>Allergies/Medical Conditions:</label>
+                    <textarea id='allergies' title='Allergies'></textarea>
+                    
+                    <label for='commute-permission' id="commute-permission-label">Permission to Commute Alone:</label>
+                    <select id="commute-permission" title='PermissiontoCommuteAlone'>
+                        <option>--None--</option>
+                        <optgroup label="Does your child have permission to walk, bicycle, or take public transportation home on their own?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </optgroup>
+                    </select>
+
+                    <label for="DCYF-id" id='DCYF-id-label'>DCYF Student ID:</label>
+                    <input type='text' maxlength="8" name="DCYF-student-id" id="DCYF-student-id" title='DCYFStuID'>
+
+                    <!-- <h2 class='inForm'><u>Waivers</u></h2>
+                    <label for='liability'>Liability</label>
+                    <details>
+                        <summary>Waiver & Indemnity Agreement</summary>
+                    </details>
+                    <input type='checkbox' name='liability' id='liability' title='LiabilityWaiver'>
+
+                    <label for="data-release">Data Release</label>
+                    <input type='checkbox' name="data-release" id="data-release" title='DataReleaseWaiver'>
+
+                    <label for="media-release">Media Release</label>
+                    <input type='checkbox' name="media-release" id="media-release" title='MediaReleaseWaiver'> --> 
+
+                    <h2 class='inForm'><u>Parent/Guardian Information</u></h2>
+
+                    <label for='parent-first-name' id="parent-fName-label">Parent First Name*:</label>
+                    <input type="text" name="parent-first-name" id='parent-first-name' title="ParentFName" required>
+
+                    <label for='parent-last-name' id="parent-lName-label">Parent Last Name*:</label>
+                    <input type="text" name="parent-last-name" id='parent-last-name' title="ParentLName" required>
+
+                    <label for='parent-email' id="parentEmail-label">Parent Email Address*:</label>
+                    <input type="email" name="parent-email" id='parent-email' title="ParentEmail" required>                
+
+                    <label for='relationship' id="relationship-label">Relationship to Child:</label>
+                    <input type="text" name="relationship" id='relationship' title="Relationship">
                 
+                    <label for='parent-phone1' id="parent-phone1-label">Parent Phone 1*:</label>
+                    <input type="tel" name="parent-phone1" id='parent-phone1' title="ParentPhone1">
+
+                    <label for='parent-phone2' id="parent-phone2-label">Parent Phone 2:</label>
+                    <input type="tel" name="parent-phone2" id='parent-phone2' title="ParentPhone2">
+
+                    <label for='parent-phone3' id="parent-phone3-label">Parent Phone 3:</label>
+                    <input type="tel" name="parent-phone3" id='parent-phone3' title="ParentPhone3">
+
+                    <!--<h3>Mailing Address:</h3>-->
+                    <label for='street' id="street-label">Mailing Street:</label>
+                    <input type="text" name="street" id='street' title="MailingStreet">
+
+                    <label for='city' id="city-label">Mailing City:</label>
+                    <input type="text" name="city" id='city' title="MailingCity">
+
+                    <label for='state' id="state-label">Mailing State/Province:</label>
+                    <input type="text" name="state" id='state' title="MailingState">             
+
+                    <label for='zip-code' id="zip-code-label">Mailing Zip/Postal Code:</label>
+                    <input type="text" name="zip-code" id='zip-code' title="MailingZip">
+
+                    <label for='country' id="country-label">Mailing Country:</label>
+                    <input type="text" name='country' id='country' title="MailingCountry">
+
+
+                    <label for='fluency' id="fluency-label">Parent English Fluency:</label>
+                    <select id='fluency' title='ParentEnglishFluency'>
+                        <option>--None--</option>
+                        <optgroup label="English Fluency">
+                            <option value="Yes">Yes</option>
+                            <option calue='Some'>Some</option>
+                            <option value="No">No</option>
+                        </optgroup>
+                    </select>
+
+                    <label for='home-lang' id="home-lang-label">Parent Home Language:</label>
+                    <select id="home-lang" title='ParentHomeLang'>
+                        <option></option>
+                        <optgroup label="Languages">
+                            <option value="English">English</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="Chinese">Chinese (incl. Cantonese, Mandarin, other Chinese languages)</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="Bengali">Bengali</option>
+                            <option value="French and French Creole">French and French Creole</option>
+                            <option value="German">German</option>
+                            <option value="Greek">Greek</option>
+                            <option value="Gujrati">Gujrati</option>
+                            <option value="Hebrew">Hebrew</option>
+                            <option value="hindi">Hindi</option>
+                            <option value="Hmong">Hmong</option>
+                            <option value="Italian">Italian</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Punjabi">Punjabi</option>
+                            <option value="Persian">Persian</option>
+                            <option value="Polish">Polish</option>
+                            <option value="Portuguese">Portuguese</option>
+                            <option value="Russian">Russian</option>
+                            <option value="Tagalog">Tagalog</option>
+                            <option value="Telugu">Telugu</option>
+                            <option value="Urdu">Urdu</option>
+                            <option value="Vietnamese">Vietnamese</option>
+                            <option value="Other">Other</option>
+                        </optgroup>
+                    </select>
+
+                    <label for='other-lang' id='other-lang-label'>Specify Other Language:</label>
+                    <input type="text" name='other-lang' id='other-lang' title="OtherLang">
+
+                    <label for='volunteer' id='volunteer-label'>Volunteer for this program? (Parent):</label>
+                    <select id="volunteer" title='Volunteer'>
+                        <option>--None--</option>
+                        <optgroup label="Are you interested in being a volunteer for this program?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </optgroup>
+                    </select>
+
+                    <h2><u>Emergency Contact (Other than Parent/Guardian)</u></h2>
+
+                    <label for='ec-name' id="ec-name-label">Emergency Contact Name:</label>
+                    <input type="text" name="ec-name" id='ec-name' title="Emergency_Contact_Name">
+
+                    <label for='ec-relationship' id="ec-relationship-label">Emergency Contact Relationship to Child:</label>
+                    <input type="text" name="ec-relationship" id='ec-relationship' title="Emergency_Contact_Relationship to Child">
                 
-                <label for='personal-email' id="pEmail-label">Personal Email:</label>
-                <input type="email" name="personal-email" id='personal-email' title="PersonalEmail">
+                    <label for='ec-phone1' id="ec-phone1-label">Emergency Contact Phone 1:</label>
+                    <input type="tel" name="ec-phone1" id='ec-phone1' title="Emergency_Contact_Phone1">
 
-                <label for='home-phone' id="hPhone-label">Home Phone:</label>
-                <input type="tel" name="home-phone" id='home-phone' title="HomePhone">
+                    <label for='ec-phone2' id="ec-phone2-label">Emergency Contact Phone 2:</label>
+                    <input type="tel" name="ec-phone2" id='ec-phone2' title="Emergency_Contact_Phone2">
 
+                    <label for='ec-phone3' id="ec-phone3-label">Emergency Contact Phone 3:</label>
+                    <input type="tel" name="ec-phone3" id='ec-phone3' title="Emergency_Contact_Phone3">
+
+                    <label for='ec-permission' id='ec-permission-label'>Permission to Pick up Child</label>
+                    <select id="ec-permission" title='Emergency_Contact_Permission_to_Pickup_child'>
+                        <option>--None--</option>
+                        <optgroup label="Does this person have permission to pick up your child?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </optgroup>
+                    </select>
+
+
+                    <h2><u>Second Emergency Contact</u></h2>
                 
-                <label for='birthdate' id="bday-label">Birthdate:</label>
-                <input type="date" name="birthdate" id='birthdate' title="Birthdate">
+                    <label for='ec2-name' id="ec2-name-label">Second Emergency Contact Name:</label>
+                    <input type="text" name="ec2-name" id='ec2-name' title="Second_Emergency_Contact_Name">
 
-                <label for='gender-list' id="gender-label">Gender:</label>
-                <select id="gender-list" title='Gender'>
-                    <option>--Choose Gender--</option>
-                    <optgroup>
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                        <option value="Non-Binary">Non-Binary</option>
-                    </optgroup>
-                </select>
-
-                <label for='grade-list' id="grade-label">Grade:</label>
-                <select id="grade-list" title='Grade'>
-                    <option>--Choose Grade--</option>
-                    <optgroup label="Grades">
-                        <option value="K">Kindergarten</option>
-                        <option value="1st">1st</option>
-                        <option value="2nd">2nd</option>
-                        <option value="3rd">3rd</option>
-                        <option value="4th">4th</option>
-                        <option value="5th">5th</option>
-                        <option value="6th">6th</option>
-                        <option value="7th">7th</option>
-                        <option value="8th">8th</option>
-                    </optgroup>
-                </select>
-
-
-                <label for='ethnicity' id="ethinicity-label">Ethnicity:</label>
-                <select id="ethnicity-list" title='Ethnicity'>
-                    <option>--Choose Ethnicity--</option>
-                    <optgroup label="Ethnicity">
-                        <option value="Hispanic/Latino">Hispanic/Latino</option>
-                        <option value="Native American">Native American</option>
-                        <option value="African American">African American</option>
-                        <option value="Pacific Islander">Pacific Islander</option>
-                        <option value="Asian">Asian</option>
-                        <option value="Caucasian">Caucasian</option>
-                        <option value="Middle Eastern/Arabic">Middle Eastern/Arabic</option>
-                        <option value="Multi-Racial/Multi-Ethnic">Multi-Racial/Multi-Ethnic</option>
-                        <option value="Filipino">Filipino</option>
-                        <option value="Other">Other</option>
-                    </optgroup>
-                </select>
-
-
-                <label for='reduced-lunch-list' id="reduced-lunch-label">Reduced Price Lunch:</label>
-                <select id="reduced-lunch-list" title='ReducedPriceLunch'>
-                    <option>--N/A--</option>
-                    <optgroup label="Does your child receive free/reduced price lunch at school during the school year?">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </optgroup>
-                </select>
-
-                <label for='allergies' id='allergies-label'>Allergies/Medical Conditions:</label>
-                <textarea id='allergies' title='Allergies'></textarea>
+                    <label for='ec2-relationship' id="ec2-relationship-label">Sec. Emergency Contact Relationship to Child:</label>
+                    <input type="text" name="ec2-relationship" id='ec2-relationship' title="Second_Emergency_Contact_Relationship">
                 
-                <label for='commute-permission' id="commute-permission-label">Permission to Commute Alone:</label>
-                <select id="commute-permission" title='PermissiontoCommuteAlone'>
-                    <option>--None--</option>
-                    <optgroup label="Does your child have permission to walk, bicycle, or take public transportation home on their own?">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </optgroup>
-                </select>
+                    <label for='ec2-phone1' id="ec2-phone1-label">Second Emergency Contact Phone 1:</label>
+                    <input type="tel" name="ec2-phone1" id='ec2-phone1' title="Second_Emergency_Contact_Phone1">
 
-                <label for="DCYF-id" id='DCYF-id-label'>DCYF Student ID:</label>
-                <input type='text' maxlength="8" name="DCYF-student-id" id="DCYF-student-id" title='DCYFStuID'>
+                    <label for='ec2-phone2' id="ec2-phone2-label">Second Emergency Contact Phone 2:</label>
+                    <input type="tel" name="ec2-phone2" id='ec2-phone2' title="Second_Emergency_Contact_Phone2">
 
-                <!-- <h2 class='inForm'><u>Waivers</u></h2>
-                <label for='liability'>Liability</label>
-                <details>
-                    <summary>Waiver & Indemnity Agreement</summary>
-                </details>
-                <input type='checkbox' name='liability' id='liability' title='LiabilityWaiver'>
+                    <label for='ec2-phone3' id="ec2-phone3-label">Sencond Emergency Contact Phone 3:</label>
+                    <input type="tel" name="ec2-phone3" id='ec2-phone3' title="Second_Emergency_Contact_Phone3">
 
-                <label for="data-release">Data Release</label>
-                <input type='checkbox' name="data-release" id="data-release" title='DataReleaseWaiver'>
-
-                <label for="media-release">Media Release</label>
-                <input type='checkbox' name="media-release" id="media-release" title='MediaReleaseWaiver'> --> 
-
-               <h2 class='inForm'><u>Parent/Guardian Information</u></h2>
-
-                <label for='parent-first-name' id="parent-fName-label">Parent First Name:</label>
-                <input type="text" name="parent-first-name" id='parent-first-name' title="ParentFName">
-
-                <label for='parent-last-name' id="parent-lName-label">Parent Last Name:</label>
-                <input type="text" name="parent-last-name" id='parent-last-name' title="ParentLName">
-
-                <label for='parent-email' id="parentEmail-label">Parent Email Address:</label>
-                <input type="email" name="parent-email" id='parent-email' title="ParentEmail">                
-
-                <label for='relationship' id="relationship-label">Relationship to Child:</label>
-                <input type="text" name="relationship" id='relationship' title="Relationship">
-               
-                <label for='parent-phone1' id="parent-phone1-label">Parent Phone 1:</label>
-                <input type="tel" name="parent-phone1" id='parent-phone1' title="ParentPhone1">
-
-                <label for='parent-phone2' id="parent-phone2-label">Parent Phone 2:</label>
-                <input type="tel" name="parent-phone2" id='parent-phone2' title="ParentPhone2">
-
-                <label for='parent-phone3' id="parent-phone3-label">Parent Phone 3:</label>
-                <input type="tel" name="parent-phone3" id='parent-phone3' title="ParentPhone3">
-
-                <!--<h3>Mailing Address:</h3>-->
-                <label for='street' id="street-label">Mailing Street:</label>
-                <input type="text" name="street" id='street' title="MailingStreet">
-
-                <label for='city' id="city-label">Mailing City:</label>
-                <input type="text" name="city" id='city' title="MailingCity">
-
-                <label for='state' id="state-label">Mailing State/Province:</label>
-                <input type="text" name="state" id='state' title="MailingState">             
-
-                <label for='zip-code' id="zip-code-label">Mailing Zip/Postal Code:</label>
-                <input type="text" name="zip-code" id='zip-code' title="MailingZip">
-
-                <label for='country' id="country-label">Mailing Country:</label>
-                <input type="text" name='country' id='country' title="MailingCountry">
-
-
-                <label for='fluency' id="fluency-label">Parent English Fluency:</label>
-                <select id='fluency' title='ParentEnglishFluency'>
-                    <option>--None--</option>
-                    <optgroup label="English Fluency">
-                        <option value="Yes">Yes</option>
-                        <option calue='Some'>Some</option>
-                        <option value="No">No</option>
-                    </optgroup>
-                </select>
-
-                <label for='home-lang' id="home-lang-label">Parent Home Language:</label>
-                <select id="home-lang" title='ParentHomeLang'>
-                    <option>--Choose Language--</option>
-                    <optgroup label="Languages">
-                        <option value="English">English</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="Chinese">Chinese (incl. Cantonese, Mandarin, other Chinese languages)</option>
-                        <option value="Arabic">Arabic</option>
-                        <option value="Bengali">Bengali</option>
-                        <option value="French and French Creole">French and French Creole</option>
-                        <option value="German">German</option>
-                        <option value="Greek">Greek</option>
-                        <option value="Gujrati">Gujrati</option>
-                        <option value="Hebrew">Hebrew</option>
-                        <option value="hindi">Hindi</option>
-                        <option value="Hmong">Hmong</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Japanese">Japanese</option>
-                        <option value="Korean">Korean</option>
-                        <option value="Punjabi">Punjabi</option>
-                        <option value="Persian">Persian</option>
-                        <option value="Polish">Polish</option>
-                        <option value="Portuguese">Portuguese</option>
-                        <option value="Russian">Russian</option>
-                        <option value="Tagalog">Tagalog</option>
-                        <option value="Telugu">Telugu</option>
-                        <option value="Urdu">Urdu</option>
-                        <option value="Vietnamese">Vietnamese</option>
-                        <option value="Other">Other</option>
-                    </optgroup>
-                </select>
-
-                <label for='other-lang' id='other-lang-label'>Specify Other Language:</label>
-                <input type="text" name='other-lang' id='other-lang' title="OtherLang">
-
-                <label for='volunteer' id='volunteer-label'>Volunteer for this program? (Parent):</label>
-                <select id="volunteer" title='Volunteer'>
-                    <option>--None--</option>
-                    <optgroup label="Are you interested in being a volunteer for this program?">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </optgroup>
-                </select>
-
-                <h2><u>Emergency Contact (Other than Parent/Guardian)</u></h2>
-
-                <label for='ec-name' id="ec-name-label">Emergency Contact Name:</label>
-                <input type="text" name="ec-name" id='ec-name' title="Emergency_Contact_Name">
-
-                <label for='ec-relationship' id="ec-relationship-label">Emergency Contact Relationship to Child:</label>
-                <input type="text" name="ec-relationship" id='ec-relationship' title="Emergency_Contact_Relationship to Child">
-               
-                <label for='ec-phone1' id="ec-phone1-label">Emergency Contact Phone 1:</label>
-                <input type="tel" name="ec-phone1" id='ec-phone1' title="Emergency_Contact_Phone1">
-
-                <label for='ec-phone2' id="ec-phone2-label">Emergency Contact Phone 2:</label>
-                <input type="tel" name="ec-phone2" id='ec-phone2' title="Emergency_Contact_Phone2">
-
-                <label for='ec-phone3' id="ec-phone3-label">Emergency Contact Phone 3:</label>
-                <input type="tel" name="ec-phone3" id='ec-phone3' title="Emergency_Contact_Phone3">
-
-                <label for='ec-permission' id='ec-permission-label'>Permission to Pick up Child</label>
-                <select id="ec-permission" title='Emergency_Contact_Permission_to_Pickup_child'>
-                    <option>--None--</option>
-                    <optgroup label="Does this person have permission to pick up your child?">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </optgroup>
-                </select>
-
-
-                <h2><u>Second Emergency Contact</u></h2>
-               
-                <label for='ec2-name' id="ec2-name-label">Second Emergency Contact Name:</label>
-                <input type="text" name="ec2-name" id='ec2-name' title="Second_Emergency_Contact_Name">
-
-                <label for='ec2-relationship' id="ec2-relationship-label">Sec. Emergency Contact Relationship to Child:</label>
-                <input type="text" name="ec2-relationship" id='ec2-relationship' title="Second_Emergency_Contact_Relationship">
-               
-                <label for='ec2-phone1' id="ec2-phone1-label">Second Emergency Contact Phone 1:</label>
-                <input type="tel" name="ec2-phone1" id='ec2-phone1' title="Second_Emergency_Contact_Phone1">
-
-                <label for='ec2-phone2' id="ec2-phone2-label">Second Emergency Contact Phone 2:</label>
-                <input type="tel" name="ec2-phone2" id='ec2-phone2' title="Second_Emergency_Contact_Phone2">
-
-                <label for='ec2-phone3' id="ec2-phone3-label">Sencond Emergency Contact Phone 3:</label>
-                <input type="tel" name="ec2-phone3" id='ec2-phone3' title="Second_Emergency_Contact_Phone3">
-
-                <label for='ec2-permission' id='ec2-permission-label'>Permission to Pick up Child</label>
-                <select id="ec2-permission" title='Second_Emergency_Contact_Permission_to_Pickup_child'>
-                    <option>--None--</option>
-                    <optgroup label="Does this person have permission to pick up your child?">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </optgroup>
-                </select>
-
+                    <label for='ec2-permission' id='ec2-permission-label'>Permission to Pick up Child</label>
+                    <select id="ec2-permission" title='Second_Emergency_Contact_Permission_to_Pickup_child'>
+                        <option>--None--</option>
+                        <optgroup label="Does this person have permission to pick up your child?">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
 
             </form>
+
+            
+
 
             <section id='btns'>
                 <button class='form' id='submit-btn'>Submit</button>
             </section>
             
+            <dialog class="confirm">
+                <p>Confirm your information: </p>
+                <menu>
+                    <button id="NotConfirm">No</button>
+                    <button id="YesConfirm">Yes</button>
+                </menu>
+            </dialog>
+
+
+
         </main>
 
 
