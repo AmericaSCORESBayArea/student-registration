@@ -29,8 +29,8 @@ window.onload = function Loader(){
         fetch('https://salesforce-data-api-proxy.us-e2.cloudhub.io/api/contact', {
             method: 'POST',
             headers: {
-                'client_id': process.env.MY_ID, //a647e195e65c4a358563bd950916e28d
-                'cleint_secret': process.env.MY_S, //45CDe2241f4C4D238d320fc6A7521C71
+                'client_id': process.env.MY_ID, 
+                'cleint_secret': process.env.MY_S, 
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(order)
