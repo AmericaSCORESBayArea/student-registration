@@ -26,7 +26,7 @@ window.onload = function Loader(){
      /* POST using the fetch call */
      function postFetch(){
         let order = formData();
-        fetch('https://salesforce-data-api-proxy.us-e2.cloudhub.io/api/contact', {
+        fetch('https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contact', {
             method: 'POST',
             headers: {
                 'client_id': process.env.MY_ID, 
@@ -70,18 +70,6 @@ window.onload = function Loader(){
                 console.log('NOT')
             });
             document.querySelector("#YesConfirm").addEventListener('click', function(){
-                // let order = formData();
-                // fetch('https://salesforce-data-api-proxy.us-e2.cloudhub.io/api/contact', {
-                //     method: 'POST',
-                //     headers: {
-                //         'client_id': env.MY_ID,
-                //         'cleint_secret': process.env.MY_S,
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify(order)
-
-                // }).then(response => response.json())
-                // .then(data => console.log(data));
                 postFetch();
                 dialogBox.close();
                 console.log('YES')
