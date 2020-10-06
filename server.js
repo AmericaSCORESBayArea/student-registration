@@ -48,6 +48,6 @@ app.post('/postRequest', jsonParser, function(req, res){
 
 
 app.use(express.static(path.join(__dirname, 'src')));
-app.listen(8000);
+app.listen(3000);
 
 
