@@ -27,3 +27,6 @@ The protection of the family requires a secure authentication strategy. Presentl
 - The first time a family registers, they provide a mobile number where they can receive an SMS with an authentication code to complete the initial registration.
 - A returning family updating their contact information, will enter their mobile phone number to identify themselves. The https://github.com/AmericaSCORESBayArea/salesforce-auth-api returns the needed response for _Firebase_ to generate the SMS to that contact number, if it exists. If it is not found, the user will need to complete the initial registration step. Presently, there is nothing to stop a registrant from creating more than one record, provided they use a different phone number for each, and can complete the authentication
 - This basic authentiation flow will be used in other web-based services and a future Family App.
+
+### Implementation Resources
+https://medium.com/javascript-in-plain-english/easy-authentication-system-with-react-and-firebase-for-beginners-780cadc9d5e4
