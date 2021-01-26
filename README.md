@@ -32,4 +32,4 @@ The protection of the family requires a secure authentication strategy. Presentl
 https://medium.com/javascript-in-plain-english/easy-authentication-system-with-react-and-firebase-for-beginners-780cadc9d5e4
 
 ### Design Documentation
-[Design.md](Design)
+[Design](Design.md)
