@@ -12,10 +12,16 @@
                     grid-template-columns: 100px 5fr 1fr;
                                         
                 }
-                #logo{
-                    grid-row: 1;
-                    grid-column: 1;
-                    width: 100px;
+                #header-logo{
+                    display: grid;
+                    width:500px;
+                    height:225px;
+                    background-image:url("../assets/America-SCORES-Logo.jpg");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+                #header-break-background{
+                    background-color:white;
                 }
                 h1{
                     grid-row: 2;
@@ -61,10 +67,16 @@
                 background-color: rgb(228, 228, 228);
                                     
             }
-            #logo{
-                grid-row: 1;
-                grid-column: 1;
-                width: 200px;
+            #header-logo{
+                display: grid;
+                width:500px;
+                height:225px;
+                background-image:url("../assets/America-SCORES-Logo.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #header-break-background{
+                background-color:white;
             }
             h1{
                 grid-row: 2;
@@ -189,8 +201,14 @@
 
     <body>
         <header>
+            <div id="header-logo"></div>
             <h1>Student Registration Form</h1>
         </header>
+        <div id="header-break-background">     
+            <br/>
+            <br/>
+            <br/>
+        </div>
         <main>
             <h3 id='star'>required fields denoted by *</h3>
             <form id="student-registration">
