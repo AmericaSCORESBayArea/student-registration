@@ -8,23 +8,23 @@
            @media screen and (max-width: 700px) {
                 header{
                     display: grid;
-                    grid-template-rows: 50px 125px;
-                    grid-template-columns: 100px 5fr 1fr;
-                                        
+                    grid-auto-rows: 50px 50px;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    background-color:white;
                 }
                 #header-logo{
-                    display: grid;
-                    width:500px;
-                    height:225px;
-                    background-image:url("../assets/America-SCORES-Logo.jpg");
-                    background-repeat: no-repeat;
-                    background-size: cover;
+                    grid-row: 1;
+                    grid-column: 2;
+                    width:250px;
+                    height:120px;
+                    align-content: center;
+                    margin: auto;
                 }
                 #header-break-background{
                     background-color:white;
                 }
                 h1{
-                    grid-row: 2;
+                    grid-row: 3;
                     grid-column: 2;
                     font-size: 25px;
                     width: 150px;
@@ -62,24 +62,23 @@
 
             header{
                 display: grid;
-                grid-template-rows: 50px 125px;
-                grid-template-columns: 100px 5fr 1fr;
-                background-color: rgb(228, 228, 228);
-                                    
+                grid-auto-rows: 50px 50px;
+                grid-template-columns: 1fr 1fr 1fr;
+                background-color:white;
             }
             #header-logo{
-                display: grid;
-                width:500px;
-                height:225px;
-                background-image:url("../assets/America-SCORES-Logo.jpg");
-                background-repeat: no-repeat;
-                background-size: cover;
+                grid-row: 1;
+                grid-column: 2;
+                width:250px;
+                height:120px;
+                align-content: center;
+                margin: auto;
             }
             #header-break-background{
                 background-color:white;
             }
             h1{
-                grid-row: 2;
+                grid-row: 3;
                 grid-column: 2;
                 font-size: 25px;
                 width: 150px;
@@ -201,11 +200,10 @@
 
     <body>
         <header>
-            <div id="header-logo"></div>
+            <img id="header-logo" src="../assets/America-SCORES-Logo.jpg" alt="AmericaSCORES">
             <h1>Student Registration Form</h1>
         </header>
         <div id="header-break-background">     
-            <br/>
             <br/>
             <br/>
         </div>
