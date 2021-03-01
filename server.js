@@ -171,6 +171,10 @@ function postRequest(formData){
 
 
 app.use(express.static(path.join(__dirname, 'src')));
-app.listen(80);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, err => {
+    if(err) throw err;
+    console.log("%c Server running", "color: green");
+});
 
 
