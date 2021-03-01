@@ -16,31 +16,26 @@ window.onload = function Loader(){
         console.log(order);
         console.log("SPACES");
         console.log(JSON.stringify(order));
-        let variable = fetch('/postRequest', {
-            method: 'POST',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(order),
-        })
-        .then((response) => {
-            console.log("response");
-            console.log(response);
-            return response;
-        }, (error) => {
-            alert(error.data);
-            console.log("error");
-            console.log(error);
-            return error;
-        })
-        .then(data => {
-            console.log('data');
-            console.log(JSON.stringify(data));
-            console.log(data);
-        });
-        console.log("psotes");
-        console.log(variable);
-
+        const reqHeaders = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        axios.post('/register', JSON.stringify(order), reqHeaders)
+                .then((response) => {
+                    console.log('success repsonse',response.data);
+                    if(response.data !== undefined){
+                        alert("Student Successful Registrated");
+                        return response.data.contactId;
+                    }else{
+                        alert("Student Registration failed");
+                        return '';
+                    }
+                    
+                }, (error) => {
+                    alert("Student Registration failed")
+                    return error;
+                });
     }
         
     function submitForm(){
@@ -54,15 +49,14 @@ window.onload = function Loader(){
                 
             } 
         });
-        
+
         if(!requiredFilled){
             let titles = "\n";
             unfilled.forEach(function(i){
                 titles += i.title + "\n";
              });
             alert("Some required fields were not filled: " + titles);
-        }
-        if(requiredFilled){
+        } else { 
             let complete = confirm('Complete Registration?');
             if(complete){
                 let postResponse = postFetch();

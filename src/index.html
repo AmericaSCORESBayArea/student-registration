@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Registration Form</title>   
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
        <style>
            @media screen and (max-width: 700px) {
                 header{
@@ -62,9 +63,11 @@
 
             header{
                 display: grid;
-                grid-auto-rows: 50px 50px;
-                grid-template-columns: 1fr 1fr 1fr;
-                background-color:white;
+                grid-template-rows: 50px 125px;
+                grid-template-columns: 100px 5fr 1fr;
+                background-color: rgb(228, 228, 228);
+                background-image: url("../AmericaScoresUpdated.png");
+                                    
             }
             #header-logo{
                 grid-row: 1;
@@ -194,7 +197,7 @@
 
         </style>
 
-        <script src='app.js'></script>
+        <script src='/form.js'></script>
 
     </head>
 
