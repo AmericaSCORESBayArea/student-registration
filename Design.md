@@ -57,3 +57,6 @@
 ### Registration and Waiver Flow v3 (email)
 
 1. Receive a call and email with reg form and specific waivers
+
+## MVP
+-[The San Francisco District Waiver can be used in the MVP release of the Web Registration](waiver_SF.md)
