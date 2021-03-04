@@ -29,9 +29,15 @@
 2. Arriving at the Reg link, Parent enters name and mobile number.
 3. If they are returning, they receive an authentication code via SMS to access a populated form for
     them to update and submit
-4. If they are new, they receive an authentication code via SMS to access and fill out an empty form
+4. If they are new, they are presented with an empty form to complete.
+5. The completed waiver is sent as an attachment with "Accepted by (parent name and email)" in the email body. (optionally in the waiver attachment as well). Waiver can be in pdf or a common image format.
 ![Regform_Parent_UX.png](Regform_Parent_UX.png)
 
 
 ## MVP
 -[The San Francisco District Waiver can be used in the MVP release of the Web Registration](waiver_SF.md)
+
+## Data Requirements
+### The Contact Object stores the Student Registration info, including Waiver Status for the present Season
+### A historical record is made including: Date/Time, Contact ID, Parent Full Name, Parent Email, WaiverName, Acceptance (T/F)
+The historical record belongs in a Salesforce implementation, but a logfile, in addition to the emails that are sent, will meet MVP requirements.
