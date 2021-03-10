@@ -76,10 +76,7 @@ window.onload = function Loader(){
             unfilled.forEach(function(i){
                 titles += i.title + "</br>";
              });
-            $.alert({
-                title: 'Please Fill the Required Fields'+ '<span class="red-req">*</span>',
-                content: titles,
-            });
+             alert('Please Fill the Required Fields'+ '<span class="red-req">*</span>' + title);
         } else { 
             /*$.confirm({
                 title: 'Student Registration',
