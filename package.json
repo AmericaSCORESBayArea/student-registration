@@ -1,5 +1,5 @@
 {
-  "name": "Student Registration App",
+  "name": "Student-Registration-App",
   "version": "1.0.0",
   "description": "This App allows student to register for the sessions",
   "main": "server.js",
