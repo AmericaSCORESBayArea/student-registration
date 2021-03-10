@@ -42,7 +42,7 @@ window.onload = function Loader(){
                     console.log('success repsonse',response.data);
                     if(response.data !== undefined){
                         if(response.data.data === true){
-                            alert("Student Successful Registered");
+                           
                         }else{
                             alert("Student Registration failed");
                         }
@@ -71,7 +71,7 @@ window.onload = function Loader(){
             } 
         });
 
-        /*if(!requiredFilled){
+        if(!requiredFilled){
             let titles = "\n";
             unfilled.forEach(function(i){
                 titles += i.title + "</br>";
@@ -80,7 +80,7 @@ window.onload = function Loader(){
                 title: 'Please Fill the Required Fields'+ '<span class="red-req">*</span>',
                 content: titles,
             });
-        } else { */
+        } else { 
             /*$.confirm({
                 title: 'Student Registration',
                 content: 'Complete Registration?',
@@ -99,7 +99,7 @@ window.onload = function Loader(){
                 console.log(postResponse);
             }
 
-        //}
+        }
     }
     
     function enableSubmit(){
