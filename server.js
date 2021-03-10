@@ -2,15 +2,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const parser =  require('body-parser');
+const bp =  require('body-parser');
 const cors =  require('cors');
 const axios = require('axios');
 
-let jsonParser = parser.json();
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({ path: './src/env/development.env' });
+    require('dotenv').config({ path: './env/development.env' });
   }
 
 const id = process.env.CLIENT_ID;
@@ -18,6 +19,8 @@ const secret = process.env.CLIENT_SECRET;
 const baseUrl = process.env.BASEURL;
 const muleEndPoint = process.env.MULEENDPOINT;
 
+axios.defaults.headers.common['client_id'] = id;
+axios.defaults.headers.common['client_secret'] = secret;
 
 const reqHeaders = {
     headers: {
@@ -31,57 +34,9 @@ var corsOptions = {
   }
 
 app.post('/register',cors(corsOptions), async(req, res) => {
-    //console.log(formData);
-    let data = {
-        "OtherLang": "",
-        "Emergency_Contact_Phone3": "",
-        "Gender": "",
-        "Emergency_Contact_Name": "",
-        "ParentHomeLang": "",
-        "Second_Emergency_Contact_Phone1": "",
-        "Relationship": "",
-        "ParentPhone1": "",
-        "Emergency_Contact_Phone2": "",
-        "ParentLName": "",
-        "LiabilityWaiver": false,
-        "Ethnicity": "",
-        "Second_Emergency_Contact_Relationship": "",
-        "SchoolName": "",
-        "PermissiontoCommuteAlone": "",
-        "DCYFStuID": "",
-        "MailingStreet": "",
-        "Volunteer": "",
-        "Grade": "",
-        "Second_Emergency_Contact_Name": "",
-        "DataReleaseWaiver": false,
-        "MailingCity": "",
-        "MediaReleaseWaiver": false,
-        "ParentEnglishFluency": "",
-        "Second_Emergency_Contact_Phone3": "",
-        "MailingCountry": "",
-        "MailingZip": 0,
-        "ParentPhone3": "",
-        "Emergency_Contact_Phone1": "",
-        "ReducedPriceLunch": "",
-        "Allergies": "",
-        "Birthdate": "2021-01-11",
-        "ContactRecordType": "",
-        "Second_Emergency_Contact_Permission_to_Pickup_child": "",
-        "Emergency_Contact_Relationship": "",
-        "ParentEmail": "",
-        "Emergency_Contact_Permission_to_Pickup_child": "",
-        "ParentFName": "",
-        "ParentPhone2": "",
-        "LastName": "",
-        "PersonalEmail": "",
-        "MailingState": "",
-        "Second_Emergency_Contact_Phone2": "",
-        "MiddleName": "",
-        "FirstName": "",
-        "HomePhone": ""
-      };
-      //console.log(data);
-      console.log('url',muleEndPoint);
+    let data = req.body;
+    data["ContactRecordType"] = process.env.CONTACTRECORDID;
+    console.log('data',req.body);
     let mRes =  await axios.post(muleEndPoint, data, reqHeaders)
     .then((response) => {
         console.log('success repsonse',response.data);
@@ -91,27 +46,16 @@ app.post('/register',cors(corsOptions), async(req, res) => {
         console.log(error.data);
         return error;
     });
-    //pResponse = postRequest(req.body);
-    //console.log('res', pResponse); 
-    //res.send(pResponse);
     if(mRes.isAxiosError){
         res.status(mRes.response.status).json({ data: mRes.response.data});
     }else{
          var rData = mRes.data;
-        res.status(mRes.status).json({ data: rData});
+         console.log(rData.Successful_Registration);
+        res.status(mRes.status).json({ data: rData.Successful_Registration});
     }
-    // console.log('response',mRes.status);
-    // console.log('response',mRes.statusText);
-    // console.log('response',mRes.response.status);
-    // console.log('response',mRes.response.data);
-    // console.log('status',mRes.isAxiosError);
-    // console.log('res', mRes.data);
-    
-    return mRes.data;
   }) 
 
-
-app.use(express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, err => {
     if(err) throw err;
