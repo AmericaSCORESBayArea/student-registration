@@ -1,53 +1,65 @@
-require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const path = require('path');
-const parser =  require('body-parser');
-//const router = express.Router();
+const bp =  require('body-parser');
+const cors =  require('cors');
 const axios = require('axios');
 
-let jsonParser = parser.json();
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: true }))
 
 
-const id = process.env.MY_ID;
-const secret = process.env.MY_SECRET;
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({ path: './env/development.env' });
+  }
+
+const id = process.env.CLIENT_ID;
+const secret = process.env.CLIENT_SECRET;
+const baseUrl = process.env.BASEURL;
+const muleEndPoint = process.env.MULEENDPOINT;
+
+axios.defaults.headers.common['client_id'] = id;
+axios.defaults.headers.common['client_secret'] = secret;
 
 const reqHeaders = {
     headers: {
-        'client_id': id, 
-        'client_secret': secret,
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
     }
 }
 
-function postRequest(formData){
-    console.log(formData);
-	axios.post('https://salesforce-data-api-proxy-prod.us-e2.cloudhub.io/api/contact', formData, reqHeaders)
-	.then((response) => {
-        console.log(response);
+var corsOptions = {
+    origin: baseUrl,
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
+app.post('/register',cors(corsOptions), async(req, res) => {
+    let data = req.body;
+    data["ContactRecordType"] = process.env.CONTACTRECORDID;
+    console.log('data',req.body);
+    let mRes =  await axios.post(muleEndPoint, data, reqHeaders)
+    .then((response) => {
+        console.log('success repsonse',response.data);
         return response;
-	}, (error) => {
+    }, (error) => {
         console.log(error);
         console.log(error.data);
         return error;
-	});
-}
+    });
+    if(mRes.isAxiosError){
+        res.status(mRes.response.status).json({ data: mRes.response.data});
+    }else{
+         var rData = mRes.data;
+         console.log(rData.Successful_Registration);
+        res.status(mRes.status).json({ data: rData.Successful_Registration});
+    }
+  }) 
 
-app.get('/src', function(req, res){
-	console.log('html loaded');
-    res.sendFile(path.join(__dirname+'/index.html'));
-    //res.sendFile(path.join(__dirname+'/app.js'));
+app.use(express.static(path.join(__dirname, '/public')));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, err => {
+    if(err) throw err;
+    console.log("%c Server running", "color: green");
 });
-
-app.post('/postRequest', jsonParser, function(req, res){
-    console.log('postRequest called');
-    apiRes = postRequest(req.body);
-    // router.get('/src', function(req, res){
-    // });
-});
-
-
-app.use(express.static(path.join(__dirname, 'src')));
-app.listen(3000);
 
 
