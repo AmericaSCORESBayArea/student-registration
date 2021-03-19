@@ -16,12 +16,12 @@
 
 ### An Online Solution Must be Secure and Structured
 
--[ ] Forms can be hosted on ASBA squarespace (not critical)
--[ ] A Spanish-Language version is required for all forms
--[ ] Registration is either New Student or Update Returning and can be determined by parent login (mulesoft proxy API + OAuth)
--[ ] Waiver can be hosted on Squarespace (or stored in Salesforce)
--[ ] Waiver is different, by region, requiring logic (e.g. School selected in Reg form)
--[ ] After waiver is Accepted online it must be emailed to parent (CCPA) ideally from Salesforce
+- [ ] -Forms can be hosted on ASBA squarespace (not critical)-
+- [x] A Spanish-Language version is required for all forms (MVP is including both languages in one form)
+- [ ] Registration is either New Student or Update Returning and can be determined by parent login (mulesoft proxy API + OAuth)
+- [ ] Waiver can be hosted on Squarespace (or stored in Salesforce)
+- [ ] Waiver is different, by region, requiring logic (e.g. School selected in Reg form)
+- [ ] After waiver is Accepted online it must be emailed to parent (CCPA) ideally from Salesforce
 
 ### Registration and Waiver Flow via Web URL
 
