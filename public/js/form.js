@@ -33,6 +33,8 @@ window.onload = function Loader(){
                 data[el.title] = el.value;
             }
         }
+        let alEl = document.getElementById("allergies");
+        data[alEl.title] = alEl.value;
         data["LiabilityWaiver"] = true;
         data["DataReleaseWaiver"] = true;
         data["MediaReleaseWaiver"] = true;
