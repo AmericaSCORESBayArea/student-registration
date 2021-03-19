@@ -16,7 +16,8 @@
 
 ### An Online Solution Must be Secure and Structured
 
-- [ ] -Forms can be hosted on ASBA squarespace (not critical)-
+- [ ] ~~Forms can be hosted on ASBA squarespace (not critical)~~
+- [ ] Form also works on Mobile (or as an embed in the mobile apps)
 - [x] A Spanish-Language version is required for all forms (MVP is including both languages in one form)
 - [ ] Registration is either New Student or Update Returning and can be determined by parent login (mulesoft proxy API + OAuth)
 - [ ] Waiver can be hosted on Squarespace (or stored in Salesforce)
