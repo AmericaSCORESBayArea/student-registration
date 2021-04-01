@@ -14,8 +14,7 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. File an issue and assign it to @critiqalpete. Give it a "Security-Issue" label
+2. If you can apply a fix immediately, then go for it and assign the PR to the most recent committer
+3. Keep and eye on it. Let us know in the chats in Github and Slack
+4. You have our recurring gratitude!
