@@ -16,21 +16,21 @@ const FormElementController = ({config,onValueChange,currentValue}) => {
     dataType === "text" || dataType === "email" || dataType === "tel"  || dataType === "date" ?
       <StringFormElement
         config={config}
-        onValueChange={onValueChange}
+        onValueChange={onValueChange.bind(this, config)}
         currentValue={currentValue}
       />
     :
     dataType === "textArea"?
       <TextAreaFormElement
         config={config}
-        onValueChange={onValueChange}
+        onValueChange={onValueChange.bind(this, config)}
         currentValue={currentValue}
       />
       :
       dataType === "enum" ?
         <EnumerableElement
           config={config}
-          onValueChange={onValueChange}
+          onValueChange={onValueChange.bind(this, config)}
           currentValue={currentValue}
         />
         : null

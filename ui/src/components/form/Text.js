@@ -24,7 +24,7 @@ const TextFormElement = ({config,onValueChange,currentValue}) => {
         name={`${formValue}`}
         placeholder={`${!!placeholder ? placeholder : !!formLabel ? formLabel : formValue}`}
         value={!!currentValue ? currentValue : ""}
-        onChange={onValueChange.bind(this, config)}
+        onChange={onValueChange}
         min={!!min ? min : ""}
         max={!!max ? max : ""}
       />
