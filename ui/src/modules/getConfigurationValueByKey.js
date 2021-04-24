@@ -1,3 +1,3 @@
-import configuration from "../config";
-const getConfigurationValueByKey = (configKey) => !!configuration && !!configuration[configKey] ? configuration[configKey] : null;
+import dotEnvConfig from "../dotEnvConfig";
+const getConfigurationValueByKey = (configKey) => !!dotEnvConfig && !!dotEnvConfig[configKey] ? dotEnvConfig[configKey] : null;
 export default getConfigurationValueByKey;
