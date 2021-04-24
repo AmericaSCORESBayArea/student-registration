@@ -1,6 +1,7 @@
 logs
 pids
 build
+releases
 coverage
 lib-cov
 bower_components
