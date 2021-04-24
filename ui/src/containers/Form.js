@@ -27,6 +27,7 @@ const FormContainer  = () => {
   const onSubmitCallback = (e) => {
     e.preventDefault();
     console.log("submit here");
+    console.log(formState);
   };
 
   return (
