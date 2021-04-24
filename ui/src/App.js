@@ -1,6 +1,7 @@
 // Import FirebaseAuth and firebase.
 import React from 'react';
 import FirebaseAuthContainer from "./containers/FirebaseAuth";
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
 
@@ -30,6 +31,13 @@ class App extends React.Component {
     }
     return (
       <div>
+        <img
+          src={"/America-SCORES-Logo.jpg"}
+          style={{
+            width:"100%",
+            maxWidth:"300px"
+          }}
+        />
         <h1>Student Registration</h1>
         <FirebaseAuthContainer/>
       </div>
