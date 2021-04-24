@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import getConfigurationValueByKey from "../modules/getConfigurationValueByKey";
+import FormContainer from "./Form";
+import { Button } from 'reactstrap';
 
 const firebaseAuth = {
   apiKey: getConfigurationValueByKey("REACT_APP_FIREBASE_API_KEY"),
@@ -24,7 +26,6 @@ const FirebaseAuthContainer  = () => {
   if (!firebaseAuthCallbacksSet) {
     setFirebaseAuthCallbacksSet(true);
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       setFirebaseAuthObj(user);
     });
     setTimeout(() => {
@@ -37,7 +38,7 @@ const FirebaseAuthContainer  = () => {
     firebase.auth().signOut();
     setTimeout(() => {
       window.location = "/";
-    },1000);
+    }, 1000);
   }
 
   if (isLoading) return <div>Loading</div>;
@@ -56,10 +57,10 @@ const FirebaseAuthContainer  = () => {
           />
           :
           <div>
-            <button
+            <Button
               onClick={signOutClickCallback}
-            >Sign-out</button>
-            <h1>Logged In</h1>
+            >Sign-out</Button>
+            <FormContainer/>
           </div>
       }
     </div>
