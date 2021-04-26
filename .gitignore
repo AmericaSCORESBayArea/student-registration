@@ -32,3 +32,4 @@ firebase-debug.*.log*
 *.pid.lock
 *.tgz
 .idea
+.vscode
