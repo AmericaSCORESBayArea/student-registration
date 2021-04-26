@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "rm -rf ../server/public && react-scripts build && mv build ../server/public"
   },
   "eslintConfig": {
     "extends": [
