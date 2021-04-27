@@ -109,65 +109,67 @@ const FormContainer  = () => {
         paddingLeft: "20px"
       }}
     >
-      {
-        formConfig.map((item, index) => {
-          const {formValue} = item;
-          const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
-          return (
-            <FormElementController
-              key={index}
-              config={item}
-              currentValue={currentValue}
-              onValueChange={onValueChange}
-            />
-          );
-        })
-      }
-      {
-        !!submitErrorMessage &&
-        <Alert
-          color="danger"
-        >
-          {
-            !!submitErrorTitle &&
-            <h3>{`${submitErrorTitle}`}</h3>
-          }
-          {`${submitErrorMessage}`}
-        </Alert>
-      }
-      {
-        !!submitSuccessMessage &&
-        <Alert
-          color="success"
-        >
-          {`${submitSuccessMessage}`}
-        </Alert>
-      }
-      {
-        !!submitButtonDisabledFields.length > 0 &&
-        <Alert
-          color="warning"
-        >
-          <p>Required Fields Missing</p>
-          <ul>
+      <fieldset>
+        {
+          formConfig.map((item, index) => {
+            const {formValue} = item;
+            const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
+            return (
+              <FormElementController
+                key={index}
+                config={item}
+                currentValue={currentValue}
+                onValueChange={onValueChange}
+              />
+            );
+          })
+        }
+        {
+          !!submitErrorMessage &&
+          <Alert
+            color="danger"
+          >
             {
-              submitButtonDisabledFields.map((item, index) => {
-                const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
-                return (
-                  <li
-                    key={index}
-                  >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
-                )
-              })
+              !!submitErrorTitle &&
+              <h3>{`${submitErrorTitle}`}</h3>
             }
-          </ul>
-        </Alert>
-      }
-      <Button
-        onClick={onSubmitCallback}
-        disabled={blSubmitButtonDisabled}
-        color={blSubmitButtonDisabled ? "secondary" : "primary"}
-      >Submit</Button>
+            {`${submitErrorMessage}`}
+          </Alert>
+        }
+        {
+          !!submitSuccessMessage &&
+          <Alert
+            color="success"
+          >
+            {`${submitSuccessMessage}`}
+          </Alert>
+        }
+        {
+          !!submitButtonDisabledFields.length > 0 &&
+          <Alert
+            color="warning"
+          >
+            <p>Required Fields Missing</p>
+            <ul>
+              {
+                submitButtonDisabledFields.map((item, index) => {
+                  const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
+                  return (
+                    <li
+                      key={index}
+                    >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
+                  )
+                })
+              }
+            </ul>
+          </Alert>
+        }
+        <Button
+          onClick={onSubmitCallback}
+          disabled={blSubmitButtonDisabled}
+          color={blSubmitButtonDisabled ? "secondary" : "primary"}
+        >Submit</Button>
+      </fieldset>
     </Form>
   );
 };
