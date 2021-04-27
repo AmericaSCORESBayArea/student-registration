@@ -13,7 +13,7 @@ const FormElementController = ({config,onValueChange,currentValue}) => {
       config={config}
     />
     :
-    dataType === "text" || dataType === "email" || dataType === "tel"  || dataType === "date" ?
+    dataType === "text" || dataType === "number" || dataType === "email" || dataType === "tel"  || dataType === "date" ?
       <StringFormElement
         config={config}
         onValueChange={onValueChange.bind(this, config)}
