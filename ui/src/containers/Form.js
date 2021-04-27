@@ -1,6 +1,6 @@
 import React, {useState,useReducer} from 'react';
 import axios from 'axios';
-import { Button,Form,Alert } from 'reactstrap';
+import { Button, Form, Alert, Spinner } from 'reactstrap';
 
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
@@ -32,6 +32,7 @@ const FormContainer  = () => {
   };
 
   const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
+  const [submitInProgress,setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
@@ -48,6 +49,7 @@ const FormContainer  = () => {
   };
 
   const postFetch = () => {
+    setSubmitInProgress(true);
     setSubmitSuccessMessage(null);
     setSubmitErrorMessage(null);
     setSubmitErrorTitle(null);
@@ -59,13 +61,16 @@ const FormContainer  = () => {
     console.log(submitObj);
     axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
       console.log(response);
+      setSubmitInProgress(false);
       setSubmitSuccessMessage(`Student Registration Successful!`);
     }, (error) => {
       console.log(error);
+      setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
     }).catch((e) => {
       console.log(e);
+      setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
     });
@@ -164,9 +169,15 @@ const FormContainer  = () => {
             </ul>
           </Alert>
         }
+        {
+          submitInProgress &&
+          <div>
+            <p><Spinner size="sm" color="primary"/>{` `}Registering...</p>
+          </div>
+        }
         <Button
           onClick={onSubmitCallback}
-          disabled={blSubmitButtonDisabled}
+          disabled={blSubmitButtonDisabled || submitInProgress}
           color={blSubmitButtonDisabled ? "secondary" : "primary"}
         >Submit</Button>
       </fieldset>
