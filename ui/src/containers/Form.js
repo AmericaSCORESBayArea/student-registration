@@ -5,6 +5,23 @@ import { Button,Form,Alert } from 'reactstrap';
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
 
+const reqHeaders = {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+const generateInitialFormState = (formConfig) => {
+  if (!formConfig) return [];
+  return formConfig.filter((item) => !!item.formValue).map((item) => {
+    const {formValue,dataType} = item;
+    return {
+      formValue,
+      value:dataType === "number" ? 0 : ""
+    };
+  });
+};
+
 const FormContainer  = () => {
 
   const formStateReducer = (state, newState) => {
@@ -14,68 +31,40 @@ const FormContainer  = () => {
     ];
   };
 
-  const [formState, setFormState] = useReducer(formStateReducer, []);
+  const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
+  const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
+
+  if (!formConfig) return null;
 
   const onValueChange = (config, e) => {
     const newValue = e.target.value;
-    const {formValue} = config;
+    const {formValue, dataType} = config;
     setFormState({
       formValue,
-      value: newValue
+      value: dataType === "number" ? parseInt(newValue) : newValue
     });
   };
 
-  /* POST using the fetch call */
   const postFetch = () => {
-    // // let order = formData();
-    // console.log(order);
-    console.log("SPACES");
-    console.log(JSON.stringify(formState));
-    const reqHeaders = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    submitErrorTitle(null);
-    submitErrorMessage(null);
-    axios.post('/register', JSON.stringify(formState), reqHeaders)
-      .then((response) => {
-        console.log('success repsonse', response.data);
-        if (response.data !== undefined) {
-          if (response.data.data === true) {
-
-            console.log("RESULT LOOKS OK!");
-
-            // $( "#dialog-confirm" ).dialog({
-            //   resizable: false,
-            //   height: "auto",
-            //   width: 400,
-            //   modal: true,
-            //   buttons: {
-            //     "Register New Student": function() {
-            //       $( this ).dialog( "close" );
-            //       resetFields();
-            //     },
-            //     "Goto Scores Home": function() {
-            //       window.location.href = "https://scoresu.org/";
-            //     }
-            //   }
-            // });
-          } else {
-            setSubmitErrorTitle("Student Registration Failed");
-            setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-          }
-        } else {
-          setSubmitErrorTitle("Student Registration Failed");
-          setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-        }
-      }, (error) => {
-        console.log(error);
-        setSubmitErrorTitle("Student Registration Failed");
-        setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-      }).catch((e) => {
+    setSubmitSuccessMessage(null);
+    setSubmitErrorMessage(null);
+    setSubmitErrorTitle(null);
+    let submitObj = {};
+    console.log(formState);
+    formState.map((item) => {
+      submitObj[item.formValue] = item.value;
+    });
+    console.log(submitObj);
+    axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
+      console.log(response);
+      setSubmitSuccessMessage(`Student Registration Successful!`);
+    }, (error) => {
+      console.log(error);
+      setSubmitErrorTitle("Student Registration Failed");
+      setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
+    }).catch((e) => {
       console.log(e);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
@@ -95,7 +84,7 @@ const FormContainer  = () => {
       onSubmit={onSubmitCallback}
       style={{
         maxWidth: "500px",
-        paddingLeft:"20px"
+        paddingLeft: "20px"
       }}
     >
       {
@@ -122,6 +111,14 @@ const FormContainer  = () => {
             <h3>{`${submitErrorTitle}`}</h3>
           }
           {`${submitErrorMessage}`}
+        </Alert>
+      }
+      {
+        !!submitSuccessMessage &&
+        <Alert
+          color="success"
+        >
+          {`${submitSuccessMessage}`}
         </Alert>
       }
       <Button
