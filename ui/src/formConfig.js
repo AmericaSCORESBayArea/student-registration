@@ -8,8 +8,8 @@ const formConfig = [
     formValue:"firstName",
     formLabel:"First Name",
     helpText:"Enter First Name",
-    isRequired:true,
-    placeholder:"Enter First Name"
+    placeholder:"Enter First Name",
+    isRequired: true
   },
   {
     dataType:"text",
@@ -24,16 +24,16 @@ const formConfig = [
     formValue:"lastName",
     formLabel:"Last Name",
     helpText:"Enter Last Name",
-    isRequired:true,
-    placeholder:"Enter Last Name"
+    placeholder:"Enter Last Name",
+    isRequired: true
   },
   {
     dataType:"enum",
     formValue:"schoolName",
     formLabel:"School Name",
     helpText:"Select School Name",
-    isRequired:true,
     placeholder:"Enter School Name",
+    isRequired: true,
     enumItems: [
       "Adelante Selby Lane Elementary School",
       "Alvarado Elementary School",
@@ -146,15 +146,14 @@ const formConfig = [
     formValue:"personalEmail",
     formLabel:"Personal Email",
     helpText:"Enter Personal Email",
-    isRequired:true,
-    placeholder:"Enter Personal Email"
+    placeholder:"Enter Personal Email",
+    isRequired: true
   },
   {
     dataType:"tel",
     formValue:"homePhone",
     formLabel:"Home Phone",
     helpText:"Enter Home Phone",
-    isRequired:true,
     placeholder:"Enter Home Phone"
   },
   {
@@ -162,17 +161,16 @@ const formConfig = [
     formValue:"birthDate",
     formLabel:"Birthdate",
     helpText:"Enter Birthdate",
-    isRequired:true,
     placeholder:"Enter Birthdate",
     min:"1900-01-01",
-    max:"2021-04-01"
+    max:"2021-04-01",
+    isRequired: true
   },
   {
     dataType:"enum",
     formValue:"gender",
     formLabel:"Gender",
     helpText:"Select Gender",
-    isRequired:true,
     placeholder:"Select Gender",
     enumItems: [
       "Female",
@@ -186,7 +184,6 @@ const formConfig = [
     formValue:"grade",
     formLabel:"Grade",
     helpText:"Select Grade",
-    isRequired:true,
     placeholder:"Select Grade",
     enumItems: [
       "Kindergarten",
@@ -205,7 +202,6 @@ const formConfig = [
     formValue:"ethnicity",
     formLabel:"Ethnicity",
     helpText:"Select Ethnicity",
-    isRequired:true,
     placeholder:"Select Ethnicity",
     enumItems: [
       "Hispanic/Latino",
@@ -225,7 +221,6 @@ const formConfig = [
     formValue:"reducedPriceLunch",
     formLabel:"Reduced Price Lunch",
     helpText:"Select Reduced Price Lunch",
-    isRequired:true,
     placeholder:"Select Reduced Price Lunch",
     enumItems: [
       "Yes",
@@ -237,7 +232,6 @@ const formConfig = [
     formValue:"allergiesMedicalConditions",
     formLabel:"Allergies/Medical Conditions",
     helpText:"Enter Allergies/Medical Conditions",
-    isRequired:true,
     placeholder:"Enter Allergies/Medical Conditions"
   },
   {
@@ -245,7 +239,6 @@ const formConfig = [
     formValue:"permissionToCommuteAlone",
     formLabel:"Select Permission to Commute Alone",
     helpText:"Select Permission to Commute Alone",
-    isRequired:true,
     placeholder:"Select Permission to Commute Alone",
     enumItems: [
       "Yes",
@@ -261,31 +254,30 @@ const formConfig = [
     formValue:"parentFirstName",
     formLabel:"Parent First Name",
     helpText:"Enter Parent First Name",
-    isRequired:true,
-    placeholder:"Enter Parent First Name"
+    placeholder:"Enter Parent First Name",
+    isRequired: true
   },
   {
     dataType:"text",
     formValue:"parentLastName",
     formLabel:"Parent Last Name",
     helpText:"Enter Parent Last Name",
-    isRequired:true,
-    placeholder:"Enter Parent Last Name"
+    placeholder:"Enter Parent Last Name",
+    isRequired: true
   },
   {
     dataType:"email",
     formValue:"parentPersonalEmail",
     formLabel:"Parent Email",
     helpText:"Enter Parent Email",
-    isRequired:true,
-    placeholder:"Enter Parent Email"
+    placeholder:"Enter Parent Email",
+    isRequired: true
   },
   {
     dataType:"text",
     formValue:"relationshipToChild",
     formLabel:"Relationship to Child",
     helpText:"Enter Relationship to Child",
-    isRequired:true,
     placeholder:"Enter Relationship to Child"
   },
   {
@@ -293,15 +285,14 @@ const formConfig = [
     formValue:"parentPhone1",
     formLabel:"Parent Phone 1",
     helpText:"Enter Parent Phone 1",
-    isRequired:true,
-    placeholder:"Enter Parent Phone 1"
+    placeholder:"Enter Parent Phone 1",
+    isRequired: true
   },
   {
     dataType:"tel",
     formValue:"parentPhone2",
     formLabel:"Parent Phone 2",
     helpText:"Enter Parent Phone 2",
-    isRequired:true,
     placeholder:"Enter Parent Phone 2"
   },
   {
@@ -309,7 +300,6 @@ const formConfig = [
     formValue:"parentPhone3",
     formLabel:"Parent Phone 3",
     helpText:"Enter Parent Phone 3",
-    isRequired:true,
     placeholder:"Enter Parent Phone 3"
   },
   {
@@ -317,7 +307,6 @@ const formConfig = [
     formValue:"mailingStreet",
     formLabel:"Mailing Street",
     helpText:"Enter Mailing Street",
-    isRequired:true,
     placeholder:"Enter Mailing Street"
   },
   {
@@ -325,7 +314,6 @@ const formConfig = [
     formValue:"mailingCity",
     formLabel:"Mailing City",
     helpText:"Enter Mailing City",
-    isRequired:true,
     placeholder:"Enter Mailing City"
   },
   {
@@ -333,7 +321,6 @@ const formConfig = [
     formValue:"mailingState",
     formLabel:"Mailing State/Province",
     helpText:"Enter Mailing State/Province",
-    isRequired:true,
     placeholder:"Enter Mailing State/Province"
   },
   {
@@ -341,7 +328,6 @@ const formConfig = [
     formValue:"mailingZip",
     formLabel:"Mailing Zip",
     helpText:"Enter Mailing Zip",
-    isRequired:true,
     placeholder:"Enter Mailing Zip"
   },
   {
@@ -349,7 +335,6 @@ const formConfig = [
     formValue:"mailingCountry",
     formLabel:"Mailing Country",
     helpText:"Enter Mailing Country",
-    isRequired:true,
     placeholder:"Enter Mailing Country"
   },
   {
@@ -357,7 +342,6 @@ const formConfig = [
     formValue:"parentEnglishFluency",
     formLabel:"Parent English Fluency",
     helpText:"Select Parent English Fluency",
-    isRequired:true,
     placeholder:"Select Parent English Fluency",
     enumItems: [
       "Yes",
@@ -370,7 +354,6 @@ const formConfig = [
     formValue:"parentHomeLanguage",
     formLabel:"Parent Home Language",
     helpText:"Select Parent Home Language",
-    isRequired:true,
     placeholder:"Select Parent Home Language",
     enumItems: [
       "English",
@@ -405,7 +388,6 @@ const formConfig = [
     formValue:"volunteerForThisProgram",
     formLabel:"Volunteer for this program? (Parent)",
     helpText:"Select Volunteer for this Program",
-    isRequired:true,
     placeholder:"Select Parent Home Language",
     enumItems: [
       "Yes",
@@ -421,7 +403,6 @@ const formConfig = [
     formValue:"emergencyContactName",
     formLabel:"Emergency Contact Name",
     helpText:"Enter Emergency Contact Name",
-    isRequired:true,
     placeholder:"Enter Emergency Contact Name"
   },
   {
@@ -429,7 +410,6 @@ const formConfig = [
     formValue:"emergencyRelationshipToChild",
     formLabel:"Emergency Relationship to Child",
     helpText:"Enter Emergency Relationship to Child",
-    isRequired:true,
     placeholder:"Enter Emergency Relationship to Child"
   },
   {
@@ -437,7 +417,6 @@ const formConfig = [
     formValue:"emergencyPhone1",
     formLabel:"Emergency Phone 1",
     helpText:"Enter Emergency Phone 1",
-    isRequired:true,
     placeholder:"Enter Emergency Phone 1"
   },
   {
@@ -445,7 +424,6 @@ const formConfig = [
     formValue:"emergencyPhone2",
     formLabel:"Emergency Phone 2",
     helpText:"Enter Emergency Phone 2",
-    isRequired:true,
     placeholder:"Enter Emergency Phone 2"
   },
   {
@@ -453,7 +431,6 @@ const formConfig = [
     formValue:"emergencyPhone3",
     formLabel:"Emergency Phone 3",
     helpText:"Enter Emergency Phone 3",
-    isRequired:true,
     placeholder:"Enter Emergency Phone 3"
   },
   {
@@ -461,7 +438,6 @@ const formConfig = [
     formValue:"permissionForEmergencyContactToPickupChild",
     formLabel:"Permission to Pick up Child?",
     helpText:"Select Permission to Pick up Child",
-    isRequired:true,
     placeholder:"Select Permission to Pick up Child",
     enumItems: [
       "Yes",
@@ -477,7 +453,6 @@ const formConfig = [
     formValue:"secondaryEmergencyContactName",
     formLabel:"Secondary Emergency Contact Name",
     helpText:"Enter Secondary Emergency Contact Name",
-    isRequired:true,
     placeholder:"Enter Secondary Emergency Contact Name"
   },
   {
@@ -485,7 +460,6 @@ const formConfig = [
     formValue:"secondaryEmergencyRelationshipToChild",
     formLabel:"Secondary Emergency Relationship to Child",
     helpText:"Enter Secondary Emergency Relationship to Child",
-    isRequired:true,
     placeholder:"Enter Secondary Emergency Relationship to Child"
   },
   {
@@ -493,7 +467,6 @@ const formConfig = [
     formValue:"secondaryEmergencyPhone1",
     formLabel:"Secondary Emergency Phone 1",
     helpText:"Enter Secondary Emergency Phone 1",
-    isRequired:true,
     placeholder:"Enter Secondary Emergency Phone 1"
   },
   {
@@ -501,7 +474,6 @@ const formConfig = [
     formValue:"secondaryEmergencyPhone2",
     formLabel:"Secondary Emergency Phone 2",
     helpText:"Enter Secondary Emergency Phone 2",
-    isRequired:true,
     placeholder:"Enter Secondary Emergency Phone 2"
   },
   {
@@ -509,7 +481,6 @@ const formConfig = [
     formValue:"secondaryEmergencyPhone3",
     formLabel:"Secondary Emergency Phone 3",
     helpText:"Enter Secondary Emergency Phone 3",
-    isRequired:true,
     placeholder:"Enter Secondary Emergency Phone 3"
   },
   {
@@ -517,7 +488,6 @@ const formConfig = [
     formValue:"secondaryPermissionForEmergencyContactToPickupChild",
     formLabel:"Secondary Permission to Pick up Child?",
     helpText:"Select Secondary Permission to Pick up Child",
-    isRequired:true,
     placeholder:"Select Secondary Permission to Pick up Child",
     enumItems: [
       "Yes",
