@@ -4,7 +4,6 @@
   "description": "This App allows student to register for the sessions",
   "main": "server.js",
   "scripts": {
-    "test-setup": "npm install && cd ui && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
