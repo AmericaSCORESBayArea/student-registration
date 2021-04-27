@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import getConfigurationValueByKey from "../modules/getConfigurationValueByKey";
 import FormContainer from "./Form";
-import { Button, Spinner } from 'reactstrap';
+import { Fade, Button, Spinner } from 'reactstrap';
 
 const firebaseAuth = {
   apiKey: getConfigurationValueByKey("REACT_APP_FIREBASE_API_KEY"),
@@ -53,21 +53,25 @@ const FirebaseAuthContainer  = () => {
     <div>
       {
         !firebaseAuthObj ?
-          <StyledFirebaseAuth
-            uiConfig={{
-              signInOptions: [
-                firebase.auth.PhoneAuthProvider.PROVIDER_ID
-              ]
-            }}
-            firebaseAuth={firebase.auth()}
-          />
+          <Fade>
+            <StyledFirebaseAuth
+              uiConfig={{
+                signInOptions: [
+                  firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                ]
+              }}
+              firebaseAuth={firebase.auth()}
+            />
+          </Fade>
           :
           <div>
             <div className="clearfix" style={{padding: '.5rem'}}>
-              <Button
-                className="btn btn-secondary float-right"
-                onClick={signOutClickCallback}
-              >Sign-out</Button>
+              <Fade>
+                <Button
+                  className="btn btn-secondary float-right"
+                  onClick={signOutClickCallback}
+                >Sign-out</Button>
+              </Fade>
             </div>
             <FormContainer/>
           </div>

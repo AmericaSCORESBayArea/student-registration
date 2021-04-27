@@ -1,6 +1,6 @@
 import React, {useState,useReducer} from 'react';
 import axios from 'axios';
-import { Button, Form, Alert, Spinner } from 'reactstrap';
+import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
@@ -32,7 +32,7 @@ const FormContainer  = () => {
   };
 
   const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
-  const [submitInProgress,setSubmitInProgress] = useState(false);
+  const [submitInProgress, setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
@@ -107,81 +107,83 @@ const FormContainer  = () => {
   const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0;
 
   return (
-    <Form
-      onSubmit={onSubmitCallback}
-      style={{
-        maxWidth: "500px",
-        paddingLeft: "20px"
-      }}
-    >
-      <fieldset>
-        {
-          formConfig.map((item, index) => {
-            const {formValue} = item;
-            const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
-            return (
-              <FormElementController
-                key={index}
-                config={item}
-                currentValue={currentValue}
-                onValueChange={onValueChange}
-              />
-            );
-          })
-        }
-        {
-          !!submitErrorMessage &&
-          <Alert
-            color="danger"
-          >
-            {
-              !!submitErrorTitle &&
-              <h3>{`${submitErrorTitle}`}</h3>
-            }
-            {`${submitErrorMessage}`}
-          </Alert>
-        }
-        {
-          !!submitSuccessMessage &&
-          <Alert
-            color="success"
-          >
-            {`${submitSuccessMessage}`}
-          </Alert>
-        }
-        {
-          !!submitButtonDisabledFields.length > 0 &&
-          <Alert
-            color="warning"
-          >
-            <p>Required Fields Missing</p>
-            <ul>
+    <Fade in={true}>
+      <Form
+        onSubmit={onSubmitCallback}
+        style={{
+          maxWidth: "500px",
+          paddingLeft: "20px"
+        }}
+      >
+        <fieldset>
+          {
+            formConfig.map((item, index) => {
+              const {formValue} = item;
+              const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
+              return (
+                <FormElementController
+                  key={index}
+                  config={item}
+                  currentValue={currentValue}
+                  onValueChange={onValueChange}
+                />
+              );
+            })
+          }
+          {
+            !!submitErrorMessage &&
+            <Alert
+              color="danger"
+            >
               {
-                submitButtonDisabledFields.map((item, index) => {
-                  const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
-                  return (
-                    <li
-                      key={index}
-                    >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
-                  )
-                })
+                !!submitErrorTitle &&
+                <h3>{`${submitErrorTitle}`}</h3>
               }
-            </ul>
-          </Alert>
-        }
-        {
-          submitInProgress &&
-          <div>
-            <p><Spinner size="sm" color="primary"/>{` `}Registering...</p>
-          </div>
-        }
-        <Button
-          onClick={onSubmitCallback}
-          disabled={blSubmitButtonDisabled || submitInProgress}
-          color={blSubmitButtonDisabled ? "secondary" : "primary"}
-        >Submit</Button>
-      </fieldset>
-    </Form>
+              {`${submitErrorMessage}`}
+            </Alert>
+          }
+          {
+            !!submitSuccessMessage &&
+            <Alert
+              color="success"
+            >
+              {`${submitSuccessMessage}`}
+            </Alert>
+          }
+          {
+            !!submitButtonDisabledFields.length > 0 &&
+            <Alert
+              color="warning"
+            >
+              <p>Required Fields Missing</p>
+              <ul>
+                {
+                  submitButtonDisabledFields.map((item, index) => {
+                    const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
+                    return (
+                      <li
+                        key={index}
+                      >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
+                    )
+                  })
+                }
+              </ul>
+            </Alert>
+          }
+          {
+            submitInProgress &&
+            <div>
+              <p><Spinner size="sm" color="primary"/>{` `}Registering...</p>
+            </div>
+          }
+          <Button
+            onClick={onSubmitCallback}
+            disabled={blSubmitButtonDisabled || submitInProgress}
+            color={blSubmitButtonDisabled ? "secondary" : "primary"}
+          >Submit</Button>
+        </fieldset>
+      </Form>
+    </Fade>
   );
 };
 

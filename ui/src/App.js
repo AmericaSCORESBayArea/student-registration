@@ -1,7 +1,7 @@
 // Import FirebaseAuth and firebase.
 import React from 'react';
 import FirebaseAuthContainer from "./containers/FirebaseAuth";
-import { Container, Row, Col } from 'reactstrap';
+import { Fade, Container, Row, Col } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
@@ -34,27 +34,29 @@ class App extends React.Component {
       <div
         style={{paddingBottom: "50px"}}
       >
-        <Container>
-          <Row>
-            <Col>
-              <img
-                src={"/America-SCORES-Logo.jpg"}
-                style={{
-                  width: "100%",
-                  maxWidth: "300px"
-                }}
-              />
-              <h1
-                style={{textAlign: "center"}}
-              >Student Registration</h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <FirebaseAuthContainer/>
-            </Col>
-          </Row>
-        </Container>
+        <Fade>
+          <Container>
+            <Row>
+              <Col>
+                <img
+                  src={"/America-SCORES-Logo.jpg"}
+                  style={{
+                    width: "100%",
+                    maxWidth: "300px"
+                  }}
+                />
+                <h1
+                  style={{textAlign: "center"}}
+                >Student Registration</h1>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FirebaseAuthContainer/>
+              </Col>
+            </Row>
+          </Container>
+        </Fade>
       </div>
     );
   }
