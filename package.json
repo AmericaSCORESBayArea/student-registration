@@ -4,7 +4,7 @@
   "description": "America SCORES Registration Form",
   "main": "cd server && server.js",
   "scripts": {
-    "test-setup" : "cd ui && npm run build",
+    "test-setup" : "cd server && npm install && cd ../ui && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
