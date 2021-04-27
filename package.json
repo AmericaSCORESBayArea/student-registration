@@ -1,20 +1,21 @@
 {
-  "name": "student-registration",
+  "name": "Student-Registration-App",
   "version": "1.0.0",
-  "description": "America SCORES Registration Form",
-  "main": "cd server && server.js",
+  "description": "This App allows student to register for the sessions",
+  "main": "server.js",
   "scripts": {
-    "test-setup" : "cd server && npm install && cd ../ui && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test-setup": "npm install && cd ui && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AmericaSCORESBayArea/student-registration.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AmericaSCORESBayArea/student-registration/issues"
-  },
-  "homepage": "https://github.com/AmericaSCORESBayArea/student-registration#readme"
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsdom": "^16.4.0"
+  }
 }
