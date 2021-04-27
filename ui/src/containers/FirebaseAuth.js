@@ -63,9 +63,12 @@ const FirebaseAuthContainer  = () => {
           />
           :
           <div>
-            <Button
-              onClick={signOutClickCallback}
-            >Sign-out</Button>
+            <div className="clearfix" style={{padding: '.5rem'}}>
+              <Button
+                className="btn btn-secondary float-right"
+                onClick={signOutClickCallback}
+              >Sign-out</Button>
+            </div>
             <FormContainer/>
           </div>
       }
