@@ -99,6 +99,8 @@ const FormContainer  = () => {
     return true;
   });
 
+  const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0;
+
   return (
     <Form
       onSubmit={onSubmitCallback}
@@ -163,7 +165,8 @@ const FormContainer  = () => {
       }
       <Button
         onClick={onSubmitCallback}
-        disabled={submitButtonDisabledFields.length > 0}
+        disabled={blSubmitButtonDisabled}
+        color={blSubmitButtonDisabled ? "secondary" : "primary"}
       >Submit</Button>
     </Form>
   );
