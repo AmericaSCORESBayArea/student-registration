@@ -3,12 +3,12 @@ import {Label} from 'reactstrap';
 
 const FormLabel = ({config,elementId}) => {
   if (!config || !elementId) return null;
-  const {formValue, formLabel} = config;
+  const {formValue, formLabel,isRequired} = config;
   const labelToDisplay = `${!!formLabel ? formLabel : !!formValue ? formValue : ""}`;
   return (
       <Label
         for={`${elementId}`}
-      >{labelToDisplay}</Label>
+      >{labelToDisplay}{isRequired && <span className="red-req">*</span>}</Label>
   );
 };
 

@@ -1,9 +1,26 @@
 import React, {useState,useReducer} from 'react';
 import axios from 'axios';
-import { Button,Form,Alert } from 'reactstrap';
+import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
+
+const reqHeaders = {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+const generateInitialFormState = (formConfig) => {
+  if (!formConfig) return [];
+  return formConfig.filter((item) => !!item.formValue).map((item) => {
+    const {formValue,dataType} = item;
+    return {
+      formValue,
+      value:dataType === "number" ? 0 : ""
+    };
+  });
+};
 
 const FormContainer  = () => {
 
@@ -14,69 +31,46 @@ const FormContainer  = () => {
     ];
   };
 
-  const [formState, setFormState] = useReducer(formStateReducer, []);
+  const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
+  const [submitInProgress, setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
-  console.log(submitErrorMessage);
+  const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
+
+  if (!formConfig) return null;
+
   const onValueChange = (config, e) => {
     const newValue = e.target.value;
-    const {formValue} = config;
+    const {formValue, dataType} = config;
     setFormState({
       formValue,
-      value: newValue
+      value: dataType === "number" ? parseInt(newValue) : newValue
     });
   };
 
-  /* POST using the fetch call */
   const postFetch = () => {
-    // // let order = formData();
-    // console.log(order);
-    console.log("SPACES");
-    console.log(JSON.stringify(formState));
-    const reqHeaders = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    submitErrorTitle(null);
-    submitErrorMessage(null);
-    axios.post('/register', JSON.stringify(formState), reqHeaders)
-      .then((response) => {
-        console.log('success repsonse', response.data);
-        if (response.data !== undefined) {
-          if (response.data.data === true) {
-
-            console.log("RESULT LOOKS OK!");
-
-            // $( "#dialog-confirm" ).dialog({
-            //   resizable: false,
-            //   height: "auto",
-            //   width: 400,
-            //   modal: true,
-            //   buttons: {
-            //     "Register New Student": function() {
-            //       $( this ).dialog( "close" );
-            //       resetFields();
-            //     },
-            //     "Goto Scores Home": function() {
-            //       window.location.href = "https://scoresu.org/";
-            //     }
-            //   }
-            // });
-          } else {
-            setSubmitErrorTitle("Student Registration Failed");
-            setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-          }
-        } else {
-          setSubmitErrorTitle("Student Registration Failed");
-          setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-        }
-      }, (error) => {
-        console.log(error);
-        setSubmitErrorTitle("Student Registration Failed");
-        setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-      }).catch((e) => {
+    setSubmitInProgress(true);
+    setSubmitSuccessMessage(null);
+    setSubmitErrorMessage(null);
+    setSubmitErrorTitle(null);
+    let submitObj = {};
+    console.log(formState);
+    formState.map((item) => {
+      submitObj[item.formValue] = item.value;
+    });
+    console.log(submitObj);
+    axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
+      console.log(response);
+      setSubmitInProgress(false);
+      setSubmitSuccessMessage(`Student Registration Successful!`);
+    }, (error) => {
+      console.log(error);
+      setSubmitInProgress(false);
+      setSubmitErrorTitle("Student Registration Failed");
+      setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
+    }).catch((e) => {
       console.log(e);
+      setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
     });
@@ -90,44 +84,106 @@ const FormContainer  = () => {
     postFetch();
   };
 
+  const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
+
+  const submitButtonDisabledFields = requiredFields.filter((item) => {
+    const matchingFormValue = formState.filter((item_2) => item_2.formValue === item);
+    if (matchingFormValue.length === 1) {
+      const valueToCheck = matchingFormValue[0].value;
+      if (typeof valueToCheck === "string") {
+        if (valueToCheck.trim().length > 0) {
+          return false;
+        }
+      }
+      if (typeof valueToCheck === "number") {
+        if (!isNaN(valueToCheck)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  });
+
+  const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0;
+
   return (
-    <Form
-      onSubmit={onSubmitCallback}
-      style={{
-        maxWidth: "500px",
-        paddingLeft:"20px"
-      }}
-    >
-      {
-        formConfig.map((item, index) => {
-          const {formValue} = item;
-          const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
-          return (
-            <FormElementController
-              key={index}
-              config={item}
-              currentValue={currentValue}
-              onValueChange={onValueChange}
-            />
-          );
-        })
-      }
-      {
-        !!submitErrorMessage &&
-        <Alert
-          color="danger"
-        >
+    <Fade in={true}>
+      <Form
+        onSubmit={onSubmitCallback}
+        style={{
+          maxWidth: "500px",
+          paddingLeft: "20px"
+        }}
+      >
+        <fieldset>
           {
-            !!submitErrorTitle &&
-            <h3>{`${submitErrorTitle}`}</h3>
+            formConfig.map((item, index) => {
+              const {formValue} = item;
+              const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
+              return (
+                <FormElementController
+                  key={index}
+                  config={item}
+                  currentValue={currentValue}
+                  onValueChange={onValueChange}
+                />
+              );
+            })
           }
-          {`${submitErrorMessage}`}
-        </Alert>
-      }
-      <Button
-        onClick={onSubmitCallback}
-      >Submit</Button>
-    </Form>
+          {
+            !!submitErrorMessage &&
+            <Alert
+              color="danger"
+            >
+              {
+                !!submitErrorTitle &&
+                <h3>{`${submitErrorTitle}`}</h3>
+              }
+              {`${submitErrorMessage}`}
+            </Alert>
+          }
+          {
+            !!submitSuccessMessage &&
+            <Alert
+              color="success"
+            >
+              {`${submitSuccessMessage}`}
+            </Alert>
+          }
+          {
+            !!submitButtonDisabledFields.length > 0 &&
+            <Alert
+              color="warning"
+            >
+              <p>Required Fields Missing</p>
+              <ul>
+                {
+                  submitButtonDisabledFields.map((item, index) => {
+                    const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
+                    return (
+                      <li
+                        key={index}
+                      >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
+                    )
+                  })
+                }
+              </ul>
+            </Alert>
+          }
+          {
+            submitInProgress &&
+            <div>
+              <p><Spinner size="sm" color="primary"/>{` `}Registering...</p>
+            </div>
+          }
+          <Button
+            onClick={onSubmitCallback}
+            disabled={blSubmitButtonDisabled || submitInProgress}
+            color={blSubmitButtonDisabled ? "secondary" : "primary"}
+          >Submit</Button>
+        </fieldset>
+      </Form>
+    </Fade>
   );
 };
 
