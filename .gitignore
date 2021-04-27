@@ -6,7 +6,6 @@ coverage
 lib-cov
 bower_components
 node_modules
-server/public
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
