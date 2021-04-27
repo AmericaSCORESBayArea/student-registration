@@ -324,7 +324,7 @@ const formConfig = [
     placeholder:"Enter Mailing State/Province"
   },
   {
-    dataType:"text",
+    dataType:"number",
     formValue:"MailingZip",
     formLabel:"Mailing Zip",
     helpText:"Enter Mailing Zip",
