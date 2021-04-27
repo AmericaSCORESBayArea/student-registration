@@ -17,7 +17,7 @@ const FormContainer  = () => {
   const [formState, setFormState] = useReducer(formStateReducer, []);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
-  console.log(submitErrorMessage);
+
   const onValueChange = (config, e) => {
     const newValue = e.target.value;
     const {formValue} = config;
