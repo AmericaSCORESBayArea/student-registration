@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fade, Container, Row, Col } from 'reactstrap';
+import { Fade, Container, Row, Col, Alert } from 'reactstrap';
 import ConfigContainer from "./containers/Config";
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -26,7 +26,24 @@ class App extends React.Component {
   render() {
     if (!!this.state.errorMessage) {
       return (
-        <div>{`${this.state.errorMessage}`}</div>
+        <div>
+
+          <img
+            src={"/America-SCORES-Logo.jpg"}
+            style={{
+              width: "100%",
+              maxWidth: "300px"
+            }}
+          />
+          <h1
+            style={{textAlign: "center"}}
+          >Student Registration</h1>
+          <Alert
+            color="danger"
+          >
+            <h3>{`${this.state.errorMessage}`}</h3>
+          </Alert>
+        </div>
       );
     }
     return (
