@@ -13,19 +13,18 @@ const reqHeaders = {
 
 const generateInitialFormState = (formConfig) => {
 
-
-
-
-  axios.get('/info', JSON.stringify(submitObj), reqHeaders).then((response) => {
-    console.log(response);
-
-  }, (error) => {
-    console.log(error);
-
-  }).catch((e) => {
-    console.log(e);
-
-  });
+  axios.get('/info')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
 
 
 
