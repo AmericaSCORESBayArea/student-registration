@@ -28,7 +28,7 @@ const ConfigContainer  = () => {
       header:reqHeaders
     }).then(function (response) {
         console.log(response);
-        const data = response.data.data;
+        const {data} = response;
         if (!!data) {
           setAppConfig(data);
         }
