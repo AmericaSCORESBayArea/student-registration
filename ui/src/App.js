@@ -34,7 +34,7 @@ class App extends React.Component {
               width: "100%",
               maxWidth: "300px"
             }}
-          />
+           alt={`America Scores Logo`}/>
           <h1
             style={{textAlign: "center"}}
           >Student Registration</h1>
@@ -60,6 +60,7 @@ class App extends React.Component {
                     width: "100%",
                     maxWidth: "300px"
                   }}
+                  alt={`America Scores Logo`}
                 />
                 <h1
                   style={{textAlign: "center"}}
