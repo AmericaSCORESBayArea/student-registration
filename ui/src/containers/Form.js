@@ -4,6 +4,7 @@ import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
+import SpinnerWithMessage from "../components/Spinner";
 
 const reqHeaders = {
   headers: {
@@ -12,24 +13,6 @@ const reqHeaders = {
 };
 
 const generateInitialFormState = (formConfig) => {
-
-  axios.get('/info')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
-
-
-
-
-
   if (!formConfig) return [];
   return formConfig.filter((item) => !!item.formValue).map((item) => {
     const {formValue,dataType} = item;
@@ -190,9 +173,9 @@ const FormContainer  = () => {
           }
           {
             submitInProgress &&
-            <div>
-              <p><Spinner size="sm" color="primary"/>{` `}Registering...</p>
-            </div>
+            <SpinnerWithMessage
+              message={`Registering...`}
+            />
           }
           <Button
             onClick={onSubmitCallback}
