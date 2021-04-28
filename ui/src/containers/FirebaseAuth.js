@@ -1,23 +1,21 @@
 import React, {useState} from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import getConfigurationValueByKey from "../modules/getConfigurationValueByKey";
 import FormContainer from "./Form";
 import { Fade, Button, Spinner } from 'reactstrap';
+import SpinnerWithMessage from "../components/Spinner";
 
-const firebaseAuth = {
-  apiKey: getConfigurationValueByKey("REACT_APP_FIREBASE_API_KEY"),
-  authDomain: getConfigurationValueByKey("REACT_APP_FIREBASE_AUTH_DOMAIN"),
-  databaseURL: getConfigurationValueByKey("REACT_APP_FIREBASE_DATABASE_URL"),
-  projectId: getConfigurationValueByKey("REACT_APP_FIREBASE_PROJECT_ID"),
-  storageBucket: getConfigurationValueByKey("REACT_APP_FIREBASE_STORAGE_BUCKET"),
-  messagingSenderId: getConfigurationValueByKey("REACT_APP_FIREBASE_MESSAGE_SENDER_ID"),
-  appId: getConfigurationValueByKey("REACT_APP_FIREBASE_APP_ID")
-};
+const FirebaseAuthContainer  = ({appConfig}) => {
 
-firebase.initializeApp(firebaseAuth);
-
-const FirebaseAuthContainer  = () => {
+  const firebaseAuth = {
+    apiKey: appConfig.REACT_APP_FIREBASE_API_KEY,
+    authDomain: appConfig.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: appConfig.REACT_APP_FIREBASE_DATABASE_URL,
+    projectId: appConfig.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: appConfig.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: appConfig.REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
+    appId: appConfig.REACT_APP_FIREBASE_APP_ID
+  };
 
   const [isLoading, setIsLoading] = useState(true);
   const [firebaseAuthCallbacksSet, setFirebaseAuthCallbacksSet] = useState(false);
@@ -25,6 +23,7 @@ const FirebaseAuthContainer  = () => {
 
   if (!firebaseAuthCallbacksSet) {
     setFirebaseAuthCallbacksSet(true);
+    firebase.initializeApp(firebaseAuth);
     firebase.auth().onAuthStateChanged((user) => {
       setFirebaseAuthObj(user);
     });
@@ -43,9 +42,9 @@ const FirebaseAuthContainer  = () => {
 
   if (isLoading) {
     return (
-      <div>
-        <p><Spinner size="sm" color="primary"/>{` `}Loading...</p>
-      </div>
+      <SpinnerWithMessage
+        message={`Loading...`}
+      />
     );
   }
 
@@ -53,7 +52,7 @@ const FirebaseAuthContainer  = () => {
     <div>
       {
         !firebaseAuthObj ?
-          <Fade>
+          <div>
             <StyledFirebaseAuth
               uiConfig={{
                 signInOptions: [
@@ -62,7 +61,7 @@ const FirebaseAuthContainer  = () => {
               }}
               firebaseAuth={firebase.auth()}
             />
-          </Fade>
+          </div>
           :
           <div>
             <div className="clearfix" style={{padding: '.5rem'}}>
