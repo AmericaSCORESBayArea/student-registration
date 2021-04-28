@@ -41,7 +41,7 @@ app.post('/register',cors(corsOptions), async(req, res) => {
   console.log('data', req.body);
   const mRes = await axios.post(muleEndPoint, data, reqHeaders)
     .then((response) => {
-      console.log('success repsonse', response.data);
+      console.log('success response', response.data);
       return response;
     }, (error) => {
       console.log(error);
