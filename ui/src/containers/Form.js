@@ -4,6 +4,7 @@ import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
+import SpinnerWithMessage from "../components/Spinner";
 
 const reqHeaders = {
   headers: {
@@ -54,22 +55,17 @@ const FormContainer  = () => {
     setSubmitErrorMessage(null);
     setSubmitErrorTitle(null);
     let submitObj = {};
-    console.log(formState);
     formState.map((item) => {
       submitObj[item.formValue] = item.value;
     });
-    console.log(submitObj);
     axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
-      console.log(response);
       setSubmitInProgress(false);
       setSubmitSuccessMessage(`Student Registration Successful!`);
     }, (error) => {
-      console.log(error);
       setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
     }).catch((e) => {
-      console.log(e);
       setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
@@ -78,9 +74,6 @@ const FormContainer  = () => {
 
   const onSubmitCallback = (e) => {
     e.preventDefault();
-    console.log("submit here");
-    console.log(formState);
-    console.log("existing submit-----");
     postFetch();
   };
 
@@ -172,9 +165,9 @@ const FormContainer  = () => {
           }
           {
             submitInProgress &&
-            <div>
-              <p><Spinner size="sm" color="primary"/>{` `}Registering...</p>
-            </div>
+            <SpinnerWithMessage
+              message={`Registering...`}
+            />
           }
           <Button
             onClick={onSubmitCallback}
