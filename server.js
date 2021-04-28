@@ -73,7 +73,6 @@ app.get('/info',cors(corsOptions), async(req, res) => {
     .map((item) => {
       allowedAPIConfigResponse[item] = appConfig[item];
     });
-  console.log(allowedAPIConfigResponse);
   res.status(200).json(allowedAPIConfigResponse);
 });
 

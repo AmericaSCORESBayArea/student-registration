@@ -55,22 +55,17 @@ const FormContainer  = () => {
     setSubmitErrorMessage(null);
     setSubmitErrorTitle(null);
     let submitObj = {};
-    console.log(formState);
     formState.map((item) => {
       submitObj[item.formValue] = item.value;
     });
-    console.log(submitObj);
     axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
-      console.log(response);
       setSubmitInProgress(false);
       setSubmitSuccessMessage(`Student Registration Successful!`);
     }, (error) => {
-      console.log(error);
       setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
     }).catch((e) => {
-      console.log(e);
       setSubmitInProgress(false);
       setSubmitErrorTitle("Student Registration Failed");
       setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
@@ -79,9 +74,6 @@ const FormContainer  = () => {
 
   const onSubmitCallback = (e) => {
     e.preventDefault();
-    console.log("submit here");
-    console.log(formState);
-    console.log("existing submit-----");
     postFetch();
   };
 

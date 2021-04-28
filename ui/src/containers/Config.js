@@ -13,21 +13,16 @@ const reqHeaders = {
 
 const ConfigContainer  = () => {
 
-  console.log(`ConfigContainer`);
-
   const [configRequested, setConfigRequested] = useState(false);
   const [configRequestCompleted, setConfigRequestedCompleted] = useState(false);
   const [appConfig, setAppConfig] = useState(null);
   const [requestError, setRequestError] = useState("");
 
   const runGetConfigRequest = () => {
-    console.log('TESTIGN');
-
     setConfigRequested(true);
     axios.get('/info',{
       header:reqHeaders
     }).then(function (response) {
-        console.log(response);
         const {data} = response;
         if (!!data) {
           setAppConfig(data);
