@@ -12,6 +12,25 @@ const reqHeaders = {
 };
 
 const generateInitialFormState = (formConfig) => {
+
+
+
+
+  axios.get('/info', JSON.stringify(submitObj), reqHeaders).then((response) => {
+    console.log(response);
+
+  }, (error) => {
+    console.log(error);
+
+  }).catch((e) => {
+    console.log(e);
+
+  });
+
+
+
+
+
   if (!formConfig) return [];
   return formConfig.filter((item) => !!item.formValue).map((item) => {
     const {formValue,dataType} = item;
