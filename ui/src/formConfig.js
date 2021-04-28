@@ -173,10 +173,10 @@ const formConfig = [
     helpText:"Select Gender",
     placeholder:"Select Gender",
     enumItems: [
-      "Female",
       "Male",
-      "Transgender",
-      "Other"
+      "Female",
+      "Non-binary",
+      "Prefer not to say"
     ]
   },
   {
