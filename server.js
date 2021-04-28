@@ -61,7 +61,11 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, err => {
+app.get('/info',cors(corsOptions), async(req, res) => {
+  res.status(200).json({data: process.env});
+});
+
+    app.listen(PORT, err => {
   console.log("PROCESS ENV : ")
   console.log(process.env);
   if (err) throw err;
