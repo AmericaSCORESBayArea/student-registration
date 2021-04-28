@@ -62,6 +62,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, err => {
+  console.log(process.env);
   if (err) throw err;
   console.log("%c Server running", "color: green");
 });
