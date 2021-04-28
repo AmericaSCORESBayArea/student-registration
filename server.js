@@ -1,14 +1,23 @@
-
 const express = require('express');
 const app = express();
 const path = require('path');
 const bp =  require('body-parser');
 const cors =  require('cors');
 const axios = require('axios');
+const dotenv = require('dotenv');
 
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: true }))
 
+const generateAppConfig = () => {
+  const dotEnvResult = dotenv.config();
+  console.log(dotEnvResult);
+  return !('error' in dotEnvResult) ? dotEnvResult.parsed : process.env;
+};
+
+const appConfig = generateAppConfig();
+
+console.log(appConfig);
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config({path: './env/development.env'});
@@ -62,12 +71,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 
 app.get('/info',cors(corsOptions), async(req, res) => {
-  res.status(200).json({data: process.env});
+  console.log(appConfig);
+  res.status(200).json({data: appConfig});
 });
 
-    app.listen(PORT, err => {
+app.listen(PORT, err => {
   console.log("PROCESS ENV : ")
-  console.log(process.env);
+  console.log(appConfig);
   if (err) throw err;
   console.log("%c Server running", "color: green");
 });
