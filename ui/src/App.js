@@ -1,7 +1,6 @@
-// Import FirebaseAuth and firebase.
 import React from 'react';
-import FirebaseAuthContainer from "./containers/FirebaseAuth";
 import { Fade, Container, Row, Col } from 'reactstrap';
+import ConfigContainer from "./containers/Config";
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
@@ -52,7 +51,7 @@ class App extends React.Component {
             </Row>
             <Row>
               <Col>
-                <FirebaseAuthContainer/>
+                <ConfigContainer/>
               </Col>
             </Row>
           </Container>
