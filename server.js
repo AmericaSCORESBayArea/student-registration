@@ -6,17 +6,16 @@ const cors =  require('cors');
 const axios = require('axios');
 const dotenv = require('dotenv');
 
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: true }))
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
+const configurationStartingKeyValueIndicatingAPIAllowed = `REACT_APP_`;
 const generateAppConfig = () => {
+
   const dotEnvResult = dotenv.config();
-  console.log(dotEnvResult);
   return !('error' in dotEnvResult) ? dotEnvResult.parsed : process.env;
 };
-
 const appConfig = generateAppConfig();
-
 console.log(appConfig);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -71,13 +70,19 @@ app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 
 app.get('/info',cors(corsOptions), async(req, res) => {
-  console.log(appConfig);
-  res.status(200).json({data: appConfig});
+
+
+  let allowedAPIConfigResponse = {};
+  Object.keys(appConfig)
+    .filter((item) => item.indexOf(configurationStartingKeyValueIndicatingAPIAllowed) === 0)
+    .map((item) => {
+      allowedAPIConfigResponse[item] = appConfig[item];
+    });
+  console.log(allowedAPIConfigResponse);
+  res.status(200).json(allowedAPIConfigResponse);
 });
 
 app.listen(PORT, err => {
-  console.log("PROCESS ENV : ")
-  console.log(appConfig);
   if (err) throw err;
   console.log("%c Server running", "color: green");
 });
