@@ -3,12 +3,27 @@ import {nanoid} from "nanoid";
 import {FormGroup,Input } from 'reactstrap';
 import FormLabel from "./Label";
 
+const defaultSelectText = "Select..."
+
 const EnumerableElement = ({config,onValueChange}) => {
 
   if (!config) return null;
   const {formValue, helpText, enumItems} = config;
   if (!formValue || !enumItems) return null;
   const elementId = nanoid();
+
+  const onSelectValueChange = (e) => {
+    const newValue = e.target.value;
+    if (newValue !== defaultSelectText) {
+      onValueChange(e);
+    } else {
+      onValueChange({
+        target:{
+          value:""
+        }
+      });
+    }
+  };
 
   return (
     <FormGroup
@@ -22,8 +37,13 @@ const EnumerableElement = ({config,onValueChange}) => {
         type="select"
         name={`${formValue}`}
         id={`${elementId}`}
-        onChange={onValueChange}
+        onChange={onSelectValueChange}
       >
+        {
+          <option
+            key={"default_select_text"}
+          >{`${defaultSelectText}`}</option>
+        }
         {
           enumItems.map((item,index) => {
             return (
