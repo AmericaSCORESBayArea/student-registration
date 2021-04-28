@@ -16,11 +16,6 @@ const generateAppConfig = () => {
   return !('error' in dotEnvResult) ? dotEnvResult.parsed : process.env;
 };
 const appConfig = generateAppConfig();
-console.log(appConfig);
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({path: './env/development.env'});
-}
 
 const id = process.env.CLIENT_ID;
 const secret = process.env.CLIENT_SECRET;
