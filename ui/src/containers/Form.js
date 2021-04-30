@@ -32,6 +32,8 @@ const FormContainer  = () => {
     ];
   };
 
+  const [formFadeState, setFormFadeState] = useState(true)
+  const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
   const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
@@ -77,6 +79,16 @@ const FormContainer  = () => {
     postFetch();
   };
 
+  const onFormResetClickCallback = () => {
+    setFormFadeState(false);
+    setTimeout(() => {
+      setResetButtonFadeState(false);
+      setTimeout(() => {
+        window.location = window.location;
+      }, 500);
+    }, 500);
+  };
+
   const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
 
   const submitButtonDisabledFields = requiredFields.filter((item) => {
@@ -100,83 +112,101 @@ const FormContainer  = () => {
   const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0;
 
   return (
-    <Fade in={true}>
-      <Form
-        onSubmit={onSubmitCallback}
-        style={{
-          maxWidth: "500px",
-          paddingLeft: "20px"
-        }}
-      >
-        <fieldset>
-          {
-            formConfig.map((item, index) => {
-              const {formValue} = item;
-              const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
-              return (
-                <FormElementController
-                  key={index}
-                  config={item}
-                  currentValue={currentValue}
-                  onValueChange={onValueChange}
-                />
-              );
-            })
-          }
-          {
-            !!submitErrorMessage &&
-            <Alert
-              color="danger"
-            >
-              {
-                !!submitErrorTitle &&
-                <h3>{`${submitErrorTitle}`}</h3>
-              }
-              {`${submitErrorMessage}`}
-            </Alert>
-          }
-          {
-            !!submitSuccessMessage &&
-            <Alert
-              color="success"
-            >
-              {`${submitSuccessMessage}`}
-            </Alert>
-          }
-          {
-            !!submitButtonDisabledFields.length > 0 &&
-            <Alert
-              color="warning"
-            >
-              <p>Required Fields Missing</p>
-              <ul>
+    <div>
+      <Fade in={formFadeState}>
+        <Form
+          onSubmit={onSubmitCallback}
+          style={{
+            maxWidth: "500px",
+            paddingLeft: "20px"
+          }}
+        >
+          <fieldset
+            disabled={!!submitSuccessMessage || blSubmitButtonDisabled}
+          >
+            {
+              formConfig.map((item, index) => {
+                const {formValue} = item;
+                const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
+                return (
+                  <FormElementController
+                    key={index}
+                    config={item}
+                    currentValue={currentValue}
+                    onValueChange={onValueChange}
+                  />
+                );
+              })
+            }
+            {
+              !!submitErrorMessage &&
+              <Alert
+                color="danger"
+              >
                 {
-                  submitButtonDisabledFields.map((item, index) => {
-                    const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
-                    return (
-                      <li
-                        key={index}
-                      >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
-                    )
-                  })
+                  !!submitErrorTitle &&
+                  <h3>{`${submitErrorTitle}`}</h3>
                 }
-              </ul>
-            </Alert>
-          }
-          {
-            submitInProgress &&
-            <SpinnerWithMessage
-              message={`Registering...`}
-            />
-          }
+                {`${submitErrorMessage}`}
+              </Alert>
+            }
+            {
+              !!submitSuccessMessage &&
+              <Alert
+                color="success"
+              >
+                {`${submitSuccessMessage}`}
+              </Alert>
+            }
+            {
+              !submitSuccessMessage && !!submitButtonDisabledFields.length > 0 &&
+              <Alert
+                color="warning"
+              >
+                <p>Required Fields Missing</p>
+                <ul>
+                  {
+                    submitButtonDisabledFields.map((item, index) => {
+                      const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
+                      return (
+                        <li
+                          key={index}
+                        >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
+                      )
+                    })
+                  }
+                </ul>
+              </Alert>
+            }
+            {
+              submitInProgress &&
+              <SpinnerWithMessage
+                message={`Registering...`}
+              />
+            }
+            {
+              !submitSuccessMessage &&
+              <Button
+                onClick={onSubmitCallback}
+                disabled={blSubmitButtonDisabled || submitInProgress || !!submitSuccessMessage}
+                color={blSubmitButtonDisabled ? "secondary" : "primary"}
+              >Submit</Button>
+            }
+          </fieldset>
+        </Form>
+      </Fade>
+      <Fade
+        in={resetButtonFadeState}
+      >
+        {
+          !!submitSuccessMessage &&
           <Button
-            onClick={onSubmitCallback}
-            disabled={blSubmitButtonDisabled || submitInProgress}
-            color={blSubmitButtonDisabled ? "secondary" : "primary"}
-          >Submit</Button>
-        </fieldset>
-      </Form>
-    </Fade>
+            onClick={onFormResetClickCallback}
+            color="primary"
+          >Click to Register Another Student</Button>
+        }
+      </Fade>
+    </div>
   );
 };
 
