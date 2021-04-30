@@ -102,7 +102,7 @@ const FormContainer  = () => {
       const formValue = matchingFormValue.formValue;
       const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
       const valueToCheck = matchingFormValue.value;
-      if (["text","enum"].indexOf(matchingFormDataType) > -1 ) {
+      if (["text","enum","date"].indexOf(matchingFormDataType) > -1 ) {
         if (valueToCheck.trim().length > 0) {
           return false;
         }
