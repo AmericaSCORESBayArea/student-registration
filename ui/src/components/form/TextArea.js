@@ -1,12 +1,12 @@
 import React from 'react';
 import {nanoid} from "nanoid";
-import {FormGroup, Input} from 'reactstrap';
+import {Alert, FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
 
 const TextFormElement = ({config,onValueChange,currentValue}) => {
 
   if (!config) return null;
-  const {dataType, formValue, formLabel, helpText, placeholder, min, max} = config;
+  const {dataType, formValue, formLabel, helpText, placeholder, min, max,isRequired} = config;
   if (!dataType || !formValue) return null;
   const elementId = nanoid();
 
@@ -26,6 +26,13 @@ const TextFormElement = ({config,onValueChange,currentValue}) => {
         value={!!currentValue ? currentValue : ""}
         onChange={onValueChange}
       />
+      {
+        ["textArea"].indexOf(dataType) > -1 && isRequired &&
+        currentValue.trim().length === 0 &&
+        <Alert
+          color={"warning"}
+        >{`Please enter a valid value for ${formLabel}`}</Alert>
+      }
     </FormGroup>
   );
 };
