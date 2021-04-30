@@ -38,7 +38,7 @@ const FormContainer  = () => {
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
-  const [submitSuccessMessage, setSubmitSuccessMessage] = useState();
+  const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
 
   if (!formConfig) return null;
 
@@ -122,7 +122,7 @@ const FormContainer  = () => {
           }}
         >
           <fieldset
-            disabled={!!submitSuccessMessage || blSubmitButtonDisabled}
+            disabled={!!submitSuccessMessage}
           >
             {
               formConfig.map((item, index) => {
