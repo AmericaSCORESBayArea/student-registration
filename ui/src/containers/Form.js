@@ -38,7 +38,7 @@ const FormContainer  = () => {
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
-  const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
+  const [submitSuccessMessage, setSubmitSuccessMessage] = useState();
 
   if (!formConfig) return null;
 
@@ -195,6 +195,9 @@ const FormContainer  = () => {
           </fieldset>
         </Form>
       </Fade>
+      {
+        !resetButtonFadeState && <Spinner/>
+      }
       <Fade
         in={resetButtonFadeState}
       >
