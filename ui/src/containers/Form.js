@@ -7,6 +7,7 @@ import FormElementController from "../components/form/_controller";
 import SpinnerWithMessage from "../components/Spinner";
 import ModalComponent from "../components/Modal";
 import Waiver from "../components/Waiver";
+import isValidEmail from "../modules/isValidEmail";
 
 const reqHeaders = {
   headers: {
@@ -96,15 +97,22 @@ const FormContainer  = () => {
   const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
 
   const submitButtonDisabledFields = requiredFields.filter((item) => {
-    const matchingFormValue = formState.filter((item_2) => item_2.formValue === item);
-    if (matchingFormValue.length === 1) {
-      const valueToCheck = matchingFormValue[0].value;
-      if (typeof valueToCheck === "string") {
+    const matchingFormValue = formState.filter((item_2) => item_2.formValue === item).pop();
+    if (!!matchingFormValue) {
+      const formValue = matchingFormValue.formValue;
+      const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
+      const valueToCheck = matchingFormValue.value;
+      if (["text","enum"].indexOf(matchingFormDataType) > -1 ) {
         if (valueToCheck.trim().length > 0) {
           return false;
         }
       }
-      if (typeof valueToCheck === "number") {
+      if (matchingFormDataType === "email") {
+        if (isValidEmail(valueToCheck)) {
+          return false;
+        }
+      }
+      if (matchingFormDataType === "number") {
         if (!isNaN(valueToCheck)) {
           return false;
         }
