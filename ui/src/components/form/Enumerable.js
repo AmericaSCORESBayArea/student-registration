@@ -121,7 +121,15 @@ const EnumerableElement = ({config,onValueChange}) => {
       return renderDropDown(formValue, elementId, onSelectValueChange, enumItems);
     }
     const valueFieldElementId = `${elementId}_filterField_value`;
-    const valueFieldItems = enumItems.filter((item_2) => !!item_2[valueField]).map((item_2) => item_2[valueField]).filter((item_2, index_2, arr_2) => arr_2.indexOf(item_2) === index_2);
+    const valueFieldItems = [
+      defaultSelectText,
+      ...enumItems.filter((item) => filterFields.filter((item_2) => {
+        const currentFilterParentState = !!enumState[item_2] ? enumState[item_2] : null;
+        return !currentFilterParentState || currentFilterParentState === filterAllSelectText || item[item_2] === currentFilterParentState;
+      }).length === filterFields.length)
+        .map((item) => item[valueField]).filter((item, index, arr) => arr.indexOf(item) === index)
+    ];
+
     return (
       <div>
         {
@@ -141,10 +149,7 @@ const EnumerableElement = ({config,onValueChange}) => {
         }
         <span>{`${valueField}`}</span>
         {
-          renderDropDown(valueField, valueFieldElementId, onSelectValueChange, [
-            defaultSelectText,
-            ...valueFieldItems
-          ])
+          renderDropDown(valueField, valueFieldElementId, onSelectValueChange, valueFieldItems)
         }
       </div>
     );
