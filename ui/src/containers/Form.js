@@ -5,6 +5,8 @@ import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
 import SpinnerWithMessage from "../components/Spinner";
+import ModalComponent from "../components/Modal";
+import Waiver from "../components/Waiver";
 
 const reqHeaders = {
   headers: {
@@ -35,6 +37,8 @@ const FormContainer  = () => {
   const [formFadeState, setFormFadeState] = useState(true)
   const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
   const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
+  const [displayWaiverModal, setDisplayWaiverModal] = useState(false);
+  const [waiverAccepted, setWaiverAccepted] = useState(false);
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
@@ -109,7 +113,14 @@ const FormContainer  = () => {
     return true;
   });
 
-  const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0;
+  const toggleWaiverModal = () => setDisplayWaiverModal(!displayWaiverModal);
+  const acceptWaiverCallback = () => {
+    setWaiverAccepted(true);
+    toggleWaiverModal();
+  };
+
+  const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0 || !waiverAccepted;
+  const blShowWarningMessages = (!submitSuccessMessage && !!submitButtonDisabledFields.length > 0) || !waiverAccepted;
 
   return (
     <div>
@@ -159,23 +170,47 @@ const FormContainer  = () => {
               </Alert>
             }
             {
-              !submitSuccessMessage && !!submitButtonDisabledFields.length > 0 &&
+              blShowWarningMessages &&
               <Alert
                 color="warning"
               >
-                <p>Required Fields Missing</p>
-                <ul>
-                  {
-                    submitButtonDisabledFields.map((item, index) => {
-                      const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
-                      return (
-                        <li
-                          key={index}
-                        >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
-                      )
-                    })
-                  }
-                </ul>
+                <div>
+                  <p>{`Required Fields Missing :`}</p>
+                  <ul>
+                    {
+                      submitButtonDisabledFields.map((item, index) => {
+                        const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
+                        return (
+                          <li
+                            key={index}
+                          >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
+                        )
+                      })
+                    }
+                  </ul>
+                </div>
+                {
+                  !waiverAccepted &&
+                  <div>
+                    <p>{`Please review and accept waiver : `}</p>
+                    <Button
+                      color={"primary"}
+                      onClick={toggleWaiverModal}
+                    >Show Waiver</Button>
+                  </div>
+                }
+              </Alert>
+            }
+            {
+              waiverAccepted &&
+              <Alert
+                color={"secondary"}
+              >
+                <p>Waiver Accepted</p>
+                <Button
+                  color={"secondary"}
+                  onClick={toggleWaiverModal}
+                >Show Waiver</Button>
               </Alert>
             }
             {
@@ -209,6 +244,18 @@ const FormContainer  = () => {
           >Click to Register Another Student</Button>
         }
       </Fade>
+      {
+        displayWaiverModal &&
+        <ModalComponent
+          submitModalCallback={acceptWaiverCallback}
+          cancelModalCallback={toggleWaiverModal}
+          modalTitle={"Waiver"}
+          submitButtonText={!waiverAccepted ? "Accept" : null}
+          cancelButtonText={!waiverAccepted ? "Decline" : "Close"}
+        >
+          <Waiver/>
+        </ModalComponent>
+      }
     </div>
   );
 };
