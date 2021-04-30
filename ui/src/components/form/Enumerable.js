@@ -1,6 +1,6 @@
 import React, {useState,useReducer} from 'react';
 import {nanoid} from "nanoid";
-import {FormGroup,Input } from 'reactstrap';
+import {Alert, FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
 
 const defaultSelectText = "Select...";
@@ -18,9 +18,19 @@ const enumStateReducer = (state, newState) => {
   return updatedState;
 };
 
-const EnumerableElement = ({config,onValueChange}) => {
+const EnumerableElement = ({config,onValueChange,currentValue}) => {
 
-  const {formValue, helpText, enumItems, enableSubFiltering, filterFields, valueField} = config;
+  const {
+    dataType,
+    formLabel,
+    isRequired,
+    formValue,
+    helpText,
+    enumItems,
+    enableSubFiltering,
+    filterFields,
+    valueField
+  } = config;
 
   const availableFilterFields = enableSubFiltering && !!filterFields && Array.isArray(filterFields) && filterFields.length > 0 ? filterFields.map((item, index) => {
     const valuesForCurrentField = enumItems.filter((item_2) => !!item_2[item]).map((item_2) => item_2[item]).filter((item_2, index_2, arr_2) => arr_2.indexOf(item_2) === index_2);
@@ -65,22 +75,24 @@ const EnumerableElement = ({config,onValueChange}) => {
 
   const renderDropDown = (formValue, elementId, onSelectValueChange, enumItemsToUse) => {
     return (
-      <Input
-        type="select"
-        name={`${formValue}`}
-        id={`${elementId}`}
-        onChange={onSelectValueChange}
-      >
-        {
-          enumItemsToUse.map((item, index) => {
-            return (
-              <option
-                key={index}
-              >{`${item}`}</option>
-            );
-          })
-        }
-      </Input>
+      <div>
+        <Input
+          type="select"
+          name={`${formValue}`}
+          id={`${elementId}`}
+          onChange={onSelectValueChange}
+        >
+          {
+            enumItemsToUse.map((item, index) => {
+              return (
+                <option
+                  key={index}
+                >{`${item}`}</option>
+              );
+            })
+          }
+        </Input>
+      </div>
     );
   };
 
@@ -182,6 +194,13 @@ const EnumerableElement = ({config,onValueChange}) => {
             defaultSelectText,
             ...enumItems
           ])
+      }
+      {
+        ["text", "enum"].indexOf(dataType) > -1 && isRequired &&
+        currentValue.trim().length === 0 &&
+        <Alert
+          color={"warning"}
+        >{`Please select a valid value for ${formLabel}`}</Alert>
       }
     </FormGroup>
   );
