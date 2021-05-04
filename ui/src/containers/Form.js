@@ -2,7 +2,6 @@ import React, {useState,useReducer} from 'react';
 import axios from 'axios';
 import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
-import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
 import SpinnerWithMessage from "../components/Spinner";
 import ModalComponent from "../components/Modal";
@@ -26,7 +25,7 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = () => {
+const FormContainer  = ({formConfig}) => {
 
   const formStateReducer = (state, newState) => {
     return [
