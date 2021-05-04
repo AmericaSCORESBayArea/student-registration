@@ -1,6 +1,6 @@
 import React from 'react';
 import { Fade, Container, Row, Col, Alert } from 'reactstrap';
-import ConfigContainer from "./containers/Config";
+import WorkflowContainer from "./containers/Workflow";
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
@@ -69,7 +69,7 @@ class App extends React.Component {
             </Row>
             <Row>
               <Col>
-                <ConfigContainer/>
+                <WorkflowContainer/>
               </Col>
             </Row>
           </Container>
