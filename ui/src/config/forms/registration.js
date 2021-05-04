@@ -1,4 +1,4 @@
-const formConfig = [
+const registrationFormConfig = [
   {
     dataType:"title",
     formLabel:"Student Details"
@@ -529,4 +529,4 @@ const formConfig = [
   }
 ];
 
-export default formConfig;
+export default registrationFormConfig;
