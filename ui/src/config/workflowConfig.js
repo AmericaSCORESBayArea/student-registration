@@ -11,7 +11,8 @@ const workflowConfig = [
     nextForm: "Parent or Coach",
     displayWaiver: false,
     displayWarnings: false,
-    localStore:true
+    localStore:true,
+    breadCrumbPreviewFormStateValue:"Language"
   },
   {
     formName: "Parent or Coach",
@@ -19,7 +20,8 @@ const workflowConfig = [
     nextForm: "New or Existing",
     displayWaiver: false,
     displayWarnings: false,
-    localStore:true
+    localStore:true,
+    breadCrumbPreviewFormStateValue:"ParentOrCoach"
   },
   {
     formName: "New or Existing",
@@ -27,7 +29,8 @@ const workflowConfig = [
     nextForm: "Registration",
     displayWaiver: false,
     displayWarnings: false,
-    localStore:true
+    localStore:true,
+    breadCrumbPreviewFormStateValue:"NewOrExisting"
   },
   {
     formName: "Registration",
