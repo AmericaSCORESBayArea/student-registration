@@ -95,7 +95,7 @@ const WorkflowContainer  = () => {
                     <BreadcrumbItem
                       key={index}
                       active={isActiveBreadcrumb}
-                      style={{cursor: "pointer"}}
+                      style={{cursor: isActiveBreadcrumb ? "default" : "pointer"}}
                     >{
                       !isActiveBreadcrumb ?
                         <a
