@@ -7,10 +7,11 @@ import FormContainer from "./Form";
 const generateInitialWorkflowState = (workflowConfig) => {
   if (!workflowConfig) return [];
   return workflowConfig.filter((item) => !!item.formName).map((item) => {
-    const {formName} = item;
+    const {formName,localStore} = item;
+    const initialFormState = !!localStore ? store.get(formName) : {};
     return {
       formName,
-      formState:{}
+      formState:initialFormState
     };
   });
 };
@@ -67,13 +68,15 @@ const WorkflowContainer  = () => {
             </Breadcrumb>
             {
               workflowConfig.filter((item, index) => index === currentFormIndex).map((item, index) => {
-                const {formConfig} = item;
+                const {formName} = item;
+                const currentFormState = !!workflowState ? workflowState.filter((item_2) => formName === item_2.formName).map((item_2) => item_2.formState).pop() : null;
                 return (
                   <Fade
                     in={true}
                   >
                     <FormContainer
                       workflowConfig={item}
+                      initialFormState={!!currentFormState && Object.keys(currentFormState).length > 0 ? currentFormState : null}
                       formSubmitCallback={formSubmitCallback}
                     />
                   </Fade>
