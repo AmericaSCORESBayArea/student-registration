@@ -2,7 +2,6 @@ import React, {useState,useReducer} from 'react';
 import axios from 'axios';
 import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
-import formConfig from '../formConfig';
 import FormElementController from "../components/form/_controller";
 import SpinnerWithMessage from "../components/Spinner";
 import ModalComponent from "../components/Modal";
@@ -26,7 +25,9 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = () => {
+const FormContainer  = ({workflowConfig, initialFormState,formSubmitCallback}) => {
+
+  const {displayWaiver, displayWarnings, formConfig, postEndpoint} = workflowConfig;
 
   const formStateReducer = (state, newState) => {
     return [
@@ -37,7 +38,7 @@ const FormContainer  = () => {
 
   const [formFadeState, setFormFadeState] = useState(true)
   const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
-  const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
+  const [formState, setFormState] = useReducer(formStateReducer, !!initialFormState ? initialFormState : generateInitialFormState(formConfig));
   const [displayWaiverModal, setDisplayWaiverModal] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
   const [submitInProgress, setSubmitInProgress] = useState(false);
@@ -57,31 +58,39 @@ const FormContainer  = () => {
   };
 
   const postFetch = () => {
-    setSubmitInProgress(true);
-    setSubmitSuccessMessage(null);
-    setSubmitErrorMessage(null);
-    setSubmitErrorTitle(null);
-    let submitObj = {};
-    formState.map((item) => {
-      submitObj[item.formValue] = item.value;
-    });
-    axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
-      setSubmitInProgress(false);
-      setSubmitSuccessMessage(`Student Registration Successful!`);
-    }, (error) => {
-      setSubmitInProgress(false);
-      setSubmitErrorTitle("Student Registration Failed");
-      setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-    }).catch((e) => {
-      setSubmitInProgress(false);
-      setSubmitErrorTitle("Student Registration Failed");
-      setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-    });
+    if (!!postEndpoint) {
+      setSubmitInProgress(true);
+      setSubmitSuccessMessage(null);
+      setSubmitErrorMessage(null);
+      setSubmitErrorTitle(null);
+      let submitObj = {};
+      formState.map((item) => {
+        submitObj[item.formValue] = item.value;
+      });
+      axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
+        console.log(response);
+        setSubmitInProgress(false);
+        setSubmitSuccessMessage(`Successful!`);
+      }, (error) => {
+        console.log(error);
+        setSubmitInProgress(false);
+        setSubmitErrorTitle("Error Encountered");
+        setSubmitErrorMessage("Oops! Something Went Wrong!");
+      }).catch((e) => {
+        console.log(e);
+        setSubmitInProgress(false);
+        setSubmitErrorTitle("Error Encountered");
+        setSubmitErrorMessage("Oops! Something Went Wrong!");
+      });
+    }
   };
 
   const onSubmitCallback = (e) => {
     e.preventDefault();
-    postFetch();
+    if (!!postEndpoint) {
+      postFetch();
+    }
+    formSubmitCallback(formConfig, formState);
   };
 
   const onFormResetClickCallback = () => {
@@ -102,7 +111,7 @@ const FormContainer  = () => {
       const formValue = matchingFormValue.formValue;
       const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
       const valueToCheck = matchingFormValue.value;
-      if (["text","enum","date","tel"].indexOf(matchingFormDataType) > -1 ) {
+      if (["text", "enum", "date", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
         if (valueToCheck.trim().length > 0) {
           return false;
         }
@@ -121,14 +130,49 @@ const FormContainer  = () => {
     return true;
   });
 
-  const toggleWaiverModal = () => setDisplayWaiverModal(!displayWaiverModal);
-  const acceptWaiverCallback = () => {
-    setWaiverAccepted(true);
-    toggleWaiverModal();
+  const toggleWaiverModal = () => {
+    if (displayWaiver) {
+      setDisplayWaiverModal(!displayWaiverModal);
+    }
   };
 
-  const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0 || !waiverAccepted;
-  const blShowWarningMessages = (!submitSuccessMessage && !!submitButtonDisabledFields.length > 0) || !waiverAccepted;
+  const acceptWaiverCallback = () => {
+    if (displayWaiver) {
+      setWaiverAccepted(true);
+      toggleWaiverModal();
+    }
+  };
+
+  const isSubmitButtonDisabled = () => {
+    if (submitButtonDisabledFields.length > 0) {
+      return true;
+    }
+    if (displayWaiver) {
+      if (!waiverAccepted) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const isWarningMessageContainerEnabled = () => {
+    if (displayWarnings) {
+      if (!submitSuccessMessage) {
+        if (submitButtonDisabledFields.length > 0) {
+          return true;
+        }
+      }
+      if (displayWaiver) {
+        if (!waiverAccepted) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  const blSubmitButtonDisabled = isSubmitButtonDisabled();
+  const blShowWarningMessages = isWarningMessageContainerEnabled();
 
   return (
     <div>
@@ -198,7 +242,7 @@ const FormContainer  = () => {
                   </ul>
                 </div>
                 {
-                  !waiverAccepted &&
+                  displayWaiver && !waiverAccepted &&
                   <div>
                     <p>{`Please review and accept waiver : `}</p>
                     <Button
@@ -210,7 +254,7 @@ const FormContainer  = () => {
               </Alert>
             }
             {
-              waiverAccepted &&
+              displayWaiver && waiverAccepted &&
               <Alert
                 color={"secondary"}
               >
@@ -253,7 +297,7 @@ const FormContainer  = () => {
         }
       </Fade>
       {
-        displayWaiverModal &&
+        displayWaiver && displayWaiverModal &&
         <ModalComponent
           submitModalCallback={acceptWaiverCallback}
           cancelModalCallback={toggleWaiverModal}

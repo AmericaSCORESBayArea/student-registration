@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fade, Container, Row, Col, Alert } from 'reactstrap';
-import ConfigContainer from "./containers/Config";
 import 'bootstrap/dist/css/bootstrap.css';
+import ConfigContainer from "./containers/Config";
 
 class App extends React.Component {
 

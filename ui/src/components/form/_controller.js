@@ -3,6 +3,7 @@ import StringFormElement from "./Text";
 import TextAreaFormElement from "./TextArea";
 import TitleFormElement from "./Title";
 import EnumerableElement from "./Enumerable";
+import ButtonOptionsElement from "./ButtonOptions";
 
 const FormElementController = ({config,onValueChange,currentValue}) => {
   if (!config) return null;
@@ -13,27 +14,34 @@ const FormElementController = ({config,onValueChange,currentValue}) => {
       config={config}
     />
     :
-    dataType === "text" || dataType === "number" || dataType === "email" || dataType === "tel"  || dataType === "date" ?
+    dataType === "text" || dataType === "number" || dataType === "email" || dataType === "tel" || dataType === "date" ?
       <StringFormElement
         config={config}
         onValueChange={onValueChange.bind(this, config)}
         currentValue={currentValue}
       />
-    :
-    dataType === "textArea"?
-      <TextAreaFormElement
-        config={config}
-        onValueChange={onValueChange.bind(this, config)}
-        currentValue={currentValue}
-      />
       :
-      dataType === "enum" ?
-        <EnumerableElement
+      dataType === "textArea" ?
+        <TextAreaFormElement
           config={config}
           onValueChange={onValueChange.bind(this, config)}
           currentValue={currentValue}
         />
-        : null
+        :
+        dataType === "enum" ?
+          <EnumerableElement
+            config={config}
+            onValueChange={onValueChange.bind(this, config)}
+            currentValue={currentValue}
+          />
+          :
+          dataType === "buttonOptions" ?
+            <ButtonOptionsElement
+              config={config}
+              onValueChange={onValueChange.bind(this, config)}
+              currentValue={currentValue}
+            />
+            : null
 };
 
 export default FormElementController;

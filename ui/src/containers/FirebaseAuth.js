@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import FormContainer from "./Form";
-import { Fade, Button, Spinner } from 'reactstrap';
+import { Fade, Button } from 'reactstrap';
 import SpinnerWithMessage from "../components/Spinner";
+import WorkflowContainer from "./Workflow";
 
 const FirebaseAuthContainer  = ({appConfig}) => {
 
@@ -72,7 +72,7 @@ const FirebaseAuthContainer  = ({appConfig}) => {
                 >Sign-out</Button>
               </Fade>
             </div>
-            <FormContainer/>
+            <WorkflowContainer/>
           </div>
       }
     </div>
