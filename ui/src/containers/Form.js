@@ -27,7 +27,7 @@ const generateInitialFormState = (formConfig) => {
 
 const FormContainer  = ({workflowConfig, formSubmitCallback}) => {
 
-  const {displayWaiver, displayWarnings, formConfig} = workflowConfig;
+  const {displayWaiver, displayWarnings, formConfig, postEndpoint} = workflowConfig;
 
   const formStateReducer = (state, newState) => {
     return [
@@ -58,34 +58,39 @@ const FormContainer  = ({workflowConfig, formSubmitCallback}) => {
   };
 
   const postFetch = () => {
-    setSubmitInProgress(true);
-    setSubmitSuccessMessage(null);
-    setSubmitErrorMessage(null);
-    setSubmitErrorTitle(null);
-    let submitObj = {};
-    formState.map((item) => {
-      submitObj[item.formValue] = item.value;
-    });
-    axios.post('/register', JSON.stringify(submitObj), reqHeaders).then((response) => {
-      setSubmitInProgress(false);
-      setSubmitSuccessMessage(`Student Registration Successful!`);
-    }, (error) => {
-      setSubmitInProgress(false);
-      setSubmitErrorTitle("Student Registration Failed");
-      setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-    }).catch((e) => {
-      setSubmitInProgress(false);
-      setSubmitErrorTitle("Student Registration Failed");
-      setSubmitErrorMessage("Oops! Something Went Wrong in Registering the Student");
-    });
+    if (!!postEndpoint) {
+      setSubmitInProgress(true);
+      setSubmitSuccessMessage(null);
+      setSubmitErrorMessage(null);
+      setSubmitErrorTitle(null);
+      let submitObj = {};
+      formState.map((item) => {
+        submitObj[item.formValue] = item.value;
+      });
+      axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
+        console.log(response);
+        setSubmitInProgress(false);
+        setSubmitSuccessMessage(`Successful!`);
+      }, (error) => {
+        console.log(error);
+        setSubmitInProgress(false);
+        setSubmitErrorTitle("Error Encountered");
+        setSubmitErrorMessage("Oops! Something Went Wrong!");
+      }).catch((e) => {
+        console.log(e);
+        setSubmitInProgress(false);
+        setSubmitErrorTitle("Error Encountered");
+        setSubmitErrorMessage("Oops! Something Went Wrong!");
+      });
+    }
   };
 
   const onSubmitCallback = (e) => {
     e.preventDefault();
-    // postFetch();
-
+    if (!!postEndpoint) {
+      postFetch();
+    }
     formSubmitCallback(formConfig, formState);
-
   };
 
   const onFormResetClickCallback = () => {
