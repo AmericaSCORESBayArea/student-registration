@@ -1,5 +1,5 @@
 import React, {useState, useReducer} from 'react';
-import { Fade,Breadcrumb,BreadcrumbItem } from 'reactstrap';
+import { Fade,Breadcrumb,BreadcrumbItem,Spinner } from 'reactstrap';
 import workflowConfig from "../config/workflowConfig";
 import FormContainer from "./Form";
 
@@ -25,6 +25,7 @@ const WorkflowContainer  = () => {
 
   const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
   const [currentFormIndex, setCurrentFormIndex] = useState(0);
+  const [formLoading, setFormLoading] = useState(false);
 
   if (!workflowConfig) return null;
 
@@ -36,41 +37,59 @@ const WorkflowContainer  = () => {
     });
   };
 
+  const formSubmitCallback = (config, formState) => {
+
+    console.log(config);
+    console.log(formState);
+
+    setFormLoading(true);
+    setTimeout(() => {
+      setFormLoading(false);
+    }, 500);
+
+    setCurrentFormIndex(currentFormIndex + 1);
+  };
+
   return (
     <div>
       {
-        workflowConfig.filter((item, index) => index === currentFormIndex).map((item, index) => {
-          const {formConfig} = item;
-
-          const formsBefore = workflowConfig.filter((item_2, index_2) => index_2 < index);
-          const formsAfter = workflowConfig.filter((item_2, index_2) => index_2 > index);
-
-          return (
-            <Fade
-              key={index}
-              in={true}
-            >
-              <div>
-                <Breadcrumb>
-                  {
-                    workflowConfig.filter((item_2, index_2) => index_2 <= index).map((item_2, index_2) => {
-                      const formNameBreadcrumb = item_2.formName;
-                      return (
-                        <BreadcrumbItem
-                          key={index_2}
-                          active={index === index_2}
-                        >{`${formNameBreadcrumb}`}</BreadcrumbItem>
-                      );
-                    })
-                  }
-                </Breadcrumb>
-                <FormContainer
-                  formConfig={formConfig}
-                />
-              </div>
-            </Fade>
-          )
-        })
+        !formLoading ?
+          <Fade
+            in={true}
+          >
+            <Breadcrumb>
+              {
+                workflowConfig.filter((item, index) => index <= currentFormIndex).map((item, index) => {
+                  const formNameBreadcrumb = item.formName;
+                  return (
+                    <BreadcrumbItem
+                      key={index}
+                      active={index === index}
+                    >{`${formNameBreadcrumb}`}</BreadcrumbItem>
+                  );
+                })
+              }
+            </Breadcrumb>
+            {
+              workflowConfig.filter((item, index) => index === currentFormIndex).map((item, index) => {
+                const {formConfig} = item;
+                return (
+                  <Fade
+                    in={true}
+                  >
+                    <FormContainer
+                      formConfig={formConfig}
+                      formSubmitCallback={formSubmitCallback}
+                    />
+                  </Fade>
+                );
+              })
+            }
+          </Fade>
+          :
+          <div>
+            <Spinner size="sm" color="primary" />{' '}
+          </div>
       }
     </div>
   );
