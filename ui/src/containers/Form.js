@@ -25,7 +25,9 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({formConfig}) => {
+const FormContainer  = ({formConfig, formSubmitCallback}) => {
+
+  const {displayWaiver} = formConfig;
 
   const formStateReducer = (state, newState) => {
     return [
@@ -80,7 +82,10 @@ const FormContainer  = ({formConfig}) => {
 
   const onSubmitCallback = (e) => {
     e.preventDefault();
-    postFetch();
+    // postFetch();
+
+    formSubmitCallback(formConfig, formState);
+
   };
 
   const onFormResetClickCallback = () => {
@@ -101,7 +106,7 @@ const FormContainer  = ({formConfig}) => {
       const formValue = matchingFormValue.formValue;
       const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
       const valueToCheck = matchingFormValue.value;
-      if (["text","enum","date","tel"].indexOf(matchingFormDataType) > -1 ) {
+      if (["text", "enum", "date", "tel"].indexOf(matchingFormDataType) > -1) {
         if (valueToCheck.trim().length > 0) {
           return false;
         }
@@ -120,14 +125,47 @@ const FormContainer  = ({formConfig}) => {
     return true;
   });
 
-  const toggleWaiverModal = () => setDisplayWaiverModal(!displayWaiverModal);
-  const acceptWaiverCallback = () => {
-    setWaiverAccepted(true);
-    toggleWaiverModal();
+  const toggleWaiverModal = () => {
+    if (displayWaiver) {
+      setDisplayWaiverModal(!displayWaiverModal);
+    }
   };
 
-  const blSubmitButtonDisabled = submitButtonDisabledFields.length > 0 || !waiverAccepted;
-  const blShowWarningMessages = (!submitSuccessMessage && !!submitButtonDisabledFields.length > 0) || !waiverAccepted;
+  const acceptWaiverCallback = () => {
+    if (displayWaiver) {
+      setWaiverAccepted(true);
+      toggleWaiverModal();
+    }
+  };
+
+  const isSubmitButtonDisabled = () => {
+    if (submitButtonDisabledFields.length > 0) {
+      return true;
+    }
+    if (displayWaiver) {
+      if (!waiverAccepted) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const isWarningMessageContainerEnabled = () => {
+    if (!submitSuccessMessage) {
+      if (submitButtonDisabledFields.length > 0) {
+        return true;
+      }
+    }
+    if (displayWaiver) {
+      if (!waiverAccepted) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const blSubmitButtonDisabled = isSubmitButtonDisabled();
+  const blShowWarningMessages = isWarningMessageContainerEnabled();
 
   return (
     <div>
@@ -197,7 +235,7 @@ const FormContainer  = ({formConfig}) => {
                   </ul>
                 </div>
                 {
-                  !waiverAccepted &&
+                  displayWaiver && !waiverAccepted &&
                   <div>
                     <p>{`Please review and accept waiver : `}</p>
                     <Button
@@ -209,7 +247,7 @@ const FormContainer  = ({formConfig}) => {
               </Alert>
             }
             {
-              waiverAccepted &&
+              displayWaiver && waiverAccepted &&
               <Alert
                 color={"secondary"}
               >
@@ -252,7 +290,7 @@ const FormContainer  = ({formConfig}) => {
         }
       </Fade>
       {
-        displayWaiverModal &&
+        displayWaiver && displayWaiverModal &&
         <ModalComponent
           submitModalCallback={acceptWaiverCallback}
           cancelModalCallback={toggleWaiverModal}
