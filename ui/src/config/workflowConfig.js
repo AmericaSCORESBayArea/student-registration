@@ -5,25 +5,26 @@ import registrationFormConfig from "./forms/registration";
 
 const workflowConfig = [
   {
-    formName:"Language Form",
+    formName:"Language",
     isStartingForm:true,
     formConfig:languageFormConfig,
-    nextForm:"Parent of Coach Form"
+    nextForm:"Parent or Coach"
   },
   {
-    formName:"Parent of Coach Form",
+    formName:"Parent or Coach",
     formConfig:parentOrCoachFormConfig,
-    nextForm:"New or Existing Form"
+    nextForm:"New or Existing"
   },
   {
-    formName:"New or Existing Form",
+    formName:"New or Existing",
     formConfig:newOrExistingFormConfig,
-    nextForm:"Registration Form"
+    nextForm:"Registration"
   },
   {
-    formName:"Registration Form",
+    formName:"Registration",
     formConfig:registrationFormConfig,
-    postEndpoint:"/register"
+    postEndpoint:"/register",
+    displayWaiver:true
   }
 ];
 
