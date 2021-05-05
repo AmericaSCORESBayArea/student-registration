@@ -8,7 +8,7 @@ const generateInitialWorkflowState = (workflowConfig) => {
   if (!workflowConfig) return [];
   return workflowConfig.filter((item) => !!item.formName).map((item) => {
     const {formName,localStore} = item;
-    const initialFormState = !!localStore ? store.get(formName) : {};
+    const initialFormState = !!localStore ? store.get(formName) : null;
     return {
       formName,
       formState:initialFormState
@@ -26,8 +26,25 @@ const WorkflowContainer  = () => {
   };
 
   const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
-  const [currentFormIndex, setCurrentFormIndex] = useState(0);
+
+  const setInitialFormIndex = () => {
+    if (!!workflowState) {
+      return workflowConfig.map((item, index) => {
+        return {
+          ...item,
+          formIndex: index
+        };
+      }).filter((item) => workflowState
+        .filter((item_2) => item.formName === item_2.formName)
+        .map((item_2) => item_2.formState).pop() === null)
+        .map((item) => item.formIndex).pop();
+    }
+    return 0;
+  };
+
+  const [currentFormIndex, setCurrentFormIndex] = useState(setInitialFormIndex());
   const [formLoading, setFormLoading] = useState(false);
+
   if (!workflowConfig) return null;
 
   const formSubmitCallback = (config, formState) => {
