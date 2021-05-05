@@ -1,4 +1,5 @@
 import React, {useState, useReducer} from 'react';
+import store from "store2";
 import { Fade,Breadcrumb,BreadcrumbItem,Spinner } from 'reactstrap';
 import workflowConfig from "../config/workflowConfig";
 import FormContainer from "./Form";
@@ -26,23 +27,22 @@ const WorkflowContainer  = () => {
   const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
   const [currentFormIndex, setCurrentFormIndex] = useState(0);
   const [formLoading, setFormLoading] = useState(false);
-
   if (!workflowConfig) return null;
 
-  const onValueChange = (config, newState) => {
-    const {formName} = config;
+  const formSubmitCallback = (config, formState) => {
+    const {formName, localStore} = workflowConfig[currentFormIndex];
+    setFormLoading(true);
+    setCurrentFormIndex(currentFormIndex + 1);
     setWorkflowState({
       formName,
-      formState: newState
+      formState
     });
-  };
-
-  const formSubmitCallback = (config, formState) => {
-    setFormLoading(true);
+    if (localStore) {
+      store.set(formName, formState, true);
+    }
     setTimeout(() => {
       setFormLoading(false);
     }, 500);
-    setCurrentFormIndex(currentFormIndex + 1);
   };
 
   return (
