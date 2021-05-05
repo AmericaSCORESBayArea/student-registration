@@ -25,7 +25,7 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({workflowConfig, formSubmitCallback}) => {
+const FormContainer  = ({workflowConfig, initialFormState,formSubmitCallback}) => {
 
   const {displayWaiver, displayWarnings, formConfig, postEndpoint} = workflowConfig;
 
@@ -38,7 +38,7 @@ const FormContainer  = ({workflowConfig, formSubmitCallback}) => {
 
   const [formFadeState, setFormFadeState] = useState(true)
   const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
-  const [formState, setFormState] = useReducer(formStateReducer, generateInitialFormState(formConfig));
+  const [formState, setFormState] = useReducer(formStateReducer, !!initialFormState ? initialFormState : generateInitialFormState(formConfig));
   const [displayWaiverModal, setDisplayWaiverModal] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
   const [submitInProgress, setSubmitInProgress] = useState(false);
