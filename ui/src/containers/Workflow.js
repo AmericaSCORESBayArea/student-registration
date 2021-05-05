@@ -1,5 +1,5 @@
 import React, {useState, useReducer} from 'react';
-import { Fade } from 'reactstrap';
+import { Fade,Breadcrumb,BreadcrumbItem } from 'reactstrap';
 import workflowConfig from "../config/workflowConfig";
 import FormContainer from "./Form";
 
@@ -32,23 +32,42 @@ const WorkflowContainer  = () => {
     const {formName} = config;
     setWorkflowState({
       formName,
-      formState:newState
+      formState: newState
     });
   };
 
   return (
     <div>
       {
-        workflowConfig.filter((item,index) => index === currentFormIndex).map((item,index) => {
+        workflowConfig.filter((item, index) => index === currentFormIndex).map((item, index) => {
           const {formConfig} = item;
+
+          const formsBefore = workflowConfig.filter((item_2, index_2) => index_2 < index);
+          const formsAfter = workflowConfig.filter((item_2, index_2) => index_2 > index);
+
           return (
             <Fade
               key={index}
               in={true}
             >
-              <FormContainer
-                formConfig={formConfig}
-              />
+              <div>
+                <Breadcrumb>
+                  {
+                    workflowConfig.filter((item_2, index_2) => index_2 <= index).map((item_2, index_2) => {
+                      const formNameBreadcrumb = item_2.formName;
+                      return (
+                        <BreadcrumbItem
+                          key={index_2}
+                          active={index === index_2}
+                        >{`${formNameBreadcrumb}`}</BreadcrumbItem>
+                      );
+                    })
+                  }
+                </Breadcrumb>
+                <FormContainer
+                  formConfig={formConfig}
+                />
+              </div>
             </Fade>
           )
         })
