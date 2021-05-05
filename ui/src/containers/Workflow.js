@@ -80,10 +80,14 @@ const WorkflowContainer  = () => {
                 );
               })
             }
+            {
+              currentFormIndex >= workflowConfig.length &&
+              <h3>Workflow Complete</h3>
+            }
           </Fade>
           :
           <div>
-            <Spinner size="sm" color="primary" />{' '}
+            <Spinner size="sm" color="primary"/>{' '}
           </div>
       }
     </div>
