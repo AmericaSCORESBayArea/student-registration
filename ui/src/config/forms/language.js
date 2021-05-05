@@ -5,6 +5,7 @@ const languageFormConfig = [
     formLabel:"Language",
     helpText:"Select Language",
     placeholder:"Select Language",
+    isRequired: true,
     enumItems: [
       "English",
       "Español"
