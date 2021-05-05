@@ -47,9 +47,15 @@ const WorkflowContainer  = () => {
 
   if (!workflowConfig) return null;
 
+  const toggleFormLoadState = () => {
+    setFormLoading(true);
+    setTimeout(() => {
+      setFormLoading(false);
+    }, 500);
+  };
+
   const formSubmitCallback = (config, formState) => {
     const {formName, localStore} = workflowConfig[currentFormIndex];
-    setFormLoading(true);
     setCurrentFormIndex(currentFormIndex + 1);
     setWorkflowState({
       formName,
@@ -58,9 +64,12 @@ const WorkflowContainer  = () => {
     if (localStore) {
       store.set(formName, formState, true);
     }
-    setTimeout(() => {
-      setFormLoading(false);
-    }, 500);
+    toggleFormLoadState();
+  };
+
+  const onBreadcrumbClick = (formIndex) => {
+    setCurrentFormIndex(formIndex);
+    toggleFormLoadState();
   };
 
   return (
@@ -74,11 +83,20 @@ const WorkflowContainer  = () => {
               {
                 workflowConfig.filter((item, index) => index <= currentFormIndex).map((item, index) => {
                   const formNameBreadcrumb = item.formName;
+                  const isActiveBreadcrumb = index === currentFormIndex;
                   return (
                     <BreadcrumbItem
                       key={index}
-                      active={index === index}
-                    >{`${formNameBreadcrumb}`}</BreadcrumbItem>
+                      active={isActiveBreadcrumb}
+                      style={{cursor: "pointer"}}
+                    >{
+                      !isActiveBreadcrumb ?
+                        <a
+                          onClick={onBreadcrumbClick.bind(this, index)}
+                        >{`${formNameBreadcrumb}`}</a>
+                        :
+                        <span>{`${formNameBreadcrumb}`}</span>
+                    }</BreadcrumbItem>
                   );
                 })
               }
