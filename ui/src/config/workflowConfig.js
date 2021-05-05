@@ -9,26 +9,33 @@ const workflowConfig = [
     isStartingForm: true,
     formConfig: languageFormConfig,
     nextForm: "Parent or Coach",
-    displayWarnings: false
+    displayWaiver: false,
+    displayWarnings: false,
+    localStore:true
   },
   {
     formName: "Parent or Coach",
     formConfig: parentOrCoachFormConfig,
     nextForm: "New or Existing",
-    displayWarnings: false
+    displayWaiver: false,
+    displayWarnings: false,
+    localStore:true
   },
   {
     formName: "New or Existing",
     formConfig: newOrExistingFormConfig,
     nextForm: "Registration",
-    displayWarnings: false
+    displayWaiver: false,
+    displayWarnings: false,
+    localStore:true
   },
   {
     formName: "Registration",
     formConfig: registrationFormConfig,
     postEndpoint: "/register",
     displayWaiver: true,
-    displayWarnings: true
+    displayWarnings: true,
+    localStore:false
   }
 ];
 
