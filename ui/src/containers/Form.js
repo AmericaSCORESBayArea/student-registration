@@ -25,9 +25,9 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({formConfig, formSubmitCallback}) => {
+const FormContainer  = ({workflowConfig, formSubmitCallback}) => {
 
-  const {displayWaiver} = formConfig;
+  const {displayWaiver, displayWarnings, formConfig} = workflowConfig;
 
   const formStateReducer = (state, newState) => {
     return [
@@ -106,7 +106,7 @@ const FormContainer  = ({formConfig, formSubmitCallback}) => {
       const formValue = matchingFormValue.formValue;
       const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
       const valueToCheck = matchingFormValue.value;
-      if (["text", "enum", "date", "tel"].indexOf(matchingFormDataType) > -1) {
+      if (["text", "enum", "date", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
         if (valueToCheck.trim().length > 0) {
           return false;
         }
@@ -151,14 +151,16 @@ const FormContainer  = ({formConfig, formSubmitCallback}) => {
   };
 
   const isWarningMessageContainerEnabled = () => {
-    if (!submitSuccessMessage) {
-      if (submitButtonDisabledFields.length > 0) {
-        return true;
+    if (displayWarnings) {
+      if (!submitSuccessMessage) {
+        if (submitButtonDisabledFields.length > 0) {
+          return true;
+        }
       }
-    }
-    if (displayWaiver) {
-      if (!waiverAccepted) {
-        return true;
+      if (displayWaiver) {
+        if (!waiverAccepted) {
+          return true;
+        }
       }
     }
     return false;

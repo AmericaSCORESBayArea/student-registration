@@ -78,7 +78,7 @@ const WorkflowContainer  = () => {
                     in={true}
                   >
                     <FormContainer
-                      formConfig={formConfig}
+                      workflowConfig={item}
                       formSubmitCallback={formSubmitCallback}
                     />
                   </Fade>
