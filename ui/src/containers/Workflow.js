@@ -38,15 +38,10 @@ const WorkflowContainer  = () => {
   };
 
   const formSubmitCallback = (config, formState) => {
-
-    console.log(config);
-    console.log(formState);
-
     setFormLoading(true);
     setTimeout(() => {
       setFormLoading(false);
     }, 500);
-
     setCurrentFormIndex(currentFormIndex + 1);
   };
 
