@@ -48,6 +48,7 @@ const FormElementController = ({appConfig,config,onValueChange,currentValue}) =>
                 appConfig={appConfig}
                 config={config}
                 onValueChange={onValueChange.bind(this, config)}
+                currentValue={currentValue}
               />
               : null
 };
