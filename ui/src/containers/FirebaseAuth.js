@@ -5,7 +5,7 @@ import { Fade, Button } from 'reactstrap';
 import SpinnerWithMessage from "../components/Spinner";
 import WorkflowContainer from "./Workflow";
 
-const FirebaseAuthContainer  = ({appConfig}) => {
+const FirebaseAuthContainer  = ({appConfig,config,onValueChange,currentValue}) => {
 
   const firebaseAuth = {
     apiKey: appConfig.REACT_APP_FIREBASE_API_KEY,
@@ -72,7 +72,6 @@ const FirebaseAuthContainer  = ({appConfig}) => {
                 >Sign-out</Button>
               </Fade>
             </div>
-            <WorkflowContainer/>
           </div>
       }
     </div>
