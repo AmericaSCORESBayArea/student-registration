@@ -4,8 +4,9 @@ import TextAreaFormElement from "./TextArea";
 import TitleFormElement from "./Title";
 import EnumerableElement from "./Enumerable";
 import ButtonOptionsElement from "./ButtonOptions";
+import FirebaseAuthContainer from "../../containers/FirebaseAuth";
 
-const FormElementController = ({config,onValueChange,currentValue}) => {
+const FormElementController = ({appConfig,config,onValueChange,currentValue}) => {
   if (!config) return null;
   const {dataType} = config;
   if (!dataType) return null;
@@ -41,7 +42,14 @@ const FormElementController = ({config,onValueChange,currentValue}) => {
               onValueChange={onValueChange.bind(this, config)}
               currentValue={currentValue}
             />
-            : null
+            :
+            dataType === "firebaseAuthentication" ?
+              <FirebaseAuthContainer
+                appConfig={appConfig}
+                config={config}
+                onValueChange={onValueChange.bind(this, config)}
+              />
+              : null
 };
 
 export default FormElementController;
