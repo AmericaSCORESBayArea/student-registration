@@ -11,15 +11,25 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue}) => {
     buttonItems
   } = config;
 
+  const buttonDisplayValues = buttonItems.map((item) => typeof item === "object" ? !!item.displayValue ? item.displayValue : null : item).filter((item) => !!item);
+  const buttonValues = buttonItems.map((item) => typeof item === "object" ? !!item.value ? item.value : null : item).filter((item) => !!item);
+
+  const indexOfCurrentValueMatch = buttonValues.indexOf(currentValue);
+  const currentDisplayValue = buttonValues.length > 0 && buttonValues.length === buttonDisplayValues.length && buttonValues.length > indexOfCurrentValueMatch ? buttonDisplayValues[indexOfCurrentValueMatch] : currentValue
+
   const elementId = nanoid();
   const onButtonItemClick = (buttonValue) => {
-    onValueChange(
-      {
-        target: {
-          value: buttonValue
+    const indexOfMatch = buttonDisplayValues.indexOf(buttonValue);
+    const valueToPass = buttonValues.length > 0 && buttonValues.length === buttonDisplayValues.length && buttonValues.length > indexOfMatch ? buttonValues[indexOfMatch] : buttonValue;
+    if (indexOfMatch > -1) {
+      onValueChange(
+        {
+          target: {
+            value: valueToPass
+          }
         }
-      }
-    );
+      );
+    }
   };
 
   return (
@@ -37,12 +47,12 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue}) => {
         id={`${elementId}`}
       >
         {
-          buttonItems.map((item, index) => {
+          buttonDisplayValues.map((item, index) => {
             return (
               <Button
                 key={index}
                 size={"lg"}
-                color={!!currentValue && item === currentValue ? "primary" : "secondary"}
+                color={!!currentDisplayValue && item === currentDisplayValue ? "primary" : "secondary"}
                 onClick={onButtonItemClick.bind(this, item)}
               >{`${item}`}</Button>
             );

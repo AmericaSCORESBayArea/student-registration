@@ -7,8 +7,14 @@ const languageFormConfig = [
     placeholder: "Select Language",
     isRequired: true,
     buttonItems: [
-      "English",
-      "Español"
+      {
+        displayValue:"English",
+        value:"en"
+      },
+      {
+        displayValue:"Español",
+        value:"es"
+      }
     ]
   }
 ];
