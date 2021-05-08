@@ -8,7 +8,7 @@ const generateInitialWorkflowState = (workflowConfig) => {
   if (!workflowConfig) return [];
   return workflowConfig.filter((item) => !!item.formName).map((item) => {
     const {formName,localStore} = item;
-    const initialFormState = !!localStore ? store.get(formName) : null;
+    const initialFormState = !!localStore ? store.get(formaName) : null;
     return {
       formName,
       formState:initialFormState
@@ -16,7 +16,7 @@ const generateInitialWorkflowState = (workflowConfig) => {
   });
 };
 
-const WorkflowContainer  = () => {
+const WorkflowContainer  = ({appConfig}) => {
 
   const workflowStateReducer = (state, newState) => {
     return [
@@ -117,6 +117,7 @@ const WorkflowContainer  = () => {
                     in={true}
                   >
                     <FormContainer
+                      appConfig={appConfig}
                       workflowConfig={item}
                       initialFormState={!!currentFormState && Object.keys(currentFormState).length > 0 ? currentFormState : null}
                       formSubmitCallback={formSubmitCallback}

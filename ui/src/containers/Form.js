@@ -25,7 +25,7 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({workflowConfig, initialFormState,formSubmitCallback}) => {
+const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback}) => {
 
   const {displayWaiver, displayWarnings, formConfig, postEndpoint} = workflowConfig;
 
@@ -194,6 +194,7 @@ const FormContainer  = ({workflowConfig, initialFormState,formSubmitCallback}) =
                 return (
                   <FormElementController
                     key={index}
+                    appConfig={appConfig}
                     config={item}
                     currentValue={currentValue}
                     onValueChange={onValueChange}
