@@ -20,22 +20,20 @@ const ConfigContainer  = () => {
 
   const runGetConfigRequest = () => {
     setConfigRequested(true);
-    axios.get('/info',{
-      header:reqHeaders
+    axios.get('/info', {
+      header: reqHeaders
     }).then(function (response) {
-        const {data} = response;
-        if (!!data) {
-          setAppConfig(data);
-        }
-      })
-      .catch(function (error) {
-        console.error(error);
-        setRequestError(error.message);
-      })
-      .then(function () {
-        setConfigRequestedCompleted(true);
-      });
-  }
+      const {data} = response;
+      if (!!data) {
+        setAppConfig(data);
+      }
+    }).catch(function (error) {
+      console.error(error);
+      setRequestError(error.message);
+    }).then(function () {
+      setConfigRequestedCompleted(true);
+    });
+  };
 
   if (!configRequested) {
     if (!configRequestCompleted) {
