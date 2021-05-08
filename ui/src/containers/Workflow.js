@@ -8,7 +8,7 @@ const generateInitialWorkflowState = (workflowConfig) => {
   if (!workflowConfig) return [];
   return workflowConfig.filter((item) => !!item.formName).map((item) => {
     const {formName,localStore} = item;
-    const initialFormState = !!localStore ? store.get(formaName) : null;
+    const initialFormState = !!localStore ? store.get(formName) : null;
     return {
       formName,
       formState:initialFormState
