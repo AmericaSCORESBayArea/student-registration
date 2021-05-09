@@ -13,6 +13,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:true,
+    breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"Language"
   },
   {
@@ -22,7 +23,8 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:false,
-    breadCrumbPreviewFormStateValue:"UserName"
+    submitOnValueChange:true,
+    breadCrumbLink:false
   },
   {
     formName: "Parent or Coach",
@@ -31,6 +33,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:true,
+    breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"ParentOrCoach"
   },
   {
@@ -40,6 +43,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:true,
+    breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"NewOrExisting"
   },
   {
@@ -48,7 +52,8 @@ const workflowConfig = [
     postEndpoint: "/register",
     displayWaiver: true,
     displayWarnings: true,
-    localStore:false
+    localStore:false,
+    breadCrumbLink:true
   }
 ];
 
