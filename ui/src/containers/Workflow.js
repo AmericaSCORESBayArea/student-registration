@@ -27,8 +27,10 @@ const WorkflowContainer  = ({appConfig}) => {
 
   const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
 
-  const setInitialFormIndex = () => {
-    let proposedInitialFormState = 0;
+  const determineNextFormIndex = (proposedInitialFormState) => {
+    if (isNaN(proposedInitialFormState)) {
+      proposedInitialFormState = 0;
+    }
     if (!!workflowState) {
       const matchingNextWorkflowIndex = workflowConfig.map((item, index) => {
         return {
@@ -43,9 +45,9 @@ const WorkflowContainer  = ({appConfig}) => {
     return proposedInitialFormState;
   };
 
-  const [currentFormIndex, setCurrentFormIndex] = useState(setInitialFormIndex());
+  const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex());
   const [formLoading, setFormLoading] = useState(false);
-
+  console.log(currentFormIndex);
   if (!workflowConfig) return null;
 
   const toggleFormLoadState = () => {
@@ -57,7 +59,7 @@ const WorkflowContainer  = ({appConfig}) => {
 
   const formSubmitCallback = (config, formState) => {
     const {formName, localStore} = workflowConfig[currentFormIndex];
-    setCurrentFormIndex(currentFormIndex + 1);
+    setCurrentFormIndex(determineNextFormIndex(currentFormIndex + 1));
     setWorkflowState({
       formName,
       formState
@@ -84,13 +86,19 @@ const WorkflowContainer  = ({appConfig}) => {
           >
             <Breadcrumb>
               {
-                workflowConfig.filter((item, index) => index <= currentFormIndex && !!item.breadCrumbLink).map((item, index) => {
+                workflowConfig.map((item, index) => {
+                  return {
+                    ...item,
+                    index
+                  };
+                }).filter((item, index) => {
+                  return index <= currentFormIndex && !!item.breadCrumbLink
+                }).map((item, index) => {
                   const {breadCrumbPreviewFormStateValue} = item;
                   const formNameBreadcrumb = item.formName;
-                  const isActiveBreadcrumb = index === currentFormIndex;
+                  const isActiveBreadcrumb = item.index === currentFormIndex;
                   const currentFormState = getFormStateByFormName(formNameBreadcrumb);
                   const breadcrumbCurrentStateValue = !!breadCrumbPreviewFormStateValue && !!currentFormState ? currentFormState.filter((item) => item.formValue === breadCrumbPreviewFormStateValue).map((item) => item.value).pop() : null;
-
                   return (
                     <BreadcrumbItem
                       key={index}
@@ -99,8 +107,8 @@ const WorkflowContainer  = ({appConfig}) => {
                     >{
                       !isActiveBreadcrumb ?
                         <a
-                          onClick={onBreadcrumbClick.bind(this, index)}
-                        >{`${formNameBreadcrumb}${!!breadcrumbCurrentStateValue ? ` (${breadcrumbCurrentStateValue})` : ``}`}</a>
+                          onClick={onBreadcrumbClick.bind(this, item.index)}
+                        >{`${!!breadcrumbCurrentStateValue ? `${breadcrumbCurrentStateValue}` : `${formNameBreadcrumb}`}`}</a>
                         :
                         <span>{`${formNameBreadcrumb}`}</span>
                     }</BreadcrumbItem>
