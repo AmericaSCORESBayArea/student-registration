@@ -47,7 +47,7 @@ const WorkflowContainer  = ({appConfig}) => {
 
   const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex());
   const [formLoading, setFormLoading] = useState(false);
-  console.log(currentFormIndex);
+
   if (!workflowConfig) return null;
 
   const toggleFormLoadState = () => {
