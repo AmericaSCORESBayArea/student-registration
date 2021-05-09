@@ -3,9 +3,8 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Fade, Button } from 'reactstrap';
 import SpinnerWithMessage from "../components/Spinner";
-import WorkflowContainer from "./Workflow";
 
-const FirebaseAuthContainer  = ({appConfig,config,onValueChange,currentValue}) => {
+const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
 
   const firebaseAuth = {
     apiKey: appConfig.REACT_APP_FIREBASE_API_KEY,
@@ -21,15 +20,33 @@ const FirebaseAuthContainer  = ({appConfig,config,onValueChange,currentValue}) =
   const [firebaseAuthCallbacksSet, setFirebaseAuthCallbacksSet] = useState(false);
   const [firebaseAuthObj, setFirebaseAuthObj] = useState(null);
 
+  const submitValueChange = (firebaseAuthObj) => onValueChange(firebaseAuthObj);
+
   if (!firebaseAuthCallbacksSet) {
     setFirebaseAuthCallbacksSet(true);
-    firebase.initializeApp(firebaseAuth);
-    firebase.auth().onAuthStateChanged((user) => {
-      setFirebaseAuthObj(user);
-    });
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    if (!currentValue) {
+      try {
+        try {
+          firebase.auth(); //only fails when firebase has not been initialized
+        } catch (e) {
+          console.log(`Firebase App Initializing...`);
+          firebase.initializeApp(firebaseAuth);
+          firebase.auth().onAuthStateChanged((user) => {
+            console.log("Firebase User Authorization Set!");
+            submitValueChange(user);
+            setFirebaseAuthObj(user);
+          });
+        }
+      } catch (e) {
+        console.error(`Unknown Firebase error!`);
+        console.error(e);
+      }
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    } else {
+      submitValueChange(currentValue);
+    }
   }
 
   const signOutClickCallback = () => {
@@ -57,7 +74,10 @@ const FirebaseAuthContainer  = ({appConfig,config,onValueChange,currentValue}) =
               uiConfig={{
                 signInOptions: [
                   firebase.auth.PhoneAuthProvider.PROVIDER_ID
-                ]
+                ],
+                callbacks: {
+                  signInSuccessWithAuthResult: () => false
+                }
               }}
               firebaseAuth={firebase.auth()}
             />
