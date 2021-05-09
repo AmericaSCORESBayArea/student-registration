@@ -47,7 +47,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
 
   useEffect(() => {
-    if (submitOnValueChange) {
+    if (!!submitOnValueChange) {
       const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
       if (fieldsWithNonNullValues.length > 0) {
         formSubmitCallback(formConfig, formState);
