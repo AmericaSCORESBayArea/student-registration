@@ -84,7 +84,7 @@ const WorkflowContainer  = ({appConfig}) => {
           >
             <Breadcrumb>
               {
-                workflowConfig.filter((item, index) => index <= currentFormIndex).map((item, index) => {
+                workflowConfig.filter((item, index) => index <= currentFormIndex && !!item.breadCrumbLink).map((item, index) => {
                   const {breadCrumbPreviewFormStateValue} = item;
                   const formNameBreadcrumb = item.formName;
                   const isActiveBreadcrumb = index === currentFormIndex;
