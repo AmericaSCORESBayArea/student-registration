@@ -1,8 +1,7 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { Alert, Spinner, Fade } from 'reactstrap';
-import FirebaseAuthContainer from "./FirebaseAuth";
-
+import { Alert, Fade } from 'reactstrap';
+import WorkflowContainer from "./Workflow";
 import SpinnerWithMessage from '../components/Spinner';
 
 const reqHeaders = {
@@ -59,7 +58,7 @@ const ConfigContainer  = () => {
       }
       {
         !!appConfig &&
-        <FirebaseAuthContainer
+        <WorkflowContainer
           appConfig={appConfig}
         />
       }
