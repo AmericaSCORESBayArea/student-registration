@@ -1,4 +1,4 @@
-import React, {useState,useReducer} from 'react';
+import React, {useState,useReducer,useEffect} from 'react';
 import axios from 'axios';
 import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
 
@@ -27,7 +27,7 @@ const generateInitialFormState = (formConfig) => {
 
 const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback}) => {
 
-  const {displayWaiver, displayWarnings, formConfig, postEndpoint} = workflowConfig;
+  const {displayWaiver, displayWarnings, formConfig, postEndpoint, submitOnValueChange} = workflowConfig;
 
   const formStateReducer = (state, newState) => {
     return [
@@ -46,14 +46,24 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
 
+  useEffect(() => {
+    if (submitOnValueChange) {
+      const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
+      if (fieldsWithNonNullValues.length > 0) {
+        formSubmitCallback(formConfig, formState);
+      }
+    }
+  }, [formState]);
+
   if (!formConfig) return null;
 
   const onValueChange = (config, e) => {
-    const newValue = e.target.value;
+    const newValue = e?.target?.value;
     const {formValue, dataType} = config;
+    const newValueToUse = !!newValue ? dataType === "number" ? parseInt(newValue) : newValue : e;
     setFormState({
       formValue,
-      value: dataType === "number" ? parseInt(newValue) : newValue
+      value: newValueToUse
     });
   };
 
@@ -86,7 +96,9 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
   };
 
   const onSubmitCallback = (e) => {
-    e.preventDefault();
+    if (!!e?.preventDefault) {
+      e.preventDefault();
+    }
     if (!!postEndpoint) {
       postFetch();
     }
@@ -123,6 +135,11 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
       }
       if (matchingFormDataType === "number") {
         if (!isNaN(valueToCheck)) {
+          return false;
+        }
+      }
+      if (matchingFormDataType === "firebaseAuthentication") {
+        if (!!valueToCheck && typeof valueToCheck === "object" && Object.keys(valueToCheck).length > 0) {
           return false;
         }
       }
@@ -273,7 +290,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
               />
             }
             {
-              !submitSuccessMessage &&
+              !submitOnValueChange && !submitSuccessMessage &&
               <Button
                 onClick={onSubmitCallback}
                 disabled={blSubmitButtonDisabled || submitInProgress || !!submitSuccessMessage}
