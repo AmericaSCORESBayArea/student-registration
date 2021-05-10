@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useReducer} from 'react';
 import store from "store2";
-import {Fade, Breadcrumb, BreadcrumbItem, Spinner, Form, FormGroup, ButtonGroup} from 'reactstrap';
+import {Fade, Breadcrumb, BreadcrumbItem, Spinner, FormGroup, ButtonGroup} from 'reactstrap';
 import FormContainer from "./Form";
 import workflowConfig from "../config/workflowConfig";
 import toolbarConfig from "../config/toolbarConfig";
@@ -85,66 +85,64 @@ const WorkflowContainer  = ({appConfig}) => {
           <Fade
             in={true}
           >
-            <Form
-              inline
+            <FormGroup
+              key={`breadcrumbs`}
             >
-              <FormGroup
-                key={`breadcrumbs`}
-              >
-                <Breadcrumb>
-                  {
-                    workflowConfig.map((item, index) => {
-                      return {
-                        ...item,
-                        index
-                      };
-                    }).filter((item, index) => {
-                      return index <= currentFormIndex && !!item.breadCrumbLink
-                    }).map((item, index) => {
-                      const {breadCrumbPreviewFormStateValue} = item;
-                      const formNameBreadcrumb = item.formName;
-                      const isActiveBreadcrumb = item.index === currentFormIndex;
-                      const currentFormState = getFormStateByFormName(formNameBreadcrumb);
-                      const breadcrumbCurrentStateValue = !!breadCrumbPreviewFormStateValue && !!currentFormState ? currentFormState.filter((item) => item.formValue === breadCrumbPreviewFormStateValue).map((item) => item.value).pop() : null;
-                      return (
-                        <BreadcrumbItem
-                          key={index}
-                          active={isActiveBreadcrumb}
-                          style={{cursor: isActiveBreadcrumb ? "default" : "pointer"}}
-                        >{
-                          !isActiveBreadcrumb ?
-                            <a
-                              onClick={onBreadcrumbClick.bind(this, item.index)}
-                            >{`${!!breadcrumbCurrentStateValue ? `${breadcrumbCurrentStateValue}` : `${formNameBreadcrumb}`}`}</a>
-                            :
-                            <span>{`${formNameBreadcrumb}`}</span>
-                        }</BreadcrumbItem>
-                      );
-                    })
-                  }
-                </Breadcrumb>
-              </FormGroup>
-              <FormGroup
-                key={`toolbar`}
-              >
-                <ButtonGroup>
-                  {
-                    toolbarConfig.map((item, index) => {
-                      const {Component, name} = item;
-                      return (
-                        <div
-                          key={index}
-                        >
-                          <Fragment>
-                            <Component/>
-                          </Fragment>
-                        </div>
-                      )
-                    })
-                  }
-                </ButtonGroup>
-              </FormGroup>
-            </Form>
+              <Breadcrumb>
+                {
+                  workflowConfig.map((item, index) => {
+                    return {
+                      ...item,
+                      index
+                    };
+                  }).filter((item, index) => {
+                    return index <= currentFormIndex && !!item.breadCrumbLink
+                  }).map((item, index) => {
+                    const {breadCrumbPreviewFormStateValue} = item;
+                    const formNameBreadcrumb = item.formName;
+                    const isActiveBreadcrumb = item.index === currentFormIndex;
+                    const currentFormState = getFormStateByFormName(formNameBreadcrumb);
+                    const breadcrumbCurrentStateValue = !!breadCrumbPreviewFormStateValue && !!currentFormState ? currentFormState.filter((item) => item.formValue === breadCrumbPreviewFormStateValue).map((item) => item.value).pop() : null;
+                    return (
+                      <BreadcrumbItem
+                        key={index}
+                        active={isActiveBreadcrumb}
+                        style={{cursor: isActiveBreadcrumb ? "default" : "pointer"}}
+                      >{
+                        !isActiveBreadcrumb ?
+                          <a
+                            onClick={onBreadcrumbClick.bind(this, item.index)}
+                          >{`${!!breadcrumbCurrentStateValue ? `${breadcrumbCurrentStateValue}` : `${formNameBreadcrumb}`}`}</a>
+                          :
+                          <span>{`${formNameBreadcrumb}`}</span>
+                      }</BreadcrumbItem>
+                    );
+                  })
+                }
+              </Breadcrumb>
+            </FormGroup>
+            <FormGroup
+              key={`toolbar`}
+            >
+              <ButtonGroup>
+                {
+                  toolbarConfig.map((item, index) => {
+                    const {Component, name} = item;
+                    return (
+                      <div
+                        key={index}
+                      >
+                        <Fragment>
+                          <Component
+                            workflowState={workflowState}
+                          />
+                        </Fragment>
+                      </div>
+                    )
+                  })
+                }
+              </ButtonGroup>
+            </FormGroup>
             {
               workflowConfig.filter((item, index) => index === currentFormIndex).map((item, index) => {
                 const {formName} = item;
