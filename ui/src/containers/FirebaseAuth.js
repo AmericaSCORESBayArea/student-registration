@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Fade, Button } from 'reactstrap';
 import SpinnerWithMessage from "../components/Spinner";
 
 const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
@@ -32,9 +31,13 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
           console.log(`Firebase App Initializing...`);
           firebase.initializeApp(firebaseAuth);
           firebase.auth().onAuthStateChanged((user) => {
-            console.log("Firebase User Authorization Set!");
-            submitValueChange(user);
-            setFirebaseAuthObj(user);
+            if (!!user) {
+              console.log("Firebase User Authorization Set!");
+              submitValueChange(user);
+              setFirebaseAuthObj(user);
+            } else {
+              console.log("Firebase User Not Set Yet");
+            }
           });
         }
       } catch (e) {
@@ -49,13 +52,6 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
     }
   }
 
-  const signOutClickCallback = () => {
-    setIsLoading(true);
-    firebase.auth().signOut();
-    setTimeout(() => {
-      window.location = "/";
-    }, 1000);
-  }
 
   if (isLoading) {
     return (
@@ -84,14 +80,7 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
           </div>
           :
           <div>
-            <div className="clearfix" style={{padding: '.5rem'}}>
-              <Fade>
-                <Button
-                  className="btn btn-secondary float-right"
-                  onClick={signOutClickCallback}
-                >Sign-out</Button>
-              </Fade>
-            </div>
+            <p>Logged in</p>
           </div>
       }
     </div>
