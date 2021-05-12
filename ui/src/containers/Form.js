@@ -25,7 +25,7 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback}) => {
+const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback,onLocalizationChange}) => {
 
   const {
     displayWaiver,
@@ -33,7 +33,8 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
     formConfig,
     postEndpoint,
     submitOnValueChange,
-    submitOnAnyValue
+    submitOnAnyValue,
+    isLocalizationForm
   } = workflowConfig;
 
   const formStateReducer = (state, newState) => {
@@ -76,6 +77,9 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
       value: newValueToUse
     });
     setIsValueChanged(true);
+    if (isLocalizationForm) {
+      onLocalizationChange(newValueToUse);
+    }
   };
 
   const postFetch = () => {
