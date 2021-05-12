@@ -15,7 +15,8 @@ const workflowConfig = [
     localStore:true,
     submitOnValueChange:true,
     breadCrumbLink:true,
-    breadCrumbPreviewFormStateValue:"Language"
+    breadCrumbPreviewFormStateValue:"Language",
+    isLocalizationForm:true
   },
   {
     formName: "Authentication",
