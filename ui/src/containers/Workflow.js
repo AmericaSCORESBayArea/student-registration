@@ -2,8 +2,6 @@ import React, {Fragment, useState, useReducer} from 'react';
 import store from "store2";
 import {Fade, Breadcrumb, BreadcrumbItem, Spinner, FormGroup, ButtonGroup} from 'reactstrap';
 import FormContainer from "./Form";
-import workflowConfig from "../config/workflowConfig";
-import toolbarConfig from "../config/toolbarConfig";
 
 const generateInitialWorkflowState = (workflowConfig) => {
   if (!workflowConfig) return [];
@@ -17,7 +15,7 @@ const generateInitialWorkflowState = (workflowConfig) => {
   });
 };
 
-const WorkflowContainer  = ({appConfig}) => {
+const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizationChange}) => {
 
   const workflowStateReducer = (state, newState) => {
     return [
@@ -156,6 +154,7 @@ const WorkflowContainer  = ({appConfig}) => {
                       workflowConfig={item}
                       initialFormState={!!currentFormState && Object.keys(currentFormState).length > 0 ? currentFormState : null}
                       formSubmitCallback={formSubmitCallback}
+                      onLocalizationChange={onLocalizationChange}
                     />
                   </Fade>
                 );
