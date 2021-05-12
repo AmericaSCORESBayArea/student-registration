@@ -27,7 +27,14 @@ const generateInitialFormState = (formConfig) => {
 
 const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback}) => {
 
-  const {displayWaiver, displayWarnings, formConfig, postEndpoint, submitOnValueChange} = workflowConfig;
+  const {
+    displayWaiver,
+    displayWarnings,
+    formConfig,
+    postEndpoint,
+    submitOnValueChange,
+    submitOnAnyValue
+  } = workflowConfig;
 
   const formStateReducer = (state, newState) => {
     return [
@@ -45,15 +52,18 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
   const [submitErrorTitle, setSubmitErrorTitle] = useState(null);
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
+  const [isValueChanged, setIsValueChanged] = useState(false);
+
+  const submitForm = () => formSubmitCallback(formConfig, formState);
 
   useEffect(() => {
-    if (!!submitOnValueChange) {
+    if (!!submitOnAnyValue || (isValueChanged && submitOnValueChange)) {
       const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
       if (fieldsWithNonNullValues.length > 0) {
-        formSubmitCallback(formConfig, formState);
+        submitForm();
       }
     }
-  }, [formState]);
+  }, [formState, isValueChanged]);
 
   if (!formConfig) return null;
 
@@ -65,6 +75,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
       formValue,
       value: newValueToUse
     });
+    setIsValueChanged(true);
   };
 
   const postFetch = () => {
@@ -102,7 +113,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
     if (!!postEndpoint) {
       postFetch();
     }
-    formSubmitCallback(formConfig, formState);
+    submitForm();
   };
 
   const onFormResetClickCallback = () => {
@@ -290,7 +301,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
               />
             }
             {
-              !submitOnValueChange && !submitSuccessMessage &&
+              !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
               <Button
                 onClick={onSubmitCallback}
                 disabled={blSubmitButtonDisabled || submitInProgress || !!submitSuccessMessage}

@@ -13,6 +13,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:true,
+    submitOnValueChange:true,
     breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"Language"
   },
@@ -23,7 +24,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:false,
-    submitOnValueChange:true,
+    submitOnAnyValue:true,
     breadCrumbLink:false
   },
   {
@@ -33,6 +34,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:true,
+    submitOnValueChange:true,
     breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"ParentOrCoach"
   },
@@ -43,6 +45,7 @@ const workflowConfig = [
     displayWaiver: false,
     displayWarnings: false,
     localStore:true,
+    submitOnValueChange:true,
     breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"NewOrExisting"
   },
