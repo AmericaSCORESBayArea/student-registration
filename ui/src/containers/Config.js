@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Alert, Fade } from 'reactstrap';
-import WorkflowContainer from "./Workflow";
 import SpinnerWithMessage from '../components/Spinner';
+import LocalizationContainer from "./Localization";
 
 const reqHeaders = {
   headers: {
@@ -43,7 +43,9 @@ const ConfigContainer  = () => {
   }
 
   return (
-    <Fade in={true}>
+    <Fade
+      in={true}
+    >
       {
         requestError.length > 0 &&
         <Alert
@@ -57,10 +59,14 @@ const ConfigContainer  = () => {
         />
       }
       {
-        !!appConfig &&
-        <WorkflowContainer
-          appConfig={appConfig}
-        />
+        !!appConfig ?
+          <LocalizationContainer
+            appConfig={appConfig}
+          />
+          :
+          <Alert
+            color={"danger"}
+          >No App Config Found</Alert>
       }
     </Fade>
   );
