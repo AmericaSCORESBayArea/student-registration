@@ -59,14 +59,10 @@ const ConfigContainer  = () => {
         />
       }
       {
-        !!appConfig ?
-          <LocalizationContainer
-            appConfig={appConfig}
-          />
-          :
-          <Alert
-            color={"danger"}
-          >No App Config Found</Alert>
+        !!appConfig &&
+        <LocalizationContainer
+          appConfig={appConfig}
+        />
       }
     </Fade>
   );
