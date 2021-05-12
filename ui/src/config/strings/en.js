@@ -142,3 +142,5 @@ const localization_en = {
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER:"Select Secondary Permission to Pick up Child",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT:"Select Secondary Permission to Pick up Child",
 };
+
+export default localization_en;
