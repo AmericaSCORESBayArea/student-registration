@@ -2,13 +2,19 @@ const parentOrCoachFormConfig = [
   {
     dataType: "buttonOptions",
     formValue: "ParentOrCoach",
-    formLabel: "Parent or Coach?",
-    helpText: "Select whether you are a parent or coach",
-    placeholder: "Select Parent or Coach",
+    formLabel: "!PARENT_OR_COACH_FORM_LABEL_TEXT",
+    helpText: "!PARENT_OR_COACH_FORM_HELP_TEXT",
+    placeholder: "!PARENT_OR_COACH_FORM_PLACEHOLDER_TEXT",
     isRequired: true,
     buttonItems: [
-      "Parent",
-      "Coach"
+      {
+        displayValue:"!PARENT_OR_COACH_FORM_BUTTON_TEXT_PARENT",
+        value:"Parent"
+      },
+      {
+        displayValue:"!PARENT_OR_COACH_FORM_BUTTON_TEXT_COACH",
+        value:"Coach"
+      }
     ]
   }
 ];
