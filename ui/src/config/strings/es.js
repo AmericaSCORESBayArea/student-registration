@@ -7,7 +7,7 @@ const localization_es = {
 
   //New or Existing form
   NEW_OR_EXISTING_FORM_LABEL_TEXT: "¿Nuevo o existente?",
-  NEW_OR_EXISTING_FORM_HELP_TEXT: "Seleccione si está comenzando un nuevo registro de estudiante o actualizando un registro de estudiante existente",
+  NEW_OR_EXISTING_FORM_HELP_TEXT: "Seleccione si estás comenzando un nuevo registro de estudiante o actualizando un registro de estudiante existente",
   NEW_OR_EXISTING_FORM_PLACEHOLDER_TEXT: "Seleccione Nuevo o Existente",
   NEW_OR_EXISTING_FORM_BUTTON_TEXT_NEW: "Nuevo",
   NEW_OR_EXISTING_FORM_BUTTON_TEXT_EXISTING: "Existente",
