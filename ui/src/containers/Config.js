@@ -1,13 +1,22 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 import { Alert, Fade } from 'reactstrap';
-import WorkflowContainer from "./Workflow";
+import axios from 'axios';
+import store from "store2";
 import SpinnerWithMessage from '../components/Spinner';
+import LocalizationContainer from "./Localization";
 
 const reqHeaders = {
   headers: {
     'Content-Type': 'application/json'
   }
+};
+
+const defaultLocalizationValue = `en`;
+const localizationStoreKeyName = `localization`;
+
+const getLocalStoreLocalizationValue = () => {
+  const localStoreValue = store.get(localizationStoreKeyName);
+  return !!localStoreValue ? localStoreValue : defaultLocalizationValue;
 };
 
 const ConfigContainer  = () => {
@@ -16,6 +25,7 @@ const ConfigContainer  = () => {
   const [configRequestCompleted, setConfigRequestedCompleted] = useState(false);
   const [appConfig, setAppConfig] = useState(null);
   const [requestError, setRequestError] = useState("");
+  const [localizationState,setLocalizationState] = useState(getLocalStoreLocalizationValue);
 
   const runGetConfigRequest = () => {
     setConfigRequested(true);
@@ -42,8 +52,19 @@ const ConfigContainer  = () => {
     }
   }
 
+  const onLocalizationChange = (newValue) => {
+    console.log(`LOCALIZATION CHANGE`);
+    console.log(newValue);
+    if (!!newValue) {
+      store.set(localizationStoreKeyName, newValue);
+      setLocalizationState(localizationState);
+    }
+  };
+
   return (
-    <Fade in={true}>
+    <Fade
+      in={true}
+    >
       {
         requestError.length > 0 &&
         <Alert
@@ -58,8 +79,10 @@ const ConfigContainer  = () => {
       }
       {
         !!appConfig &&
-        <WorkflowContainer
+        <LocalizationContainer
           appConfig={appConfig}
+          localizationValue={localizationState}
+          onLocalizationChange={onLocalizationChange}
         />
       }
     </Fade>

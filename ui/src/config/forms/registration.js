@@ -1,38 +1,38 @@
 const registrationFormConfig = [
   {
     dataType:"title",
-    formLabel:"Student Details"
+    formLabel:"!REGISTRATION_FORM_TITLE"
   },
   {
     dataType:"text",
     formValue:"FirstName",
-    formLabel:"First Name",
-    helpText:"Enter First Name",
-    placeholder:"Enter First Name",
+    formLabel:"!REGISTRATION_FORM_FirstName_LABEL",
+    helpText:"!REGISTRATION_FORM_FirstName_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_FirstName_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType:"text",
     formValue:"MiddleName",
-    formLabel:"Middle Name",
-    helpText:"Enter Middle Name",
+    formLabel:"!REGISTRATION_FORM_MiddleName_LABEL",
+    helpText:"!REGISTRATION_FORM_MiddleName_HELPTEXT",
     isRequired:false,
-    placeholder:"Enter Middle Name"
+    placeholder:"!REGISTRATION_FORM_MiddleName_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"LastName",
-    formLabel:"Last Name",
-    helpText:"Enter Last Name",
-    placeholder:"Enter Last Name",
+    formLabel:"!REGISTRATION_FORM_LastName_LABEL",
+    helpText:"!REGISTRATION_FORM_LastName_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_LastName_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType: "enum",
     formValue: "SchoolName",
-    formLabel: "School Name",
-    helpText: "Select School Name",
-    placeholder: "Enter School Name",
+    formLabel:"!REGISTRATION_FORM_SchoolName_LABEL",
+    helpText:"!REGISTRATION_FORM_SchoolName_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_SchoolName_PLACEHOLDER",
     isRequired: true,
     enableSubFiltering: true,
     filterFields: [
@@ -177,24 +177,24 @@ const registrationFormConfig = [
   {
     dataType:"email",
     formValue:"PersonalEmail",
-    formLabel:"Personal Email",
-    helpText:"Enter Personal Email",
-    placeholder:"Enter Personal Email",
+    formLabel:"!REGISTRATION_FORM_PersonalEmail_LABEL",
+    helpText:"!REGISTRATION_FORM_PersonalEmail_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_PersonalEmail_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType:"tel",
     formValue:"HomePhone",
-    formLabel:"Home Phone",
-    helpText:"Enter Home Phone",
-    placeholder:"Enter Home Phone"
+    formLabel:"!REGISTRATION_FORM_HomePhone_LABEL",
+    helpText:"!REGISTRATION_FORM_HomePhone_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_HomePhone_PLACEHOLDER",
   },
   {
     dataType:"date",
     formValue:"Birthdate",
-    formLabel:"Birthdate",
-    helpText:"Enter Birthdate",
-    placeholder:"Enter Birthdate",
+    formLabel:"!REGISTRATION_FORM_Birthdate_LABEL",
+    helpText:"!REGISTRATION_FORM_Birthdate_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Birthdate_PLACEHOLDER",
     min:"1900-01-01",
     max:"2021-04-01",
     isRequired: true
@@ -202,9 +202,9 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Gender",
-    formLabel:"Gender",
-    helpText:"Select Gender",
-    placeholder:"Select Gender",
+    formLabel:"!REGISTRATION_FORM_Gender_LABEL",
+    helpText:"!REGISTRATION_FORM_Gender_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Gender_PLACEHOLDER",
     enumItems: [
       "Male",
       "Female",
@@ -215,9 +215,9 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Grade",
-    formLabel:"Grade",
-    helpText:"Select Grade",
-    placeholder:"Select Grade",
+    formLabel:"!REGISTRATION_FORM_Grade_LABEL",
+    helpText:"!REGISTRATION_FORM_Grade_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Grade_PLACEHOLDER",
     enumItems: [
       "Kindergarten",
       "1st",
@@ -233,9 +233,9 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Ethnicity",
-    formLabel:"Ethnicity",
-    helpText:"Select Ethnicity",
-    placeholder:"Select Ethnicity",
+    formLabel:"!REGISTRATION_FORM_Ethnicity_LABEL",
+    helpText:"!REGISTRATION_FORM_Ethnicity_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Ethnicity_PLACEHOLDER",
     enumItems: [
       "Hispanic/Latino",
       "Native American",
@@ -252,9 +252,9 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"ReducedPriceLunch",
-    formLabel:"Reduced Price Lunch",
-    helpText:"Select Reduced Price Lunch",
-    placeholder:"Select Reduced Price Lunch",
+    formLabel:"!REGISTRATION_FORM_ReducedPriceLunch_LABEL",
+    helpText:"!REGISTRATION_FORM_ReducedPriceLunch_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ReducedPriceLunch_PLACEHOLDER",
     enumItems: [
       "Yes",
       "No"
@@ -263,16 +263,16 @@ const registrationFormConfig = [
   {
     dataType:"textArea",
     formValue:"Allergies",
-    formLabel:"Allergies/Medical Conditions",
-    helpText:"Enter Allergies/Medical Conditions",
-    placeholder:"Enter Allergies/Medical Conditions"
+    formLabel:"!REGISTRATION_FORM_Allergies_LABEL",
+    helpText:"!REGISTRATION_FORM_Allergies_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Allergies_PLACEHOLDER",
   },
   {
     dataType:"enum",
     formValue:"PermissiontoCommuteAlone",
-    formLabel:"Select Permission to Commute Alone",
-    helpText:"Select Permission to Commute Alone",
-    placeholder:"Select Permission to Commute Alone",
+    formLabel:"!REGISTRATION_FORM_PermissiontoCommuteAlone_LABEL",
+    helpText:"!REGISTRATION_FORM_PermissiontoCommuteAlone_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_PermissiontoCommuteAlone_PLACEHOLDER",
     enumItems: [
       "Yes",
       "No"
@@ -285,97 +285,97 @@ const registrationFormConfig = [
   {
     dataType:"text",
     formValue:"ParentFName",
-    formLabel:"Parent First Name",
-    helpText:"Enter Parent First Name",
-    placeholder:"Enter Parent First Name",
+    formLabel:"!REGISTRATION_FORM_ParentFName_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentFName_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentFName_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType:"text",
     formValue:"ParentLName",
-    formLabel:"Parent Last Name",
-    helpText:"Enter Parent Last Name",
-    placeholder:"Enter Parent Last Name",
+    formLabel:"!REGISTRATION_FORM_ParentLName_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentLName_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentLName_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType:"email",
     formValue:"ParentEmail",
-    formLabel:"Parent Email",
-    helpText:"Enter Parent Email",
-    placeholder:"Enter Parent Email",
+    formLabel:"!REGISTRATION_FORM_ParentEmail_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentEmail_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentEmail_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType:"text",
     formValue:"Relationship",
-    formLabel:"Relationship to Child",
-    helpText:"Enter Relationship to Child",
-    placeholder:"Enter Relationship to Child"
+    formLabel:"!REGISTRATION_FORM_Relationship_LABEL",
+    helpText:"!REGISTRATION_FORM_Relationship_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Relationship_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"ParentPhone1",
-    formLabel:"Parent Phone 1",
-    helpText:"Enter Parent Phone 1",
-    placeholder:"Enter Parent Phone 1",
+    formLabel:"!REGISTRATION_FORM_ParentPhone1_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentPhone1_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentPhone1_PLACEHOLDER",
     isRequired: true
   },
   {
     dataType:"tel",
     formValue:"ParentPhone2",
-    formLabel:"Parent Phone 2",
-    helpText:"Enter Parent Phone 2",
-    placeholder:"Enter Parent Phone 2"
+    formLabel:"!REGISTRATION_FORM_ParentPhone2_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentPhone2_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentPhone2_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"ParentPhone3",
-    formLabel:"Parent Phone 3",
-    helpText:"Enter Parent Phone 3",
-    placeholder:"Enter Parent Phone 3"
+    formLabel:"!REGISTRATION_FORM_ParentPhone3_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentPhone3_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentPhone3_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"MailingStreet",
-    formLabel:"Mailing Street",
-    helpText:"Enter Mailing Street",
-    placeholder:"Enter Mailing Street"
+    formLabel:"!REGISTRATION_FORM_MailingStreet_LABEL",
+    helpText:"!REGISTRATION_FORM_MailingStreet_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_MailingStreet_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"MailingCity",
-    formLabel:"Mailing City",
-    helpText:"Enter Mailing City",
-    placeholder:"Enter Mailing City"
+    formLabel:"!REGISTRATION_FORM_MailingCity_LABEL",
+    helpText:"!REGISTRATION_FORM_MailingCity_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_MailingCity_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"MailingState",
-    formLabel:"Mailing State/Province",
-    helpText:"Enter Mailing State/Province",
-    placeholder:"Enter Mailing State/Province"
+    formLabel:"!REGISTRATION_FORM_MailingState_LABEL",
+    helpText:"!REGISTRATION_FORM_MailingState_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_MailingState_PLACEHOLDER",
   },
   {
     dataType:"number",
     formValue:"MailingZip",
-    formLabel:"Mailing Zip",
-    helpText:"Enter Mailing Zip",
-    placeholder:"Enter Mailing Zip"
+    formLabel:"!REGISTRATION_FORM_MailingZip_LABEL",
+    helpText:"!REGISTRATION_FORM_MailingZip_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_MailingZip_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"MailingCountry",
-    formLabel:"Mailing Country",
-    helpText:"Enter Mailing Country",
-    placeholder:"Enter Mailing Country"
+    formLabel:"!REGISTRATION_FORM_MailingCountry_LABEL",
+    helpText:"!REGISTRATION_FORM_MailingCountry_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_MailingCountry_PLACEHOLDER",
   },
   {
     dataType:"enum",
     formValue:"ParentEnglishFluency",
-    formLabel:"Parent English Fluency",
-    helpText:"Select Parent English Fluency",
-    placeholder:"Select Parent English Fluency",
+    formLabel:"!REGISTRATION_FORM_ParentEnglishFluency_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentEnglishFluency_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentEnglishFluency_PLACEHOLDER",
     enumItems: [
       "Yes",
       "Some",
@@ -385,9 +385,9 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"ParentHomeLang",
-    formLabel:"Parent Home Language",
-    helpText:"Select Parent Home Language",
-    placeholder:"Select Parent Home Language",
+    formLabel:"!REGISTRATION_FORM_ParentHomeLang_LABEL",
+    helpText:"!REGISTRATION_FORM_ParentHomeLang_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_ParentHomeLang_PLACEHOLDER",
     enumItems: [
       "English",
       "Spanish",
@@ -419,9 +419,9 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Volunteer",
-    formLabel:"Volunteer for this program? (Parent)",
-    helpText:"Select Volunteer for this Program",
-    placeholder:"Select Parent Home Language",
+    formLabel:"!REGISTRATION_FORM_Volunteer_LABEL",
+    helpText:"!REGISTRATION_FORM_Volunteer_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Volunteer_PLACEHOLDER",
     enumItems: [
       "Yes",
       "No"
@@ -434,44 +434,44 @@ const registrationFormConfig = [
   {
     dataType:"text",
     formValue:"Emergency_Contact_Name",
-    formLabel:"Emergency Contact Name",
-    helpText:"Enter Emergency Contact Name",
-    placeholder:"Enter Emergency Contact Name"
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Name_LABEL",
+    helpText:"!REGISTRATION_FORM_Emergency_Contact_Name_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Name_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"Emergency_Contact_Relationship",
-    formLabel:"Emergency Relationship to Child",
-    helpText:"Enter Emergency Relationship to Child",
-    placeholder:"Enter Emergency Relationship to Child"
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Relationship_LABEL",
+    helpText:"!REGISTRATION_FORM_Emergency_Contact_Relationship_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Relationship_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"Emergency_Contact_Phone1",
-    formLabel:"Emergency Phone 1",
-    helpText:"Enter Emergency Phone 1",
-    placeholder:"Enter Emergency Phone 1"
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Phone1_LABEL",
+    helpText:"!REGISTRATION_FORM_Emergency_Contact_Phone1_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Phone1_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"Second_Emergency_Contact_Phone2",
-    formLabel:"Emergency Phone 2",
-    helpText:"Enter Emergency Phone 2",
-    placeholder:"Enter Emergency Phone 2"
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Phone2_LABEL",
+    helpText:"!REGISTRATION_FORM_Emergency_Contact_Phone2_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Phone2_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"Emergency_Contact_Phone3",
-    formLabel:"Emergency Phone 3",
-    helpText:"Enter Emergency Phone 3",
-    placeholder:"Enter Emergency Phone 3"
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Phone3_LABEL",
+    helpText:"!REGISTRATION_FORM_Emergency_Contact_Phone3_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Phone3_PLACEHOLDER",
   },
   {
     dataType:"enum",
     formValue:"Emergency_Contact_Permission_to_Pickup_child",
-    formLabel:"Permission to Pick up Child?",
-    helpText:"Select Permission to Pick up Child",
-    placeholder:"Select Permission to Pick up Child",
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_LABEL",
+    helpText:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
     enumItems: [
       "Yes",
       "No"
@@ -484,44 +484,44 @@ const registrationFormConfig = [
   {
     dataType:"text",
     formValue:"Second_Emergency_Contact_Name",
-    formLabel:"Secondary Emergency Contact Name",
-    helpText:"Enter Secondary Emergency Contact Name",
-    placeholder:"Enter Secondary Emergency Contact Name"
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Name_LABEL",
+    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Name_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Name_PLACEHOLDER",
   },
   {
     dataType:"text",
     formValue:"Second_Emergency_Contact_Relationship",
-    formLabel:"Secondary Emergency Relationship to Child",
-    helpText:"Enter Secondary Emergency Relationship to Child",
-    placeholder:"Enter Secondary Emergency Relationship to Child"
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Relationship_LABEL",
+    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Relationship_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Relationship_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"Second_Emergency_Contact_Phone1",
-    formLabel:"Secondary Emergency Phone 1",
-    helpText:"Enter Secondary Emergency Phone 1",
-    placeholder:"Enter Secondary Emergency Phone 1"
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone1_LABEL",
+    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone1_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone1_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"Second_Emergency_Contact_Phone2",
-    formLabel:"Secondary Emergency Phone 2",
-    helpText:"Enter Secondary Emergency Phone 2",
-    placeholder:"Enter Secondary Emergency Phone 2"
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_LABEL",
+    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_PLACEHOLDER",
   },
   {
     dataType:"tel",
     formValue:"Second_Emergency_Contact_Phone3",
-    formLabel:"Secondary Emergency Phone 3",
-    helpText:"Enter Secondary Emergency Phone 3",
-    placeholder:"Enter Secondary Emergency Phone 3"
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone3_LABEL",
+    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone3_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone3_PLACEHOLDER",
   },
   {
     dataType: "enum",
     formValue: "Second_Emergency_Contact_Permission_to_Pickup_child",
-    formLabel: "Secondary Permission to Pick up Child?",
-    helpText: "Select Secondary Permission to Pick up Child",
-    placeholder: "Select Secondary Permission to Pick up Child",
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL",
+    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
+    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
     enumItems: [
       "Yes",
       "No"
