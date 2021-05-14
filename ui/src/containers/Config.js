@@ -56,8 +56,12 @@ const ConfigContainer  = () => {
     console.log(`LOCALIZATION CHANGE`);
     console.log(newValue);
     if (!!newValue) {
-      store.set(localizationStoreKeyName, newValue);
-      setLocalizationState(localizationState);
+      const currentValue = store.get(localizationStoreKeyName);
+      if (currentValue !== newValue) {
+        store.set(localizationStoreKeyName, newValue);
+        setLocalizationState(localizationState);
+        window.location = window.location;
+      }
     }
   };
 
