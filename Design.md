@@ -13,18 +13,19 @@
 ○ Online Youth Privacy Policy (CCPA, PIPPA)
 ○ Secure Forms and Registration Updates
 ```
+### These objectives are being maintained on the project at https://github.com/AmericaSCORESBayArea/student-registration/projects/1 and https://github.com/AmericaSCORESBayArea/student-registration/milestones
 
-### An Online Solution Must be Secure and Structured
+#### An Online Solution Must be Secure and Structured
 
 - [ ] ~~Forms can be hosted on ASBA squarespace (not critical)~~
-- [ ] Form also works on Mobile (or as an embed in the mobile apps)
+- [x] Form also works on Mobile (or as an embed in the mobile apps)
 - [x] A Spanish-Language version is required for all forms (MVP is including both languages in one form)
-- [ ] Registration is either New Student or Update Returning and can be determined by parent login (mulesoft proxy API + OAuth)
-- [ ] Waiver can be hosted on Squarespace (or stored in Salesforce)
-- [ ] Waiver is different, by region, requiring logic (e.g. School selected in Reg form)
+- [x] Registration is either New Student or Update Returning and can be determined by parent login (mulesoft proxy API + OAuth)
+- [x] Waiver can be hosted on Squarespace (or stored in Salesforce)
+- [x] Waiver is different, by region, requiring logic (e.g. School selected in Reg form)
 - [ ] After waiver is Accepted online it must be emailed to parent (CCPA) ideally from Salesforce
 
-### Registration and Waiver Flow via Web URL
+#### Registration and Waiver Flow via Web URL
 
 1. Receive a call and/or email from Scores with a link to the Registration form on ScoresU
 2. Arriving at the Reg link, Parent enters name and mobile number.
@@ -35,7 +36,7 @@
 ![Regform_Parent_UX.png](Regform_Parent_UX.png)
 
 
-## MVP
+### MVP
 -[The San Francisco District Waiver can be used in the MVP release of the Web Registration](waiver_SF.md)
 
 ## Data Requirements
