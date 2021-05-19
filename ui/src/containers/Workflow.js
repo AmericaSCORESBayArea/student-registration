@@ -140,6 +140,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizati
                       >
                         <Fragment>
                           <Component
+                            toolbarConfig={item}
                             workflowState={workflowState}
                           />
                         </Fragment>
