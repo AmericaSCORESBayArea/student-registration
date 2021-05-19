@@ -5,6 +5,10 @@ const localization_zh = {
   LANGUAGE_FORM_HELP_TEXT:"选择语言",
   LANGUAGE_FORM_PLACEHOLDER_TEXT:"选择语言",
 
+  //Firebase Authentication
+  FIREBASE_AUTHENTICATION_SIGN_OUT_BUTTON_TEXT:"登出",
+  FIREBASE_AUTHENTICATION_SIGNING_OUT_BUTTON_TEXT:"进行中签出",
+
   //New or Existing form
   NEW_OR_EXISTING_FORM_LABEL_TEXT:"新的还是现有的？",
   NEW_OR_EXISTING_FORM_HELP_TEXT:"选择您是要开始一个新的学生注册还是更新一个现有的学生注册",
