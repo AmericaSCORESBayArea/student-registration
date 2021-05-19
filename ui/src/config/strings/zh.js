@@ -21,6 +21,10 @@ const localization_zh = {
 
   //Registration form
   REGISTRATION_FORM_TITLE:"学生资料",
+  REGISTRATION_FORM_SELECT:"选择...",
+  REGISTRATION_FORM_YES:"是的",
+  REGISTRATION_FORM_NO:"不",
+  REGISTRATION_FORM_SOME:"一些",
   REGISTRATION_FORM_FirstName_LABEL:"名",
   REGISTRATION_FORM_FirstName_PLACEHOLDER:"输入名字",
   REGISTRATION_FORM_FirstName_HELPTEXT:"输入名字",

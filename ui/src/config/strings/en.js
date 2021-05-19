@@ -21,6 +21,10 @@ const localization_en = {
 
   //Registration form
   REGISTRATION_FORM_TITLE:"Student Details",
+  REGISTRATION_FORM_SELECT:"Select...",
+  REGISTRATION_FORM_YES:"Yes",
+  REGISTRATION_FORM_NO:"No",
+  REGISTRATION_FORM_SOME:"Some",
   REGISTRATION_FORM_FirstName_LABEL:"First Name",
   REGISTRATION_FORM_FirstName_PLACEHOLDER:"Enter First Name",
   REGISTRATION_FORM_FirstName_HELPTEXT:"Enter First Name",

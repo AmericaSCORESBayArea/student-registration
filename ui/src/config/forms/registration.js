@@ -33,6 +33,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_SchoolName_LABEL",
     helpText:"!REGISTRATION_FORM_SchoolName_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_SchoolName_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     isRequired: true,
     enableSubFiltering: true,
     filterFields: [
@@ -218,6 +219,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Grade_LABEL",
     helpText:"!REGISTRATION_FORM_Grade_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Grade_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "!REGISTRATION_FORM_Grade_Kindergarten",
       "!REGISTRATION_FORM_Grade_First",
@@ -236,6 +238,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Ethnicity_LABEL",
     helpText:"!REGISTRATION_FORM_Ethnicity_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Ethnicity_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "!REGISTRATION_FORM_Ethnicity_Hispanic_Latino",
       "!REGISTRATION_FORM_Ethnicity_Native_American",
@@ -255,6 +258,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_ReducedPriceLunch_LABEL",
     helpText:"!REGISTRATION_FORM_ReducedPriceLunch_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_ReducedPriceLunch_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "Yes",
       "No"
@@ -273,6 +277,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_PermissiontoCommuteAlone_LABEL",
     helpText:"!REGISTRATION_FORM_PermissiontoCommuteAlone_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_PermissiontoCommuteAlone_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "Yes",
       "No"
@@ -376,10 +381,11 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_ParentEnglishFluency_LABEL",
     helpText:"!REGISTRATION_FORM_ParentEnglishFluency_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_ParentEnglishFluency_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
-      "Yes",
-      "Some",
-      "No"
+      "!REGISTRATION_FORM_YES",
+      "!REGISTRATION_FORM_SOME",
+      "!REGISTRATION_FORM_NO"
     ]
   },
   {
@@ -388,6 +394,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_ParentHomeLang_LABEL",
     helpText:"!REGISTRATION_FORM_ParentHomeLang_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_ParentHomeLang_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "English",
       "Spanish",
@@ -422,9 +429,10 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Volunteer_LABEL",
     helpText:"!REGISTRATION_FORM_Volunteer_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Volunteer_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
-      "Yes",
-      "No"
+      "!REGISTRATION_FORM_YES",
+      "!REGISTRATION_FORM_NO"
     ]
   },
   {
@@ -472,9 +480,10 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_LABEL",
     helpText:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
-      "Yes",
-      "No"
+      "!REGISTRATION_FORM_YES",
+      "!REGISTRATION_FORM_NO"
     ]
   },
   {
@@ -522,9 +531,10 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL",
     helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
-      "Yes",
-      "No"
+      "!REGISTRATION_FORM_YES",
+      "!REGISTRATION_FORM_NO"
     ]
   }
 ];
