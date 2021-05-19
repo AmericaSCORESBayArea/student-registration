@@ -203,6 +203,16 @@ const localization_en = {
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL:"Secondary Permission to Pick up Child?",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER:"Select Secondary Permission to Pick up Child",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT:"Select Secondary Permission to Pick up Child",
+
+  //REGISTRATION WAIVER
+  REGISTRATION_FORM_WAIVER_MODAL_TITLE_TEXT:"Waiver / Waivers",
+  REGISTRATION_FORM_WAIVER_REVIEW_AND_ACCEPT_REQUEST_MESSAGE:"Please review and accept waiver : ",
+  REGISTRATION_FORM_WAIVER_ACCEPT_BUTTON_TEXT:"Accept",
+  REGISTRATION_FORM_WAIVER_DECLINE_BUTTON_TEXT:"Decline",
+  REGISTRATION_FORM_WAIVER_CLOSE_BUTTON_TEXT:"Close",
+  REGISTRATION_FORM_WAIVER_SHOW_WAIVER_BUTTON_TEXT:"Show Waiver",
+  REGISTRATION_FORM_WAIVER_WAIVER_ACCEPTED_MESSAGE:"Waiver Accepted",
+
 };
 
 export default localization_en;
