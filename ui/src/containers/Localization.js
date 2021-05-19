@@ -14,16 +14,21 @@ const localizationStrings = {
 };
 
 const LocalizationContainer  = ({appConfig,localizationValue,onLocalizationChange}) => {
+  const blStartsWithKeyCharacter = (stringInput) => stringInput.indexOf(`!`) === 0;
+  const getLocalizedValue = (keyString) => {
+    const lookupValue = keyString.slice(1);
+    if (!!localizationStrings[localizationValue][lookupValue]) {
+      return localizationStrings[localizationValue][lookupValue];
+    }
+    return keyString;
+  }
   const handleArrayLocalizedConfig = (arrayConfigInput) => arrayConfigInput.map((item) => generateLocalizedConfig(item));
   const handleStringLocalizedConfig = (stringConfigInput) => {
     try {
       if (!!localizationValue) {
         if (!!localizationStrings[localizationValue]) {
-          if (stringConfigInput.indexOf(`!`) === 0) {
-            const lookupValue = stringConfigInput.slice(1);
-            if (!!localizationStrings[localizationValue][lookupValue]) {
-              return localizationStrings[localizationValue][lookupValue];
-            }
+          if (blStartsWithKeyCharacter(stringConfigInput)) {
+            return getLocalizedValue(stringConfigInput);
           }
         }
       }
@@ -36,7 +41,10 @@ const LocalizationContainer  = ({appConfig,localizationValue,onLocalizationChang
   const handleObjectLocalizedConfig = (objectConfigInput) => {
     try {
       let returnObj = {};
-      Object.keys(objectConfigInput).map((item) => returnObj[item] = generateLocalizedConfig(objectConfigInput[item]));
+      Object.keys(objectConfigInput).map((item) => {
+        const fieldNameToUse = blStartsWithKeyCharacter(item) ? getLocalizedValue(item) : item;
+        return returnObj[fieldNameToUse] = generateLocalizedConfig(objectConfigInput[item])
+      });
       return returnObj;
     } catch (e) {
       console.error(`error in handleObjectLocalizedConfig`);
