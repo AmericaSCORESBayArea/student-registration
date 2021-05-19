@@ -71,7 +71,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
   const onValueChange = (config, e) => {
     const newValue = e?.target?.value;
     const {formValue, dataType} = config;
-    const newValueToUse = !!newValue ? dataType === "number" ? parseInt(newValue) : newValue : e;
+    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
     setFormState({
       formValue,
       value: newValueToUse
