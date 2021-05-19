@@ -35,6 +35,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
     submitOnValueChange,
     submitOnAnyValue,
     isLocalizationForm,
+    waiverModalTitleText,
     waiverReviewAndAcceptRequestMessage,
     waiverAcceptButtonText,
     waiverDeclineButtonText,
@@ -340,7 +341,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
         <ModalComponent
           submitModalCallback={acceptWaiverCallback}
           cancelModalCallback={toggleWaiverModal}
-          modalTitle={"Waiver"}
+          modalTitle={`${!!waiverModalTitleText ? waiverModalTitleText : `Waiver`}`}
           submitButtonText={!waiverAccepted ? `${!!waiverAcceptButtonText ? waiverAcceptButtonText : `Accept`}` : null}
           cancelButtonText={!waiverAccepted ? `${!!waiverDeclineButtonText ? waiverDeclineButtonText : `Decline`}` : `${!!waiverCloseButtonText ? waiverCloseButtonText : `Close`}`}
         >

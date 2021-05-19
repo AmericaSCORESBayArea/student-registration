@@ -45,6 +45,7 @@ const workflowConfig = [
     formConfig: registrationFormConfig,
     postEndpoint: "/register",
     displayWaiver: true,
+    waiverModalTitleText:"!REGISTRATION_FORM_WAIVER_MODAL_TITLE_TEXT",
     waiverReviewAndAcceptRequestMessage:"!REGISTRATION_FORM_WAIVER_REVIEW_AND_ACCEPT_REQUEST_MESSAGE",
     waiverAcceptButtonText:"!REGISTRATION_FORM_WAIVER_ACCEPT_BUTTON_TEXT",
     waiverDeclineButtonText:"!REGISTRATION_FORM_WAIVER_DECLINE_BUTTON_TEXT",

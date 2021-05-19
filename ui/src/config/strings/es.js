@@ -205,6 +205,7 @@ const localization_es = {
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT: "Seleccione Permiso secundario para recoger al niño",
 
   //REGISTRATION WAIVER
+  REGISTRATION_FORM_WAIVER_MODAL_TITLE_TEXT:"Renuncia / Renuncias",
   REGISTRATION_FORM_WAIVER_REVIEW_AND_ACCEPT_REQUEST_MESSAGE:"Revise y acepte la exención : ",
   REGISTRATION_FORM_WAIVER_ACCEPT_BUTTON_TEXT:"Aceptar",
   REGISTRATION_FORM_WAIVER_DECLINE_BUTTON_TEXT:"Disminución",
