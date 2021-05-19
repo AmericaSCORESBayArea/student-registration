@@ -1,4 +1,4 @@
-const localization_zh_cn = {
+const localization_zh = {
 
   //Language form
   LANGUAGE_FORM_LABEL_TEXT:"语",
@@ -143,4 +143,4 @@ const localization_zh_cn = {
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT:"选择辅助权限来接孩子",
 };
 
-export default localization_zh_cn;
+export default localization_zh;
