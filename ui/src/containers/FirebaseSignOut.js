@@ -4,6 +4,8 @@ import { Fade, Button } from 'reactstrap';
 
 const FirebaseSignOutContainer  = ({toolbarConfig,workflowState}) => {
 
+  const {signOutButtonText,signingOutButtonText} = toolbarConfig;
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -36,7 +38,7 @@ const FirebaseSignOutContainer  = ({toolbarConfig,workflowState}) => {
             className="btn btn-secondary float-right"
             onClick={signOutClickCallback}
             disabled={isLoading || isSigningOut}
-          >{isSigningOut ? `Signing Out` : `Sign Out`}</Button>
+          >{isSigningOut ? `${!!signingOutButtonText ? signingOutButtonText : "Signing Out"}` : `${!!signOutButtonText ? signOutButtonText : "Sign Out"}`}</Button>
         </Fade>
       </div>
     </div>

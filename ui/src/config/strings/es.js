@@ -5,6 +5,10 @@ const localization_es = {
   LANGUAGE_FORM_HELP_TEXT: "Seleccione el idioma",
   LANGUAGE_FORM_PLACEHOLDER_TEXT: "Seleccione el idioma",
 
+  //Firebase Authentication
+  FIREBASE_AUTHENTICATION_SIGN_OUT_BUTTON_TEXT:"Desconectar",
+  FIREBASE_AUTHENTICATION_SIGNING_OUT_BUTTON_TEXT:"Cerrando sesión",
+
   //New or Existing form
   NEW_OR_EXISTING_FORM_LABEL_TEXT: "¿Nuevo o existente?",
   NEW_OR_EXISTING_FORM_HELP_TEXT: "Seleccione si estás comenzando un nuevo registro de estudiante o actualizando un registro de estudiante existente",
