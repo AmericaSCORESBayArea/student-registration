@@ -237,16 +237,16 @@ const registrationFormConfig = [
     helpText:"!REGISTRATION_FORM_Ethnicity_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Ethnicity_PLACEHOLDER",
     enumItems: [
-      "Hispanic/Latino",
-      "Native American",
-      "African American",
-      "Pacific Islander",
-      "Asian",
-      "Caucasian",
-      "Middle Eastern/Arabic",
-      "Multi-Racial/Multi-Ethnic",
-      "Filipino",
-      "Other"
+      "!REGISTRATION_FORM_Ethnicity_Hispanic_Latino",
+      "!REGISTRATION_FORM_Ethnicity_Native_American",
+      "!REGISTRATION_FORM_Ethnicity_African_American",
+      "!REGISTRATION_FORM_Ethnicity_Pacific_Islander",
+      "!REGISTRATION_FORM_Ethnicity_Asian",
+      "!REGISTRATION_FORM_Ethnicity_Caucasian",
+      "!REGISTRATION_FORM_Ethnicity_Middle_Eastern_Arabic",
+      "!REGISTRATION_FORM_Ethnicity_Multi_Racial_Multi_Ethnic",
+      "!REGISTRATION_FORM_Ethnicity_Filipino",
+      "!REGISTRATION_FORM_Ethnicity_Other"
     ]
   },
   {
