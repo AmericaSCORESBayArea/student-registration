@@ -14,6 +14,10 @@ const languageFormConfig = [
       {
         displayValue:"Español",
         value:"es"
+      },
+      {
+        displayValue:"中文",
+        value:"zh"
       }
     ]
   }
