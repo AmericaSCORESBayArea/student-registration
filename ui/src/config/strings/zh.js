@@ -203,6 +203,14 @@ const localization_zh = {
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL:"二级许可接孩子？",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER:"选择辅助权限来接孩子",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT:"选择辅助权限来接孩子",
+
+  //REGISTRATION WAIVER
+  REGISTRATION_FORM_WAIVER_REVIEW_AND_ACCEPT_REQUEST_MESSAGE:"请查看并接受豁免 : ",
+  REGISTRATION_FORM_WAIVER_ACCEPT_BUTTON_TEXT:"接受",
+  REGISTRATION_FORM_WAIVER_DECLINE_BUTTON_TEXT:"衰退",
+  REGISTRATION_FORM_WAIVER_CLOSE_BUTTON_TEXT:"关闭",
+  REGISTRATION_FORM_WAIVER_SHOW_WAIVER_BUTTON_TEXT:"显示豁免",
+  REGISTRATION_FORM_WAIVER_WAIVER_ACCEPTED_MESSAGE:"接受豁免",
 };
 
 export default localization_zh;

@@ -202,7 +202,15 @@ const localization_es = {
   REGISTRATION_FORM_Second_Emergency_Contact_Phone3_HELPTEXT: "Ingrese el teléfono de emergencia secundario 3",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL: "¿Permiso secundario para recoger al niño?",
   REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER: "Seleccione Permiso secundario para recoger al niño",
-  REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT: "Seleccione Permiso secundario para recoger al niño"
+  REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT: "Seleccione Permiso secundario para recoger al niño",
+
+  //REGISTRATION WAIVER
+  REGISTRATION_FORM_WAIVER_REVIEW_AND_ACCEPT_REQUEST_MESSAGE:"Revise y acepte la exención : ",
+  REGISTRATION_FORM_WAIVER_ACCEPT_BUTTON_TEXT:"Aceptar",
+  REGISTRATION_FORM_WAIVER_DECLINE_BUTTON_TEXT:"Disminución",
+  REGISTRATION_FORM_WAIVER_CLOSE_BUTTON_TEXT:"Cerca",
+  REGISTRATION_FORM_WAIVER_SHOW_WAIVER_BUTTON_TEXT:"Mostrar renuncia",
+  REGISTRATION_FORM_WAIVER_WAIVER_ACCEPTED_MESSAGE:"Renuncia aceptadas",
 };
 
 export default localization_es;
