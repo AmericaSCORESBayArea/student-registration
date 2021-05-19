@@ -206,10 +206,10 @@ const registrationFormConfig = [
     helpText:"!REGISTRATION_FORM_Gender_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Gender_PLACEHOLDER",
     enumItems: [
-      "Male",
-      "Female",
-      "Non-binary",
-      "Prefer not to say"
+      "!REGISTRATION_FORM_Gender_VALUE_MALE",
+      "!REGISTRATION_FORM_Gender_VALUE_FEMALE",
+      "!REGISTRATION_FORM_Gender_VALUE_NON_BINARY",
+      "!REGISTRATION_FORM_Gender_VALUE_PREFER_NOT_TO_SAY"
     ]
   },
   {
