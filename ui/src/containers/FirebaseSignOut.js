@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import firebase from 'firebase';
 import { Fade, Button } from 'reactstrap';
 
-const FirebaseSignOutContainer  = ({workflowState}) => {
+const FirebaseSignOutContainer  = ({toolbarConfig,workflowState}) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
