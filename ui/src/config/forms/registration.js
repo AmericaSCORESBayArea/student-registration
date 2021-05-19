@@ -206,6 +206,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Gender_LABEL",
     helpText:"!REGISTRATION_FORM_Gender_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Gender_PLACEHOLDER",
+    selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "!REGISTRATION_FORM_Gender_VALUE_MALE",
       "!REGISTRATION_FORM_Gender_VALUE_FEMALE",
@@ -260,8 +261,8 @@ const registrationFormConfig = [
     placeholder:"!REGISTRATION_FORM_ReducedPriceLunch_PLACEHOLDER",
     selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
-      "Yes",
-      "No"
+      "!REGISTRATION_FORM_YES",
+      "!REGISTRATION_FORM_NO"
     ]
   },
   {
@@ -279,8 +280,8 @@ const registrationFormConfig = [
     placeholder:"!REGISTRATION_FORM_PermissiontoCommuteAlone_PLACEHOLDER",
     selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
-      "Yes",
-      "No"
+      "!REGISTRATION_FORM_YES",
+      "!REGISTRATION_FORM_NO"
     ]
   },
   {
