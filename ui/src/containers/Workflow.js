@@ -15,6 +15,24 @@ const generateInitialWorkflowState = (workflowConfig) => {
   });
 };
 
+
+const determineNextFormIndex = (currentFormIndex, workflowConfig, workflowState) => {
+  if (!!workflowState) {
+    const matchingNextWorkflowIndices = workflowConfig.map((item, index) => {
+      return {
+        ...item,
+        formIndex: index
+      };
+    }).filter((item) => workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex);
+    if (matchingNextWorkflowIndices.length > 0) {
+      const nextIndex = matchingNextWorkflowIndices.reverse().pop();
+      console.log(`next index : ${nextIndex}`);
+      return nextIndex
+    }
+  }
+  return 0;
+};
+
 const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizationChange}) => {
 
   const workflowStateReducer = (state, newState) => {
@@ -26,25 +44,8 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizati
 
   const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
 
-  const determineNextFormIndex = (proposedInitialFormState) => {
-    if (isNaN(proposedInitialFormState)) {
-      proposedInitialFormState = 0;
-    }
-    if (!!workflowState) {
-      const matchingNextWorkflowIndex = workflowConfig.map((item, index) => {
-        return {
-          ...item,
-          formIndex: index
-        };
-      }).filter((item) => workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex);
-      if (matchingNextWorkflowIndex.length > 0) {
-        proposedInitialFormState = matchingNextWorkflowIndex.reverse().pop();
-      }
-    }
-    return proposedInitialFormState;
-  };
 
-  const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex());
+  const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex(0,workflowConfig, workflowState));
   const [formLoading, setFormLoading] = useState(false);
 
   if (!workflowConfig) return null;
@@ -58,7 +59,14 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizati
 
   const formSubmitCallback = (config, formState) => {
     const {formName, localStore} = workflowConfig[currentFormIndex];
-    setCurrentFormIndex(determineNextFormIndex(currentFormIndex + 1));
+    const nextIndex = workflowConfig.map((item, index) => {
+      return {
+        ...item,
+        formIndex: index
+      };
+    }).filter((item,index) => index > currentFormIndex && workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex).reverse().pop();
+    console.log(`next index : ${nextIndex}`);
+    setCurrentFormIndex(nextIndex);
     setWorkflowState({
       formName,
       formState
