@@ -219,15 +219,15 @@ const registrationFormConfig = [
     helpText:"!REGISTRATION_FORM_Grade_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Grade_PLACEHOLDER",
     enumItems: [
-      "Kindergarten",
-      "1st",
-      "2nd",
-      "3rd",
-      "4th",
-      "5th",
-      "6th",
-      "7th",
-      "8th"
+      "!REGISTRATION_FORM_Grade_Kindergarten",
+      "!REGISTRATION_FORM_Grade_First",
+      "!REGISTRATION_FORM_Grade_Second",
+      "!REGISTRATION_FORM_Grade_Third",
+      "!REGISTRATION_FORM_Grade_Fourth",
+      "!REGISTRATION_FORM_Grade_Fifth",
+      "!REGISTRATION_FORM_Grade_Sixth",
+      "!REGISTRATION_FORM_Grade_Seventh",
+      "!REGISTRATION_FORM_Grade_Eighth"
     ]
   },
   {
