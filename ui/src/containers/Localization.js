@@ -5,10 +5,12 @@ import WorkflowContainer from "./Workflow";
 
 import localization_en from "../config/strings/en";
 import localization_es from "../config/strings/es";
+import localization_zh from "../config/strings/zh";
 
 const localizationStrings = {
   en:localization_en,
-  es:localization_es
+  es:localization_es,
+  zh:localization_zh
 };
 
 const LocalizationContainer  = ({appConfig,localizationValue,onLocalizationChange}) => {
