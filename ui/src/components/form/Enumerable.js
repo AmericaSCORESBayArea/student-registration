@@ -3,7 +3,6 @@ import {nanoid} from "nanoid";
 import {Alert, FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
 
-const defaultSelectText = "Select...";
 const filterAllSelectText = "[All]";
 
 const generateInitialEnumState = (availableFilterFields) => {
@@ -26,6 +25,7 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
     isRequired,
     formValue,
     helpText,
+    selectText,
     enumItems,
     enableSubFiltering,
     filterFields,
@@ -62,7 +62,7 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
 
   const onSelectValueChange = (e) => {
     const newValue = e.target.value;
-    if (newValue !== defaultSelectText) {
+    if (newValue !== selectText) {
       onValueChange(e);
     } else {
       onValueChange({
@@ -134,7 +134,7 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
     }
     const valueFieldElementId = `${elementId}_filterField_value`;
     const valueFieldItems = [
-      defaultSelectText,
+      selectText,
       ...enumItems.filter((item) => filterFields.filter((item_2) => {
         const currentFilterParentState = !!enumState[item_2] ? enumState[item_2] : null;
         return !currentFilterParentState || currentFilterParentState === filterAllSelectText || item[item_2] === currentFilterParentState;
@@ -191,7 +191,7 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
           </div>
           :
           renderDropDown(formValue, elementId, onSelectValueChange, [
-            defaultSelectText,
+            selectText,
             ...enumItems
           ])
       }
