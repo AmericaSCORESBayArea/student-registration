@@ -34,7 +34,13 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
     postEndpoint,
     submitOnValueChange,
     submitOnAnyValue,
-    isLocalizationForm
+    isLocalizationForm,
+    waiverReviewAndAcceptRequestMessage,
+    waiverAcceptButtonText,
+    waiverDeclineButtonText,
+    waiverCloseButtonText,
+    waiverShowWaiverButtonText,
+    waiverWaiverAcceptedMessage
   } = workflowConfig;
 
   const formStateReducer = (state, newState) => {
@@ -277,11 +283,11 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
                 {
                   displayWaiver && !waiverAccepted &&
                   <div>
-                    <p>{`Please review and accept waiver : `}</p>
+                    <p>{`${!!waiverReviewAndAcceptRequestMessage ? waiverReviewAndAcceptRequestMessage : `Please review and accept waiver`}`}</p>
                     <Button
                       color={"primary"}
                       onClick={toggleWaiverModal}
-                    >Show Waiver</Button>
+                    >{`${!!waiverShowWaiverButtonText ? waiverShowWaiverButtonText : `Show Waiver`}`}</Button>
                   </div>
                 }
               </Alert>
@@ -291,11 +297,11 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
               <Alert
                 color={"secondary"}
               >
-                <p>Waiver Accepted</p>
+                <p>{`${!!waiverWaiverAcceptedMessage ? waiverWaiverAcceptedMessage : `Waiver Accepted`}`}</p>
                 <Button
                   color={"secondary"}
                   onClick={toggleWaiverModal}
-                >Show Waiver</Button>
+                >{`${!!waiverShowWaiverButtonText ? waiverShowWaiverButtonText : `Show Waiver`}`}</Button>
               </Alert>
             }
             {
@@ -335,8 +341,8 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
           submitModalCallback={acceptWaiverCallback}
           cancelModalCallback={toggleWaiverModal}
           modalTitle={"Waiver"}
-          submitButtonText={!waiverAccepted ? "Accept" : null}
-          cancelButtonText={!waiverAccepted ? "Decline" : "Close"}
+          submitButtonText={!waiverAccepted ? `${!!waiverAcceptButtonText ? waiverAcceptButtonText : `Accept`}` : null}
+          cancelButtonText={!waiverAccepted ? `${!!waiverDeclineButtonText ? waiverDeclineButtonText : `Decline`}` : `${!!waiverCloseButtonText ? waiverCloseButtonText : `Close`}`}
         >
           <Waiver/>
         </ModalComponent>
