@@ -92,42 +92,6 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizati
             in={true}
           >
             <FormGroup
-              key={`breadcrumbs`}
-            >
-              <Breadcrumb>
-                {
-                  workflowConfig.map((item, index) => {
-                    return {
-                      ...item,
-                      index
-                    };
-                  }).filter((item, index) => {
-                    return index <= currentFormIndex && !!item.breadCrumbLink
-                  }).map((item, index) => {
-                    const {breadCrumbPreviewFormStateValue} = item;
-                    const formNameBreadcrumb = item.formName;
-                    const isActiveBreadcrumb = item.index === currentFormIndex;
-                    const currentFormState = getFormStateByFormName(formNameBreadcrumb);
-                    const breadcrumbCurrentStateValue = !!breadCrumbPreviewFormStateValue && !!currentFormState ? currentFormState.filter((item) => item.formValue === breadCrumbPreviewFormStateValue).map((item) => item.value).pop() : null;
-                    return (
-                      <BreadcrumbItem
-                        key={index}
-                        active={isActiveBreadcrumb}
-                        style={{cursor: isActiveBreadcrumb ? "default" : "pointer"}}
-                      >{
-                        !isActiveBreadcrumb ?
-                          <a
-                            onClick={onBreadcrumbClick.bind(this, item.index)}
-                          >{`${!!breadcrumbCurrentStateValue ? `${breadcrumbCurrentStateValue}` : `${formNameBreadcrumb}`}`}</a>
-                          :
-                          <span>{`${formNameBreadcrumb}`}</span>
-                      }</BreadcrumbItem>
-                    );
-                  })
-                }
-              </Breadcrumb>
-            </FormGroup>
-            <FormGroup
               key={`toolbar`}
             >
               <ButtonGroup>
@@ -173,6 +137,42 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizati
               currentFormIndex >= workflowConfig.length &&
               <h3>Workflow Complete</h3>
             }
+            <FormGroup
+              key={`breadcrumbs`}
+            >
+              <Breadcrumb>
+                {
+                  workflowConfig.map((item, index) => {
+                    return {
+                      ...item,
+                      index
+                    };
+                  }).filter((item, index) => {
+                    return index <= currentFormIndex && !!item.breadCrumbLink
+                  }).map((item, index) => {
+                    const {breadCrumbPreviewFormStateValue} = item;
+                    const formNameBreadcrumb = item.formName;
+                    const isActiveBreadcrumb = item.index === currentFormIndex;
+                    const currentFormState = getFormStateByFormName(formNameBreadcrumb);
+                    const breadcrumbCurrentStateValue = !!breadCrumbPreviewFormStateValue && !!currentFormState ? currentFormState.filter((item) => item.formValue === breadCrumbPreviewFormStateValue).map((item) => item.value).pop() : null;
+                    return (
+                      <BreadcrumbItem
+                        key={index}
+                        active={isActiveBreadcrumb}
+                        style={{cursor: isActiveBreadcrumb ? "default" : "pointer"}}
+                      >{
+                        !isActiveBreadcrumb ?
+                          <a
+                            onClick={onBreadcrumbClick.bind(this, item.index)}
+                          >{`${!!breadcrumbCurrentStateValue ? `${breadcrumbCurrentStateValue}` : `${formNameBreadcrumb}`}`}</a>
+                          :
+                          <span>{`${formNameBreadcrumb}`}</span>
+                      }</BreadcrumbItem>
+                    );
+                  })
+                }
+              </Breadcrumb>
+            </FormGroup>
           </Fade>
           :
           <div>
