@@ -8,7 +8,8 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue}) => {
   const {
     formValue,
     helpText,
-    buttonItems
+    buttonItems,
+    size
   } = config;
 
   const buttonDisplayValues = buttonItems.map((item) => typeof item === "object" ? !!item.displayValue ? item.displayValue : null : item).filter((item) => !!item);
@@ -51,7 +52,7 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue}) => {
             return (
               <Button
                 key={index}
-                size={"lg"}
+                size={!!size ? size : "lg"}
                 color={!!currentDisplayValue && item === currentDisplayValue ? "primary" : "secondary"}
                 onClick={onButtonItemClick.bind(this, item)}
               >{`${item}`}</Button>
