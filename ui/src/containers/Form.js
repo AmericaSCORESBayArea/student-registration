@@ -25,7 +25,7 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback,onLocalizationChange}) => {
+const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback}) => {
 
   const {
     displayWaiver,
@@ -34,7 +34,6 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
     postEndpoint,
     submitOnValueChange,
     submitOnAnyValue,
-    isLocalizationForm,
     waiverModalTitleText,
     waiverReviewAndAcceptRequestMessage,
     waiverAcceptButtonText,
@@ -84,9 +83,6 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
       value: newValueToUse
     });
     setIsValueChanged(true);
-    if (isLocalizationForm) {
-      onLocalizationChange(newValueToUse);
-    }
   };
 
   const postFetch = () => {

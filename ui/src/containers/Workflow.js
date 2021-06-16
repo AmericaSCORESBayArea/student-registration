@@ -33,7 +33,7 @@ const determineNextFormIndex = (currentFormIndex, workflowConfig, workflowState)
   return 0;
 };
 
-const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizationChange}) => {
+const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
 
   const workflowStateReducer = (state, newState) => {
     return [
@@ -127,7 +127,6 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,onLocalizati
                       workflowConfig={item}
                       initialFormState={!!currentFormState && Object.keys(currentFormState).length > 0 ? currentFormState : null}
                       formSubmitCallback={formSubmitCallback}
-                      onLocalizationChange={onLocalizationChange}
                     />
                   </Fade>
                 );
