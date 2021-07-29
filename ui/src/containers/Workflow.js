@@ -1,7 +1,8 @@
 import React, {Fragment, useState, useReducer} from 'react';
 import store from "store2";
-import {Fade, Breadcrumb, BreadcrumbItem, Spinner, FormGroup, ButtonGroup} from 'reactstrap';
+import {Fade, Breadcrumb, BreadcrumbItem, FormGroup, ButtonGroup} from 'reactstrap';
 import FormContainer from "./Form";
+import SpinnerWithMessage from "../components/Spinner";
 
 const generateInitialWorkflowState = (workflowConfig) => {
   if (!workflowConfig) return [];
@@ -45,7 +46,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
   const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
 
 
-  const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex(0,workflowConfig, workflowState));
+  const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex(0, workflowConfig, workflowState));
   const [formLoading, setFormLoading] = useState(false);
 
   if (!workflowConfig) return null;
@@ -64,7 +65,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
         ...item,
         formIndex: index
       };
-    }).filter((item,index) => index > currentFormIndex && workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex).reverse().pop();
+    }).filter((item, index) => index > currentFormIndex && workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex).reverse().pop();
     console.log(`next index : ${nextIndex}`);
     setCurrentFormIndex(nextIndex);
     setWorkflowState({
@@ -175,7 +176,9 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
           </Fade>
           :
           <div>
-            <Spinner size="sm" color="primary"/>{' '}
+            <SpinnerWithMessage
+              message={` `}
+            />
           </div>
       }
     </div>
