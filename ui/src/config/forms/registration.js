@@ -422,7 +422,11 @@ const registrationFormConfig = [
       "!REGISTRATION_FORM_ParentHomeLang_Urdu",
       "!REGISTRATION_FORM_ParentHomeLang_Vietnamese",
       "!REGISTRATION_FORM_ParentHomeLang_Other"
-    ]
+    ],
+    fillInOptionValues:[
+      "!REGISTRATION_FORM_ParentHomeLang_Other"
+    ],
+    fillInOptionFormValueOverride:"OtherLang"
   },
   {
     dataType:"enum",
