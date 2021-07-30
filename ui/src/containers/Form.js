@@ -25,7 +25,20 @@ const generateInitialFormState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCallback}) => {
+const generateInitialFormOverrideState = (formConfig) => {
+  if (!formConfig) return [];
+  return formConfig.filter((item) => !!item.formValue && !!item.fillInOptionFormValueOverride && !!item.fillInOptionValues && Array.isArray(item.fillInOptionValues) && item.fillInOptionValues.length > 0).map((item) => {
+    const {formValue, dataType, fillInOptionValues, fillInOptionFormValueOverride} = item;
+    return {
+      formValue,
+      options:fillInOptionValues,
+      formOverrideValue:fillInOptionFormValueOverride,
+      value: dataType === "number" ? 0 : ""
+    };
+  });
+};
+
+const FormContainer  = ({appConfig,workflowConfig, initialFormState,initialFormOverrideState,formSubmitCallback}) => {
 
   const {
     displayWaiver,
@@ -53,6 +66,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
   const [formFadeState, setFormFadeState] = useState(true)
   const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
   const [formState, setFormState] = useReducer(formStateReducer, !!initialFormState ? initialFormState : generateInitialFormState(formConfig));
+  const [formOverrideState, setFormOverrideState] = useReducer(formStateReducer, !!initialFormOverrideState ? initialFormOverrideState : generateInitialFormOverrideState(formConfig));
   const [displayWaiverModal, setDisplayWaiverModal] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
   const [submitInProgress, setSubmitInProgress] = useState(false);
@@ -80,6 +94,18 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
     const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
     setFormState({
       formValue,
+      value: newValueToUse
+    });
+    setIsValueChanged(true);
+  };
+
+  const onOverrideValueChange = (config, e) => {
+    const newValue = e?.target?.value;
+    const {formValue, dataType,fillInOptionFormValueOverride} = config;
+    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
+    setFormOverrideState({
+      formValue,
+      formOverrideValue:fillInOptionFormValueOverride,
       value: newValueToUse
     });
     setIsValueChanged(true);
@@ -226,6 +252,7 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
               formConfig.map((item, index) => {
                 const {formValue} = item;
                 const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
+                const currentOverrideValue = !!formValue ? formOverrideState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
                 return (
                   <FormElementController
                     key={index}
@@ -233,6 +260,8 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,formSubmitCa
                     config={item}
                     currentValue={currentValue}
                     onValueChange={onValueChange}
+                    onOverrideValueChange={onOverrideValueChange}
+                    currentOverrideValue={currentOverrideValue}
                   />
                 );
               })
