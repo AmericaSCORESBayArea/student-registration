@@ -250,7 +250,7 @@ const registrationFormConfig = [
       "!REGISTRATION_FORM_Ethnicity_Middle_Eastern_Arabic",
       "!REGISTRATION_FORM_Ethnicity_Multi_Racial_Multi_Ethnic",
       "!REGISTRATION_FORM_Ethnicity_Filipino",
-      "!REGISTRATION_FORM_Ethnicity_Other"
+      // "!REGISTRATION_FORM_Ethnicity_Other"
     ]
   },
   {
