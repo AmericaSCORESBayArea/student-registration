@@ -4,6 +4,7 @@ import TextAreaFormElement from "./TextArea";
 import TitleFormElement from "./Title";
 import EnumerableElement from "./Enumerable";
 import ButtonOptionsElement from "./ButtonOptions";
+import StaticElement from "./Static";
 import FirebaseAuthContainer from "../../containers/FirebaseAuth";
 
 const FormElementController = ({appConfig,config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue}) => {
@@ -52,7 +53,14 @@ const FormElementController = ({appConfig,config,onValueChange,onOverrideValueCh
                 onValueChange={onValueChange.bind(this, config)}
                 currentValue={currentValue}
               />
-              : null
+              :
+              dataType === "static" ?
+                <StaticElement
+                  config={config}
+                  currentValue={currentValue}
+                />
+                :
+                null
 };
 
 export default FormElementController;
