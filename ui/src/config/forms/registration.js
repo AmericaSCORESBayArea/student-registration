@@ -370,11 +370,10 @@ const registrationFormConfig = [
     placeholder:"!REGISTRATION_FORM_MailingZip_PLACEHOLDER",
   },
   {
-    dataType:"text",
+    dataType:"static",
     formValue:"MailingCountry",
-    formLabel:"!REGISTRATION_FORM_MailingCountry_LABEL",
-    helpText:"!REGISTRATION_FORM_MailingCountry_HELPTEXT",
-    placeholder:"!REGISTRATION_FORM_MailingCountry_PLACEHOLDER",
+    staticValue:"US",
+    formLabel:"!REGISTRATION_FORM_MailingCountry_LABEL"
   },
   {
     dataType:"enum",

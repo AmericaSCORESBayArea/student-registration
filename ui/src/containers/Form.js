@@ -17,10 +17,10 @@ const reqHeaders = {
 const generateInitialFormState = (formConfig) => {
   if (!formConfig) return [];
   return formConfig.filter((item) => !!item.formValue).map((item) => {
-    const {formValue,dataType} = item;
+    const {formValue, dataType, staticValue} = item;
     return {
       formValue,
-      value:dataType === "number" ? 0 : ""
+      value: dataType === "number" ? 0 : dataType === "static" ? staticValue : ""
     };
   });
 };
