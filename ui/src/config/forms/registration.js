@@ -37,7 +37,6 @@ const registrationFormConfig = [
     isRequired: true,
     enableSubFiltering: true,
     filterFields: [
-      "!REGISTRATION_FORM_SchoolName_FIELD_SITE_TYPE",
       "!REGISTRATION_FORM_SchoolName_FIELD_SITE_REGION"
     ],
     valueField: "!REGISTRATION_FORM_SchoolName_FIELD_SITE_SCHOOL_NAME",
