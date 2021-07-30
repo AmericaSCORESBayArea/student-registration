@@ -101,11 +101,12 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,initialFormO
 
   const onOverrideValueChange = (config, e) => {
     const newValue = e?.target?.value;
-    const {formValue, dataType,fillInOptionFormValueOverride} = config;
+    const {formValue, dataType,fillInOptionFormValueOverride,fillInOptionValues} = config;
     const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
     setFormOverrideState({
       formValue,
       formOverrideValue:fillInOptionFormValueOverride,
+      options:fillInOptionValues,
       value: newValueToUse
     });
     setIsValueChanged(true);
@@ -121,6 +122,17 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,initialFormO
       formState.map((item) => {
         submitObj[item.formValue] = item.value;
       });
+
+      formOverrideState.map((item) => {
+        formState.map((item_2) => {
+          if (item.formValue === item_2.formValue) {
+            if (item.options.indexOf(item_2.value) > -1) {
+              submitObj[item.formOverrideValue] = item.value;
+            }
+          }
+        });
+      });
+
       axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
         console.log(response);
         setSubmitInProgress(false);
