@@ -2,6 +2,7 @@ import React, {useState,useReducer} from 'react';
 import {nanoid} from "nanoid";
 import {Alert, FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
+import TextFormElement from "./Text";
 
 const filterAllSelectText = "[All]";
 
@@ -17,7 +18,7 @@ const enumStateReducer = (state, newState) => {
   return updatedState;
 };
 
-const EnumerableElement = ({config,onValueChange,currentValue}) => {
+const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue}) => {
 
   const {
     dataType,
@@ -29,7 +30,9 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
     enumItems,
     enableSubFiltering,
     filterFields,
-    valueField
+    valueField,
+    fillInOptionValues,
+    fillInOptionFormValueOverride
   } = config;
 
   const availableFilterFields = enableSubFiltering && !!filterFields && Array.isArray(filterFields) && filterFields.length > 0 ? filterFields.map((item, index) => {
@@ -72,6 +75,16 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
       });
     }
   };
+
+  const blDisplayOverrideElement = !!fillInOptionFormValueOverride && !!fillInOptionValues && Array.isArray(fillInOptionValues) && fillInOptionValues.length > 0 && fillInOptionValues.indexOf(currentValue) > -1;
+
+  const overrideElementConfig = blDisplayOverrideElement ? {
+    dataType:"text",
+    formValue:fillInOptionFormValueOverride,
+    formLabel:config.formLabel,
+    placeholder:config.placeholder,
+    isRequired:true
+  } : {};
 
   const renderDropDown = (formValue, elementId, onSelectValueChange, enumItemsToUse) => {
     return (
@@ -194,6 +207,14 @@ const EnumerableElement = ({config,onValueChange,currentValue}) => {
             selectText,
             ...enumItems
           ])
+      }
+      {
+        blDisplayOverrideElement &&
+        <TextFormElement
+          config={overrideElementConfig}
+          onValueChange={onOverrideValueChange}
+          currentValue={currentOverrideValue}
+        />
       }
       {
         ["text", "enum"].indexOf(dataType) > -1 && isRequired &&
