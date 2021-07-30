@@ -6,7 +6,7 @@ import EnumerableElement from "./Enumerable";
 import ButtonOptionsElement from "./ButtonOptions";
 import FirebaseAuthContainer from "../../containers/FirebaseAuth";
 
-const FormElementController = ({appConfig,config,onValueChange,currentValue}) => {
+const FormElementController = ({appConfig,config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue}) => {
   if (!config) return null;
   const {dataType} = config;
   if (!dataType) return null;
@@ -33,7 +33,9 @@ const FormElementController = ({appConfig,config,onValueChange,currentValue}) =>
           <EnumerableElement
             config={config}
             onValueChange={onValueChange.bind(this, config)}
+            onOverrideValueChange={onOverrideValueChange.bind(this, config)}
             currentValue={currentValue}
+            currentOverrideValue={currentOverrideValue}
           />
           :
           dataType === "buttonOptions" ?
