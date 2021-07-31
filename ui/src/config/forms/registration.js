@@ -211,7 +211,8 @@ const registrationFormConfig = [
       "!REGISTRATION_FORM_Gender_VALUE_FEMALE",
       "!REGISTRATION_FORM_Gender_VALUE_NON_BINARY",
       "!REGISTRATION_FORM_Gender_VALUE_PREFER_NOT_TO_SAY"
-    ]
+    ],
+    isRequired: true
   },
   {
     dataType:"enum",
@@ -250,7 +251,8 @@ const registrationFormConfig = [
       "!REGISTRATION_FORM_Ethnicity_Multi_Racial_Multi_Ethnic",
       "!REGISTRATION_FORM_Ethnicity_Filipino",
       // "!REGISTRATION_FORM_Ethnicity_Other"
-    ]
+    ],
+    isRequired: true
   },
   {
     dataType:"enum",
@@ -262,7 +264,8 @@ const registrationFormConfig = [
     enumItems: [
       "!REGISTRATION_FORM_YES",
       "!REGISTRATION_FORM_NO"
-    ]
+    ],
+    isRequired: true
   },
   {
     dataType:"textArea",
@@ -385,7 +388,8 @@ const registrationFormConfig = [
       "!REGISTRATION_FORM_YES",
       "!REGISTRATION_FORM_SOME",
       "!REGISTRATION_FORM_NO"
-    ]
+    ],
+    isRequired: true
   },
   {
     dataType:"enum",
@@ -393,6 +397,7 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_ParentHomeLang_LABEL",
     helpText:"!REGISTRATION_FORM_ParentHomeLang_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_ParentHomeLang_PLACEHOLDER",
+    isRequired: true,
     selectText:"!REGISTRATION_FORM_SELECT",
     enumItems: [
       "!REGISTRATION_FORM_ParentHomeLang_English",
