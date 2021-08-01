@@ -179,8 +179,7 @@ const registrationFormConfig = [
     formValue:"PersonalEmail",
     formLabel:"!REGISTRATION_FORM_PersonalEmail_LABEL",
     helpText:"!REGISTRATION_FORM_PersonalEmail_HELPTEXT",
-    placeholder:"!REGISTRATION_FORM_PersonalEmail_PLACEHOLDER",
-    isRequired: true
+    placeholder:"!REGISTRATION_FORM_PersonalEmail_PLACEHOLDER"
   },
   {
     dataType:"tel",
@@ -202,6 +201,7 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Gender",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Gender_LABEL",
     helpText:"!REGISTRATION_FORM_Gender_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Gender_PLACEHOLDER",
@@ -216,6 +216,7 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Grade",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Grade_LABEL",
     helpText:"!REGISTRATION_FORM_Grade_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Grade_PLACEHOLDER",
@@ -235,6 +236,7 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Ethnicity",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Ethnicity_LABEL",
     helpText:"!REGISTRATION_FORM_Ethnicity_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Ethnicity_PLACEHOLDER",
@@ -255,6 +257,7 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"ReducedPriceLunch",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_ReducedPriceLunch_LABEL",
     helpText:"!REGISTRATION_FORM_ReducedPriceLunch_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_ReducedPriceLunch_PLACEHOLDER",
@@ -390,6 +393,7 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"ParentHomeLang",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_ParentHomeLang_LABEL",
     helpText:"!REGISTRATION_FORM_ParentHomeLang_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_ParentHomeLang_PLACEHOLDER",
@@ -445,6 +449,7 @@ const registrationFormConfig = [
   {
     dataType:"text",
     formValue:"Emergency_Contact_Name",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Emergency_Contact_Name_LABEL",
     helpText:"!REGISTRATION_FORM_Emergency_Contact_Name_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Emergency_Contact_Name_PLACEHOLDER",
@@ -452,6 +457,7 @@ const registrationFormConfig = [
   {
     dataType:"text",
     formValue:"Emergency_Contact_Relationship",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Emergency_Contact_Relationship_LABEL",
     helpText:"!REGISTRATION_FORM_Emergency_Contact_Relationship_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Emergency_Contact_Relationship_PLACEHOLDER",
@@ -459,6 +465,7 @@ const registrationFormConfig = [
   {
     dataType:"tel",
     formValue:"Emergency_Contact_Phone1",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Emergency_Contact_Phone1_LABEL",
     helpText:"!REGISTRATION_FORM_Emergency_Contact_Phone1_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Emergency_Contact_Phone1_PLACEHOLDER",
@@ -480,6 +487,7 @@ const registrationFormConfig = [
   {
     dataType:"enum",
     formValue:"Emergency_Contact_Permission_to_Pickup_child",
+    isRequired: true,
     formLabel:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_LABEL",
     helpText:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
