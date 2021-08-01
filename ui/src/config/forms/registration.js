@@ -337,13 +337,6 @@ const registrationFormConfig = [
     placeholder:"!REGISTRATION_FORM_ParentPhone2_PLACEHOLDER",
   },
   {
-    dataType:"tel",
-    formValue:"ParentPhone3",
-    formLabel:"!REGISTRATION_FORM_ParentPhone3_LABEL",
-    helpText:"!REGISTRATION_FORM_ParentPhone3_HELPTEXT",
-    placeholder:"!REGISTRATION_FORM_ParentPhone3_PLACEHOLDER",
-  },
-  {
     dataType:"text",
     formValue:"MailingStreet",
     formLabel:"!REGISTRATION_FORM_MailingStreet_LABEL",
@@ -376,19 +369,6 @@ const registrationFormConfig = [
     formValue:"MailingCountry",
     staticValue:"US",
     formLabel:"!REGISTRATION_FORM_MailingCountry_LABEL"
-  },
-  {
-    dataType:"enum",
-    formValue:"ParentEnglishFluency",
-    formLabel:"!REGISTRATION_FORM_ParentEnglishFluency_LABEL",
-    helpText:"!REGISTRATION_FORM_ParentEnglishFluency_HELPTEXT",
-    placeholder:"!REGISTRATION_FORM_ParentEnglishFluency_PLACEHOLDER",
-    selectText:"!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_YES",
-      "!REGISTRATION_FORM_SOME",
-      "!REGISTRATION_FORM_NO"
-    ]
   },
   {
     dataType:"enum",
@@ -478,13 +458,6 @@ const registrationFormConfig = [
     placeholder:"!REGISTRATION_FORM_Emergency_Contact_Phone2_PLACEHOLDER",
   },
   {
-    dataType:"tel",
-    formValue:"Emergency_Contact_Phone3",
-    formLabel:"!REGISTRATION_FORM_Emergency_Contact_Phone3_LABEL",
-    helpText:"!REGISTRATION_FORM_Emergency_Contact_Phone3_HELPTEXT",
-    placeholder:"!REGISTRATION_FORM_Emergency_Contact_Phone3_PLACEHOLDER",
-  },
-  {
     dataType:"enum",
     formValue:"Emergency_Contact_Permission_to_Pickup_child",
     isRequired: true,
@@ -528,13 +501,6 @@ const registrationFormConfig = [
     formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_LABEL",
     helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_HELPTEXT",
     placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_PLACEHOLDER",
-  },
-  {
-    dataType:"tel",
-    formValue:"Second_Emergency_Contact_Phone3",
-    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone3_LABEL",
-    helpText:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone3_HELPTEXT",
-    placeholder:"!REGISTRATION_FORM_Second_Emergency_Contact_Phone3_PLACEHOLDER",
   },
   {
     dataType: "enum",
