@@ -1,5 +1,5 @@
 import React from 'react';
-import StringFormElement from "./Text";
+import TextFormElement from "./Text";
 import TextAreaFormElement from "./TextArea";
 import TitleFormElement from "./Title";
 import EnumerableElement from "./Enumerable";
@@ -17,7 +17,7 @@ const FormElementController = ({appConfig,config,onValueChange,onOverrideValueCh
     />
     :
     dataType === "text" || dataType === "number" || dataType === "email" || dataType === "tel" || dataType === "date" ?
-      <StringFormElement
+      <TextFormElement
         config={config}
         onValueChange={onValueChange.bind(this, config)}
         currentValue={currentValue}
