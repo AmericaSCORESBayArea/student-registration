@@ -92,29 +92,6 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
           <Fade
             in={true}
           >
-            <FormGroup
-              key={`toolbar`}
-            >
-              <ButtonGroup>
-                {
-                  toolbarConfig.map((item, index) => {
-                    const {Component, name} = item;
-                    return (
-                      <div
-                        key={index}
-                      >
-                        <Fragment>
-                          <Component
-                            toolbarConfig={item}
-                            workflowState={workflowState}
-                          />
-                        </Fragment>
-                      </div>
-                    )
-                  })
-                }
-              </ButtonGroup>
-            </FormGroup>
             {
               workflowConfig.filter((item, index) => index === currentFormIndex).map((item, index) => {
                 const {formName} = item;
@@ -172,6 +149,29 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
                   })
                 }
               </Breadcrumb>
+            </FormGroup>
+            <FormGroup
+              key={`toolbar`}
+            >
+              <ButtonGroup>
+                {
+                  toolbarConfig.map((item, index) => {
+                    const {Component, name} = item;
+                    return (
+                      <div
+                        key={index}
+                      >
+                        <Fragment>
+                          <Component
+                            toolbarConfig={item}
+                            workflowState={workflowState}
+                          />
+                        </Fragment>
+                      </div>
+                    )
+                  })
+                }
+              </ButtonGroup>
             </FormGroup>
           </Fade>
           :
