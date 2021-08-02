@@ -248,7 +248,8 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const blSubmitButtonDisabled = isSubmitButtonDisabled();
   const blShowWarningMessages = isWarningMessageContainerEnabled();
 
-  const blFormDisabled = submitInProgress || !!submitSuccessMessage
+  const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
+  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
 
   return (
     <div>
@@ -360,7 +361,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
               <Button
                 onClick={onSubmitCallback}
-                disabled={blSubmitButtonDisabled || submitInProgress || !!submitSuccessMessage}
+                disabled={blErrorEncountered || blFormDisabled}
                 color={blSubmitButtonDisabled ? "secondary" : "primary"}
               >Submit</Button>
             }
