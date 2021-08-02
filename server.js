@@ -62,9 +62,9 @@ app.post('/register',cors(corsOptions), async(req, res) => {
       returnMessage = mRes.response.data;
     } else {
       const rData = mRes.data;
-      if (!!rData.Successful_Registration) {
+      if (!!rData.ContactId) {
         returnStatus = mRes.status;
-        returnMessage = rData.Successful_Registration;
+        returnMessage = rData.ContactId;
       }
     }
   } catch(e) {
