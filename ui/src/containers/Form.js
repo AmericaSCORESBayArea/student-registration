@@ -7,6 +7,7 @@ import SpinnerWithMessage from "../components/Spinner";
 import ModalComponent from "../components/Modal";
 import Waiver from "../components/Waiver";
 import isValidEmail from "../modules/isValidEmail";
+import RequiredWrapper from "../components/form/Required";
 
 const reqHeaders = {
   headers: {
@@ -38,7 +39,7 @@ const generateInitialFormOverrideState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({appConfig,workflowConfig, initialFormState,initialFormOverrideState,formSubmitCallback}) => {
+const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormState,initialFormOverrideState,formSubmitCallback}) => {
 
   const {
     displayWaiver,
@@ -101,12 +102,12 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,initialFormO
 
   const onOverrideValueChange = (config, e) => {
     const newValue = e?.target?.value;
-    const {formValue, dataType,fillInOptionFormValueOverride,fillInOptionValues} = config;
+    const {formValue, dataType, fillInOptionFormValueOverride, fillInOptionValues} = config;
     const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
     setFormOverrideState({
       formValue,
-      formOverrideValue:fillInOptionFormValueOverride,
-      options:fillInOptionValues,
+      formOverrideValue: fillInOptionFormValueOverride,
+      options: fillInOptionValues,
       value: newValueToUse
     });
     setIsValueChanged(true);
@@ -266,15 +267,21 @@ const FormContainer  = ({appConfig,workflowConfig, initialFormState,initialFormO
                 const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
                 const currentOverrideValue = !!formValue ? formOverrideState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
                 return (
-                  <FormElementController
-                    key={index}
-                    appConfig={appConfig}
+                  <RequiredWrapper
+                    requiredConfig={requiredConfig}
                     config={item}
                     currentValue={currentValue}
-                    onValueChange={onValueChange}
-                    onOverrideValueChange={onOverrideValueChange}
-                    currentOverrideValue={currentOverrideValue}
-                  />
+                  >
+                    <FormElementController
+                      key={index}
+                      appConfig={appConfig}
+                      config={item}
+                      currentValue={currentValue}
+                      onValueChange={onValueChange}
+                      onOverrideValueChange={onOverrideValueChange}
+                      currentOverrideValue={currentOverrideValue}
+                    />
+                  </RequiredWrapper>
                 );
               })
             }
