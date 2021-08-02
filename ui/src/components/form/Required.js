@@ -15,7 +15,7 @@ const RequiredWrapper = ({currentValue, config,children,requiredConfig}) => {
           ["textArea", "text", "enum", "date"].indexOf(dataType) > -1 ?
             currentValue.trim().length > 0 : true : true;
 
-  if (dataType === "title") {
+  if (["title","firebaseAuthentication"].indexOf(dataType) > -1) {
     return children;
   }
 
