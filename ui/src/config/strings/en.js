@@ -1,5 +1,15 @@
 const localization_en = {
 
+  //Required Text
+  REQUIRED_FIELD_REQUIRED_TEXT:"Required",
+  REQUIRED_FIELD_VALID_TEXT:"Valid",
+  REQUIRED_FIELD_TEXT_VALUE:"Text",
+  REQUIRED_FIELD_VALUE_VALUE:"Value",
+  REQUIRED_FIELD_EMAIL_VALUE:"Email",
+  REQUIRED_FIELD_NUMBER_VALUE:"Number",
+  REQUIRED_FIELD_TELEPHONE_VALUE:"Telephone",
+  REQUIRED_FIELD_DATE_VALUE:"Date",
+
   //Language form
   LANGUAGE_FORM_LABEL_TEXT: "Language",
   LANGUAGE_FORM_HELP_TEXT: "Select Language",
