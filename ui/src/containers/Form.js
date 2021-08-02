@@ -114,41 +114,45 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   };
 
   const postFetch = () => {
-    if (!!postEndpoint) {
-      setSubmitInProgress(true);
-      setSubmitSuccessMessage(null);
-      setSubmitErrorMessage(null);
-      setSubmitErrorTitle(null);
-      let submitObj = {};
-      formState.map((item) => {
-        submitObj[item.formValue] = item.value;
-      });
-
-      formOverrideState.map((item) => {
-        formState.map((item_2) => {
-          if (item.formValue === item_2.formValue) {
-            if (item.options.indexOf(item_2.value) > -1) {
-              submitObj[item.formOverrideValue] = item.value;
-            }
-          }
+    if (!submitButtonDisabledFields) {
+      if (!!postEndpoint) {
+        setSubmitInProgress(true);
+        setSubmitSuccessMessage(null);
+        setSubmitErrorMessage(null);
+        setSubmitErrorTitle(null);
+        let submitObj = {};
+        formState.map((item) => {
+          submitObj[item.formValue] = item.value;
         });
-      });
 
-      axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
-        console.log(response);
-        setSubmitInProgress(false);
-        setSubmitSuccessMessage(`Successful!`);
-      }, (error) => {
-        console.log(error);
-        setSubmitInProgress(false);
-        setSubmitErrorTitle("Error Encountered");
-        setSubmitErrorMessage("Oops! Something Went Wrong!");
-      }).catch((e) => {
-        console.log(e);
-        setSubmitInProgress(false);
-        setSubmitErrorTitle("Error Encountered");
-        setSubmitErrorMessage("Oops! Something Went Wrong!");
-      });
+        formOverrideState.map((item) => {
+          formState.map((item_2) => {
+            if (item.formValue === item_2.formValue) {
+              if (item.options.indexOf(item_2.value) > -1) {
+                submitObj[item.formOverrideValue] = item.value;
+              }
+            }
+          });
+        });
+
+        axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
+          console.log(response);
+          setSubmitInProgress(false);
+          setSubmitSuccessMessage(`Successful!`);
+        }, (error) => {
+          console.log(error);
+          setSubmitInProgress(false);
+          setSubmitErrorTitle("Error Encountered");
+          setSubmitErrorMessage("Oops! Something Went Wrong!");
+        }).catch((e) => {
+          console.log(e);
+          setSubmitInProgress(false);
+          setSubmitErrorTitle("Error Encountered");
+          setSubmitErrorMessage("Oops! Something Went Wrong!");
+        });
+      }
+    } else {
+      console.error(`post new registration attempted and button should be disabled...`);
     }
   };
 
@@ -174,7 +178,11 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
 
   const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
 
+  const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
+  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
+
   const submitButtonDisabledFields = requiredFields.filter((item) => {
+  if (blErrorEncountered || blFormDisabled) return true;
     const matchingFormValue = formState.filter((item_2) => item_2.formValue === item).pop();
     if (!!matchingFormValue) {
       const formValue = matchingFormValue.formValue;
@@ -247,9 +255,6 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
 
   const blSubmitButtonDisabled = isSubmitButtonDisabled();
   const blShowWarningMessages = isWarningMessageContainerEnabled();
-
-  const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
-  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
 
   return (
     <div>
@@ -361,7 +366,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
               <Button
                 onClick={onSubmitCallback}
-                disabled={blErrorEncountered || blFormDisabled}
+                disabled={submitButtonDisabledFields}
                 color={blSubmitButtonDisabled ? "secondary" : "primary"}
               >Submit</Button>
             }
