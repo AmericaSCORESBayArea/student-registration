@@ -113,8 +113,44 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     setIsValueChanged(true);
   };
 
+  const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
+
+  const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
+  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
+
+  const submitButtonDisabledFields = requiredFields.filter((item) => {
+  if (blErrorEncountered || blFormDisabled) return true;
+    const matchingFormValue = formState.filter((item_2) => item_2.formValue === item).pop();
+    if (!!matchingFormValue) {
+      const formValue = matchingFormValue.formValue;
+      const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
+      const valueToCheck = matchingFormValue.value;
+      if (["text", "enum", "date", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
+        if (valueToCheck.trim().length > 0) {
+          return false;
+        }
+      }
+      if (matchingFormDataType === "email") {
+        if (isValidEmail(valueToCheck)) {
+          return false;
+        }
+      }
+      if (matchingFormDataType === "number") {
+        if (!isNaN(valueToCheck)) {
+          return false;
+        }
+      }
+      if (matchingFormDataType === "firebaseAuthentication") {
+        if (!!valueToCheck && typeof valueToCheck === "object" && Object.keys(valueToCheck).length > 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  });
+
   const postFetch = () => {
-    if (!submitButtonDisabledFields) {
+    if (!blSubmitButtonDisabled) {
       if (!!postEndpoint) {
         setSubmitInProgress(true);
         setSubmitSuccessMessage(null);
@@ -175,42 +211,6 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
       }, 500);
     }, 500);
   };
-
-  const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
-
-  const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
-  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
-
-  const submitButtonDisabledFields = requiredFields.filter((item) => {
-  if (blErrorEncountered || blFormDisabled) return true;
-    const matchingFormValue = formState.filter((item_2) => item_2.formValue === item).pop();
-    if (!!matchingFormValue) {
-      const formValue = matchingFormValue.formValue;
-      const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
-      const valueToCheck = matchingFormValue.value;
-      if (["text", "enum", "date", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
-        if (valueToCheck.trim().length > 0) {
-          return false;
-        }
-      }
-      if (matchingFormDataType === "email") {
-        if (isValidEmail(valueToCheck)) {
-          return false;
-        }
-      }
-      if (matchingFormDataType === "number") {
-        if (!isNaN(valueToCheck)) {
-          return false;
-        }
-      }
-      if (matchingFormDataType === "firebaseAuthentication") {
-        if (!!valueToCheck && typeof valueToCheck === "object" && Object.keys(valueToCheck).length > 0) {
-          return false;
-        }
-      }
-    }
-    return true;
-  });
 
   const toggleWaiverModal = () => {
     if (displayWaiver) {
@@ -313,7 +313,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               </Alert>
             }
             {
-              blShowWarningMessages &&
+              blShowWarningMessages && !blErrorEncountered &&
               <Alert
                 color="warning"
               >
