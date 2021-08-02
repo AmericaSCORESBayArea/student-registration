@@ -3,7 +3,7 @@ import {nanoid} from "nanoid";
 import {Alert, FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
 
-const TextFormElement = ({config,onValueChange,currentValue}) => {
+const TextFormElement = ({config,onValueChange,currentValue,disabled}) => {
 
   if (!config) return null;
   const {dataType, formValue, formLabel, helpText, placeholder, min, max,isRequired} = config;
@@ -25,6 +25,7 @@ const TextFormElement = ({config,onValueChange,currentValue}) => {
         placeholder={`${!!placeholder ? placeholder : !!formLabel ? formLabel : formValue}`}
         value={!!currentValue ? currentValue : ""}
         onChange={onValueChange}
+        disabled={disabled}
       />
     </FormGroup>
   );

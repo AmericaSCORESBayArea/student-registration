@@ -1,11 +1,9 @@
 import React from 'react';
 import {nanoid} from "nanoid";
-import {FormGroup, Input, Alert} from 'reactstrap';
+import {FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
-import isValidPhone from "../../modules/isValidPhone";
-import isValidEmail from "../../modules/isValidEmail";
 
-const TextFormElement = ({config,onValueChange,currentValue}) => {
+const TextFormElement = ({config,onValueChange,currentValue,disabled}) => {
 
   if (!config) return null;
   const {dataType, formValue, formLabel, helpText, placeholder, min, max, isRequired} = config;
@@ -29,6 +27,7 @@ const TextFormElement = ({config,onValueChange,currentValue}) => {
         onChange={onValueChange}
         min={!!min ? min : ""}
         max={!!max ? max : ""}
+        disabled={disabled}
       />
     </FormGroup>
   );
