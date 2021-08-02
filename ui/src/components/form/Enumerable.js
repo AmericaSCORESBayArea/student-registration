@@ -1,6 +1,6 @@
 import React, {useState,useReducer} from 'react';
 import {nanoid} from "nanoid";
-import {Alert, FormGroup, Input} from 'reactstrap';
+import {FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
 import TextFormElement from "./Text";
 
@@ -215,13 +215,6 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           onValueChange={onOverrideValueChange}
           currentValue={currentOverrideValue}
         />
-      }
-      {
-        ["text", "enum"].indexOf(dataType) > -1 && isRequired &&
-        currentValue.trim().length === 0 &&
-        <Alert
-          color={"warning"}
-        >{`Please select a valid value for ${formLabel}`}</Alert>
       }
     </FormGroup>
   );
