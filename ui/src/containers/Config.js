@@ -5,6 +5,7 @@ import SpinnerWithMessage from '../components/Spinner';
 import WorkflowContainer from "./Workflow";
 import workflowConfig from "../config/workflowConfig";
 import toolbarConfig from "../config/toolbarConfig";
+import requiredConfig from "../config/requiredConfig";
 
 import localization_en from "../config/strings/en";
 import localization_es from "../config/strings/es";
@@ -113,6 +114,7 @@ const ConfigContainer  = ({localizationValue}) => {
   const appConfigLocalized = generateLocalizedConfig(appConfig);
   const workflowConfigLocalized = generateLocalizedConfig(workflowConfig);
   const toolbarConfigLocalized = generateLocalizedConfig(toolbarConfig);
+  const requiredConfigLocalized = generateLocalizedConfig(requiredConfig);
 
   return (
     <Fade
@@ -137,6 +139,7 @@ const ConfigContainer  = ({localizationValue}) => {
             appConfig={appConfigLocalized}
             workflowConfig={workflowConfigLocalized}
             toolbarConfig={toolbarConfigLocalized}
+            requiredConfig={requiredConfigLocalized}
           />
         </div>
       }
