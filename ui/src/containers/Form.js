@@ -248,6 +248,9 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const blSubmitButtonDisabled = isSubmitButtonDisabled();
   const blShowWarningMessages = isWarningMessageContainerEnabled();
 
+  const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
+  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
+
   return (
     <div>
       <Fade in={formFadeState}>
@@ -258,9 +261,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
             paddingLeft: "20px"
           }}
         >
-          <fieldset
-            disabled={!!submitSuccessMessage}
-          >
+          <fieldset>
             {
               formConfig.map((item, index) => {
                 const {formValue} = item;
@@ -280,6 +281,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
                       onValueChange={onValueChange}
                       onOverrideValueChange={onOverrideValueChange}
                       currentOverrideValue={currentOverrideValue}
+                      disabled={blFormDisabled}
                     />
                   </RequiredWrapper>
                 );
@@ -359,7 +361,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
               <Button
                 onClick={onSubmitCallback}
-                disabled={blSubmitButtonDisabled || submitInProgress || !!submitSuccessMessage}
+                disabled={blErrorEncountered || blFormDisabled}
                 color={blSubmitButtonDisabled ? "secondary" : "primary"}
               >Submit</Button>
             }

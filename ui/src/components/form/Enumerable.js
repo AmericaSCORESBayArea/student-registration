@@ -18,7 +18,7 @@ const enumStateReducer = (state, newState) => {
   return updatedState;
 };
 
-const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue}) => {
+const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue,disabled}) => {
 
   const {
     dataType,
@@ -94,6 +94,7 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           name={`${formValue}`}
           id={`${elementId}`}
           onChange={onSelectValueChange}
+          disabled={disabled}
         >
           {
             enumItemsToUse.map((item, index) => {
@@ -127,6 +128,7 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
         id={`${elementId}`}
         value={!!enumState[formValue] ? enumState[formValue] : enumItemsToUse[0]}
         onChange={onSelectValueChange.bind(this, formValue)}
+        disabled={disabled}
       >
         {
           itemsToDisplayBasedOnParentFilter.map((item, index) => {
@@ -214,6 +216,7 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           config={overrideElementConfig}
           onValueChange={onOverrideValueChange}
           currentValue={currentOverrideValue}
+          disabled={disabled}
         />
       }
     </FormGroup>

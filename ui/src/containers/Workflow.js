@@ -66,16 +66,21 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConf
         formIndex: index
       };
     }).filter((item, index) => index > currentFormIndex && workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex).reverse().pop();
-    console.log(`next index : ${nextIndex}`);
-    setCurrentFormIndex(nextIndex);
-    setWorkflowState({
-      formName,
-      formState
-    });
-    if (localStore) {
-      store.set(formName, formState, true);
+
+    if (!isNaN(nextIndex)) {
+      console.log(`next index : ${nextIndex}`);
+      setCurrentFormIndex(nextIndex);
+      setWorkflowState({
+        formName,
+        formState
+      });
+      if (localStore) {
+        store.set(formName, formState, true);
+      }
+      toggleFormLoadState();
+    } else {
+      console.log("no more form indices");
     }
-    toggleFormLoadState();
   };
 
   const onBreadcrumbClick = (formIndex) => {

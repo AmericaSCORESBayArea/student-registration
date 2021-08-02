@@ -3,7 +3,7 @@ import {nanoid} from "nanoid";
 import {Button, ButtonGroup, FormGroup} from 'reactstrap';
 import FormLabel from "./Label";
 
-const ButtonOptionsElement = ({config,onValueChange,currentValue}) => {
+const ButtonOptionsElement = ({config,onValueChange,currentValue,disabled}) => {
 
   const {
     formValue,
@@ -55,6 +55,7 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue}) => {
                 size={!!size ? size : "lg"}
                 color={!!currentDisplayValue && item === currentDisplayValue ? "primary" : "secondary"}
                 onClick={onButtonItemClick.bind(this, item)}
+                disabled={disabled}
               >{`${item}`}</Button>
             );
           })
