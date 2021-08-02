@@ -34,7 +34,7 @@ const determineNextFormIndex = (currentFormIndex, workflowConfig, workflowState)
   return 0;
 };
 
-const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
+const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConfig}) => {
 
   const workflowStateReducer = (state, newState) => {
     return [
@@ -103,6 +103,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig}) => {
                     <FormContainer
                       appConfig={appConfig}
                       workflowConfig={item}
+                      requiredConfig={requiredConfig}
                       initialFormState={!!currentFormState && Object.keys(currentFormState).length > 0 ? currentFormState : null}
                       formSubmitCallback={formSubmitCallback}
                     />
