@@ -366,7 +366,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
               <Button
                 onClick={onSubmitCallback}
-                disabled={submitButtonDisabledFields}
+                disabled={blSubmitButtonDisabled}
                 color={blSubmitButtonDisabled ? "secondary" : "primary"}
               >Submit</Button>
             }
