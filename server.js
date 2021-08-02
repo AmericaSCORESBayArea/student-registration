@@ -37,27 +37,41 @@ const corsOptions = {
 };
 
 app.post('/register',cors(corsOptions), async(req, res) => {
-  const data = {
-    ...req.body,
-    ContactRecordType:process.env.CONTACTRECORDID
-  };
-  console.log('data', req.body);
-  const mRes = await axios.post(muleEndPoint, data, reqHeaders)
-    .then((response) => {
-      console.log('success response', response.data);
-      return response;
-    }, (error) => {
-      console.log(error);
-      console.log(error.data);
-      return error;
-    });
-  if (mRes.isAxiosError) {
-    res.status(mRes.response.status).json({data: mRes.response.data});
-  } else {
-    const rData = mRes.data;
-    console.log(rData.Successful_Registration);
-    res.status(mRes.status).json({data: rData.Successful_Registration});
+
+  let returnStatus = 400;
+  let returnMessage = null;
+
+  try {
+    const data = {
+      ...req.body,
+      ContactRecordType: process.env.CONTACTRECORDID
+    };
+    console.log('data', req.body);
+    const mRes = await axios.post(muleEndPoint, data, reqHeaders)
+      .then((response) => {
+        console.log('success response', response.data);
+        return response;
+      }, (error) => {
+        console.log(error);
+        console.log(error.data);
+        return error;
+      });
+    console.log(mRes);
+    if (mRes.isAxiosError) {
+      returnStatus = mRes.response.status;
+      returnMessage = mRes.response.data;
+    } else {
+      const rData = mRes.data;
+      if (!!rData.Successful_Registration) {
+        returnStatus = mRes.status;
+        returnMessage = rData.Successful_Registration;
+      }
+    }
+  } catch(e) {
+    console.error("server error encountered...");
+    console.error(e);
   }
+  res.status(returnStatus).json({data: returnMessage});
 });
 
 app.use(express.static(path.join(__dirname, '/public')));
