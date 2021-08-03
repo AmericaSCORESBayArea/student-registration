@@ -1,12 +1,12 @@
 import React from 'react';
 import {nanoid} from "nanoid";
-import {FormGroup, Input} from 'reactstrap';
+import {Alert, FormGroup, Input} from 'reactstrap';
 import FormLabel from "./Label";
 
-const TextFormElement = ({config,onValueChange,currentValue}) => {
+const TextFormElement = ({config,onValueChange,currentValue,disabled}) => {
 
   if (!config) return null;
-  const {dataType, formValue, formLabel, helpText, placeholder, min, max} = config;
+  const {dataType, formValue, formLabel, helpText, placeholder, min, max,isRequired} = config;
   if (!dataType || !formValue) return null;
   const elementId = nanoid();
 
@@ -24,7 +24,8 @@ const TextFormElement = ({config,onValueChange,currentValue}) => {
         name={`${formValue}`}
         placeholder={`${!!placeholder ? placeholder : !!formLabel ? formLabel : formValue}`}
         value={!!currentValue ? currentValue : ""}
-        onChange={onValueChange.bind(this, config)}
+        onChange={onValueChange}
+        disabled={disabled}
       />
     </FormGroup>
   );

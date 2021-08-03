@@ -1,18 +1,21 @@
-
 const express = require('express');
 const app = express();
 const path = require('path');
 const bp =  require('body-parser');
 const cors =  require('cors');
 const axios = require('axios');
+const dotenv = require('dotenv');
 
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: true }))
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
+const configurationStartingKeyValueIndicatingAPIAllowed = `REACT_APP_`;
+const generateAppConfig = () => {
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({ path: './env/development.env' });
-  }
+  const dotEnvResult = dotenv.config({path: '.env'});
+  return !('error' in dotEnvResult) ? dotEnvResult.parsed : process.env;
+};
+const appConfig = generateAppConfig();
 
 const id = process.env.CLIENT_ID;
 const secret = process.env.CLIENT_SECRET;
@@ -23,43 +26,71 @@ axios.defaults.headers.common['client_id'] = id;
 axios.defaults.headers.common['client_secret'] = secret;
 
 const reqHeaders = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
-
-var corsOptions = {
-    origin: baseUrl,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  headers: {
+    'Content-Type': 'application/json'
   }
+};
+
+const corsOptions = {
+  origin: baseUrl,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 app.post('/register',cors(corsOptions), async(req, res) => {
-    let data = req.body;
-    data["ContactRecordType"] = process.env.CONTACTRECORDID;
-    console.log('data',req.body);
-    let mRes =  await axios.post(muleEndPoint, data, reqHeaders)
-    .then((response) => {
-        console.log('success repsonse',response.data);
+
+  let returnStatus = 400;
+  let returnMessage = null;
+
+  try {
+    const data = {
+      ...req.body,
+      ContactRecordType: process.env.CONTACTRECORDID
+    };
+    console.log('data', req.body);
+    const mRes = await axios.post(muleEndPoint, data, reqHeaders)
+      .then((response) => {
+        console.log('success response', response.data);
         return response;
-    }, (error) => {
+      }, (error) => {
         console.log(error);
         console.log(error.data);
         return error;
-    });
-    if(mRes.isAxiosError){
-        res.status(mRes.response.status).json({ data: mRes.response.data});
-    }else{
-         var rData = mRes.data;
-         console.log(rData.Successful_Registration);
-        res.status(mRes.status).json({ data: rData.Successful_Registration});
+      });
+    console.log(mRes);
+    if (mRes.isAxiosError) {
+      returnStatus = mRes.response.status;
+      returnMessage = mRes.response.data;
+    } else {
+      const rData = mRes.data;
+      if (!!rData.ContactId) {
+        returnStatus = mRes.status;
+        returnMessage = rData.ContactId;
+      }
     }
-  }) 
-
-app.use(express.static(path.join(__dirname, '/public')));
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, err => {
-    if(err) throw err;
-    console.log("%c Server running", "color: green");
+  } catch(e) {
+    console.error("server error encountered...");
+    console.error(e);
+  }
+  res.status(returnStatus).json({data: returnMessage});
 });
 
+app.use(express.static(path.join(__dirname, '/public')));
 
+const PORT = process.env.PORT || 3000;
+
+app.get('/info',cors(corsOptions), async(req, res) => {
+
+
+  let allowedAPIConfigResponse = {};
+  Object.keys(appConfig)
+    .filter((item) => item.indexOf(configurationStartingKeyValueIndicatingAPIAllowed) === 0)
+    .map((item) => {
+      allowedAPIConfigResponse[item] = appConfig[item];
+    });
+  res.status(200).json(allowedAPIConfigResponse);
+});
+
+app.listen(PORT, err => {
+  if (err) throw err;
+  console.log("%c Server running", "color: green");
+});
