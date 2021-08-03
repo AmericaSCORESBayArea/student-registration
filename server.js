@@ -99,7 +99,7 @@ app.listen(PORT, err => {
 
 const buildReactApp = () => {
   console.log("Building React App...");
-  exec('cd ui && npm run build', (err, stdout, stderr) => {
+  exec('cd ui && npm install && npm run build', (err, stdout, stderr) => {
     console.log("React App Build Complete...");
     if (err) {
       console.error("Error Building React App!");
