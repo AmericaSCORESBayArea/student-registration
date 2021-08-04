@@ -3,7 +3,7 @@ pids
 build
 releases
 coverage
-public
+#public
 lib-cov
 bower_components
 node_modules

@@ -5,7 +5,7 @@ const bp =  require('body-parser');
 const cors =  require('cors');
 const axios = require('axios');
 const dotenv = require('dotenv');
-const { exec } = require('child_process');
+// const { exec } = require('child_process');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
@@ -97,21 +97,21 @@ app.listen(PORT, err => {
 });
 
 
-const buildReactApp = () => {
-  console.log("Building React App...");
-  exec('cd ui && npm install && npm run build', (err, stdout, stderr) => {
-    console.log("React App Build Complete...");
-    if (err) {
-      console.error("Error Building React App!");
-      console.error(err);
-    }
-    if (!!stdout) {
-      console.log(`React App Build stdout: ${stdout}`);
-    }
-    if (!!stderr) {
-      console.log(`React App Build stderr: ${stderr}`);
-    }
-  });
-};
-
-buildReactApp();
+// const buildReactApp = () => {
+//   console.log("Building React App...");
+//   exec('cd ui && npm install && npm run build', (err, stdout, stderr) => {
+//     console.log("React App Build Complete...");
+//     if (err) {
+//       console.error("Error Building React App!");
+//       console.error(err);
+//     }
+//     if (!!stdout) {
+//       console.log(`React App Build stdout: ${stdout}`);
+//     }
+//     if (!!stderr) {
+//       console.log(`React App Build stderr: ${stderr}`);
+//     }
+//   });
+// };
+//
+// buildReactApp();
