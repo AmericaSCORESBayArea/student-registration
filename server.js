@@ -120,22 +120,22 @@ const buildReactApp = () => {
 };
 
 
-// const startMockServer = () => {
-//   const PORT = process.env.PORT || 3000;
-//   const app = express();
-//   console.log("Mock Server Starting...");
-//   const server = app.listen(PORT, err => {
-//     console.log("Mock Server Started...");
-//   });
-//   setTimeout(() => {
-//     console.log("Mock Server Closing...");
-//     server.close(() => {
-//       console.log("Mock Server Closed...");
-//     })
-//   }, 2000);
-// };
-//
-// startMockServer();
+const startMockServer = () => {
+  const PORT = process.env.PORT || 3000;
+  const app = express();
+  console.log("Mock Server Starting...");
+  const server = app.listen(PORT, err => {
+    console.log("Mock Server Started...");
+  });
+  setTimeout(() => {
+    console.log("Mock Server Closing...");
+    server.close(() => {
+      console.log("Mock Server Closed...");
+    })
+  }, 2000);
+};
+
+startMockServer();
 
 
 buildReactApp();
