@@ -288,7 +288,7 @@ const registrationFormConfig = [
   },
   {
     dataType:"title",
-    formLabel:"Parent/Guardian Information"
+    formLabel:"!REGISTRATION_FORM_ParentGuardianInformation_TITLE"
   },
   {
     dataType:"text",
@@ -424,7 +424,7 @@ const registrationFormConfig = [
   },
   {
     dataType:"title",
-    formLabel:"Emergency Contact (Other than Parent/Guardian)"
+    formLabel:"!REGISTRATION_FORM_Emergency_Contact_TITLE"
   },
   {
     dataType:"text",
@@ -472,7 +472,7 @@ const registrationFormConfig = [
   },
   {
     dataType:"title",
-    formLabel:"Second Emergency Contact (Other than Parent/Guardian and Primary Emergency Contact)"
+    formLabel:"!REGISTRATION_FORM_Second_Emergency_Contact_TITLE"
   },
   {
     dataType:"text",
