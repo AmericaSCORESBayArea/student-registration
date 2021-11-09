@@ -1,0 +1,386 @@
+[
+  {
+    "schoolName": "Jefferson Elementary School District",
+    "region": "Daly City",
+    "siteId":"Site Id for 'Jefferson Elementary School District'"
+
+  },
+  {
+    "schoolName": "Woodrow Wilson Elementary School",
+    "region": "Daly City",
+    "siteId":"Site Id for 'Woodrow Wilson Elementary School'"
+
+  },
+  {
+    "schoolName": "Panorama Elementary School",
+    "region": "Daly City",
+    "siteId":"Site Id for 'Panorama Elementary School'"
+
+  },
+  {
+    "schoolName": "Burbank Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Burbank Elementary School'"
+
+  },
+  {
+    "schoolName": "Cherryland Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Cherryland Elementary School'"
+
+  },
+  {
+    "schoolName": "East Avenue Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'East Avenue Elementary School'"
+
+  },
+  {
+    "schoolName": "Park Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Park Elementary School'"
+
+  },
+  {
+    "schoolName": "Stonebrae Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Stonebrae Elementary School'"
+
+  },
+  {
+    "schoolName": "Strobridge Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Strobridge Elementary School'"
+
+  },
+  {
+    "schoolName": "Cesar Chavez Middle School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Cesar Chavez Middle School'"
+
+  },
+  {
+    "schoolName": "MLK Middle School Hayward",
+    "region": "Hayward",
+    "siteId":"Site Id for 'MLK Middle School Hayward'"
+
+  },
+  {
+    "schoolName": "Winton Middle School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Winton Middle School'"
+
+  },
+  {
+    "schoolName": "Ochoa Middle School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Ochoa Middle School'"
+
+  },
+  {
+    "schoolName": "Bret Harte Hayward Middle School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Bret Harte Hayward Middle School'"
+
+  },
+  {
+    "schoolName": "Longwood Elementary School Hayward",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Longwood Elementary School Hayward'"
+
+  },
+  {
+    "schoolName": "Palma Ceia Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Palma Ceia Elementary School'"
+
+  },
+  {
+    "schoolName": "Glassbrook Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Glassbrook Elementary School'"
+
+  },
+  {
+    "schoolName": "Harder Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Harder Elementary School'"
+
+  },
+  {
+    "schoolName": "Tyrrell Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Tyrrell Elementary School'"
+
+  },
+  {
+    "schoolName": "Fairview Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Fairview Elementary School'"
+
+  },
+  {
+    "schoolName": "Treeview Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Treeview Elementary School'"
+
+  },
+  {
+    "schoolName": "Schafer Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Schafer Elementary School'"
+
+  },
+  {
+    "schoolName": "Bowman Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Bowman Elementary School'"
+
+  },
+  {
+    "schoolName": "Eldridge Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Eldridge Elementary School'"
+
+  },
+  {
+    "schoolName": "Faith Ringgold Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Faith Ringgold Elementary School'"
+
+  },
+  {
+    "schoolName": "Ruus Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Ruus Elementary School'"
+
+  },
+  {
+    "schoolName": "Southgate Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Southgate Elementary School'"
+
+  },
+  {
+    "schoolName": "Lorin Eden Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Lorin Eden Elementary School'"
+
+  },
+  {
+    "schoolName": "Eden Gardens Elementary School",
+    "region": "Hayward",
+    "siteId":"Site Id for 'Eden Gardens Elementary School'"
+
+  },
+  {
+    "schoolName": "Coliseum Collegiate Prep Academy",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Coliseum Collegiate Prep Academy'"
+
+  },
+  {
+    "schoolName": "Montera Middle School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Montera Middle School'"
+
+  },
+  {
+    "schoolName": "Westlake Middle School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Westlake Middle School'"
+
+  },
+  {
+    "schoolName": "ASCEND Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'ASCEND Elementary School'"
+
+  },
+  {
+    "schoolName": "Esperanza Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Esperanza Elementary School'"
+
+  },
+  {
+    "schoolName": "Korematsu Discovery Academy",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Korematsu Discovery Academy'"
+
+  },
+  {
+    "schoolName": "Manzanita Community School & Manzanita SEED",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Manzanita Community School & Manzanita SEED'"
+
+  },
+  {
+    "schoolName": "Elmhurst Middle School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Elmhurst Middle School'"
+
+  },
+  {
+    "schoolName": "Global Family Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Global Family Elementary School'"
+
+  },
+  {
+    "schoolName": "Howard Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Howard Elementary School'"
+
+  },
+  {
+    "schoolName": "Sankofa Academy",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Sankofa Academy'"
+
+  },
+  {
+    "schoolName": "Glenview Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Glenview Elementary School'"
+
+  },
+  {
+    "schoolName": "Prescott Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Prescott Elementary School'"
+
+  },
+  {
+    "schoolName": "Greenleaf Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Greenleaf Elementary School'"
+
+  },
+  {
+    "schoolName": "EnCompass Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'EnCompass Elementary School'"
+
+  },
+  {
+    "schoolName": "Bridges Academy Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Bridges Academy Elementary School'"
+
+  },
+  {
+    "schoolName": "MLK Lafayette Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'MLK Lafayette Elementary School'"
+
+  },
+  {
+    "schoolName": "International Community School & Think College Now",
+    "region": "Oakland",
+    "siteId":"Site Id for 'International Community School & Think College Now'"
+
+  },
+  {
+    "schoolName": "Learning Without Limits Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Learning Without Limits Elementary School'"
+
+  },
+  {
+    "schoolName": "Bret Harte Oakland Middle School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Bret Harte Oakland Middle School'"
+
+  },
+  {
+    "schoolName": "Madison Park Primary",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Madison Park Primary'"
+
+  },
+  {
+    "schoolName": "Futures Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Futures Elementary School'"
+
+  },
+  {
+    "schoolName": "Futures & Community United Elementary School",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Futures & Community United Elementary School'"
+
+  },
+  {
+    "schoolName": "Life Academy",
+    "region": "Oakland",
+    "siteId":"Site Id for 'Life Academy'"
+
+  },
+  {
+    "schoolName": "John Gill Elementary School",
+    "region": "Redwood City",
+    "siteId":"Site Id for 'John Gill Elementary School'"
+
+  },
+  {
+    "schoolName": "Hawes Elementary School",
+    "region": "Redwood City",
+    "siteId":"Site Id for 'Hawes Elementary School'"
+
+  },
+  {
+    "schoolName": "Henry Ford Elementary School",
+    "region": "Redwood City",
+    "siteId":"Site Id for 'Henry Ford Elementary School'"
+
+  },
+  {
+    "schoolName": "Adelante Selby Lane Elementary School",
+    "region": "Redwood City",
+    "siteId":"Site Id for 'Adelante Selby Lane Elementary School'"
+
+  },
+  {
+    "schoolName": "Bessie Carmichael",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Bessie Carmichael'"
+
+  },
+  {
+    "schoolName": "Redding Elementary School",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Redding Elementary School'"
+
+  },
+  {
+    "schoolName": "Garfield Elementary School",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Garfield Elementary School'"
+
+  },
+  {
+    "schoolName": "Up on Top - Program Site",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Up on Top - Program Site'"
+
+  },
+  {
+    "schoolName": "Sherman Elementary School",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Sherman Elementary School'"
+
+  },
+  {
+    "schoolName": "Moscone Elementary School",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Moscone Elementary School'"
+
+  },
+  {
+    "schoolName": "Tenderloin Community School",
+    "region": "San Francisco Civic Center",
+    "siteId":"Site Id for 'Tenderloin Community School'"
+
+  }
+]
