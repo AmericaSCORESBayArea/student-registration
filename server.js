@@ -5,7 +5,7 @@ const bp =  require('body-parser');
 const cors =  require('cors');
 const axios = require('axios');
 const dotenv = require('dotenv');
-// const { exec } = require('child_process');
+const schoolIdMapping = require('./school_site_id_mapping.json');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
@@ -37,6 +37,20 @@ const corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
+const getSiteIdFromSchoolName = (schoolName) => {
+  if (schoolIdMapping) {
+    if (Array.isArray(schoolIdMapping)) {
+      if (schoolIdMapping.length > 0) {
+        const matchingSchoolIds = schoolIdMapping.filter((item) => item.schoolName && item.siteId && item.schoolName === schoolName).map((item) => item.siteId);
+        if (matchingSchoolIds.length > 0) {
+          return matchingSchoolIds[0];
+        }
+      }
+    }
+  }
+  return "";
+}
+
 app.post('/register',cors(corsOptions), async(req, res) => {
 
   let returnStatus = 400;
@@ -45,9 +59,12 @@ app.post('/register',cors(corsOptions), async(req, res) => {
   try {
     const data = {
       ...req.body,
-      ContactRecordType: process.env.CONTACTRECORDID
+      SchoolSiteId:req.body.SchoolName ? getSiteIdFromSchoolName() : "",
+      ContactType: process.env.CONTACTRECORDTYPE,
+      ContactRecordType: process.env.CONTACTRECORDTYPE
     };
-    console.log('data', req.body);
+    console.log('REQUEST BODY : ', req.body);
+    console.log('DATA TO SEND : ',data);
     const mRes = await axios.post(muleEndPoint, data, reqHeaders)
       .then((response) => {
         console.log('success response', response.data);
@@ -63,10 +80,7 @@ app.post('/register',cors(corsOptions), async(req, res) => {
       returnMessage = mRes.response.data;
     } else {
       const rData = mRes.data;
-      if (!!rData.ContactId) {
-        returnStatus = mRes.status;
-        returnMessage = rData.ContactId;
-      }
+      console.log('RESPONSE : ', rData);
     }
   } catch(e) {
     console.error("server error encountered...");
