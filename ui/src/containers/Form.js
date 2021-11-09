@@ -149,6 +149,15 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     return true;
   });
 
+  const setErrorStates = (title,message) => {
+    setSubmitErrorTitle(title);
+    setSubmitErrorMessage(message);
+    setTimeout(() => {
+      setSubmitErrorTitle(null);
+      setSubmitErrorMessage(null);
+    }, 30000);
+  }
+
   const postFetch = () => {
     if (!blSubmitButtonDisabled) {
       if (!!postEndpoint) {
@@ -178,13 +187,11 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
         }, (error) => {
           console.log(error);
           setSubmitInProgress(false);
-          setSubmitErrorTitle("Error Encountered");
-          setSubmitErrorMessage("Oops! Something Went Wrong!");
+          setErrorStates("Error Encountered",`Oops! Something Went Wrong! [1] ${error}`);
         }).catch((e) => {
           console.log(e);
           setSubmitInProgress(false);
-          setSubmitErrorTitle("Error Encountered");
-          setSubmitErrorMessage("Oops! Something Went Wrong!");
+          setErrorStates("Error Encountered",`Oops! Something Went Wrong! [2] ${e}`);
         });
       }
     } else {
