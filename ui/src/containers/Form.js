@@ -305,26 +305,6 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               })
             }
             {
-              !!submitErrorMessage &&
-              <Alert
-                color="danger"
-              >
-                {
-                  !!submitErrorTitle &&
-                  <h3>{`${submitErrorTitle}`}</h3>
-                }
-                {`${submitErrorMessage}`}
-              </Alert>
-            }
-            {
-              !!submitSuccessMessage &&
-              <Alert
-                color="success"
-              >
-                {`${submitSuccessMessage}`}
-              </Alert>
-            }
-            {
               blShowWarningMessages && !blErrorEncountered && !submitInProgress &&
               <Alert
                 color="warning"
@@ -373,6 +353,26 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               <SpinnerWithMessage
                 message={`Registering...`}
               />
+            }
+            {
+              !!submitErrorMessage &&
+              <Alert
+                color="danger"
+              >
+                {
+                  !!submitErrorTitle &&
+                  <h3>{`${submitErrorTitle}`}</h3>
+                }
+                {`${submitErrorMessage}`}
+              </Alert>
+            }
+            {
+              !!submitSuccessMessage &&
+              <Alert
+                color="success"
+              >
+                {`${submitSuccessMessage}`}
+              </Alert>
             }
             {
               !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
