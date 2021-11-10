@@ -9,6 +9,8 @@ import Waiver from "../components/Waiver";
 import isValidEmail from "../modules/isValidEmail";
 import RequiredWrapper from "../components/form/Required";
 
+const resetFormTimeoutMS = 30000;
+
 const reqHeaders = {
   headers: {
     'Content-Type': 'application/json'
@@ -155,7 +157,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     setTimeout(() => {
       setSubmitErrorTitle(null);
       setSubmitErrorMessage(null);
-    }, 30000);
+    }, resetFormTimeoutMS);
   }
 
   const postFetch = () => {
@@ -184,6 +186,9 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
           console.log(response);
           setSubmitInProgress(false);
           setSubmitSuccessMessage(`Successful!`);
+          setTimeout(() => {
+            setSubmitSuccessMessage(null);
+          }, resetFormTimeoutMS)
         }, (error) => {
           console.log(error);
           setSubmitInProgress(false);
