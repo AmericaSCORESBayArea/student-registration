@@ -9,6 +9,8 @@ import Waiver from "../components/Waiver";
 import isValidEmail from "../modules/isValidEmail";
 import RequiredWrapper from "../components/form/Required";
 
+const resetFormTimeoutMS = 10000;
+
 const reqHeaders = {
   headers: {
     'Content-Type': 'application/json'
@@ -149,6 +151,15 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     return true;
   });
 
+  const setErrorStates = (title,message) => {
+    setSubmitErrorTitle(title);
+    setSubmitErrorMessage(message);
+    setTimeout(() => {
+      setSubmitErrorTitle(null);
+      setSubmitErrorMessage(null);
+    }, resetFormTimeoutMS);
+  }
+
   const postFetch = () => {
     if (!blSubmitButtonDisabled) {
       if (!!postEndpoint) {
@@ -175,16 +186,17 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
           console.log(response);
           setSubmitInProgress(false);
           setSubmitSuccessMessage(`Successful!`);
+          setTimeout(() => {
+            setSubmitSuccessMessage(null);
+          }, resetFormTimeoutMS)
         }, (error) => {
           console.log(error);
           setSubmitInProgress(false);
-          setSubmitErrorTitle("Error Encountered");
-          setSubmitErrorMessage("Oops! Something Went Wrong!");
+          setErrorStates("Error Encountered",`Oops! Something Went Wrong! [1] ${error}`);
         }).catch((e) => {
           console.log(e);
           setSubmitInProgress(false);
-          setSubmitErrorTitle("Error Encountered");
-          setSubmitErrorMessage("Oops! Something Went Wrong!");
+          setErrorStates("Error Encountered",`Oops! Something Went Wrong! [2] ${e}`);
         });
       }
     } else {
@@ -293,26 +305,6 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               })
             }
             {
-              !!submitErrorMessage &&
-              <Alert
-                color="danger"
-              >
-                {
-                  !!submitErrorTitle &&
-                  <h3>{`${submitErrorTitle}`}</h3>
-                }
-                {`${submitErrorMessage}`}
-              </Alert>
-            }
-            {
-              !!submitSuccessMessage &&
-              <Alert
-                color="success"
-              >
-                {`${submitSuccessMessage}`}
-              </Alert>
-            }
-            {
               blShowWarningMessages && !blErrorEncountered && !submitInProgress &&
               <Alert
                 color="warning"
@@ -361,6 +353,26 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
               <SpinnerWithMessage
                 message={`Registering...`}
               />
+            }
+            {
+              !!submitErrorMessage &&
+              <Alert
+                color="danger"
+              >
+                {
+                  !!submitErrorTitle &&
+                  <h3>{`${submitErrorTitle}`}</h3>
+                }
+                {`${submitErrorMessage}`}
+              </Alert>
+            }
+            {
+              !!submitSuccessMessage &&
+              <Alert
+                color="success"
+              >
+                {`${submitSuccessMessage}`}
+              </Alert>
             }
             {
               !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&

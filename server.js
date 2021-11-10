@@ -1,18 +1,17 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const bp =  require('body-parser');
-const cors =  require('cors');
+const bp = require('body-parser');
+const cors = require('cors');
 const axios = require('axios');
 const dotenv = require('dotenv');
-// const { exec } = require('child_process');
+const schoolIdMapping = require('./school_site_id_mapping.json');
 
 app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+app.use(bp.urlencoded({extended: true}));
 
 const configurationStartingKeyValueIndicatingAPIAllowed = `REACT_APP_`;
 const generateAppConfig = () => {
-
   const dotEnvResult = dotenv.config({path: '.env'});
   return !('error' in dotEnvResult) ? dotEnvResult.parsed : process.env;
 };
@@ -37,49 +36,58 @@ const corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
-app.post('/register',cors(corsOptions), async(req, res) => {
+const getSiteIdFromSchoolName = (schoolName) => {
+  if (schoolIdMapping) {
+    if (Array.isArray(schoolIdMapping)) {
+      if (schoolIdMapping.length > 0) {
+        const matchingSchoolIds = schoolIdMapping.filter((item) => item.schoolName && item.siteId && item.schoolName === schoolName).map((item) => item.siteId);
+        if (matchingSchoolIds.length > 0) {
+          return matchingSchoolIds[0];
+        }
+      }
+    }
+  }
+  return "";
+}
 
-  let returnStatus = 400;
-  let returnMessage = null;
-
+app.post('/register', cors(corsOptions), async (req, res) => {
+  let rStatus = 400;
+  let rData = null;
   try {
     const data = {
       ...req.body,
-      ContactRecordType: process.env.CONTACTRECORDID
+      SchoolSiteId: req.body.SchoolName ? getSiteIdFromSchoolName() : "",
+      ContactType: process.env.CONTACTRECORDTYPE,
+      ContactRecordType: process.env.CONTACTRECORDTYPE
     };
-    console.log('data', req.body);
+    console.log('Form Data from UI : ', req.body);
+    console.log(`Data to Send to Mulesoft API ${muleEndPoint} :`, data);
     const mRes = await axios.post(muleEndPoint, data, reqHeaders)
       .then((response) => {
-        console.log('success response', response.data);
+        console.log(`Request Complete!`)
         return response;
       }, (error) => {
-        console.log(error);
-        console.log(error.data);
-        return error;
+        console.error(`Request ERRORS!`)
+        console.error(error);
+        return error.response;
       });
-    console.log(mRes);
-    if (mRes.isAxiosError) {
-      returnStatus = mRes.response.status;
-      returnMessage = mRes.response.data;
-    } else {
-      const rData = mRes.data;
-      if (!!rData.ContactId) {
-        returnStatus = mRes.status;
-        returnMessage = rData.ContactId;
-      }
-    }
-  } catch(e) {
-    console.error("server error encountered...");
+    rData = mRes.data;
+    rStatus = mRes.status;
+    console.log(`Mulesoft Response Status + Data : ${rStatus} : ${typeof rData === "object" ? JSON.stringify(rData) : rData}`);
+  } catch (e) {
+    rData = "";
+    rStatus = 502;
+    console.error("Server error encountered...");
     console.error(e);
   }
-  res.status(returnStatus).json({data: returnMessage});
+  res.status(rStatus).json({data: rData});
 });
 
 app.use(express.static(path.join(__dirname, '/public')));
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/info',cors(corsOptions), async(req, res) => {
+app.get('/info', cors(corsOptions), async (req, res) => {
 
 
   let allowedAPIConfigResponse = {};

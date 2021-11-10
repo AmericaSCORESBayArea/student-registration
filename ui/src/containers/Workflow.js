@@ -78,8 +78,6 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConf
         store.set(formName, formState, true);
       }
       toggleFormLoadState();
-    } else {
-      console.log("no more form indices");
     }
   };
 
