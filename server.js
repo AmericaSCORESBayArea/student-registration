@@ -12,7 +12,6 @@ app.use(bp.urlencoded({ extended: true }));
 
 const configurationStartingKeyValueIndicatingAPIAllowed = `REACT_APP_`;
 const generateAppConfig = () => {
-
   const dotEnvResult = dotenv.config({path: '.env'});
   return !('error' in dotEnvResult) ? dotEnvResult.parsed : process.env;
 };
