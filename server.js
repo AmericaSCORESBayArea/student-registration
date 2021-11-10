@@ -51,10 +51,8 @@ const getSiteIdFromSchoolName = (schoolName) => {
 }
 
 app.post('/register',cors(corsOptions), async(req, res) => {
-
-  let returnStatus = 400;
-  let returnMessage = null;
-
+  let rStatus = 400;
+  let rData = null;
   try {
     const data = {
       ...req.body,
@@ -62,30 +60,28 @@ app.post('/register',cors(corsOptions), async(req, res) => {
       ContactType: process.env.CONTACTRECORDTYPE,
       ContactRecordType: process.env.CONTACTRECORDTYPE
     };
-    console.log('REQUEST BODY : ', req.body);
-    console.log('DATA TO SEND : ',data);
+    console.log('Form Data from UI : ', req.body);
+    console.log(`Data to Send to Mulesoft API ${muleEndPoint} :`, data);
     const mRes = await axios.post(muleEndPoint, data, reqHeaders)
       .then((response) => {
-        console.log('success response', response.data);
+        console.log(`Request Complete!`)
         return response;
       }, (error) => {
-        console.log(error);
-        console.log(error.data);
+        console.error(`Request ERRORS!`)
+        console.error(error);
+        console.error(error.data);
         return error;
       });
-    console.log(mRes);
-    if (mRes.isAxiosError) {
-      returnStatus = mRes.response.status;
-      returnMessage = mRes.response.data;
-    } else {
-      const rData = mRes.data;
-      console.log('RESPONSE : ', rData);
-    }
+    rData = mRes.data;
+    rStatus = mRes.status;
+    console.log(`Mulesoft Response Status + Data : ${rStatus} : ${rData}`);
   } catch(e) {
-    console.error("server error encountered...");
+    rData = "";
+    rStatus = 502;
+    console.error("Server error encountered...");
     console.error(e);
   }
-  res.status(returnStatus).json({data: returnMessage});
+  res.status(rStatus).json({data: rData});
 });
 
 app.use(express.static(path.join(__dirname, '/public')));
