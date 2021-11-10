@@ -69,12 +69,11 @@ app.post('/register', cors(corsOptions), async (req, res) => {
       }, (error) => {
         console.error(`Request ERRORS!`)
         console.error(error);
-        console.error(error.data);
-        return error;
+        return error.response;
       });
     rData = mRes.data;
     rStatus = mRes.status;
-    console.log(`Mulesoft Response Status + Data : ${rStatus} : ${JSON.stringify(rData)}`);
+    console.log(`Mulesoft Response Status + Data : ${rStatus} : ${typeof rData === "object" ? JSON.stringify(rData) : rData}`);
   } catch (e) {
     rData = "";
     rStatus = 502;
