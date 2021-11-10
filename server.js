@@ -56,7 +56,7 @@ app.post('/register', cors(corsOptions), async (req, res) => {
   try {
     const data = {
       ...req.body,
-      SchoolSiteId: req.body.SchoolName ? getSiteIdFromSchoolName() : "",
+      SchoolSiteId: req.body.SchoolName ? getSiteIdFromSchoolName(req.body.SchoolName) : "",
       ContactType: process.env.CONTACTRECORDTYPE,
       ContactRecordType: process.env.CONTACTRECORDTYPE
     };
