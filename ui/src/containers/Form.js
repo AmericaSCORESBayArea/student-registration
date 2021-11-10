@@ -9,7 +9,7 @@ import Waiver from "../components/Waiver";
 import isValidEmail from "../modules/isValidEmail";
 import RequiredWrapper from "../components/form/Required";
 
-const resetFormTimeoutMS = 30000;
+const resetFormTimeoutMS = 10000;
 
 const reqHeaders = {
   headers: {
