@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const bp =  require('body-parser');
-const cors =  require('cors');
+const bp = require('body-parser');
+const cors = require('cors');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const schoolIdMapping = require('./school_site_id_mapping.json');
 
 app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
+app.use(bp.urlencoded({extended: true}));
 
 const configurationStartingKeyValueIndicatingAPIAllowed = `REACT_APP_`;
 const generateAppConfig = () => {
@@ -50,13 +50,13 @@ const getSiteIdFromSchoolName = (schoolName) => {
   return "";
 }
 
-app.post('/register',cors(corsOptions), async(req, res) => {
+app.post('/register', cors(corsOptions), async (req, res) => {
   let rStatus = 400;
   let rData = null;
   try {
     const data = {
       ...req.body,
-      SchoolSiteId:req.body.SchoolName ? getSiteIdFromSchoolName() : "",
+      SchoolSiteId: req.body.SchoolName ? getSiteIdFromSchoolName() : "",
       ContactType: process.env.CONTACTRECORDTYPE,
       ContactRecordType: process.env.CONTACTRECORDTYPE
     };
@@ -74,8 +74,8 @@ app.post('/register',cors(corsOptions), async(req, res) => {
       });
     rData = mRes.data;
     rStatus = mRes.status;
-    console.log(`Mulesoft Response Status + Data : ${rStatus} : ${rData}`);
-  } catch(e) {
+    console.log(`Mulesoft Response Status + Data : ${rStatus} : ${JSON.stringify(rData)}`);
+  } catch (e) {
     rData = "";
     rStatus = 502;
     console.error("Server error encountered...");
@@ -88,7 +88,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/info',cors(corsOptions), async(req, res) => {
+app.get('/info', cors(corsOptions), async (req, res) => {
 
 
   let allowedAPIConfigResponse = {};
