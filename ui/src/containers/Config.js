@@ -81,18 +81,21 @@ const ConfigContainer  = ({localizationValue}) => {
     return stringConfigInput;
   };
   const handleObjectLocalizedConfig = (objectConfigInput) => {
-    try {
-      let returnObj = {};
-      Object.keys(objectConfigInput).map((item) => {
-        const fieldNameToUse = blStartsWithKeyCharacter(item) ? getLocalizedValue(item) : item;
-        return returnObj[fieldNameToUse] = generateLocalizedConfig(objectConfigInput[item])
-      });
-      return returnObj;
-    } catch (e) {
-      console.error(`error in handleObjectLocalizedConfig`);
-      console.error(e);
+    if (objectConfigInput) {
+      try {
+        let returnObj = {};
+        Object.keys(objectConfigInput).map((item) => {
+          const fieldNameToUse = blStartsWithKeyCharacter(item) ? getLocalizedValue(item) : item;
+          return returnObj[fieldNameToUse] = generateLocalizedConfig(objectConfigInput[item])
+        });
+        return returnObj;
+      } catch (e) {
+        console.error(`error in handleObjectLocalizedConfig`);
+        console.error(e);
+      }
+      return objectConfigInput;
     }
-    return objectConfigInput;
+    return null;
   };
 
   const generateLocalizedConfig = (configInput) => {
