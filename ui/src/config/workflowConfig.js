@@ -5,6 +5,11 @@ import registrationFormConfig from "./forms/registration";
 
 const workflowConfig = [
   {
+    formName: "Select Region",
+    configEndpoint: "/region-config",
+    nextForm: "Authentication"
+  },
+  {
     formName: "Authentication",
     formConfig: authenticationFormConfig,
     nextForm: "Parent or Coach",

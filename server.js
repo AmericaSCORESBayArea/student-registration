@@ -88,8 +88,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 
 app.get('/info', cors(corsOptions), async (req, res) => {
-
-
   let allowedAPIConfigResponse = {};
   Object.keys(appConfig)
     .filter((item) => item.indexOf(configurationStartingKeyValueIndicatingAPIAllowed) === 0)
@@ -98,6 +96,19 @@ app.get('/info', cors(corsOptions), async (req, res) => {
     });
   res.status(200).json(allowedAPIConfigResponse);
 });
+
+// app.get('/region-config', cors(corsOptions), async (req, res) => {
+//
+//   console.log("REGION CONFIG REQUEST HERE");
+//
+//   // let allowedAPIConfigResponse = {};
+//   // Object.keys(appConfig)
+//   //   .filter((item) => item.indexOf(configurationStartingKeyValueIndicatingAPIAllowed) === 0)
+//   //   .map((item) => {
+//   //     allowedAPIConfigResponse[item] = appConfig[item];
+//   //   });
+//   res.status(200).json({});
+// });
 
 app.listen(PORT, err => {
   if (err) throw err;
