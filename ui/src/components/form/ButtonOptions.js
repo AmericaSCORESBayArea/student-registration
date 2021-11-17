@@ -8,6 +8,7 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue,disabled}) => {
   const {
     formValue,
     helpText,
+    buttonOrientation,
     buttonItems,
     size
   } = config;
@@ -44,8 +45,9 @@ const ButtonOptionsElement = ({config,onValueChange,currentValue,disabled}) => {
         />
       </div>
       <ButtonGroup
-        name={`${formValue}`}
         id={`${elementId}`}
+        name={`${formValue}`}
+        vertical={buttonOrientation && buttonOrientation === "vertical"}
       >
         {
           buttonDisplayValues.map((item, index) => {

@@ -287,72 +287,146 @@ const registrationFormConfig = [
     isRequired: true
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
+    buttonOrientation:"vertical",
     formValue: "Gender",
     isRequired: true,
     formLabel: "!REGISTRATION_FORM_Gender_LABEL",
     helpText: "!REGISTRATION_FORM_Gender_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Gender_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_Gender_VALUE_MALE",
-      "!REGISTRATION_FORM_Gender_VALUE_FEMALE",
-      "!REGISTRATION_FORM_Gender_VALUE_NON_BINARY",
-      "!REGISTRATION_FORM_Gender_VALUE_PREFER_NOT_TO_SAY"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_Gender_VALUE_MALE",
+        value:"Male"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Gender_VALUE_FEMALE",
+        value:"Female"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Gender_VALUE_NON_BINARY",
+        value:"Non-binary"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Gender_VALUE_PREFER_NOT_TO_SAY",
+        value:"Prefer not to say"
+      }
     ]
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
+    buttonOrientation:"vertical",
     formValue: "Grade",
     isRequired: true,
     formLabel: "!REGISTRATION_FORM_Grade_LABEL",
     helpText: "!REGISTRATION_FORM_Grade_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Grade_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_Grade_Kindergarten",
-      "!REGISTRATION_FORM_Grade_First",
-      "!REGISTRATION_FORM_Grade_Second",
-      "!REGISTRATION_FORM_Grade_Third",
-      "!REGISTRATION_FORM_Grade_Fourth",
-      "!REGISTRATION_FORM_Grade_Fifth",
-      "!REGISTRATION_FORM_Grade_Sixth",
-      "!REGISTRATION_FORM_Grade_Seventh",
-      "!REGISTRATION_FORM_Grade_Eighth"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Kindergarten",
+        value:"K"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_First",
+        value:"1st"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Second",
+        value:"2nd"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Third",
+        value:"3rd"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Fourth",
+        value:"4th"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Fifth",
+        value:"5th"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Sixth",
+        value:"6th"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Seventh",
+        value:"7th"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Grade_Eighth",
+        value:"8th"
+      }
     ]
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
+    buttonOrientation:"vertical",
     formValue: "Ethnicity",
     isRequired: true,
     formLabel: "!REGISTRATION_FORM_Ethnicity_LABEL",
     helpText: "!REGISTRATION_FORM_Ethnicity_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Ethnicity_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_Ethnicity_Hispanic_Latino",
-      "!REGISTRATION_FORM_Ethnicity_Native_American",
-      "!REGISTRATION_FORM_Ethnicity_African_American",
-      "!REGISTRATION_FORM_Ethnicity_Pacific_Islander",
-      "!REGISTRATION_FORM_Ethnicity_Asian",
-      "!REGISTRATION_FORM_Ethnicity_Caucasian",
-      "!REGISTRATION_FORM_Ethnicity_Middle_Eastern_Arabic",
-      "!REGISTRATION_FORM_Ethnicity_Multi_Racial_Multi_Ethnic",
-      "!REGISTRATION_FORM_Ethnicity_Filipino",
-      // "!REGISTRATION_FORM_Ethnicity_Other"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Hispanic_Latino",
+        value:"Hispanic/Latino"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Native_American",
+        value:"Native American"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_African_American",
+        value:"African American"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Pacific_Islander",
+        value:"Pacific Islander"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Asian",
+        value:"Asian"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Caucasian",
+        value:"Caucasian"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Middle_Eastern_Arabic",
+        value:"Middle Eastern/Arabic"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Multi_Racial_Multi_Ethnic",
+        value:"Multi-Racial/Multi-Ethnic"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Ethnicity_Filipino",
+        value:"Filipino"
+      }
     ]
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
     formValue: "ReducedPriceLunch",
     isRequired: true,
     formLabel: "!REGISTRATION_FORM_ReducedPriceLunch_LABEL",
     helpText: "!REGISTRATION_FORM_ReducedPriceLunch_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_ReducedPriceLunch_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_YES",
-      "!REGISTRATION_FORM_NO"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_YES",
+        value:"Yes"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_NO",
+        value:"No"
+      }
     ]
   },
   {
@@ -363,15 +437,21 @@ const registrationFormConfig = [
     placeholder: "!REGISTRATION_FORM_Allergies_PLACEHOLDER",
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
     formValue: "PermissiontoCommuteAlone",
     formLabel: "!REGISTRATION_FORM_PermissiontoCommuteAlone_LABEL",
     helpText: "!REGISTRATION_FORM_PermissiontoCommuteAlone_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_PermissiontoCommuteAlone_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_YES",
-      "!REGISTRATION_FORM_NO"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_YES",
+        value:"Yes"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_NO",
+        value:"No"
+      }
     ]
   },
   {
@@ -499,15 +579,21 @@ const registrationFormConfig = [
     fillInOptionFormValueOverride: "OtherLang"
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
     formValue: "Volunteer",
     formLabel: "!REGISTRATION_FORM_Volunteer_LABEL",
     helpText: "!REGISTRATION_FORM_Volunteer_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Volunteer_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_YES",
-      "!REGISTRATION_FORM_NO"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_YES",
+        value:"Yes"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_NO",
+        value:"No"
+      }
     ]
   },
   {
@@ -546,16 +632,22 @@ const registrationFormConfig = [
     placeholder: "!REGISTRATION_FORM_Emergency_Contact_Phone2_PLACEHOLDER",
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
     formValue: "Emergency_Contact_Permission_to_Pickup_child",
     isRequired: true,
     formLabel: "!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_LABEL",
     helpText: "!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_YES",
-      "!REGISTRATION_FORM_NO"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_YES",
+        value:"Yes"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_NO",
+        value:"No"
+      }
     ]
   },
   {
@@ -591,15 +683,21 @@ const registrationFormConfig = [
     placeholder: "!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_PLACEHOLDER",
   },
   {
-    dataType: "enum",
+    dataType: "buttonOptions",
     formValue: "Second_Emergency_Contact_Permission_to_Pickup_child",
     formLabel: "!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL",
     helpText: "!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
     selectText: "!REGISTRATION_FORM_SELECT",
-    enumItems: [
-      "!REGISTRATION_FORM_YES",
-      "!REGISTRATION_FORM_NO"
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_YES",
+        value:"Yes"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_NO",
+        value:"No"
+      }
     ]
   }
 ];
