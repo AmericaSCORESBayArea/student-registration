@@ -483,11 +483,35 @@ const registrationFormConfig = [
     isRequired: true
   },
   {
-    dataType: "text",
+    dataType: "buttonOptions",
+    buttonOrientation:"vertical",
     formValue: "Relationship",
     formLabel: "!REGISTRATION_FORM_Relationship_LABEL",
     helpText: "!REGISTRATION_FORM_Relationship_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Relationship_PLACEHOLDER",
+    selectText: "!REGISTRATION_FORM_SELECT",
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_Parent",
+        value:"Parent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_LegalGuardian",
+        value:"Legal Guardian"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_FosterParent",
+        value:"Foster Parent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_Grandparent",
+        value:"Grandparent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_SiblingOrOtherRelative",
+        value:"Sibling/Other Relative"
+      }
+    ]
   },
   {
     dataType: "tel",
@@ -609,12 +633,36 @@ const registrationFormConfig = [
     placeholder: "!REGISTRATION_FORM_Emergency_Contact_Name_PLACEHOLDER",
   },
   {
-    dataType: "text",
+    dataType: "buttonOptions",
+    buttonOrientation:"vertical",
     formValue: "Emergency_Contact_Relationship",
     isRequired: true,
     formLabel: "!REGISTRATION_FORM_Emergency_Contact_Relationship_LABEL",
     helpText: "!REGISTRATION_FORM_Emergency_Contact_Relationship_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Emergency_Contact_Relationship_PLACEHOLDER",
+    selectText: "!REGISTRATION_FORM_SELECT",
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_Parent",
+        value:"Parent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_LegalGuardian",
+        value:"Legal Guardian"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_FosterParent",
+        value:"Foster Parent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_Grandparent",
+        value:"Grandparent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_SiblingOrOtherRelative",
+        value:"Sibling/Other Relative"
+      }
+    ]
   },
   {
     dataType: "tel",
@@ -662,11 +710,35 @@ const registrationFormConfig = [
     placeholder: "!REGISTRATION_FORM_Second_Emergency_Contact_Name_PLACEHOLDER",
   },
   {
-    dataType: "text",
+    dataType: "buttonOptions",
+    buttonOrientation:"vertical",
     formValue: "Second_Emergency_Contact_Relationship",
     formLabel: "!REGISTRATION_FORM_Second_Emergency_Contact_Relationship_LABEL",
     helpText: "!REGISTRATION_FORM_Second_Emergency_Contact_Relationship_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Second_Emergency_Contact_Relationship_PLACEHOLDER",
+    selectText: "!REGISTRATION_FORM_SELECT",
+    buttonItems: [
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_Parent",
+        value:"Parent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_LegalGuardian",
+        value:"Legal Guardian"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_FosterParent",
+        value:"Foster Parent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_Grandparent",
+        value:"Grandparent"
+      },
+      {
+        displayValue:"!REGISTRATION_FORM_Relationship_VALUE_SiblingOrOtherRelative",
+        value:"Sibling/Other Relative"
+      }
+    ]
   },
   {
     dataType: "tel",
