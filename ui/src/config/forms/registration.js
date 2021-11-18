@@ -680,25 +680,6 @@ const registrationFormConfig = [
     placeholder: "!REGISTRATION_FORM_Emergency_Contact_Phone2_PLACEHOLDER",
   },
   {
-    dataType: "buttonOptions",
-    formValue: "Emergency_Contact_Permission_to_Pickup_child",
-    isRequired: true,
-    formLabel: "!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_LABEL",
-    helpText: "!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
-    placeholder: "!REGISTRATION_FORM_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
-    selectText: "!REGISTRATION_FORM_SELECT",
-    buttonItems: [
-      {
-        displayValue:"!REGISTRATION_FORM_YES",
-        value:"Yes"
-      },
-      {
-        displayValue:"!REGISTRATION_FORM_NO",
-        value:"No"
-      }
-    ]
-  },
-  {
     dataType: "title",
     formLabel: "!REGISTRATION_FORM_Second_Emergency_Contact_TITLE"
   },
@@ -753,24 +734,6 @@ const registrationFormConfig = [
     formLabel: "!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_LABEL",
     helpText: "!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Second_Emergency_Contact_Phone2_PLACEHOLDER",
-  },
-  {
-    dataType: "buttonOptions",
-    formValue: "Second_Emergency_Contact_Permission_to_Pickup_child",
-    formLabel: "!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_LABEL",
-    helpText: "!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_HELPTEXT",
-    placeholder: "!REGISTRATION_FORM_Second_Emergency_Contact_Permission_to_Pickup_child_PLACEHOLDER",
-    selectText: "!REGISTRATION_FORM_SELECT",
-    buttonItems: [
-      {
-        displayValue:"!REGISTRATION_FORM_YES",
-        value:"Yes"
-      },
-      {
-        displayValue:"!REGISTRATION_FORM_NO",
-        value:"No"
-      }
-    ]
   }
 ];
 
