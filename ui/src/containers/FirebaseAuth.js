@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import firebase from 'firebase';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import SpinnerWithMessage from "../components/Spinner";
+import FirebaseSignOutContainer from "./FirebaseSignOut";
 
 const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
 
@@ -19,7 +21,7 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
   const [firebaseAuthCallbacksSet, setFirebaseAuthCallbacksSet] = useState(false);
   const [firebaseAuthObj, setFirebaseAuthObj] = useState(null);
 
-  const submitValueChange = (firebaseAuthObj) => onValueChange(firebaseAuthObj);
+  const submitValueChange = (newUserValue) => onValueChange(newUserValue);
 
   if (!firebaseAuthCallbacksSet) {
     setFirebaseAuthCallbacksSet(true);
@@ -30,11 +32,15 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
         } catch (e) {
           console.log(`Firebase App Initializing...`);
           firebase.initializeApp(firebaseAuth);
-          firebase.auth().onAuthStateChanged((user) => {
-            if (!!user) {
-              console.log("Firebase User Authorization Set!");
-              submitValueChange(user);
-              setFirebaseAuthObj(user);
+          firebase.auth().onAuthStateChanged((response) => {
+            if (!!response) {
+              const {multiFactor} = response
+              if (multiFactor) {
+                const{user} = multiFactor
+                console.log("Firebase User Authorization Set!");
+                submitValueChange(user);
+                setFirebaseAuthObj(user);
+              }
             } else {
               console.log("Firebase User Not Set Yet");
             }
@@ -81,6 +87,10 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
           :
           <div>
             <p>Logged in</p>
+            <FirebaseSignOutContainer
+              toolbarConfig={{signOutButtonText:"Sign Out",signingOutButtonText:"Signing Out..."}}
+              workflowState={[{formName:"Authentication",formState:"Logged In"}]}
+            />
           </div>
       }
     </div>
