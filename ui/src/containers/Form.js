@@ -84,6 +84,22 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const [formConfigError,setFormConfigError] = useState(null);
   const [formConfigFromEndPoint,setFormConfigFromEndpoint] = useState(null);
 
+  useEffect(() => {
+    if (isValueChanged) {
+      if (postEndpoint) {
+        window.addEventListener('beforeunload', alertUser)
+        return () => {
+          window.removeEventListener('beforeunload', alertUser)
+        }
+      }
+    }
+  }, [isValueChanged])
+
+  const alertUser = e => {
+    e.preventDefault()
+    e.returnValue = ''
+  }
+
   const submitForm = () => formSubmitCallback(formConfig, formState);
 
   useEffect(async () => {
@@ -137,7 +153,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
       formValue,
       value: newValueToUse
     });
-    setIsValueChanged(true);
+    if (!isValueChanged) setIsValueChanged(true);
   };
 
   const onOverrideValueChange = (config, e) => {
@@ -150,7 +166,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
       options: fillInOptionValues,
       value: newValueToUse
     });
-    setIsValueChanged(true);
+    if (!isValueChanged) setIsValueChanged(true);
   };
 
   const formConfigToUse = formConfig ? formConfig : formConfigFromEndPoint ? formConfigFromEndPoint : null;
