@@ -1,5 +1,10 @@
 const localization_es = {
 
+  //Region Form
+  REGION_FORM_LABEL_TEXT:"Región",
+  REGION_HELP_TEXT:"Seleccione región",
+  REGION_PLACEHOLDER_TEXT:"Seleccione región",
+
   //Required Text
   REQUIRED_FIELD_REQUIRED_TEXT:"Requerido",
   REQUIRED_FIELD_VALID_TEXT:"Válido",

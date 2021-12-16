@@ -1,5 +1,10 @@
 const localization_zh = {
 
+  //Region Form
+  REGION_FORM_LABEL_TEXT:"地区",
+  REGION_HELP_TEXT:"选择地区",
+  REGION_PLACEHOLDER_TEXT:"选择地区",
+
   //Required Text
   REQUIRED_FIELD_REQUIRED_TEXT:"必需的",
   REQUIRED_FIELD_VALID_TEXT:"有效的",
