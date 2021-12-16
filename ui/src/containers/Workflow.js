@@ -1,20 +1,9 @@
-import React, {Fragment, useState, useReducer} from 'react';
+import React, {Fragment, useState} from 'react';
 import store from "store2";
 import {Fade, Breadcrumb, BreadcrumbItem, FormGroup, ButtonGroup} from 'reactstrap';
 import FormContainer from "./Form";
 import SpinnerWithMessage from "../components/Spinner";
 
-const generateInitialWorkflowState = (workflowConfig) => {
-  if (!workflowConfig) return [];
-  return workflowConfig.filter((item) => !!item.formName).map((item) => {
-    const {formName,localStore} = item;
-    const initialFormState = !!localStore ? store.get(formName) : null;
-    return {
-      formName,
-      formState:initialFormState
-    };
-  });
-};
 
 
 const determineNextFormIndex = (currentFormIndex, workflowConfig, workflowState) => {
@@ -34,17 +23,7 @@ const determineNextFormIndex = (currentFormIndex, workflowConfig, workflowState)
   return 0;
 };
 
-const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConfig}) => {
-
-  const workflowStateReducer = (state, newState) => {
-    return [
-      ...state.filter((item) => item.formName !== newState.formName),
-      newState
-    ];
-  };
-
-  const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfig));
-
+const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConfig,workflowState,setWorkflowState,appendWorkflowStates}) => {
 
   const [currentFormIndex, setCurrentFormIndex] = useState(determineNextFormIndex(0, workflowConfig, workflowState));
   const [formLoading, setFormLoading] = useState(false);
@@ -59,13 +38,22 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConf
   };
 
   const formSubmitCallback = (config, formState) => {
+    let nextIndex = currentFormIndex;
     const {formName, localStore} = workflowConfig[currentFormIndex];
-    const nextIndex = workflowConfig.map((item, index) => {
+    const possibleNextIndex = workflowConfig.map((item, index) => {
       return {
         ...item,
         formIndex: index
       };
-    }).filter((item, index) => index > currentFormIndex && workflowState.filter((item_2) => item.formName === item_2.formName && item_2.formState === null).length > 0).map((item) => item.formIndex).reverse().pop();
+    }).filter((item, index) => {
+      return index > currentFormIndex && (workflowState.filter((item_2) => {
+      return item.formName === item_2.formName && item_2.formState === null}).length > 0 || formState.value)}).map((item) => item.formIndex).reverse().pop();
+      if (!isNaN(possibleNextIndex)) {
+        nextIndex = possibleNextIndex
+      }
+      if (nextIndex <= currentFormIndex ) {
+        nextIndex = currentFormIndex+1
+      }
 
     if (!isNaN(nextIndex)) {
       console.log(`next index : ${nextIndex}`);
@@ -87,7 +75,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConf
   };
 
   const getFormStateByFormName = (formNameToGet) => !!workflowState ? workflowState.filter((item_2) => formNameToGet === item_2.formName).map((item_2) => item_2.formState).pop() : null;
-
+  
   return (
     <div>
       {
@@ -109,6 +97,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConf
                       requiredConfig={requiredConfig}
                       initialFormState={!!currentFormState && Object.keys(currentFormState).length > 0 ? currentFormState : null}
                       formSubmitCallback={formSubmitCallback}
+                      appendWorkflowStates={appendWorkflowStates}
                     />
                   </Fade>
                 );
