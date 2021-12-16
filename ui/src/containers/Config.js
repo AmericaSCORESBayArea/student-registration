@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useReducer} from 'react';
+import store from "store2";
 import { Alert, Fade } from 'reactstrap';
 import axios from 'axios';
 import SpinnerWithMessage from '../components/Spinner';
 import WorkflowContainer from "./Workflow";
-import workflowConfig from "../config/workflowConfig";
+import workflowConfigInitial from "../config/workflowConfig";
 import toolbarConfig from "../config/toolbarConfig";
 import requiredConfig from "../config/requiredConfig";
 
@@ -22,39 +23,19 @@ const localizationStrings = {
   zh:localization_zh
 };
 
+const generateInitialWorkflowState = (workflowConfig) => {
+  if (!workflowConfig) return [];
+  return workflowConfig.filter((item) => !!item.formName).map((item) => {
+    const {formName,localStore} = item;
+    const initialFormState = !!localStore ? store.get(formName) : null;
+    return {
+      formName,
+      formState:initialFormState
+    };
+  });
+};
+
 const ConfigContainer  = ({localizationValue}) => {
-
-  const [configRequested, setConfigRequested] = useState(false);
-  const [configRequestCompleted, setConfigRequestedCompleted] = useState(false);
-  const [appConfig, setAppConfig] = useState(null);
-  const [requestError, setRequestError] = useState("");
-
-  if (!localizationValue) return null;
-
-  const runGetConfigRequest = () => {
-    setConfigRequested(true);
-    axios.get('/info', {
-      header: reqHeaders
-    }).then(function (response) {
-      const {data} = response;
-      if (!!data) {
-        setAppConfig(data);
-      }
-    }).catch(function (error) {
-      console.error(error);
-      setRequestError(error.message);
-    }).then(function () {
-      setConfigRequestedCompleted(true);
-    });
-  };
-
-  if (!configRequested) {
-    if (!configRequestCompleted) {
-      if (!appConfig) {
-        runGetConfigRequest();
-      }
-    }
-  }
 
   const blStartsWithKeyCharacter = (stringInput) => stringInput.indexOf(`!`) === 0;
   const getLocalizedValue = (keyString) => {
@@ -85,8 +66,11 @@ const ConfigContainer  = ({localizationValue}) => {
       try {
         let returnObj = {};
         Object.keys(objectConfigInput).map((item) => {
-          const fieldNameToUse = blStartsWithKeyCharacter(item) ? getLocalizedValue(item) : item;
-          return returnObj[fieldNameToUse] = generateLocalizedConfig(objectConfigInput[item])
+          if (item !== "decisionValues") {
+            const fieldNameToUse = blStartsWithKeyCharacter(item) ? getLocalizedValue(item) : item;
+            return returnObj[fieldNameToUse] = generateLocalizedConfig(objectConfigInput[item])
+          }
+          return returnObj[item] = objectConfigInput[item]
         });
         return returnObj;
       } catch (e) {
@@ -113,6 +97,58 @@ const ConfigContainer  = ({localizationValue}) => {
     }
     return configInput;
   };
+  
+  const workflowStateReducer = (state, newState) => {
+    return [
+      ...state.filter((item) => item.formName !== newState.formName),
+      newState
+    ];
+  };
+
+  const [configRequested, setConfigRequested] = useState(false);
+  const [configRequestCompleted, setConfigRequestedCompleted] = useState(false);
+  const [appConfig, setAppConfig] = useState(null);
+  const [workflowConfig, setWorkflowConfig] = useState(workflowConfigInitial);
+  const [workflowState, setWorkflowState] = useReducer(workflowStateReducer, generateInitialWorkflowState(workflowConfigInitial));
+  const [requestError, setRequestError] = useState("");
+
+
+
+
+  if (!localizationValue) return null;
+
+  const runGetConfigRequest = () => {
+    setConfigRequested(true);
+    axios.get('/info', {
+      header: reqHeaders
+    }).then(function (response) {
+      const {data} = response;
+      if (!!data) {
+        setAppConfig(data);
+      }
+    }).catch(function (error) {
+      console.error(error);
+      setRequestError(error.message);
+    }).then(function () {
+      setConfigRequestedCompleted(true);
+    });
+  };
+
+  if (!configRequested) {
+    if (!configRequestCompleted) {
+      if (!appConfig) {
+        runGetConfigRequest();
+      }
+    }
+  }
+
+  const appendWorkflowStates = (newWorkFlowStates) => {
+    generateInitialWorkflowState(newWorkFlowStates).map((item) => {
+      const matchingExistingWorkflowState = workflowState.find((item_2) => item.formName === item_2.formName)
+      if (!matchingExistingWorkflowState) setWorkflowState(item)
+    })
+    setWorkflowConfig([...workflowConfigInitial,...newWorkFlowStates])
+  }
 
   const appConfigLocalized = generateLocalizedConfig(appConfig);
   const workflowConfigLocalized = generateLocalizedConfig(workflowConfig);
@@ -143,6 +179,9 @@ const ConfigContainer  = ({localizationValue}) => {
             workflowConfig={workflowConfigLocalized}
             toolbarConfig={toolbarConfigLocalized}
             requiredConfig={requiredConfigLocalized}
+            workflowState={workflowState}
+            setWorkflowState={setWorkflowState}
+            appendWorkflowStates={appendWorkflowStates}
           />
         </div>
       }
