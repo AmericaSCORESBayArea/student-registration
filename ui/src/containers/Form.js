@@ -41,7 +41,7 @@ const generateInitialFormOverrideState = (formConfig) => {
   });
 };
 
-const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormState,initialFormOverrideState,formSubmitCallback}) => {
+const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormState,initialFormOverrideState,formSubmitCallback, appendWorkflowStates}) => {
 
   const {
     displayWaiver,
@@ -57,7 +57,9 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     waiverDeclineButtonText,
     waiverCloseButtonText,
     waiverShowWaiverButtonText,
-    waiverWaiverAcceptedMessage
+    waiverWaiverAcceptedMessage,
+    decisionMatchKey,
+    decisionValues
   } = workflowConfig;
 
   const formStateReducer = (state, newState) => {
@@ -79,7 +81,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
   const [isValueChanged, setIsValueChanged] = useState(false);
   const [formConfigLoading,setFormConfigLoading] = useState(false);
-  const [formConfigError,setFormConfigError] = useState("TESTING HERE");
+  const [formConfigError,setFormConfigError] = useState(null);
   const [formConfigFromEndPoint,setFormConfigFromEndpoint] = useState(null);
 
   const submitForm = () => formSubmitCallback(formConfig, formState);
@@ -110,7 +112,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   },[]);
 
   useEffect(() => {
-    if (!!submitOnAnyValue || (isValueChanged && submitOnValueChange)) {
+    if (submitOnAnyValue || (isValueChanged && submitOnValueChange)) {
       const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
       if (fieldsWithNonNullValues.length > 0) {
         submitForm();
@@ -123,7 +125,14 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const onValueChange = (config, e) => {
     const newValue = e?.target?.value;
     const {formValue, dataType} = config;
-    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
+    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e.phoneNumber ? e.phoneNumber : "" : "";
+    if (decisionMatchKey && decisionValues && Array.isArray(decisionValues)) {
+      const matchingDecision = decisionValues.find((item) => item.decisionValue === newValueToUse)
+      if (matchingDecision) {
+        const {outputConfig} = matchingDecision;
+        appendWorkflowStates(outputConfig)
+      }
+    }
     setFormState({
       formValue,
       value: newValueToUse
