@@ -53,13 +53,13 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
 
   const onFilterSelectValueChange = (filterValue, newValue) => {
     setIsUpdating(true);
-
     const currentValue = enumState[filterValue] ? enumState[filterValue] : null;
-
+    const blAlreadySelected = currentValue && currentValue === newValue;
     setEnumState({
       formValue: filterValue,
-      value: currentValue && currentValue === newValue ? filterAllSelectText : newValue
+      value: blAlreadySelected ? filterAllSelectText : newValue
     });
+    onSelectValueChange({target:{value:selectText}})
     setTimeout(() => {
       setIsUpdating(false);
     }, 0);
@@ -97,6 +97,7 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           id={`${elementId}`}
           onChange={onSelectValueChange}
           disabled={disabled}
+          value={currentValue}
         >
           <option
             key={"empty"}
@@ -156,7 +157,6 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
     }
     const valueFieldElementId = `${elementId}_filterField_value`;
     const valueFieldItems = [
-      selectText,
       ...enumItems.filter((item) => filterFields.filter((item_2) => {
         const currentFilterParentState = !!enumState[item_2] ? enumState[item_2] : null;
         return !currentFilterParentState || currentFilterParentState === filterAllSelectText || item[item_2] === currentFilterParentState;
@@ -212,7 +212,6 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           </div>
           :
           renderDropDown(formValue, elementId, onSelectValueChange, [
-            selectText,
             ...enumItems
           ])
       }
