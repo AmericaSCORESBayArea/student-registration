@@ -98,5 +98,109 @@
   {
     "schoolName": "Willie Brown Middle School",
     "siteId": "0011T00002O0xX0QAJ"
+  },
+  {
+    "schoolName":"Bowman Elementary School",
+    "siteId": "0011T00002O0xVcQAJ"
+  },
+  {
+    "schoolName":"Bret Harte Hayward Middle School",
+    "siteId": "0015000002HvvWaAAJ"
+  },
+  {
+    "schoolName":"Burbank Elementary School",
+    "siteId": "0011T00002KIFpHQAX"
+  },
+  {
+    "schoolName":"Cesar Chavez Middle School",
+    "siteId": "0015000002HvvWWAAZ"
+  },
+  {
+    "schoolName":"Cherryland Elementary School",
+    "siteId": "0011T00002KIFpIQAX"
+  },
+  {
+    "schoolName":"East Avenue Elementary School",
+    "siteId": "0011T00002KIFpJQAX"
+  },
+  {
+    "schoolName":"Eden Gardens Elementary School",
+    "siteId": "0011T00002KK9veQAD"
+  },
+  {
+    "schoolName":"Eldridge Elementary School",
+    "siteId": "0011T00002O0xVmQAJ"
+  },
+  {
+    "schoolName":"Fairview Elementary School",
+    "siteId": "0011T00002O0xWLQAZ"
+  },
+  {
+    "schoolName":"Faith Ringgold Elementary School",
+    "siteId": "0011T00002O0xW1QAJ"
+  },
+  {
+    "schoolName":"Glassbrook Elementary School",
+    "siteId": "0015000002HvvWeAAJ"
+  },
+  {
+    "schoolName":"Harder Elementary School",
+    "siteId": "0015000002HvvWfAAJ"
+  },
+  {
+    "schoolName":"Longwood Elementary School Hayward",
+    "siteId": "0015000002HvvWcAAJ"
+  },
+  {
+    "schoolName":"Lorin Eden Elementary School",
+    "siteId": "0011T00002KK9vKQAT"
+  },
+  {
+    "schoolName":"MLK Middle School Hayward",
+    "siteId": "0015000002HvvWXAAZ"
+  },
+  {
+    "schoolName":"Ochoa Middle School",
+    "siteId": "0015000002HvvWZAAZ"
+  },
+  {
+    "schoolName":"Palma Ceia Elementary School",
+    "siteId": "0015000002HvvWdAAJ"
+  },
+  {
+    "schoolName":"Park Elementary School",
+    "siteId": "0011T00002KIFpRQAX"
+  },
+  {
+    "schoolName":"Ruus Elementary School",
+    "siteId": "0011T00002O0xWBQAZ"
+  },
+  {
+    "schoolName":"Schafer Elementary School",
+    "siteId": "0011T00002O0xWuQAJ"
+  },
+  {
+    "schoolName":"Southgate Elementary School",
+    "siteId": "0011T00002KK9vAQAT"
+  },
+  {
+    "schoolName":"Stonebrae Elementary School",
+    "siteId": "0011T00002KIFpTQAX"
+  },
+  {
+    "schoolName":"Strobridge Elementary School",
+    "siteId": "0011T00002KIFpUQAX"
+  },
+  {
+    "schoolName":"Treeview Elementary School",
+    "siteId": "0011T00002O0xWzQAJ"
+  },
+  {
+    "schoolName":"Tyrrell Elementary School",
+    "siteId": "0011T00002N2jMpQAJ"
+  },
+  {
+    "schoolName":"Winton Middle School",
+    "siteId": "0015000002HvvWYAAZ"
   }
 ]
