@@ -59,7 +59,7 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
       formValue: filterValue,
       value: blAlreadySelected ? filterAllSelectText : newValue
     });
-    onSelectValueChange({target:{value:selectText}})
+    if (!blAlreadySelected) onSelectValueChange({target:{value:selectText}})
     setTimeout(() => {
       setIsUpdating(false);
     }, 0);
