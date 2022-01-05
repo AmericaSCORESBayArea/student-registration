@@ -98,6 +98,9 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           onChange={onSelectValueChange}
           disabled={disabled}
         >
+          <option
+            key={"empty"}
+          >{`${selectText}`}</option>
           {
             enumItemsToUse.sort((a,b) => a > b ? 1 : -1).map((item, index) => {
               return (
