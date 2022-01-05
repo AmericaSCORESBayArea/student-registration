@@ -1,10 +1,10 @@
 import React, {useState,useEffect} from 'react';
-import firebase from 'firebase';
 import { Fade, Button } from 'reactstrap';
+import { getAuth,signOut } from "firebase/auth";
 
 const FirebaseSignOutContainer  = ({toolbarConfig,workflowState}) => {
 
-  const {signOutButtonText,signingOutButtonText} = toolbarConfig;
+  const {signOutButtonText,signingOutButtonText} = toolbarConfig || {};
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,10 +23,15 @@ const FirebaseSignOutContainer  = ({toolbarConfig,workflowState}) => {
   const signOutClickCallback = () => {
     setIsSigningOut(true);
     setIsLoading(true);
-    firebase.auth().signOut();
-    setTimeout(() => {
-      window.location = "/";
-    }, 1000);
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      setTimeout(() => {
+        window.location = "/";
+      }, 1000);
+    }).catch((error) => {
+      // An error happened.
+      console.error("error signing out")
+    });
   };
 
   return (
