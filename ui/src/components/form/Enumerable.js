@@ -1,6 +1,6 @@
 import React, {useState,useReducer} from 'react';
 import {nanoid} from "nanoid";
-import {FormGroup, Input} from 'reactstrap';
+import {Button, FormGroup, Input,ButtonGroup} from 'reactstrap';
 import FormLabel from "./Label";
 import TextFormElement from "./Text";
 
@@ -51,12 +51,14 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
 
   const elementId = nanoid();
 
-  const onFilterSelectValueChange = (filterValue, e) => {
+  const onFilterSelectValueChange = (filterValue, newValue) => {
     setIsUpdating(true);
-    const newValue = e.target.value;
+
+    const currentValue = enumState[filterValue] ? enumState[filterValue] : null;
+
     setEnumState({
       formValue: filterValue,
-      value: newValue
+      value: currentValue && currentValue === newValue ? filterAllSelectText : newValue
     });
     setTimeout(() => {
       setIsUpdating(false);
@@ -97,7 +99,7 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
           disabled={disabled}
         >
           {
-            enumItemsToUse.map((item, index) => {
+            enumItemsToUse.sort((a,b) => a > b ? 1 : -1).map((item, index) => {
               return (
                 <option
                   key={index}
@@ -114,32 +116,34 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
     const currentFilterDropDownIndex = filterFields.indexOf(formValue);
     const parentFormValuesToConsiderForFilter = filterFields.filter((item, index) => index < currentFilterDropDownIndex);
     const itemsToDisplayBasedOnParentFilter = [
-      filterAllSelectText,
       ...enumItems.filter((item) => parentFormValuesToConsiderForFilter.filter((item_2) => {
         const currentFilterParentState = !!enumState[item_2] ? enumState[item_2] : null;
         return !currentFilterParentState || currentFilterParentState === filterAllSelectText || item[item_2] === currentFilterParentState;
       }).length === parentFormValuesToConsiderForFilter.length)
         .map((item) => item[formValue]).filter((item, index, arr) => arr.indexOf(item) === index)
     ];
+
+
+    const currentValue = !!enumState[formValue] ? enumState[formValue] : enumItemsToUse[0];
+
     return (
-      <Input
-        type="select"
+      <ButtonGroup
         name={`${formValue}`}
         id={`${elementId}`}
-        value={!!enumState[formValue] ? enumState[formValue] : enumItemsToUse[0]}
-        onChange={onSelectValueChange.bind(this, formValue)}
         disabled={disabled}
       >
         {
           itemsToDisplayBasedOnParentFilter.map((item, index) => {
             return (
-              <option
+              <Button
                 key={index}
-              >{`${item}`}</option>
-            );
+                color={item === currentValue ? "primary" :"secondary"}
+                onClick={onSelectValueChange.bind(this, formValue, item)}
+              >{`${item}`}</Button>
+            )
           })
         }
-      </Input>
+      </ButtonGroup>
     );
   };
 
@@ -194,7 +198,6 @@ const EnumerableElement = ({config,onValueChange,onOverrideValueChange,currentVa
         !!enableSubFiltering ?
           <div
             className="card"
-            style={{width: "18rem"}}
           >
             <div
               className="card-body"
