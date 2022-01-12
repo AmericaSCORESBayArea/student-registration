@@ -2,6 +2,7 @@ import React from 'react';
 import {Alert} from 'reactstrap';
 import isValidPhone from "../../modules/isValidPhone";
 import isValidEmail from "../../modules/isValidEmail";
+import isValidDate from "../../modules/isValidDate";
 
 const RequiredWrapper = ({currentValue, config,children,requiredConfig}) => {
   const {isRequired, dataType} = config;
@@ -12,7 +13,9 @@ const RequiredWrapper = ({currentValue, config,children,requiredConfig}) => {
         isValidEmail(currentValue) :
         dataType === "number" ?
           !isNaN(currentValue) :
-          ["textArea", "text", "enum", "date"].indexOf(dataType) > -1 ?
+        dataType === "date"  ?
+          isValidDate(currentValue) :
+          ["textArea", "text", "enum"].indexOf(dataType) > -1 ?
             currentValue.trim().length > 0 : true : true;
 
   if (["title","firebaseAuthentication"].indexOf(dataType) > -1) {
