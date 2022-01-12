@@ -17,7 +17,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
   },[yearValue,monthValue,dayValue])
 
   if (!config) return null;
-  const {dataType, formValue, formLabel, helpText, placeholder, min, max, isRequired} = config;
+  const {dataType, formValue, formLabel, helpText, placeholder, min, max, isRequired, yearLabel, monthLabel, dayLabel} = config;
   if (!dataType || !formValue) return null;
   const elementId = nanoid();
 
@@ -35,7 +35,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
       />
       <Row>
         <Col xs={3}>
-          <span>Month</span>
+          <span>{`${monthLabel ? monthLabel : 'Month'}`}</span>
           <Input
             type="text"
             onChange={onMonthChange}
@@ -45,7 +45,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
           <span>{`/`}</span>
         </Col>
         <Col xs={3}>
-          <span>Day</span>
+          <span>{`${dayLabel ? dayLabel : 'Day'}`}</span>
           <Input
             type="text"
             onChange={onDayChange}
@@ -55,7 +55,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
           <span>{`/`}</span>
         </Col>
         <Col xs={4}>
-          <span>Year</span>
+          <span>{`${yearLabel ? yearLabel : 'Year'}`}</span>
           <Input
             type="text"
             onChange={onYearChange}
