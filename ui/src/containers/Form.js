@@ -8,6 +8,7 @@ import ModalComponent from "../components/Modal";
 import Waiver from "../components/Waiver";
 import isValidEmail from "../modules/isValidEmail";
 import RequiredWrapper from "../components/form/Required";
+import isValidDate from "../modules/isValidDate";
 
 const resetFormTimeoutMS = 10000;
 
@@ -110,7 +111,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const onValueChange = (config, e) => {
     const newValue = e?.target?.value;
     const {formValue, dataType} = config;
-    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
+    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : dataType === "date" ? e : "";
     setFormState({
       formValue,
       value: newValueToUse
@@ -143,8 +144,13 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
       const formValue = matchingFormValue.formValue;
       const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
       const valueToCheck = matchingFormValue.value;
-      if (["text", "enum", "date", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
+      if (["text", "enum", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
         if (valueToCheck.trim().length > 0) {
+          return false;
+        }
+      }
+      if (matchingFormDataType === "date") {
+        if (isValidDate(valueToCheck)) {
           return false;
         }
       }
@@ -185,7 +191,15 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
         setSubmitErrorTitle(null);
         let submitObj = {};
         formState.map((item) => {
-          submitObj[item.formValue] = item.value;
+          if (item.formValue === "Birthdate") {
+            const monthString = `${item.value[1]}`
+            const dayString = `${item.value[2]}`
+            const yearString = `${item.value[0]}`
+            const proposedDateText = `${monthString.length === 1 ? `0${monthString}` : monthString}/${dayString.length === 1 ? `0${dayString}` : dayString}/${yearString}`
+            submitObj[item.formValue] = proposedDateText;
+          } else {
+            submitObj[item.formValue] = item.value;
+          }
         });
 
         formOverrideState.map((item) => {
