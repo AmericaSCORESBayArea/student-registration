@@ -195,7 +195,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
             const monthString = `${item.value[1]}`
             const dayString = `${item.value[2]}`
             const yearString = `${item.value[0]}`
-            const proposedDateText = `${monthString.length === 1 ? `0${monthString}` : monthString}/${dayString.length === 1 ? `0${dayString}` : dayString}/${yearString}`
+            const proposedDateText = `${yearString}-${monthString.length === 1 ? `0${monthString}` : monthString}-${dayString.length === 1 ? `0${dayString}` : dayString}`
             submitObj[item.formValue] = proposedDateText;
           } else {
             submitObj[item.formValue] = item.value;
