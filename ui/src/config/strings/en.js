@@ -101,7 +101,7 @@ const localization_en = {
   REGISTRATION_FORM_Ethnicity_Multi_Racial_Multi_Ethnic:"Multi-Racial/Multi-Ethnic",
   REGISTRATION_FORM_Ethnicity_Filipino:"Filipino",
   REGISTRATION_FORM_Ethnicity_Other:"Other",
-  REGISTRATION_FORM_ReducedPriceLunch_LABEL:"Reduced Price Lunch",
+  REGISTRATION_FORM_ReducedPriceLunch_LABEL:"Does your child receive Free or Reduced Price Lunch?",
   REGISTRATION_FORM_ReducedPriceLunch_PLACEHOLDER:"Select Reduced Price Lunch",
   REGISTRATION_FORM_ReducedPriceLunch_HELPTEXT:"Select Reduced Price Lunch",
   REGISTRATION_FORM_Allergies_LABEL:"Allergies/Medical Conditions",
