@@ -22,7 +22,7 @@ const localization_en = {
   //New or Existing form
   NEW_OR_EXISTING_FORM_LABEL_TEXT: "New or Returning?",
   NEW_OR_EXISTING_FORM_HELP_TEXT: "Select whether you are starting a new student registration or updating a returning student registration",
-  NEW_OR_EXISTING_FORM_PLACEHOLDER_TEXT: "Select New  or Returning",
+  NEW_OR_EXISTING_FORM_PLACEHOLDER_TEXT: "Select New or Returning",
   NEW_OR_EXISTING_FORM_BUTTON_TEXT_NEW: "New",
   NEW_OR_EXISTING_FORM_BUTTON_TEXT_EXISTING: "Returning",
 
