@@ -13,14 +13,14 @@ const workflowConfig = [
   {
     formName: "Parent or Coach",
     formConfig: parentOrCoachFormConfig,
-    nextForm: "New or Existing",
+    nextForm: "New or Returning",
     localStore:true,
     submitOnValueChange:true,
     breadCrumbLink:true,
     breadCrumbPreviewFormStateValue:"ParentOrCoach"
   },
   {
-    formName: "New or Existing",
+    formName: "New or Returning",
     formConfig: newOrExistingFormConfig,
     nextForm: "Registration",
     localStore:true,
