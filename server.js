@@ -32,7 +32,7 @@ const reqHeaders = {
 };
 
 const corsOptions = {
-  origin: baseUrl,
+  origin: appConfig.NODE_ENV === "development" ? "http://localhost:4000" : baseUrl,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
@@ -49,6 +49,29 @@ const getSiteIdFromSchoolName = (schoolName) => {
   }
   return "";
 }
+
+app.options('/search',cors(corsOptions), async (req, res) => {
+  res.status(200).json({});
+})
+
+app.post('/search',cors(corsOptions), async (req, res) => {
+  let rStatus = 400;
+  let rData = null;
+  if (req.body) {
+    if (req.body.phoneNumber) {
+      const requestURL = `${muleEndPoint}/searchByPhoneNumber?phoneNumber=${appConfig.NODE_ENV === "development" ? "1234567890" : req.body.phoneNumber.slice(2,)}`
+      const mRes = await axios.get(requestURL, reqHeaders)
+        .then((response) => {
+          return response;
+        }, (error) => {
+          return error.response;
+        });
+      rData = mRes.data;
+      rStatus = mRes.status;
+    }
+  }
+  res.status(rStatus).json({data: rData});
+})
 
 app.post('/register', cors(corsOptions), async (req, res) => {
   let rStatus = 400;
@@ -88,8 +111,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 
 app.get('/info', cors(corsOptions), async (req, res) => {
-
-
   let allowedAPIConfigResponse = {};
   Object.keys(appConfig)
     .filter((item) => item.indexOf(configurationStartingKeyValueIndicatingAPIAllowed) === 0)
