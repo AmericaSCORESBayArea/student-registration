@@ -21,14 +21,14 @@ const localization_en = {
 
   //New or Existing form
   NEW_OR_EXISTING_FORM_LABEL_TEXT: "New or Existing?",
-  NEW_OR_EXISTING_FORM_HELP_TEXT: "Select whether you are starting a new student registration or updating an existing student registration",
-  NEW_OR_EXISTING_FORM_PLACEHOLDER_TEXT: "Select New  or Existing",
+  NEW_OR_EXISTING_FORM_HELP_TEXT: "Select whether you are starting a new student registration or updating a returning student registration",
+  NEW_OR_EXISTING_FORM_PLACEHOLDER_TEXT: "Select New  or Returning",
   NEW_OR_EXISTING_FORM_BUTTON_TEXT_NEW: "New",
-  NEW_OR_EXISTING_FORM_BUTTON_TEXT_EXISTING: "Existing",
+  NEW_OR_EXISTING_FORM_BUTTON_TEXT_EXISTING: "Returning",
 
   //Parent or Coach form
-  PARENT_OR_COACH_FORM_LABEL_TEXT:"Parent/Guardian or Coach?",
-  PARENT_OR_COACH_FORM_HELP_TEXT:"Select whether you are a Parent/Guardian or coach",
+  PARENT_OR_COACH_FORM_LABEL_TEXT:"Are you submitting this form as a Parent/Guardian or a Coach?",
+  PARENT_OR_COACH_FORM_HELP_TEXT:"Please select whether you are a Parent/Guardian of a Scores Student or a coach",
   PARENT_OR_COACH_FORM_PLACEHOLDER_TEXT:"Select Parent/Guardian or Coach",
   PARENT_OR_COACH_FORM_BUTTON_TEXT_PARENT: "Parent/Guardian",
   PARENT_OR_COACH_FORM_BUTTON_TEXT_COACH: "Coach",
