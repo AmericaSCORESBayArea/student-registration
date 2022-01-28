@@ -377,7 +377,7 @@ const registrationFormConfig = [
     buttonItems: [
       {
         displayValue:"!REGISTRATION_FORM_Ethnicity_Hispanic_Latino",
-        value:"Hispanic/Latino"
+        value:"Hispanic/Latinx"
       },
       {
         displayValue:"!REGISTRATION_FORM_Ethnicity_Native_American",

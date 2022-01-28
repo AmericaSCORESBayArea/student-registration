@@ -91,7 +91,7 @@ const localization_en = {
   REGISTRATION_FORM_Ethnicity_LABEL:"Ethnicity",
   REGISTRATION_FORM_Ethnicity_PLACEHOLDER:"Select Ethnicity",
   REGISTRATION_FORM_Ethnicity_HELPTEXT:"Select Ethnicity",
-  REGISTRATION_FORM_Ethnicity_Hispanic_Latino:"Hispanic/Latino",
+  REGISTRATION_FORM_Ethnicity_Hispanic_Latino:"Hispanic/Latinx",
   REGISTRATION_FORM_Ethnicity_Native_American:"Native American",
   REGISTRATION_FORM_Ethnicity_African_American:"African American",
   REGISTRATION_FORM_Ethnicity_Pacific_Islander:"Pacific Islander",
