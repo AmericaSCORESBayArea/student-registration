@@ -91,7 +91,7 @@ const localization_es = {
   REGISTRATION_FORM_Ethnicity_LABEL: "Etnicidad",
   REGISTRATION_FORM_Ethnicity_PLACEHOLDER: "Seleccionar origen étnico",
   REGISTRATION_FORM_Ethnicity_HELPTEXT: "Seleccionar origen étnico",
-  REGISTRATION_FORM_Ethnicity_Hispanic_Latino:"Hispano / latino",
+  REGISTRATION_FORM_Ethnicity_Hispanic_Latino:"Hispano / latinx",
   REGISTRATION_FORM_Ethnicity_Native_American:"Nativo americano",
   REGISTRATION_FORM_Ethnicity_African_American:"Afroamericano",
   REGISTRATION_FORM_Ethnicity_Pacific_Islander:"Isleño del pacífico",
