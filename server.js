@@ -70,7 +70,7 @@ app.post('/search',cors(corsOptions), async (req, res) => {
       rStatus = mRes.status;
     }
   }
-  res.status(rStatus).json({data: rData});
+  res.status(rStatus).json(rData);
 })
 
 app.post('/register', cors(corsOptions), async (req, res) => {
