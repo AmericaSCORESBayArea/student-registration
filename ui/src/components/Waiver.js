@@ -43,7 +43,9 @@ const Waiver = () => {
             sustain. I, FOR MYSELF, MY SPOUSE AND MY CHILD(REN), DO FURTHER RELEASE, ABSOLVE, INDEMNIFY, AND
             HOLD THE RELEASED PARTIES HARMLESS AGAINST ANY CLAIMS OF INJURY OR DEATH TO MY CHILD(REN) IN
             CONNECTION WITH ANY AND ALL OF THE ACTIVITIES MENTIONED.</p>
-          <ul className="nobullet">
+	  <h3>Responsibility Agreement, Waiver and Release</h3>
+	  <p>I hereby consent that my son/daughter participate in the above-referenced activity, and I hereby execute the above Agreement, Waiver, and Release on their behalf. I state that said minor is physically able to participate in said activity. I hereby agree to indemnify and hold the District (including its officers, employees, volunteers, and agents) free and harmless from any loss, liability, damage, cost, or expense which may arise out of or connected in any way with said minor's participation in said activity.</p>
+	  <ul className="nobullet">
             <li className="task-list-item">
                   <span
                     style={{color:"#32CD32",fontSize:"1em"}}
@@ -243,6 +245,8 @@ const Waiver = () => {
             transmisión con
             el objetivos de promoción y publicidad en relación al programa Soccer for Success y cualquier futuro
             acontecimiento de U. S. Soccer Foundation o programas.</p>
+<h3>Acuerdo de responsabilidad, renuncia y liberación</h3>
+<p>Por la presente doy mi consentimiento para que mi hijo/hija participe en la actividad mencionada anteriormente, y por la presente ejecuto el Acuerdo, la Renuncia y la Liberación anteriores en su nombre. Declaro que el estudiante está físicamente apto para participar en la actividad. Por la presente acepto indemnizar y mantener al Distrito (incluidos sus funcionarios, empleados, voluntarios y agentes) libre e indemne de cualquier pérdida, responsabilidad, daño, costo o gasto que pueda surgir o estar relacionado de alguna manera con la participación del estudiante en la actividad.</p>
           <ul className="nobullet">
             <li className="task-list-item">
                   <span

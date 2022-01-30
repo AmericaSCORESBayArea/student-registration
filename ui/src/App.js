@@ -123,6 +123,9 @@ class App extends React.Component {
                 />
               </Col>
             </Row>
+	    <Row>
+	    <a Href="https://scoresu.org/privacy-policy#" target="_blank">Privacy-Policy</a>
+	    </Row>
           </Container>
         </Fade>
       </div>

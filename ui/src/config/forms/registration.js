@@ -377,7 +377,7 @@ const registrationFormConfig = [
     buttonItems: [
       {
         displayValue:"!REGISTRATION_FORM_Ethnicity_Hispanic_Latino",
-        value:"Hispanic/Latino"
+        value:"Hispanic/Latinx"
       },
       {
         displayValue:"!REGISTRATION_FORM_Ethnicity_Native_American",
@@ -439,24 +439,24 @@ const registrationFormConfig = [
     helpText: "!REGISTRATION_FORM_Allergies_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Allergies_PLACEHOLDER",
   },
-  {
-    dataType: "buttonOptions",
-    formValue: "PermissiontoCommuteAlone",
-    formLabel: "!REGISTRATION_FORM_PermissiontoCommuteAlone_LABEL",
-    helpText: "!REGISTRATION_FORM_PermissiontoCommuteAlone_HELPTEXT",
-    placeholder: "!REGISTRATION_FORM_PermissiontoCommuteAlone_PLACEHOLDER",
-    selectText: "!REGISTRATION_FORM_SELECT",
-    buttonItems: [
-      {
-        displayValue:"!REGISTRATION_FORM_YES",
-        value:"Yes"
-      },
-      {
-        displayValue:"!REGISTRATION_FORM_NO",
-        value:"No"
-      }
-    ]
-  },
+//{
+//    dataType: "buttonOptions",
+//    formValue: "PermissiontoCommuteAlone",
+//    formLabel: "!REGISTRATION_FORM_PermissiontoCommuteAlone_LABEL",
+//    helpText: "!REGISTRATION_FORM_PermissiontoCommuteAlone_HELPTEXT",
+//    placeholder: "!REGISTRATION_FORM_PermissiontoCommuteAlone_PLACEHOLDER",
+//    selectText: "!REGISTRATION_FORM_SELECT",
+//    buttonItems: [
+//      {
+//        displayValue:"!REGISTRATION_FORM_YES",
+//        value:"Yes"
+//      },
+//      {
+//        displayValue:"!REGISTRATION_FORM_NO",
+//        value:"No"
+//      }
+//    ]
+//  },
   {
     dataType: "title",
     formLabel: "!REGISTRATION_FORM_ParentGuardianInformation_TITLE"
