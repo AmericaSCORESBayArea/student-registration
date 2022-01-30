@@ -9,6 +9,7 @@ import Waiver from "../components/Waiver";
 import isValidEmail from "../modules/isValidEmail";
 import RequiredWrapper from "../components/form/Required";
 import isValidDate from "../modules/isValidDate";
+import {API_URL} from "./Config";
 
 const resetFormTimeoutMS = 10000;
 
@@ -212,7 +213,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
           });
         });
 
-        axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
+        axios.post(`${API_URL}/${postEndpoint}`, JSON.stringify(submitObj), reqHeaders).then((response) => {
           console.log(response);
           setSubmitInProgress(false);
           setSubmitSuccessMessage(`Successful!`);
@@ -304,7 +305,6 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
         <Form
           onSubmit={onSubmitCallback}
           style={{
-            maxWidth: "500px",
             paddingLeft: "20px"
           }}
         >
