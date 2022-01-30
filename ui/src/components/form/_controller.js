@@ -7,6 +7,7 @@ import EnumerableElement from "./Enumerable";
 import ButtonOptionsElement from "./ButtonOptions";
 import StaticElement from "./Static";
 import FirebaseAuthContainer from "../../containers/FirebaseAuth";
+import SearchWithNewContainer from "../../containers/SearchWithNew";
 
 const FormElementController = ({appConfig,config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue,disabled}) => {
   if (!config) return null;
@@ -59,6 +60,14 @@ const FormElementController = ({appConfig,config,onValueChange,onOverrideValueCh
               :
               dataType === "firebaseAuthentication" ?
                 <FirebaseAuthContainer
+                  appConfig={appConfig}
+                  config={config}
+                  onValueChange={onValueChange.bind(this, config)}
+                  currentValue={currentValue}
+                />
+              :
+              dataType === "searchWithNew" ?
+                <SearchWithNewContainer
                   appConfig={appConfig}
                   config={config}
                   onValueChange={onValueChange.bind(this, config)}
