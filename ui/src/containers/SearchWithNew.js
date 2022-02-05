@@ -8,25 +8,35 @@ import {Button, Card, Row, Col, Collapse, Table, Container} from "reactstrap";
 
 const hiddenKeys = ["Id", "SchoolSiteId", "Name"]
 
-const PreviousDetailedContent = ({content}) => {
+const PreviousDetailedContent = ({content,contentIndex}) => {
   const [isOpen, setIsOpen] = useState(false)
-
   const displayKeys = Object.keys(content).filter((item) => hiddenKeys.indexOf(item) === -1)
-
   return (
     <Card>
       <Row>
-        <Col xs={12} sm={3} lg={2}>
-          <Button onClick={() => setIsOpen(!isOpen)}>{`View`}</Button>
-        </Col>
+        <p/>
         <Col>
-          <p>{`${content.FirstName} ${content.LastName}`}</p>
+          <small style={{paddingRight:"10px",paddingLeft:"10px"}}>{`[${contentIndex + 1}]`}</small>
+          <Button onClick={() => setIsOpen(!isOpen)}>{isOpen ? `Close` : `View`}</Button>
+          <small style={{paddingLeft:"10px"}}>{`${content.FirstName} ${content.LastName}`}</small>
         </Col>
+        <p/>
       </Row>
       <Collapse
         isOpen={isOpen}
       >
         <Container>
+          <Row>
+            <Col>
+              <p/>
+              <Button
+                color={"primary"}
+                onClick={() => console.log("click")}
+              >{`Edit`}</Button>
+              <small style={{paddingLeft:"10px"}}>Click here to modify the registration.</small>
+              <p/>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Table striped={true}>
@@ -36,8 +46,8 @@ const PreviousDetailedContent = ({content}) => {
                     displayKeys.map((item, index) => {
                       return (
                         <tr key={index}>
-                          <td key={"key"}><b>{`${item} :`}</b></td>
-                          <td key={"value"}>{content[item]}</td>
+                          <td key={"key"}><b>{`${item}`}</b></td>
+                          <td key={"value"}>{`${content[item]}`}</td>
                         </tr>
                       )
                     })
@@ -73,7 +83,7 @@ const SearchWithNewContainer  = ({appConfig,onValueChange,currentValue}) => {
         }
       }
     }
-  },[])
+  }, [])
 
 
   if (loading)
@@ -81,18 +91,36 @@ const SearchWithNewContainer  = ({appConfig,onValueChange,currentValue}) => {
       message={`Loading...`}
     />)
   return (
-    <div>
-      <Button>New</Button>
+    <Container>
+      <Row>
+        <Col>
+          <Button
+            size={"lg"}
+            color={"primary"}
+          >New</Button>
+          <small style={{paddingLeft:"10px"}}>Click to register a new student</small>
+        </Col>
+      </Row>
+      <p/>
       {
-        previousRegistrations.length > 0 &&
-        previousRegistrations.map((item, index) =>
-          <PreviousDetailedContent
-            key={index}
-            content={item}
-          />
-        )
+        previousRegistrations && previousRegistrations.length > 0 &&
+        <Row>
+          <Col>
+            <p><b>{`${previousRegistrations.length}`}</b> previous registration(s) were found associated with your phone number</p>
+            <small>Click View more details and to edit the information for an existing registration.</small>
+            {
+              previousRegistrations.map((item, index) =>
+                <PreviousDetailedContent
+                  key={index}
+                  content={item}
+                  contentIndex={index}
+                />
+              )
+            }
+          </Col>
+        </Row>
       }
-    </div>
+    </Container>
   );
 };
 
