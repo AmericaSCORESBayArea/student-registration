@@ -22,6 +22,8 @@ const localizationStrings = {
   zh:localization_zh
 };
 
+export const API_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : ""
+
 const ConfigContainer  = ({localizationValue}) => {
 
   const [configRequested, setConfigRequested] = useState(false);
@@ -33,7 +35,7 @@ const ConfigContainer  = ({localizationValue}) => {
 
   const runGetConfigRequest = () => {
     setConfigRequested(true);
-    axios.get('/info', {
+    axios.get(`${API_URL}/info`, {
       header: reqHeaders
     }).then(function (response) {
       const {data} = response;
