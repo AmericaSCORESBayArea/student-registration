@@ -163,7 +163,7 @@ const localization_es = {
   REGISTRATION_FORM_ParentHomeLang_French:"Francés y criollo Francés",
   REGISTRATION_FORM_ParentHomeLang_German:"Alemán",
   REGISTRATION_FORM_ParentHomeLang_Greek:"Griego",
-  REGISTRATION_FORM_ParentHomeLang_Gujrati:"Gujrati",
+  REGISTRATION_FORM_ParentHomeLang_Gujarati:"Gujarati",
   REGISTRATION_FORM_ParentHomeLang_Hebrew:"Hebreo",
   REGISTRATION_FORM_ParentHomeLang_Hindi:"Hindi",
   REGISTRATION_FORM_ParentHomeLang_Hmong:"Hmong",

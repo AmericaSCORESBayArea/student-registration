@@ -582,7 +582,7 @@ const registrationFormConfig = [
       "!REGISTRATION_FORM_ParentHomeLang_French",
       "!REGISTRATION_FORM_ParentHomeLang_German",
       "!REGISTRATION_FORM_ParentHomeLang_Greek",
-      "!REGISTRATION_FORM_ParentHomeLang_Gujrati",
+      "!REGISTRATION_FORM_ParentHomeLang_Gujarati",
       "!REGISTRATION_FORM_ParentHomeLang_Hebrew",
       "!REGISTRATION_FORM_ParentHomeLang_Hindi",
       "!REGISTRATION_FORM_ParentHomeLang_Hmong",
