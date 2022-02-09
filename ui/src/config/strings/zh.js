@@ -163,7 +163,7 @@ const localization_zh = {
   REGISTRATION_FORM_ParentHomeLang_French:"法语和法语克里奥尔语",
   REGISTRATION_FORM_ParentHomeLang_German:"德语",
   REGISTRATION_FORM_ParentHomeLang_Greek:"希腊语",
-  REGISTRATION_FORM_ParentHomeLang_Gujrati:"古吉拉提",
+  REGISTRATION_FORM_ParentHomeLang_Gujarati:"古吉拉提",
   REGISTRATION_FORM_ParentHomeLang_Hebrew:"希伯来语",
   REGISTRATION_FORM_ParentHomeLang_Hindi:"印地语",
   REGISTRATION_FORM_ParentHomeLang_Hmong:"苗族",
