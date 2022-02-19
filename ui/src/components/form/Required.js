@@ -6,7 +6,7 @@ import isValidDate from "../../modules/isValidDate";
 
 const RequiredWrapper = ({currentValue, config,children,requiredConfig}) => {
   const {isRequired, dataType} = config;
-  const blValidValue = isRequired ?
+  const blValidValue = isRequired ? currentValue ?
     dataType === "tel" ?
       isValidPhone(currentValue) :
       dataType === "email" ?
@@ -16,7 +16,7 @@ const RequiredWrapper = ({currentValue, config,children,requiredConfig}) => {
         dataType === "date"  ?
           isValidDate(currentValue) :
           ["textArea", "text", "enum"].indexOf(dataType) > -1 ?
-            currentValue.trim().length > 0 : true : true;
+            currentValue.trim().length > 0 : true : false : true;
 
   if (["title","firebaseAuthentication"].indexOf(dataType) > -1) {
     return children;
