@@ -9,7 +9,7 @@ import StaticElement from "./Static";
 import FirebaseAuthContainer from "../../containers/FirebaseAuth";
 import SearchWithNewContainer from "../../containers/SearchWithNew";
 
-const FormElementController = ({appConfig,config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue,disabled}) => {
+const FormElementController = ({appConfig,requiredConfig,config,onValueChange,onOverrideValueChange,currentValue,currentOverrideValue,disabled}) => {
   if (!config) return null;
   const {dataType} = config;
   if (!dataType) return null;
@@ -69,6 +69,7 @@ const FormElementController = ({appConfig,config,onValueChange,onOverrideValueCh
               dataType === "searchWithNew" ?
                 <SearchWithNewContainer
                   appConfig={appConfig}
+                  requiredConfig={requiredConfig}
                   config={config}
                   onValueChange={onValueChange.bind(this, config)}
                   currentValue={currentValue}
