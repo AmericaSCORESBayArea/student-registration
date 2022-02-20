@@ -4,7 +4,7 @@ import SpinnerWithMessage from "../components/Spinner";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
 import {API_URL} from "./Config";
-import {Button, Card, Row, Col, Collapse, Table, Container, Modal, ModalHeader} from "reactstrap";
+import {Button, Card, Row, Col, Collapse, Table, Container, Modal, Input} from "reactstrap";
 import FormContainer from "./Form";
 
 
@@ -26,8 +26,10 @@ const generateFormStateFromObj = (regObj) => {
   return initState
 }
 
-const PreviousDetailedContent = ({content,contentIndex,onEditClick}) => {
+const PreviousDetailedContent = ({content,contentIndex,onEditClick,editingContent}) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [oldValue,setOldValue] = useState(null)
+  const [newValue,setNewValue] = useState(null)
   const displayKeys = Object.keys(content).filter((item) => hiddenKeys.indexOf(item) === -1)
   return (
     <Card>
@@ -35,7 +37,10 @@ const PreviousDetailedContent = ({content,contentIndex,onEditClick}) => {
         <p/>
         <Col>
           <small style={{paddingRight:"10px",paddingLeft:"10px"}}>{`[${contentIndex + 1}]`}</small>
-          <Button onClick={() => setIsOpen(!isOpen)}>{isOpen ? `Close` : `View`}</Button>
+          <Button onClick={() => {
+            setIsOpen(!isOpen)
+            onEditClick()
+          }}>{isOpen ? `Close` : `View`}</Button>
           <small style={{paddingLeft:"10px"}}>{`${content.FirstName} ${content.LastName}`}</small>
         </Col>
         <p/>
@@ -57,16 +62,43 @@ const PreviousDetailedContent = ({content,contentIndex,onEditClick}) => {
                 <tbody>
                   {
                     displayKeys.map((item, index) => {
+                      const editingItem = editingContent && editingContent[0] === contentIndex && editingContent[1] === item;
                       return (
                         <tr key={index}>
                           <td key={"key"}><b>{`${item}`}</b></td>
-                          <td key={"value"}>{`${content[item]}`}</td>
-                          <td key={"edit"}>
-                            <Button
-                                color={"default"}
-                                onClick={() => onEditClick(contentIndex)}
-                            ><FontAwesomeIcon icon={faPencil} /></Button>
+                          <td key={"old_value"}>
+                            {`${content[item]}`}
+                            <p/>
+                            {editingItem && <Input value={newValue ? newValue : ""} onChange={(e) => setNewValue(e.target.value)}/>}
                           </td>
+                          {
+                            !editingContent &&
+                            <td key={"edit"}>
+                              <Button
+                                color={"default"}
+                                onClick={() => {
+                                  setOldValue(content[item]);
+                                  setNewValue(content[item]);
+                                  onEditClick(contentIndex, item);
+                                }}
+                              ><FontAwesomeIcon icon={faPencil}/></Button>
+                            </td>
+                          }
+                          {
+                            editingItem &&
+                            <div>
+                              <Button
+                                color={"secondary"}
+                                onClick={() => onEditClick()}
+                              >Cancel</Button>
+                              <p/>
+                              <Button
+                                  color={"primary"}
+                                  disabled={newValue === oldValue}
+                                  onClick={() => onEditClick()}
+                              >Save</Button>
+                            </div>
+                          }
                         </tr>
                       )
                     })
@@ -86,8 +118,7 @@ const SearchWithNewContainer  = ({appConfig,requiredConfig,config,onValueChange,
   const [displayNewModal, setDisplayNewModal] = useState(false)
   const [displayConfirmCancel, setDisplayConfirmCancel] = useState(false)
   const [previousRegistrations, setPreviousRegistrations] = useState([])
-  const [editingContentIndex, setEditingContentIndex] = useState(-1)
-
+  const [editingContent, setEditingContent] = useState(null)
   useEffect(() => {
     const auth = getAuth();
     if (auth) {
@@ -140,7 +171,8 @@ const SearchWithNewContainer  = ({appConfig,requiredConfig,config,onValueChange,
                   key={index}
                   content={item}
                   contentIndex={index}
-                  onEditClick={(contentIndex) => setEditingContentIndex(contentIndex)}
+                  onEditClick={(contentIndex,formValue) => setEditingContent(formValue ? [contentIndex, formValue] : null)}
+                  editingContent={editingContent}
                 />
               )
             }
