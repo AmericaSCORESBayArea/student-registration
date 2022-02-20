@@ -30,19 +30,15 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
         try {
           firebase.auth(); //only fails when firebase has not been initialized
         } catch (e) {
-          console.log(`Firebase App Initializing...`);
           firebase.initializeApp(firebaseAuth);
           firebase.auth().onAuthStateChanged((response) => {
             if (!!response) {
               const {multiFactor} = response
               if (multiFactor) {
                 const{user} = multiFactor
-                console.log("Firebase User Authorization Set!");
                 submitValueChange(user);
                 setFirebaseAuthObj(user);
               }
-            } else {
-              console.log("Firebase User Not Set Yet");
             }
           });
         }
@@ -57,7 +53,6 @@ const FirebaseAuthContainer  = ({appConfig,onValueChange,currentValue}) => {
       submitValueChange(currentValue);
     }
   }
-
 
   if (isLoading) {
     return (
