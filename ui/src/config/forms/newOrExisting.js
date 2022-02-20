@@ -8,13 +8,7 @@ const newOrExistingFormConfig = [
     helpText: "!NEW_OR_EXISTING_FORM_HELP_TEXT",
     placeholder: "",
     isRequired: true,
-    searchConfig: {
-
-    },
-    existingConfig: {
-
-    },
-    newConfig:  {
+    editFormConfig: {
       formName: "Registration",
       formConfig: registrationFormConfig,
       postEndpoint: "/register",
