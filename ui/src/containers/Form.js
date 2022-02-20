@@ -44,7 +44,6 @@ const generateInitialFormOverrideState = (formConfig) => {
 };
 
 const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormState,initialFormOverrideState,formSubmitCallback}) => {
-
   const {
     displayWaiver,
     displayWarnings,
@@ -59,7 +58,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     waiverCloseButtonText,
     waiverShowWaiverButtonText,
     waiverWaiverAcceptedMessage
-  } = workflowConfig;
+  } = workflowConfig || {};
 
   const formStateReducer = (state, newState) => {
     return [
@@ -71,6 +70,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const [formFadeState, setFormFadeState] = useState(true)
   const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
   const [formState, setFormState] = useReducer(formStateReducer, !!initialFormState ? initialFormState : generateInitialFormState(formConfig));
+
   const [formOverrideState, setFormOverrideState] = useReducer(formStateReducer, !!initialFormOverrideState ? initialFormOverrideState : generateInitialFormOverrideState(formConfig));
   const [displayWaiverModal, setDisplayWaiverModal] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
@@ -79,6 +79,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const [submitErrorMessage, setSubmitErrorMessage] = useState(null);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState(null);
   const [isValueChanged, setIsValueChanged] = useState(false);
+  const [formSubmitted,setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (isValueChanged) {
@@ -99,10 +100,14 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   const submitForm = () => formSubmitCallback(formConfig, formState);
 
   useEffect(() => {
-    if (!!submitOnAnyValue || (isValueChanged && submitOnValueChange)) {
-      const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
-      if (fieldsWithNonNullValues.length > 0) {
-        submitForm();
+    if (!formSubmitted) {
+      if (!!submitOnAnyValue || (isValueChanged && submitOnValueChange)) {
+        const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
+        if (fieldsWithNonNullValues.length > 0) {
+          setFormSubmitted(true)
+          submitForm();
+        }
+        return () => {}
       }
     }
   }, [formState, isValueChanged]);
@@ -214,7 +219,6 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
         });
 
         axios.post(`${API_URL}/${postEndpoint}`, JSON.stringify(submitObj), reqHeaders).then((response) => {
-          console.log(response);
           setSubmitInProgress(false);
           setSubmitSuccessMessage(`Successful!`);
           setTimeout(() => {
@@ -316,6 +320,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
                 const currentOverrideValue = !!formValue ? formOverrideState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
                 return (
                   <RequiredWrapper
+                    key={index}
                     requiredConfig={requiredConfig}
                     config={item}
                     currentValue={currentValue}
@@ -323,6 +328,7 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
                     <FormElementController
                       key={index}
                       appConfig={appConfig}
+                      requiredConfig={requiredConfig}
                       config={item}
                       currentValue={currentValue}
                       onValueChange={onValueChange}
