@@ -25,6 +25,43 @@ const muleEndPoint = process.env.MULEENDPOINT;
 axios.defaults.headers.common['client_id'] = id;
 axios.defaults.headers.common['client_secret'] = secret;
 
+const searchResponseToFormValuesMapping = {
+  Id:"Id",
+  FirstName:"FirstName",
+  MiddleName:"MiddleName",
+  LastName:"LastName",
+  SchoolName:"SchoolAttending",
+  PersonalEmail:"PersonalEmail",
+  HomePhone:"HomePhone",
+  Gender:"Gender",
+  Grade:"Grade",
+  Ethnicity:"Ethnicity",
+  ReducedPriceLunch:"ReducedPriceLunch",
+  Allergies:"Allergies",
+  ParentFName:"ParentFName",
+  ParentLName:"ParentLName",
+  ParentEmail:"ParentEmail",
+  Relationship:"Relationship",
+  ParentPhone1:"ParentPhone1",
+  ParentPhone2:"ParentPhone2",
+  MailingStreet: "StreetAddress",
+  MailingCity:"City",
+  MailingState:"State",
+  MailingZip:"Zip",
+  MailingCountry:"Country",
+  ParentHomeLang:"HomeLanguage",
+  Volunteer:"Volunteer",
+  Emergency_Contact_Name:"Emergency_Contact_Name",
+  Emergency_Contact_Relationship:"Emergency_Contact_Relationship",
+  Emergency_Contact_Phone1:"Emergency_Contact_Phone1",
+  Emergency_Contact_Phone2:"Emergency_Contact_Phone2",
+  Second_Emergency_Contact_Name:"Second_Emergency_Contact_Name",
+  Second_Emergency_Contact_Relationship:"Second_Emergency_Contact_Relationship",
+  Second_Emergency_Contact_Phone1:"Second_Emergency_Contact_Phone1",
+  Second_Emergency_Contact_Phone2:"Second_Emergency_Contact_Phone2",
+  Birthdate:"DateOfBirth"
+}
+
 const reqHeaders = {
   headers: {
     'Content-Type': 'application/json'
@@ -66,7 +103,17 @@ app.post('/search',cors(corsOptions), async (req, res) => {
         }, (error) => {
           return error.response;
         });
-      rData = mRes.data;
+      rData = mRes.data.map((item) => {
+        let newObj = {}
+        Object.keys(searchResponseToFormValuesMapping).forEach((mapping) => {
+          if (item[searchResponseToFormValuesMapping[mapping]]) {
+            newObj[mapping] =item[searchResponseToFormValuesMapping[mapping]]
+          } else {
+            newObj[mapping] = ""
+          }
+        })
+        return newObj
+      });
       rStatus = mRes.status;
     }
   }
@@ -124,23 +171,3 @@ app.listen(PORT, err => {
   if (err) throw err;
   console.log("%c Server running", "color: green");
 });
-
-
-// const buildReactApp = () => {
-//   console.log("Building React App...");
-//   exec('cd ui && npm install && npm run build', (err, stdout, stderr) => {
-//     console.log("React App Build Complete...");
-//     if (err) {
-//       console.error("Error Building React App!");
-//       console.error(err);
-//     }
-//     if (!!stdout) {
-//       console.log(`React App Build stdout: ${stdout}`);
-//     }
-//     if (!!stderr) {
-//       console.log(`React App Build stderr: ${stderr}`);
-//     }
-//   });
-// };
-//
-// buildReactApp();
