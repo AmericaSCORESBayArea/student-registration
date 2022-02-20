@@ -120,6 +120,48 @@ app.post('/search',cors(corsOptions), async (req, res) => {
   res.status(rStatus).json(rData);
 })
 
+app.options('/save',cors(corsOptions), async (req, res) => {
+  res.status(200).json({});
+})
+
+app.patch('/save',cors(corsOptions), async (req, res) => {
+  let rStatus = 400;
+  let rData = null;
+  if (req.body) {
+    if (req.body.id) {
+      const requestURL = `${muleEndPoint}/${req.body.id}`
+      console.log(requestURL)
+      const updateField = Object.keys(req.body).find((item) => item !== "id")
+      console.log(updateField)
+      const data = {
+        [updateField]:req.body.updateField,
+        Id:req.body.id
+      }
+      const mRes = await axios.patch(requestURL, data, reqHeaders)
+          .then((response) => {
+            return response;
+          }, (error) => {
+            return error.response;
+          });
+
+      console.log(mRes)
+      // rData = mRes.data.map((item) => {
+      //   let newObj = {}
+      //   Object.keys(searchResponseToFormValuesMapping).forEach((mapping) => {
+      //     if (item[searchResponseToFormValuesMapping[mapping]]) {
+      //       newObj[mapping] =item[searchResponseToFormValuesMapping[mapping]]
+      //     } else {
+      //       newObj[mapping] = ""
+      //     }
+      //   })
+      //   return newObj
+      // });
+      // rStatus = mRes.status;
+    }
+  }
+  res.status(rStatus).json(rData);
+})
+
 app.post('/register', cors(corsOptions), async (req, res) => {
   let rStatus = 400;
   let rData = null;
