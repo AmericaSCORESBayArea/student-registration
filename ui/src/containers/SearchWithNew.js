@@ -25,11 +25,11 @@ const generateFormStateFromObj = (regObj) => {
   return initState
 }
 
-const PreviousDetailedContent = ({content,contentIndex,onEditClick,editingContent}) => {
+const PreviousDetailedContent = ({content,formConfig,contentIndex,onEditClick,editingContent}) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [idValue,setIdValue] = useState(null)
-  const [oldValue,setOldValue] = useState(null)
-  const [newValue,setNewValue] = useState(null)
+  const [idValue, setIdValue] = useState(null)
+  const [oldValue, setOldValue] = useState(null)
+  const [newValue, setNewValue] = useState(null)
   const displayKeys = Object.keys(content).filter((item) => hiddenKeys.indexOf(item) === -1)
   useEffect(() => {
     if (!idValue) {
@@ -37,102 +37,108 @@ const PreviousDetailedContent = ({content,contentIndex,onEditClick,editingConten
         setIdValue(content[idField])
       }
     }
-  },[content])
+  }, [content])
   return (
-    <Card>
-      <Row>
-        <p/>
-        <Col>
-          <small style={{paddingRight:"10px",paddingLeft:"10px"}}>{`[${contentIndex + 1}]`}</small>
-          <Button onClick={() => {
-            setIsOpen(!isOpen)
-            onEditClick()
-          }}>{isOpen ? `Close` : `View`}</Button>
-          <small style={{paddingLeft:"10px"}}>{`${content.FirstName} ${content.LastName}`}</small>
-        </Col>
-        <p/>
-      </Row>
-      <Collapse
-        isOpen={isOpen}
-      >
-        <Container>
-          <Row>
-            <Col>
-              <p/>
-                <small style={{paddingLeft:"10px"}}>Click on a pencil icon next to a value to modify</small>
-              <p/>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Table striped={true}>
-                <tbody>
+      <Card>
+        <Row>
+          <p/>
+          <Col>
+            <small style={{paddingRight: "10px", paddingLeft: "10px"}}>{`[${contentIndex + 1}]`}</small>
+            <Button onClick={() => {
+              setIsOpen(!isOpen)
+              onEditClick()
+            }}>{isOpen ? `Close` : `View`}</Button>
+            <small style={{paddingLeft: "10px"}}>{`${content.FirstName} ${content.LastName}`}</small>
+          </Col>
+          <p/>
+        </Row>
+        <Collapse
+            isOpen={isOpen}
+        >
+          <Container>
+            <Row>
+              <Col>
+                <p/>
+                <small style={{paddingLeft: "10px"}}>Click on a pencil icon next to a value to modify</small>
+                <p/>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Table striped={true}>
+                  <tbody>
                   {
                     displayKeys.map((item, index) => {
+                      const matchingConfig = formConfig ? formConfig.find((item_2) => item_2.formValue && item_2.formValue === item) : null
                       const editingItem = editingContent && editingContent[0] === contentIndex && editingContent[1] === item;
                       return (
-                        <tr key={index}>
-                          <td key={"key"}><b>{`${item}`}</b></td>
-                          <td key={"old_value"}>
-                            {`${content[item]}`}
-                            <p/>
-                            {editingItem && <Input value={newValue ? newValue : ""} onChange={(e) => setNewValue(e.target.value)}/>}
-                          </td>
-                          {
-                            !editingContent &&
-                            <td key={"edit"}>
-                              <Button
-                                color={"default"}
-                                onClick={() => {
-                                  setOldValue(content[item]);
-                                  setNewValue(content[item]);
-                                  onEditClick(contentIndex, item);
-                                }}
-                              ><FontAwesomeIcon icon={faPencil}/></Button>
+                          <tr key={index}>
+                            <td key={"key"}>
+                              <b>{`${(matchingConfig && matchingConfig.formLabel) ? matchingConfig.formLabel : item}`}</b>
                             </td>
-                          }
-                          {
-                            editingItem &&
-                            <div>
-                              <Button
-                                color={"secondary"}
-                                onClick={() => onEditClick()}
-                              >Cancel</Button>
+                            <td key={"old_value"}>
+                              {`${content[item]}`}
                               <p/>
-                              <Button
-                                color={"primary"}
-                                disabled={newValue === oldValue}
-                                onClick={() => {
-                                  const updateObj = {
-                                    id:idValue,
-                                    [editingContent[1]]:newValue
-                                  }
-                                  axios.patch(`${API_URL}/save`, JSON.stringify(updateObj), {headers: {'Content-Type': 'application/json'}}).then((response) => {
-                                    const {data} = response;
-                                    console.log(data)
-                                    // setPreviousRegistrations(data)
-                                    // setLoading(false)
-                                    onEditClick()
-                                  })
-                                }}
-                              >Save</Button>
-                            </div>
-                          }
-                        </tr>
+                              {editingItem && <Input value={newValue ? newValue : ""}
+                                                     onChange={(e) => setNewValue(e.target.value)}/>}
+                            </td>
+                            {
+                                !editingContent &&
+                                <td key={"edit"}>
+                                  <Button
+                                      color={"default"}
+                                      onClick={() => {
+                                        setOldValue(content[item]);
+                                        setNewValue(content[item]);
+                                        onEditClick(contentIndex, item);
+                                      }}
+                                  ><FontAwesomeIcon icon={faPencil}/></Button>
+                                </td>
+                            }
+                            {
+                                editingItem &&
+                                <div>
+                                  <Button
+                                      color={"secondary"}
+                                      onClick={() => onEditClick()}
+                                  >Cancel</Button>
+                                  <p/>
+                                  <Button
+                                      color={"primary"}
+                                      disabled={newValue === oldValue}
+                                      onClick={() => {
+                                        const updateObj = {
+                                          id: idValue,
+                                          [editingContent[1]]: newValue
+                                        }
+                                        axios.patch(`${API_URL}/save`, JSON.stringify(updateObj), {headers: {'Content-Type': 'application/json'}}).then((response) => {
+                                          const {data} = response;
+                                          console.log(data)
+                                          // setPreviousRegistrations(data)
+                                          // setLoading(false)
+                                          onEditClick()
+                                        })
+                                      }}
+                                  >Save</Button>
+                                </div>
+                            }
+                          </tr>
                       )
                     })
                   }
-                </tbody>
-              </Table></Col>
-          </Row>
-        </Container>
-      </Collapse>
-    </Card>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </Container>
+        </Collapse>
+      </Card>
   )
 }
 
 const SearchWithNewContainer  = ({appConfig,requiredConfig,config,onValueChange,currentValue}) => {
-  const {editFormConfig} = config;
+  const {editFormConfig} = config || {};
+  const {formConfig} = editFormConfig || {};
   const [loading, setLoading] = useState(false)
   const [displayNewModal, setDisplayNewModal] = useState(false)
   const [displayConfirmCancel, setDisplayConfirmCancel] = useState(false)
@@ -189,6 +195,7 @@ const SearchWithNewContainer  = ({appConfig,requiredConfig,config,onValueChange,
                 <PreviousDetailedContent
                   key={index}
                   content={item}
+                  formConfig={formConfig}
                   contentIndex={index}
                   onEditClick={(contentIndex,formValue) => setEditingContent(formValue ? [contentIndex, formValue] : null)}
                   editingContent={editingContent}
