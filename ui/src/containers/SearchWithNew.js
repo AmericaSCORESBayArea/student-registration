@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import "firebase/compat/auth";
-import SpinnerWithMessage from "../components/Spinner";
-import { getAuth } from "firebase/auth";
 import axios from "axios";
-import {API_URL} from "./Config";
 import {Button, Card, Row, Col, Collapse, Table, Container, Modal, Input} from "reactstrap";
-import FormContainer from "./Form";
-
-
+import { getAuth } from "firebase/auth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPencil}  from  "@fortawesome/free-solid-svg-icons"
+import {API_URL} from "./Config";
+import FormContainer from "./Form";
+import SpinnerWithMessage from "../components/Spinner";
 
-const hiddenKeys = ["Id", "SchoolSiteId", "Name"]
+const idField = "Id"
+const hiddenKeys = [idField, "SchoolSiteId", "Name"]
 
 const generateFormStateFromObj = (regObj) => {
   let initState = []
@@ -28,9 +27,17 @@ const generateFormStateFromObj = (regObj) => {
 
 const PreviousDetailedContent = ({content,contentIndex,onEditClick,editingContent}) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [idValue,setIdValue] = useState(null)
   const [oldValue,setOldValue] = useState(null)
   const [newValue,setNewValue] = useState(null)
   const displayKeys = Object.keys(content).filter((item) => hiddenKeys.indexOf(item) === -1)
+  useEffect(() => {
+    if (!idValue) {
+      if (content[idField]) {
+        setIdValue(content[idField])
+      }
+    }
+  },[content])
   return (
     <Card>
       <Row>
@@ -93,9 +100,21 @@ const PreviousDetailedContent = ({content,contentIndex,onEditClick,editingConten
                               >Cancel</Button>
                               <p/>
                               <Button
-                                  color={"primary"}
-                                  disabled={newValue === oldValue}
-                                  onClick={() => onEditClick()}
+                                color={"primary"}
+                                disabled={newValue === oldValue}
+                                onClick={() => {
+                                  const updateObj = {
+                                    id:idValue,
+                                    [editingContent[1]]:newValue
+                                  }
+                                  axios.patch(`${API_URL}/save`, JSON.stringify(updateObj), {headers: {'Content-Type': 'application/json'}}).then((response) => {
+                                    const {data} = response;
+                                    console.log(data)
+                                    // setPreviousRegistrations(data)
+                                    // setLoading(false)
+                                    onEditClick()
+                                  })
+                                }}
                               >Save</Button>
                             </div>
                           }
