@@ -134,7 +134,7 @@ app.patch('/save',cors(corsOptions), async (req, res) => {
       const updateField = Object.keys(req.body).find((item) => item !== "id")
       console.log(updateField)
       const data = {
-        [updateField]:req.body.updateField,
+        [updateField]:req.body[updateField],
         Id:req.body.id
       }
       const mRes = await axios.patch(requestURL, data, reqHeaders)
