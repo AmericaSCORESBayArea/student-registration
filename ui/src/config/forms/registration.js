@@ -677,7 +677,7 @@ const registrationFormConfig = [
   },
   {
     dataType: "tel",
-    formValue: "Second_Emergency_Contact_Phone2",
+    formValue: "Emergency_Contact_Phone2",
     formLabel: "!REGISTRATION_FORM_Emergency_Contact_Phone2_LABEL",
     helpText: "!REGISTRATION_FORM_Emergency_Contact_Phone2_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_Emergency_Contact_Phone2_PLACEHOLDER",
