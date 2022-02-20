@@ -101,6 +101,7 @@ const WorkflowContainer  = ({appConfig,workflowConfig,toolbarConfig,requiredConf
                 const currentFormState = getFormStateByFormName(formName);
                 return (
                   <Fade
+                    key={index}
                     in={true}
                   >
                     <FormContainer
