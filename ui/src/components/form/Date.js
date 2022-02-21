@@ -5,9 +5,21 @@ import FormLabel from "./Label";
 
 const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
 
+  const [initialized,setInitialized] = useState(false)
   const [yearValue,setYearValue] = useState(null)
   const [monthValue,setMonthValue] = useState(null)
   const [dayValue,setDayValue] = useState(null)
+
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true)
+      if (Array.isArray(currentValue) && currentValue.length === 3) {
+        setYearValue(currentValue[0])
+        setMonthValue(currentValue[1])
+        setDayValue(currentValue[2])
+      }
+    }
+  },[currentValue])
 
   useEffect(() => {
     const dayValueInt = parseInt(dayValue)
@@ -28,6 +40,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
   return (
     <FormGroup
       title={`${!!helpText ? helpText : ``}`}
+      disabled={disabled}
     >
       <FormLabel
         config={config}
@@ -39,6 +52,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
           <Input
             type="text"
             onChange={onMonthChange}
+            value={monthValue}
           />
         </Col>
         <Col xs={1}>
@@ -49,6 +63,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
           <Input
             type="text"
             onChange={onDayChange}
+            value={dayValue}
           />
         </Col>
         <Col xs={1}>
@@ -59,6 +74,7 @@ const DateFormElement = ({config,onValueChange,currentValue,disabled}) => {
           <Input
             type="text"
             onChange={onYearChange}
+            value={yearValue}
           />
         </Col>
       </Row>
