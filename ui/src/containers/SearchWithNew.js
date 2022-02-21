@@ -8,8 +8,11 @@ import {faPencil}  from  "@fortawesome/free-solid-svg-icons"
 import {API_URL} from "./Config";
 import FormContainer from "./Form";
 import SpinnerWithMessage from "../components/Spinner";
+import FormElementController from "../components/form/_controller";
+import requiredConfig from "../config/requiredConfig";
 
 const idField = "Id"
+const birthDateFormValue = "Birthdate";
 const hiddenKeys = [idField, "SchoolSiteId", "Name"]
 
 const generateFormStateFromObj = (regObj) => {
@@ -39,100 +42,120 @@ const PreviousDetailedContent = ({content,formConfig,contentIndex,onEditClick,ed
     }
   }, [content])
   return (
-      <Card>
-        <Row>
-          <p/>
-          <Col>
-            <small style={{paddingRight: "10px", paddingLeft: "10px"}}>{`[${contentIndex + 1}]`}</small>
-            <Button onClick={() => {
-              setIsOpen(!isOpen)
-              onEditClick()
-            }}>{isOpen ? `Close` : `View`}</Button>
-            <small style={{paddingLeft: "10px"}}>{`${content.FirstName} ${content.LastName}`}</small>
-          </Col>
-          <p/>
-        </Row>
-        <Collapse
-            isOpen={isOpen}
-        >
-          <Container>
-            <Row>
-              <Col>
-                <p/>
-                <small style={{paddingLeft: "10px"}}>Click on a pencil icon next to a value to modify</small>
-                <p/>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Table striped={true}>
-                  <tbody>
-                  {
-                    displayKeys.map((item, index) => {
-                      const matchingConfig = formConfig ? formConfig.find((item_2) => item_2.formValue && item_2.formValue === item) : null
-                      const editingItem = editingContent && editingContent[0] === contentIndex && editingContent[1] === item;
-                      return (
-                          <tr key={index}>
-                            <td key={"key"}>
-                              <b>{`${(matchingConfig && matchingConfig.formLabel) ? matchingConfig.formLabel : item}`}</b>
-                            </td>
-                            <td key={"old_value"}>
-                              {`${content[item]}`}
-                              <p/>
-                              {editingItem && <Input value={newValue ? newValue : ""}
-                                                     onChange={(e) => setNewValue(e.target.value)}/>}
-                            </td>
-                            {
-                                !editingContent &&
-                                <td key={"edit"}>
-                                  <Button
-                                      color={"default"}
-                                      onClick={() => {
-                                        setOldValue(content[item]);
-                                        setNewValue(content[item]);
-                                        onEditClick(contentIndex, item);
-                                      }}
-                                  ><FontAwesomeIcon icon={faPencil}/></Button>
-                                </td>
-                            }
-                            {
-                                editingItem &&
-                                <div>
-                                  <Button
-                                      color={"secondary"}
-                                      onClick={() => onEditClick()}
-                                  >Cancel</Button>
-                                  <p/>
-                                  <Button
-                                      color={"primary"}
-                                      disabled={newValue === oldValue}
-                                      onClick={() => {
-                                        const updateObj = {
-                                          id: idValue,
-                                          [editingContent[1]]: newValue
-                                        }
-                                        axios.patch(`${API_URL}/save`, JSON.stringify(updateObj), {headers: {'Content-Type': 'application/json'}}).then((response) => {
-                                          const {data} = response;
-                                          console.log(data)
-                                          // setPreviousRegistrations(data)
-                                          // setLoading(false)
-                                          onEditClick()
-                                        })
-                                      }}
-                                  >Save</Button>
-                                </div>
-                            }
-                          </tr>
-                      )
-                    })
-                  }
-                  </tbody>
-                </Table>
-              </Col>
-            </Row>
-          </Container>
-        </Collapse>
-      </Card>
+    <Card>
+      <Row>
+        <p/>
+        <Col>
+          <small style={{paddingRight: "10px", paddingLeft: "10px"}}>{`[${contentIndex + 1}]`}</small>
+          <Button onClick={() => {
+            setIsOpen(!isOpen)
+            onEditClick()
+          }}>{isOpen ? `Close` : `View`}</Button>
+          <small style={{paddingLeft: "10px"}}>{`${content.FirstName} ${content.LastName}`}</small>
+        </Col>
+        <p/>
+      </Row>
+      <Collapse
+        isOpen={isOpen}
+      >
+        <Container>
+          <Row>
+            <Col>
+              <p/>
+              <small style={{paddingLeft: "10px"}}>Click on a pencil icon next to a value to modify</small>
+              <p/>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Table striped={true}>
+                <tbody>
+                {
+                  displayKeys.map((item, index) => {
+                    const matchingConfig = formConfig ? formConfig.find((item_2) => item_2.formValue && item_2.formValue === item) : null
+                    const editingItem = editingContent && editingContent[0] === contentIndex && editingContent[1] === item;
+                    return (
+                      <tr key={index}>
+                        <td key={"key"}>
+                          <b>{`${(matchingConfig && matchingConfig.formLabel) ? matchingConfig.formLabel : item}`}</b>
+                        </td>
+                        <td key={"old_value"}>
+                          {`${content[item]}`}
+                          <p/>
+                          {editingItem &&
+                            <div>
+                              <FormElementController
+                                appConfig
+                                requiredConfig={requiredConfig}
+                                config={matchingConfig}
+                                onValueChange={(e, obj) => {
+                                  // setNewValue(e.target.value)
+                                  console.log("VALUE CHANGE")
+                                  console.log(e)
+                                  console.log(obj)
+                                }}
+                                onOverrideValueChange={(e) => {
+                                  console.log("OVERRIDE CHANGE")
+                                  console.log(e)
+                                }}
+                                currentValue={newValue ? newValue : ""}
+                                currentOverrideValue={null}
+                                disabled={false}
+                              />
+                            </div>
+                          }
+                        </td>
+                        {
+                          !editingContent &&
+                          <td key={"edit"}>
+                            <Button
+                              color={"default"}
+                              onClick={() => {
+                                setOldValue(content[item]);
+                                setNewValue(content[item]);
+                                onEditClick(contentIndex, item);
+                              }}
+                            ><FontAwesomeIcon icon={faPencil}/></Button>
+                          </td>
+                        }
+                        {
+                          editingItem &&
+                          <div>
+                            <Button
+                              color={"secondary"}
+                              onClick={() => onEditClick()}
+                            >Cancel</Button>
+                            <p/>
+                            <Button
+                              color={"primary"}
+                              disabled={newValue === oldValue}
+                              onClick={() => {
+                                const updateObj = {
+                                  id: idValue,
+                                  [editingContent[1]]: newValue
+                                }
+                                axios.patch(`${API_URL}/save`, JSON.stringify(updateObj), {headers: {'Content-Type': 'application/json'}}).then((response) => {
+                                  const {data} = response;
+                                  console.log(data)
+                                  // setPreviousRegistrations(data)
+                                  // setLoading(false)
+                                  onEditClick()
+                                })
+                              }}
+                            >Save</Button>
+                          </div>
+                        }
+                      </tr>
+                    )
+                  })
+                }
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </Container>
+      </Collapse>
+    </Card>
   )
 }
 
@@ -154,7 +177,26 @@ const SearchWithNewContainer  = ({appConfig,requiredConfig,config,onValueChange,
           setLoading(true)
           axios.post(`${API_URL}/search`, JSON.stringify({phoneNumber}), {headers: {'Content-Type': 'application/json'}}).then((response) => {
             const {data} = response;
-            setPreviousRegistrations(data)
+            setPreviousRegistrations(data.map((item) => {
+              if (item[birthDateFormValue]) {
+                const birthDateSplit = item[birthDateFormValue].split("-");
+                if (birthDateSplit.length ===3) {
+                  const birthDateNewValue = [parseInt(birthDateSplit[0]),parseInt(birthDateSplit[1]),parseInt(birthDateSplit[2])]
+                  return {
+                    ...item,
+                    [birthDateFormValue]: birthDateNewValue
+                  }
+                }
+              }
+
+              // initialSplitFormFields.map((item_2) => {
+              //   if (item_2.formValue && item_2.splitChar && item[item_2.formValue]) {
+              //     newObj[item_2.formValue]=item[item_2.formValue].split(item_2.splitChar)
+              //   }
+              // })
+              // return newObj;
+              return item
+            }))
             setLoading(false)
           })
         }
