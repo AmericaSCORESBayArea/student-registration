@@ -446,7 +446,7 @@ const registrationFormConfig = [
     formLabel: "!REGISTRATION_FORM_ParentEmail_LABEL",
     helpText: "!REGISTRATION_FORM_ParentEmail_HELPTEXT",
     placeholder: "!REGISTRATION_FORM_ParentEmail_PLACEHOLDER",
-    isRequired: true
+    isRequired: false
   },
   {
     dataType: "buttonOptions",
