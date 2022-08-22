@@ -1,7 +1,7 @@
-import React from 'react';
-import { Fade, Container, Row, Col, Alert} from 'reactstrap';
+import React from "react";
+import { Fade, Container, Row, Col, Alert } from "reactstrap";
 import store from "store2";
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import ConfigContainer from "./containers/Config";
 import ButtonOptionsElement from "./components/form/ButtonOptions";
 import localizationFormConfig from "./config/forms/localization";
@@ -15,19 +15,20 @@ const getLocalStoreLocalizationValue = () => {
 };
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       errorMessage: null,
-      localizationValue: getLocalStoreLocalizationValue()
+      localizationValue: getLocalStoreLocalizationValue(),
     };
   }
 
   static getDerivedStateFromError(error) {
-    const {message} = error;
+    const { message } = error;
     return {
-      errorMessage: !!message ? `Application Error : ${message}` : "Unknown application error"
+      errorMessage: !!message
+        ? `Application Error : ${message}`
+        : "Unknown application error",
     };
   }
 
@@ -38,7 +39,6 @@ class App extends React.Component {
   }
 
   render() {
-
     const onLocalizationChange = (e) => {
       const newValue = e.target.value;
       if (!!newValue) {
@@ -46,7 +46,7 @@ class App extends React.Component {
         if (currentValue !== newValue) {
           store.set(localizationStoreKeyName, newValue);
           this.setState({
-            localizationValue: e.target.value
+            localizationValue: e.target.value,
           });
         }
       }
@@ -59,24 +59,19 @@ class App extends React.Component {
             src={"/America-SCORES-Logo.jpg"}
             style={{
               width: "100%",
-              maxWidth: "300px"
+              maxWidth: "300px",
             }}
-            alt={`America Scores Logo`}/>
-          <h1
-            style={{textAlign: "center"}}
-          >Student Registration</h1>
-          <Alert
-            color="danger"
-          >
+            alt={`America Scores Logo`}
+          />
+          <h1 style={{ textAlign: "center" }}>Student Registration</h1>
+          <Alert color="danger">
             <h3>{`${this.state.errorMessage}`}</h3>
           </Alert>
         </div>
       );
     }
     return (
-      <div
-        style={{paddingBottom: "50px"}}
-      >
+      <div style={{ paddingBottom: "50px" }}>
         <Fade>
           <Container>
             <Row>
@@ -88,7 +83,7 @@ class App extends React.Component {
                     flexDirection: "row",
                     alignItems: "center",
                     width: "100%",
-                    listStyleType: "none"
+                    listStyleType: "none",
                   }}
                 >
                   <li>
@@ -96,14 +91,12 @@ class App extends React.Component {
                       src={"/America-SCORES-Logo.jpg"}
                       style={{
                         width: "100%",
-                        maxWidth: "300px"
+                        maxWidth: "300px",
                       }}
                       alt={`America Scores Logo`}
                     />
                   </li>
-                  <li
-                    style={{marginLeft: "auto"}}
-                  >
+                  <li style={{ marginLeft: "auto" }}>
                     <ButtonOptionsElement
                       config={localizationFormConfig}
                       onValueChange={onLocalizationChange}
@@ -111,9 +104,7 @@ class App extends React.Component {
                     />
                   </li>
                 </ul>
-                <h1
-                  style={{textAlign: "center"}}
-                >Student Registration</h1>
+                <h1 style={{ textAlign: "center" }}>Student Registration</h1>
               </Col>
             </Row>
             <Row>
@@ -123,9 +114,11 @@ class App extends React.Component {
                 />
               </Col>
             </Row>
-	    <Row>
-	    <a Href="https://scoresu.org/privacy-policy#" target="_blank">Privacy-Policy</a>
-	    </Row>
+            <Row>
+              <a Href="https://scoresu.org/privacy-policy#" target="_blank">
+                Privacy-Policy
+              </a>
+            </Row>
           </Container>
         </Fade>
       </div>
