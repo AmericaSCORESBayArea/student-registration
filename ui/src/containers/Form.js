@@ -1,6 +1,6 @@
-import React, {useState,useReducer,useEffect} from 'react';
-import axios from 'axios';
-import { Button, Form, Alert, Spinner, Fade } from 'reactstrap';
+import React, { useState, useReducer, useEffect } from "react";
+import axios from "axios";
+import { Button, Form, Alert, Spinner, Fade } from "reactstrap";
 
 import FormElementController from "../components/form/_controller";
 import SpinnerWithMessage from "../components/Spinner";
@@ -14,36 +14,59 @@ const resetFormTimeoutMS = 10000;
 
 const reqHeaders = {
   headers: {
-    'Content-Type': 'application/json'
-  }
+    "Content-Type": "application/json",
+  },
 };
 
 const generateInitialFormState = (formConfig) => {
   if (!formConfig) return [];
-  return formConfig.filter((item) => !!item.formValue).map((item) => {
-    const {formValue, dataType, staticValue} = item;
-    return {
-      formValue,
-      value: dataType === "number" ? 0 : dataType === "static" ? staticValue : ""
-    };
-  });
+  return formConfig
+    .filter((item) => !!item.formValue)
+    .map((item) => {
+      const { formValue, dataType, staticValue } = item;
+      return {
+        formValue,
+        value:
+          dataType === "number" ? 0 : dataType === "static" ? staticValue : "",
+      };
+    });
 };
 
 const generateInitialFormOverrideState = (formConfig) => {
   if (!formConfig) return [];
-  return formConfig.filter((item) => !!item.formValue && !!item.fillInOptionFormValueOverride && !!item.fillInOptionValues && Array.isArray(item.fillInOptionValues) && item.fillInOptionValues.length > 0).map((item) => {
-    const {formValue, dataType, fillInOptionValues, fillInOptionFormValueOverride} = item;
-    return {
-      formValue,
-      options:fillInOptionValues,
-      formOverrideValue:fillInOptionFormValueOverride,
-      value: dataType === "number" ? 0 : ""
-    };
-  });
+  return formConfig
+    .filter(
+      (item) =>
+        !!item.formValue &&
+        !!item.fillInOptionFormValueOverride &&
+        !!item.fillInOptionValues &&
+        Array.isArray(item.fillInOptionValues) &&
+        item.fillInOptionValues.length > 0
+    )
+    .map((item) => {
+      const {
+        formValue,
+        dataType,
+        fillInOptionValues,
+        fillInOptionFormValueOverride,
+      } = item;
+      return {
+        formValue,
+        options: fillInOptionValues,
+        formOverrideValue: fillInOptionFormValueOverride,
+        value: dataType === "number" ? 0 : "",
+      };
+    });
 };
 
-const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormState,initialFormOverrideState,formSubmitCallback}) => {
-
+const FormContainer = ({
+  appConfig,
+  workflowConfig,
+  requiredConfig,
+  initialFormState,
+  initialFormOverrideState,
+  formSubmitCallback,
+}) => {
   const {
     displayWaiver,
     displayWarnings,
@@ -57,20 +80,28 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     waiverDeclineButtonText,
     waiverCloseButtonText,
     waiverShowWaiverButtonText,
-    waiverWaiverAcceptedMessage
+    waiverWaiverAcceptedMessage,
   } = workflowConfig;
 
   const formStateReducer = (state, newState) => {
     return [
       ...state.filter((item) => item.formValue !== newState.formValue),
-      newState
+      newState,
     ];
   };
 
-  const [formFadeState, setFormFadeState] = useState(true)
-  const [resetButtonFadeState, setResetButtonFadeState] = useState(true)
-  const [formState, setFormState] = useReducer(formStateReducer, !!initialFormState ? initialFormState : generateInitialFormState(formConfig));
-  const [formOverrideState, setFormOverrideState] = useReducer(formStateReducer, !!initialFormOverrideState ? initialFormOverrideState : generateInitialFormOverrideState(formConfig));
+  const [formFadeState, setFormFadeState] = useState(true);
+  const [resetButtonFadeState, setResetButtonFadeState] = useState(true);
+  const [formState, setFormState] = useReducer(
+    formStateReducer,
+    !!initialFormState ? initialFormState : generateInitialFormState(formConfig)
+  );
+  const [formOverrideState, setFormOverrideState] = useReducer(
+    formStateReducer,
+    !!initialFormOverrideState
+      ? initialFormOverrideState
+      : generateInitialFormOverrideState(formConfig)
+  );
   const [displayWaiverModal, setDisplayWaiverModal] = useState(false);
   const [waiverAccepted, setWaiverAccepted] = useState(false);
   const [submitInProgress, setSubmitInProgress] = useState(false);
@@ -82,24 +113,28 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
   useEffect(() => {
     if (isValueChanged) {
       if (postEndpoint) {
-        window.addEventListener('beforeunload', alertUser)
+        window.addEventListener("beforeunload", alertUser);
         return () => {
-          window.removeEventListener('beforeunload', alertUser)
-        }
+          window.removeEventListener("beforeunload", alertUser);
+        };
       }
     }
-  }, [isValueChanged])
+  }, [isValueChanged]);
 
-  const alertUser = e => {
-    e.preventDefault()
-    e.returnValue = ''
-  }
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
 
   const submitForm = () => formSubmitCallback(formConfig, formState);
 
   useEffect(() => {
     if (!!submitOnAnyValue || (isValueChanged && submitOnValueChange)) {
-      const fieldsWithNonNullValues = Object.keys(formState).filter((item) => typeof formState[item].value === "string" ? (!!formState[item].value && formState[item].value.trim().length > 0) : true);
+      const fieldsWithNonNullValues = Object.keys(formState).filter((item) =>
+        typeof formState[item].value === "string"
+          ? !!formState[item].value && formState[item].value.trim().length > 0
+          : true
+      );
       if (fieldsWithNonNullValues.length > 0) {
         submitForm();
       }
@@ -110,41 +145,75 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
 
   const onValueChange = (config, e) => {
     const newValue = e?.target?.value;
-    const {formValue, dataType} = config;
-    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : dataType === "date" ? e : "";
+    const { formValue, dataType } = config;
+    const newValueToUse = !!newValue
+      ? newValue === ""
+        ? ""
+        : dataType === "number"
+        ? parseInt(newValue)
+        : newValue
+      : dataType === "firebaseAuthentication"
+      ? e
+      : dataType === "date"
+      ? e
+      : "";
     setFormState({
       formValue,
-      value: newValueToUse
+      value: newValueToUse,
     });
     if (!isValueChanged) setIsValueChanged(true);
   };
 
   const onOverrideValueChange = (config, e) => {
     const newValue = e?.target?.value;
-    const {formValue, dataType, fillInOptionFormValueOverride, fillInOptionValues} = config;
-    const newValueToUse = !!newValue ? newValue === "" ? "" : dataType === "number" ? parseInt(newValue) : newValue : dataType === "firebaseAuthentication" ? e : "";
+    const {
+      formValue,
+      dataType,
+      fillInOptionFormValueOverride,
+      fillInOptionValues,
+    } = config;
+    const newValueToUse = !!newValue
+      ? newValue === ""
+        ? ""
+        : dataType === "number"
+        ? parseInt(newValue)
+        : newValue
+      : dataType === "firebaseAuthentication"
+      ? e
+      : "";
     setFormOverrideState({
       formValue,
       formOverrideValue: fillInOptionFormValueOverride,
       options: fillInOptionValues,
-      value: newValueToUse
+      value: newValueToUse,
     });
     if (!isValueChanged) setIsValueChanged(true);
   };
 
-  const requiredFields = formConfig.filter((item) => item.isRequired).map((item) => item.formValue);
+  const requiredFields = formConfig
+    .filter((item) => item.isRequired)
+    .map((item) => item.formValue);
 
   const blErrorEncountered = !!submitErrorMessage || !!submitErrorTitle;
-  const blFormDisabled = blErrorEncountered || submitInProgress || !!submitSuccessMessage;
+  const blFormDisabled =
+    blErrorEncountered || submitInProgress || !!submitSuccessMessage;
 
   const submitButtonDisabledFields = requiredFields.filter((item) => {
-  if (blErrorEncountered || blFormDisabled) return true;
-    const matchingFormValue = formState.filter((item_2) => item_2.formValue === item).pop();
+    if (blErrorEncountered || blFormDisabled) return true;
+    const matchingFormValue = formState
+      .filter((item_2) => item_2.formValue === item)
+      .pop();
     if (!!matchingFormValue) {
       const formValue = matchingFormValue.formValue;
-      const matchingFormDataType = formConfig.filter((item_2) => item_2.formValue === item).map((item_2) => item_2.dataType).pop();
+      const matchingFormDataType = formConfig
+        .filter((item_2) => item_2.formValue === item)
+        .map((item_2) => item_2.dataType)
+        .pop();
       const valueToCheck = matchingFormValue.value;
-      if (["text", "enum", "tel", "buttonOptions"].indexOf(matchingFormDataType) > -1) {
+      if (
+        ["text", "enum", "tel", "buttonOptions"].indexOf(matchingFormDataType) >
+        -1
+      ) {
         if (valueToCheck.trim().length > 0) {
           return false;
         }
@@ -165,7 +234,11 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
         }
       }
       if (matchingFormDataType === "firebaseAuthentication") {
-        if (!!valueToCheck && typeof valueToCheck === "object" && Object.keys(valueToCheck).length > 0) {
+        if (
+          !!valueToCheck &&
+          typeof valueToCheck === "object" &&
+          Object.keys(valueToCheck).length > 0
+        ) {
           return false;
         }
       }
@@ -173,14 +246,14 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
     return true;
   });
 
-  const setErrorStates = (title,message) => {
+  const setErrorStates = (title, message) => {
     setSubmitErrorTitle(title);
     setSubmitErrorMessage(message);
     setTimeout(() => {
       setSubmitErrorTitle(null);
       setSubmitErrorMessage(null);
     }, resetFormTimeoutMS);
-  }
+  };
 
   const postFetch = () => {
     if (!blSubmitButtonDisabled) {
@@ -192,10 +265,12 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
         let submitObj = {};
         formState.map((item) => {
           if (item.formValue === "Birthdate") {
-            const monthString = `${item.value[1]}`
-            const dayString = `${item.value[2]}`
-            const yearString = `${item.value[0]}`
-            const proposedDateText = `${yearString}-${monthString.length === 1 ? `0${monthString}` : monthString}-${dayString.length === 1 ? `0${dayString}` : dayString}`
+            const monthString = `${item.value[1]}`;
+            const dayString = `${item.value[2]}`;
+            const yearString = `${item.value[0]}`;
+            const proposedDateText = `${yearString}-${
+              monthString.length === 1 ? `0${monthString}` : monthString
+            }-${dayString.length === 1 ? `0${dayString}` : dayString}`;
             submitObj[item.formValue] = proposedDateText;
           } else {
             submitObj[item.formValue] = item.value;
@@ -211,26 +286,41 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
             }
           });
         });
-
-        axios.post(postEndpoint, JSON.stringify(submitObj), reqHeaders).then((response) => {
-          console.log(response);
-          setSubmitInProgress(false);
-          setSubmitSuccessMessage(`Successful!`);
-          setTimeout(() => {
-            setSubmitSuccessMessage(null);
-          }, resetFormTimeoutMS)
-        }, (error) => {
-          console.log(error);
-          setSubmitInProgress(false);
-          setErrorStates("Error Encountered",`Oops! Something Went Wrong! [1] ${error}`);
-        }).catch((e) => {
-          console.log(e);
-          setSubmitInProgress(false);
-          setErrorStates("Error Encountered",`Oops! Something Went Wrong! [2] ${e}`);
-        });
+        axios
+          .post(postEndpoint, JSON.stringify(submitObj), reqHeaders)
+          .then(
+            (response) => {
+              console.log(response);
+              setSubmitInProgress(false);
+              setSubmitSuccessMessage(
+                `The student has been registered successfully.`
+              );
+              setTimeout(() => {
+                setSubmitSuccessMessage(null);
+              }, resetFormTimeoutMS);
+            },
+            (error) => {
+              console.log(error);
+              setSubmitInProgress(false);
+              setErrorStates(
+                "Error Encountered",
+                `Oops! Something Went Wrong! [1] ${error}`
+              );
+            }
+          )
+          .catch((e) => {
+            console.log(e);
+            setSubmitInProgress(false);
+            setErrorStates(
+              "Error Encountered",
+              `Oops! Something Went Wrong! [2] ${e}`
+            );
+          });
       }
     } else {
-      console.error(`post new registration attempted and button should be disabled...`);
+      console.error(
+        `post new registration attempted and button should be disabled...`
+      );
     }
   };
 
@@ -305,142 +395,158 @@ const FormContainer  = ({appConfig,workflowConfig, requiredConfig,initialFormSta
           onSubmit={onSubmitCallback}
           style={{
             maxWidth: "500px",
-            paddingLeft: "20px"
+            paddingLeft: "20px",
           }}
         >
           <fieldset>
-            {
-              formConfig.map((item, index) => {
-                const {formValue} = item;
-                const currentValue = !!formValue ? formState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
-                const currentOverrideValue = !!formValue ? formOverrideState.filter((item_2) => !!item_2.formValue && item_2.formValue === formValue).map((item_2) => item_2.value).pop() : null;
-                return (
-                  <RequiredWrapper
-                    requiredConfig={requiredConfig}
+            {formConfig.map((item, index) => {
+              const { formValue } = item;
+              const currentValue = !!formValue
+                ? formState
+                    .filter(
+                      (item_2) =>
+                        !!item_2.formValue && item_2.formValue === formValue
+                    )
+                    .map((item_2) => item_2.value)
+                    .pop()
+                : null;
+              const currentOverrideValue = !!formValue
+                ? formOverrideState
+                    .filter(
+                      (item_2) =>
+                        !!item_2.formValue && item_2.formValue === formValue
+                    )
+                    .map((item_2) => item_2.value)
+                    .pop()
+                : null;
+              return (
+                <RequiredWrapper
+                  requiredConfig={requiredConfig}
+                  config={item}
+                  currentValue={currentValue}
+                >
+                  <FormElementController
+                    key={index}
+                    appConfig={appConfig}
                     config={item}
                     currentValue={currentValue}
-                  >
-                    <FormElementController
-                      key={index}
-                      appConfig={appConfig}
-                      config={item}
-                      currentValue={currentValue}
-                      onValueChange={onValueChange}
-                      onOverrideValueChange={onOverrideValueChange}
-                      currentOverrideValue={currentOverrideValue}
-                      disabled={blFormDisabled}
-                    />
-                  </RequiredWrapper>
-                );
-              })
-            }
-            {
-              blShowWarningMessages && !blErrorEncountered && !submitInProgress &&
-              <Alert
-                color="warning"
-              >
+                    onValueChange={onValueChange}
+                    onOverrideValueChange={onOverrideValueChange}
+                    currentOverrideValue={currentOverrideValue}
+                    disabled={blFormDisabled}
+                  />
+                </RequiredWrapper>
+              );
+            })}
+            {blShowWarningMessages && !blErrorEncountered && !submitInProgress && (
+              <Alert color="warning">
                 <div>
                   <p>{`Required Fields Missing :`}</p>
                   <ul>
-                    {
-                      submitButtonDisabledFields.map((item, index) => {
-                        const matchingFormLabel = formConfig.filter((item_2) => item === item_2.formValue).map((item_2) => item_2.formLabel).pop();
-                        return (
-                          <li
-                            key={index}
-                          >{`${!!matchingFormLabel ? matchingFormLabel : item}`}</li>
-                        )
-                      })
-                    }
+                    {submitButtonDisabledFields.map((item, index) => {
+                      const matchingFormLabel = formConfig
+                        .filter((item_2) => item === item_2.formValue)
+                        .map((item_2) => item_2.formLabel)
+                        .pop();
+                      return (
+                        <li key={index}>{`${
+                          !!matchingFormLabel ? matchingFormLabel : item
+                        }`}</li>
+                      );
+                    })}
                   </ul>
                 </div>
-                {
-                  displayWaiver && !waiverAccepted &&
+                {displayWaiver && !waiverAccepted && (
                   <div>
-                    <p>{`${!!waiverReviewAndAcceptRequestMessage ? waiverReviewAndAcceptRequestMessage : `Please review and accept waiver`}`}</p>
-                    <Button
-                      color={"primary"}
-                      onClick={toggleWaiverModal}
-                    >{`${!!waiverShowWaiverButtonText ? waiverShowWaiverButtonText : `Show Waiver`}`}</Button>
+                    <p>{`${
+                      !!waiverReviewAndAcceptRequestMessage
+                        ? waiverReviewAndAcceptRequestMessage
+                        : `Please review and accept waiver`
+                    }`}</p>
+                    <Button color={"primary"} onClick={toggleWaiverModal}>{`${
+                      !!waiverShowWaiverButtonText
+                        ? waiverShowWaiverButtonText
+                        : `Show Waiver`
+                    }`}</Button>
                   </div>
-                }
+                )}
               </Alert>
-            }
-            {
-              displayWaiver && waiverAccepted &&
-              <Alert
-                color={"secondary"}
-              >
-                <p>{`${!!waiverWaiverAcceptedMessage ? waiverWaiverAcceptedMessage : `Waiver Accepted`}`}</p>
-                <Button
-                  color={"secondary"}
-                  onClick={toggleWaiverModal}
-                >{`${!!waiverShowWaiverButtonText ? waiverShowWaiverButtonText : `Show Waiver`}`}</Button>
+            )}
+            {displayWaiver && waiverAccepted && (
+              <Alert color={"secondary"}>
+                <p>{`${
+                  !!waiverWaiverAcceptedMessage
+                    ? waiverWaiverAcceptedMessage
+                    : `Waiver Accepted`
+                }`}</p>
+                <Button color={"secondary"} onClick={toggleWaiverModal}>{`${
+                  !!waiverShowWaiverButtonText
+                    ? waiverShowWaiverButtonText
+                    : `Show Waiver`
+                }`}</Button>
               </Alert>
-            }
-            {
-              submitInProgress &&
-              <SpinnerWithMessage
-                message={`Registering...`}
-              />
-            }
-            {
-              !!submitErrorMessage &&
-              <Alert
-                color="danger"
-              >
-                {
-                  !!submitErrorTitle &&
-                  <h3>{`${submitErrorTitle}`}</h3>
-                }
+            )}
+            {submitInProgress && (
+              <SpinnerWithMessage message={`Registering...`} />
+            )}
+            {!!submitErrorMessage && (
+              <Alert color="danger">
+                {!!submitErrorTitle && <h3>{`${submitErrorTitle}`}</h3>}
                 {`${submitErrorMessage}`}
               </Alert>
-            }
-            {
-              !!submitSuccessMessage &&
-              <Alert
-                color="success"
-              >
-                {`${submitSuccessMessage}`}
-              </Alert>
-            }
-            {
-              !submitOnValueChange && !submitSuccessMessage && !submitOnAnyValue &&
-              <Button
-                onClick={onSubmitCallback}
-                disabled={blSubmitButtonDisabled}
-                color={blSubmitButtonDisabled ? "secondary" : "primary"}
-              >Submit</Button>
-            }
+            )}
+            {!!submitSuccessMessage && (
+              <Alert color="success">{`${submitSuccessMessage}`}</Alert>
+            )}
+            {!submitOnValueChange &&
+              !submitSuccessMessage &&
+              !submitOnAnyValue && (
+                <Button
+                  onClick={onSubmitCallback}
+                  disabled={blSubmitButtonDisabled}
+                  color={blSubmitButtonDisabled ? "secondary" : "primary"}
+                >
+                  Submit
+                </Button>
+              )}
           </fieldset>
         </Form>
       </Fade>
-      {
-        !resetButtonFadeState && <Spinner/>
-      }
-      <Fade
-        in={resetButtonFadeState}
-      >
-        {
-          !!submitSuccessMessage &&
-          <Button
-            onClick={onFormResetClickCallback}
-            color="primary"
-          >Click to Register Another Student</Button>
-        }
+      {!resetButtonFadeState && <Spinner />}
+      <Fade in={resetButtonFadeState}>
+        {!!submitSuccessMessage && (
+          <Button onClick={onFormResetClickCallback} color="primary">
+            Click to Register Another Student
+          </Button>
+        )}
       </Fade>
-      {
-        displayWaiver && displayWaiverModal &&
+      {displayWaiver && displayWaiverModal && (
         <ModalComponent
           submitModalCallback={acceptWaiverCallback}
           cancelModalCallback={toggleWaiverModal}
-          modalTitle={`${!!waiverModalTitleText ? waiverModalTitleText : `Waiver`}`}
-          submitButtonText={!waiverAccepted ? `${!!waiverAcceptButtonText ? waiverAcceptButtonText : `Accept`}` : null}
-          cancelButtonText={!waiverAccepted ? `${!!waiverDeclineButtonText ? waiverDeclineButtonText : `Decline`}` : `${!!waiverCloseButtonText ? waiverCloseButtonText : `Close`}`}
+          modalTitle={`${
+            !!waiverModalTitleText ? waiverModalTitleText : `Waiver`
+          }`}
+          submitButtonText={
+            !waiverAccepted
+              ? `${
+                  !!waiverAcceptButtonText ? waiverAcceptButtonText : `Accept`
+                }`
+              : null
+          }
+          cancelButtonText={
+            !waiverAccepted
+              ? `${
+                  !!waiverDeclineButtonText
+                    ? waiverDeclineButtonText
+                    : `Decline`
+                }`
+              : `${!!waiverCloseButtonText ? waiverCloseButtonText : `Close`}`
+          }
         >
-          <Waiver/>
+          <Waiver />
         </ModalComponent>
-      }
+      )}
     </div>
   );
 };
